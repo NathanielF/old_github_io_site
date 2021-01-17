@@ -1,0 +1,386 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:400|Alegreya:400,400i,700|Ubuntu:500);
+
+/* 
+  COLOR SCHEME
+  ------------
+  background: #f8f8f8
+  text: #040F0F
+  headings: #D62839
+  navbar: #3F3250
+  links: #f25757
+  hover: #4C6085
+*/
+
+body {
+  padding-top: 70px;
+  background: #f8f8f8;
+  color: #040F0F;
+  font-family: "Alegreya", "Hoefler Text", Times, serif;
+  font-weight: 400;
+  font-size: 14pt;
+}
+
+a {
+  color: #f25757;
+}
+a:hover {
+  color: #4C6085;
+  text-decoration: none;
+}
+.pub-link a {
+  font-weight: bold;
+}
+.blog-post a {
+  color: #040F0F;
+  border-bottom: 1px dotted #4C6085;
+}
+.blog-post a:hover {
+  color: #4C6085;
+}
+.post-back-link a {
+  color: #f25757;
+  border-bottom: none;
+}
+
+h1, h2, h3, h4  {
+  font-weight: bold;  
+  letter-spacing: .01em;
+}
+.area-header {
+  font-family: "Josefin Slab", serif;
+  font-weight: normal;  
+  letter-spacing: 0rem;
+}
+
+.blog-post h1, h2, h3 {
+  color: #D62839;
+}
+.blog-post h1 {
+  font-size: 2.5rem;
+}
+.blog-post h2 {
+  font-size: 2.2rem;
+}
+.post-body h3 {
+  font-size: 2rem;
+}
+h1.post-title {
+  font-size: 3rem;
+  margin-bottom: .9em;
+}
+div.post-metadata {
+  margin-bottom: 2.5rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.floatright {
+  float: right;
+}
+
+.list-indented {
+  margin-left: .75em;
+}
+
+.list-hanging {
+  padding-left: 1.25em;
+	text-indent: -1.25em;
+}
+
+.more-link {
+  font-size: .75em;
+  font-weight: bold;
+  font-family: "Josefin Slab";
+  letter-spacing: 1px;
+}
+
+.epigraph {
+  margin-top: 1em;
+  font-style: italic;
+  padding-bottom: 1.35em;
+}
+
+code {
+  font-size: .8em;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: "Inconsolata", Menlo, Monaco, "Courier New", monospace;
+  font-size: .9em;
+}
+
+.post-tags {
+  font-size: .85em;
+  font-style: italic;
+}
+
+.post-date {
+  margin-bottom: .5em;
+}
+
+.section-item {
+  margin-bottom: .75em;
+}
+
+.hanging-no-bullets > ul {
+  list-style-type: none;
+  padding: 0;
+  padding-left: 1.25em;
+	text-indent: -1.25em;
+}
+
+.align-top {
+  display: inline;
+  vertical-align: text-top;
+}
+
+footer p {
+  font-size: .75em;
+  font-style: italic;
+}
+
+footer a {
+  font-style: normal;
+}
+
+.footnote-return sup {
+  display: none;
+}
+.footnote-return:after {
+  content: '↩';
+}
+
+
+
+/* Pagination */
+
+nav > ul.pagination > li > a {
+  color: #f25757;
+  background: #f8f8f8;
+  border-color: #f25757 !important;
+  font-style: italic;
+}
+
+nav > ul.pagination > li > a:hover {
+  color: #f25757;
+  background: #f0f0f0;
+  text-decoration: none;
+}
+
+nav > ul.pagination > li.active > a {
+  color: #f8f8f8;
+  background: #f25757 !important;
+  background-color: #f25757 !important;
+}
+
+
+
+/* AMS Math-like environments */
+/* Courtesy of Z. T. Harmany: http://drz.ac/2013/01/17/latex-theorem-like-environments-for-the-web/ */
+
+.theorem {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+.theorem:before {
+    content: "Theorem.";
+    font-weight: bold;
+    font-style: normal;
+}
+.lemma {
+    display: block;
+    margin: 12px 0;
+    font-style: italic;
+}
+.lemma:before {
+    content: "Lemma.";
+    font-weight: bold;
+    font-style: normal;
+}
+.proof {
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+}
+.proof:before {
+    content: "Proof.";
+    font-style: italic;
+}
+.proof:after {
+    content: "\25FB";
+    float:right;
+}
+.definition {
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+}
+.definition:before {
+    content: "Definition.";
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Navbar */
+.navbar {
+  font-family: "Ubuntu", sans-serif;
+  text-transform: uppercase;
+  font-size: 15pt;
+  border-color: transparent;
+}
+.navbar ul {
+  font-size: 11pt;
+}
+.navbar-default {
+  background-color: #3F3250;
+  border-color: #3F3250;
+}
+.navbar-default .navbar-brand {
+  color: #f8f8f8;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #dbd1e7;
+}
+.navbar-default .navbar-text {
+  color: #f8f8f8;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #f8f8f8;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #dbd1e7;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #dbd1e7;
+  background-color: #414141;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #dbd1e7;
+  background-color: #414141;
+}
+.navbar-default .navbar-toggle {
+  border-color: #414141;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #414141;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #f8f8f8;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #f8f8f8;
+}
+.navbar-default .navbar-link {
+  color: #f8f8f8;
+}
+.navbar-default .navbar-link:hover {
+  color: #dbd1e7;
+}
+
+
+/*
+    TABLES
+*/
+
+tbody{
+  display:table-row-group
+}
+
+tfoot{
+  display:table-footer-group
+}
+table{
+  margin-bottom:2em;
+  font-size: 0.8em;
+  padding:0;
+  border-collapse:collapse;
+  -webkit-box-shadow:1px 1px 2px rgba(0,0,0,.35);
+  width:95%;
+  margin:0 auto 2em auto
+}
+table th,table td{
+  padding:10px 10px 9px;
+  line-height:18px;
+  text-align:left
+}
+table th{
+  padding-top:9px;
+  !important;
+  text-transform:uppercase;
+  vertical-align:middle
+}
+table td{
+  vertical-align:top;
+  border-top:1px solid #ddd;
+}
+table tbody th{
+  border-top:1px solid #ddd;
+  vertical-align:top
+}
+table{
+  border:1px solid #ddd;
+  border-collapse:separate;
+  *border-collapse:collapse;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px
+}
+table th+th,table td+td,table th+td{
+  border-left:1px solid #ddd
+}
+table thead tr:first-child th:first-child,table tbody tr:first-child td:first-child{
+  -webkit-border-radius:4px 0 0 0;
+  -moz-border-radius:4px 0 0 0;
+  border-radius:4px 0 0 0
+}
+table thead tr:first-child th:last-child,table tbody tr:first-child td:last-child{
+  -webkit-border-radius:0 4px 0 0;
+  -moz-border-radius:0 4px 0 0;
+  border-radius:0 4px 0 0
+}
+table tbody tr:last-child td:first-child{
+  -webkit-border-radius:0 0 0 4px;
+  -moz-border-radius:0 0 0 4px;
+  border-radius:0 0 0 4px
+}
+table tbody tr:last-child td:last-child{
+  -webkit-border-radius:0 0 4px 0;
+  -moz-border-radius:0 0 4px 0;
+  border-radius:0 0 4px 0
+}
+tbody tr:nth-child(odd){
+  background-color:rgba(0,0,0,0.03)
+}
+caption{
+  display:table-caption;
+  font-weight:300;
+  font-size:1.3em;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  word-spacing:.2em;
+  background:rgba(0,0,0,.75);
+  color:#EEE;
+  padding:4px;
+  -webkit-border-radius:4px;
+  margin:4px 0;
+  -webkit-box-shadow:2px 2px 2px rgba(0,0,0,.35)
+}

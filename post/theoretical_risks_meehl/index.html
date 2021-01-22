@@ -30,6 +30,19 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="/css/prism.css" rel="stylesheet" />
   <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
   
   
   
@@ -83,7 +96,7 @@
     <div class="row">
       <div class="col-md-3 hidden-sm hidden-xs text-right">
         <h1 class="post-title">&nbsp;</h1>
-          <em>Jan 16, 2021</em><br />
+          <em>Jan 22, 2021</em><br />
           
         </p>
       </div>
@@ -92,13 +105,15 @@
         <h1 class="post-title">Theoretical Risks - Sir Popper and Sir Fisher</h1>
         <div class="hidden-md hidden-lg post-metadata">
           <div>
-            <em>Jan 16, 2021</em>
+            <em>Jan 22, 2021</em>
           </div>
           
         </div>
 
         <div class="post-body">
           <p>In a prescient paper in the 1970s Paul Meehl wrote about the lack of cumulative success in the psychologocial sciences, and how this should be attributed to poor methodology rather the sheer difficulty of the subject. This is not to denigrate the difficulty which the psychologist faces. To make the point he elaborates an impressive list of problems for any model of a psychological process. There are a few common themes and some of the problems interact with one another in ways which could make you despair for the discipline. So it is, I think, somewhat surprising that Meehl locates the main problem not in the subject, but in the method of significance testing.</p>
+
+<p>We&rsquo;ll narrow our focus shortly, but first consider the breadth of the issues.</p>
 
 <table>
 <thead>
@@ -211,7 +226,11 @@
 </tbody>
 </table>
 
-<p>After reading through the</p>
+<p>We&rsquo;re going to focus on two of the problems that most clearly relate the issue of significance testing: open concepts, context-dependent stochastilogicals. These issues are tightly coupled with the ability to falsify psychological hypotheses since they both serve as reasons to doubt contrary evidence and therefore deny us a decisive rejection of our hypotheses even when they conflict with observable data. This difficulty directly undermines the paradigm of null-hypothesis testing in psychology, since they imply that we are incapable of placing the null under severe scrutiny.</p>
+
+<p>The ugly word &ldquo;stochastological&rdquo; is to be contrasted with the, perhaps more familar but also pompous, notion of a nomological inference - one which is valid by appeal to a wholly general law. $$ (R1) \forall x(Fx \rightarrow Gx) $$ Meehl argues that the idiosyncratic and individual specific patterns of causation in psychology short-circuit any appeals to over-arching rules. Even when we can consistently measure a disposition common across individuals, the nature of the observed patterns support probabilistic inference not law-like generalisations. Even then the underlying probabilities are liable to change with the context. You might be prone to defer to authority in 9 of 10 cases, but always exhibit knee jerk refusal when prompted by a political opponent.</p>
+
+<p>$$ (R2):  \underbrace{P(Gx | Fx) \geq 0.90}_{context = c} $$</p>
 
 
           &nbsp;

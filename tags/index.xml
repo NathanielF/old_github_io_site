@@ -6,9 +6,37 @@
     <description>Recent content in Tags on Examined Algorithms</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
+    <lastBuildDate>Fri, 22 Jan 2021 10:19:36 +0000</lastBuildDate>
     
 	<atom:link href="http://nathanielf.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Construct Validity</title>
+      <link>http://nathanielf.github.io/tags/construct-validity/</link>
+      <pubDate>Fri, 22 Jan 2021 10:19:36 +0000</pubDate>
+      
+      <guid>http://nathanielf.github.io/tags/construct-validity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Philosophy</title>
+      <link>http://nathanielf.github.io/tags/philosophy/</link>
+      <pubDate>Sat, 16 Jan 2021 10:19:36 +0000</pubDate>
+      
+      <guid>http://nathanielf.github.io/tags/philosophy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Significance Tests</title>
+      <link>http://nathanielf.github.io/tags/significance-tests/</link>
+      <pubDate>Fri, 22 Jan 2021 10:19:36 +0000</pubDate>
+      
+      <guid>http://nathanielf.github.io/tags/significance-tests/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

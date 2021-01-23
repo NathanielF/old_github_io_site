@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Philosophy on Examined Algorithms</title>
+    <link>http://nathanielf.github.io/tags/philosophy/</link>
+    <description>Recent content in Philosophy on Examined Algorithms</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
+    <lastBuildDate>Sat, 16 Jan 2021 10:19:36 +0000</lastBuildDate>
+    
+	<atom:link href="http://nathanielf.github.io/tags/philosophy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Why Philosophy?</title>
+      <link>http://nathanielf.github.io/post/why_philosophy/</link>
+      <pubDate>Sat, 16 Jan 2021 10:19:36 +0000</pubDate>
+      
+      <guid>http://nathanielf.github.io/post/why_philosophy/</guid>
+      <description>Why Philosophy? What else has the breadth and ambition to assess and grapple with the contemporary scene? It is the endeavour best positioned between demands of intellectual rigour and moral imagination. Its tools encompass logic and probabilistic reasoning, thought experiments, just-so stories, rhetorical flourish and literary style. It dabbles in all the domains of the special sciences seeking patterns and fruitful abstractions. Yet the sum of a particular philosophy is not any linear combination of the above.</description>
+    </item>
+    
+  </channel>
+</rss>

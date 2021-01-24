@@ -286,7 +286,35 @@
 
 <p>Meehl concedes that there may be some justification for this procedure if we would grant that $(H)$ has in some sense a greater &ldquo;verisimilitude&rdquo; than the auxilary commitments. Psychology differs from other disciplines in that the objects of measurement and the manner of measurement are not tightly bound. The truth &ldquo;content&rdquo; of claims about measurement of length, for instance, stand or fall with claims about the measurement instrument - they are so intimately connected that the measurement apparatus is almost definitional. You might object that appeals to versimilitude in some way puts the cart before the horse. We&rsquo;re designing an experiement to test $(H)$, how can we presume it&rsquo;s truth in testing!? This is fair but only points to difficulty of making $(H)$ precise and the distance between mental phenomena and our measurement of it</p>
 
+<h2 id="open-concepts-and-factor-analysis">Open Concepts and Factor Analysis</h2>
+
+<p>If we&rsquo;re lucky we have a clear idea of how to measure the psychological phenomenon of interest and you can devise a survey to capture the details. If instead you just have some data and you think there might be a latent factor driving the observations, then the the factor analysis effectively tries to group the observed variable by their correlations. The underlying statistical model for $m$ factors states:</p>
+
+<div class="theorem" text='The Factor Model'>
+Assume the model 
+$$\mathbf{X} = \mathbf{\mu}^{p \times 1}  + \mathbf{L}^{p \times m} \mathbf{F}^{m \times 1} \epsilon^{p \times 1} $$
+
+where $\mathbf{X}$ is our data matrix recording the observational data while $\mu$ is the mean vector with entries for each column in $\mathbf{X}$. So our observational data is deemed a function modifying the multivariate mean as a linear function of latent factors $\mathbf{F}$ with factor loadings $l_{i, j} \in \mathbf{L}$, for each of the observed variables $i$ and for each $j$ of the $m$ factors. 
+
+
+The model assumes $\mathbf{F}$ and  $\epsilon$ are independent and $E(\mathbf{F}) = \mathbf{0}, Cov(\mathbf{F}) = \mathbf{I}$ In addition note that $E(\epsilon) = \mathbf{0}$ and $Cov(\epsilon) = \Psi$ where $\Psi$ is a diagonal matrix.
+
+Then we can show that $$Cov(X) = LL^{'} + \Psi$$
+</div>
+
+<p>That&rsquo;s a bit abstract, but the point is just that each factor is a linear construct of the observed data, and we can choose how many constructs to build. An important consequence of this fact is that we can express the variance of each observed feature in terms of the loadings and a random variance, so if we can explain a high portion of their variance in a low number of factors we can be reasonably sure that the dimensional reduction remains representative of the diversity in the original data set.</p>
+
+<p>$$ Var(X_i) = \underbrace{l_{i, j}^{2} + l_{i, 2}^{2} &hellip; l_{i, m}^{2}}_{communalities} + \psi_{i}$$</p>
+
+<div class='proof'>
+cvdsv
+</div>
+
+<h2 id="an-example-in-code">An Example in Code.</h2>
+
 <iframe width="100%" height="1000" name="iframe" src="/notebooks/TheoreticalRisks_Meehl.html"  frameborder="0" scrolling="yes" onload="resizeIframe(this)"></iframe>
+
+<p>fwewef</p>
 
 
           &nbsp;

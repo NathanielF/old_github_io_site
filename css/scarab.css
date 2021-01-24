@@ -384,3 +384,46 @@ caption{
   margin:4px 0;
   -webkit-box-shadow:2px 2px 2px rgba(0,0,0,.35)
 }
+
+.theorem {
+  display: block;
+  font-style: italic;
+  font-size: 24px;
+  font-family: "Times New Roman";
+  color: black;
+}
+.theorem::before {
+  content: "Theorem. ";
+  font-weight: bold;
+  font-style: normal;
+}
+.theorem[text]::before {
+  content: "Theorem (" attr(text) ") ";
+}
+.theorem p {
+  display: inline;
+}
+
+.proof {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.proof:before {
+  content: "Proof.";
+  font-style: italic;
+}
+.proof:after {
+  content: "\25FC";
+  float:right;
+}
+.definition {
+  display: block;
+  margin: 12px 0;
+  font-style: normal;
+}
+.definition:before {
+  content: "Definition.";
+  font-weight: bold;
+  font-style: normal;
+}

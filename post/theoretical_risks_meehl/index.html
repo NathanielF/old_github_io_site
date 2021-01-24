@@ -299,7 +299,7 @@ where $\mathbf{X}$ is our data matrix recording the observational data while $\m
 
 The model assumes $\mathbf{F}$ and  $\epsilon$ are independent and $E(\mathbf{F}) = \mathbf{0}, Cov(\mathbf{F}) = \mathbf{I}$ In addition note that $E(\epsilon) = \mathbf{0}$ and $Cov(\epsilon) = \Psi$ where $\Psi$ is a diagonal matrix.
 
-Then we can show that $$Cov(X) = LL^{'} + \Psi$$
+Then we can show that $$Cov(\mathbf{X}) = \mathbf{LL}^{'} + \Psi$$
 </div>
 
 <p>That&rsquo;s a bit abstract, but the point is just that each factor is a linear construct of the observed data, and we can choose how many constructs to build. An important consequence of this fact is that we can express the variance of each observed feature in terms of the loadings and a random variance, so if we can explain a high portion of their variance in a low number of factors we can be reasonably sure that the dimensional reduction remains representative of the diversity in the original data set.</p>
@@ -307,8 +307,18 @@ Then we can show that $$Cov(X) = LL^{'} + \Psi$$
 <p>$$ Var(X_i) = \underbrace{l_{i, j}^{2} + l_{i, 2}^{2} &hellip; l_{i, m}^{2}}_{communalities} + \psi_{i}$$</p>
 
 <div class='proof'>
-cvdsv
+$$ (\mathbf{X} - \mu)^{'} = (\mathbf{L}\mathbf{F} + \epsilon)$$
+$$ \Rightarrow (\mathbf{X} - \mu)(\mathbf{X} - \mu)^{'} = (\mathbf{L}\mathbf{F} + \epsilon)(\mathbf{L}\mathbf{F} + \epsilon)^{'}$$
+$$ = (\mathbf{L}\mathbf{F} + \epsilon)((\mathbf{L}\mathbf{F})^{'} + \epsilon^{'}) $$
+$$ = \mathbf{L}\mathbf{F}(\mathbf{L}\mathbf{F})^{'} + \epsilon(\mathbf{L}\mathbf{F})^{'} + \mathbf{L}\mathbf{F}\epsilon^{'} + \epsilon\epsilon^{'}$$
+$$ \Rightarrow E((\mathbf{X} - \mu)(\mathbf{X} - \mu)^{'}) = E( (\mathbf{L}\mathbf{F} + \epsilon)(\mathbf{L}\mathbf{F} + \epsilon)^{'})$$
+$$ \Rightarrow Cov(\mathbf{X}) = \mathbf{L}E(\mathbf{F}\mathbf{F}^{'})\mathbf{L}^{'} + E(\epsilon\mathbf{F}^{'})\mathbf{L}^{'} + \mathbf{L}E(\mathbf{F}\epsilon^{'}) + E(\epsilon\epsilon^{'}) $$
+$$ = \mathbf{L}\mathbf{L}^{'} + \Psi $$
 </div>
+
+<h3 id="estimating-the-latent-factor-values">Estimating the latent factor values</h3>
+
+<p>Various techniques can be applied to estimate the loadings $\mathbf{L}$ based on a strategic decomposition of sample covariance matrix to derive the principal factors. The most typical technique is to use the eigenvalue decomposition, but a maximum likelihood method is also feasible. It is another question altogeher for how to estimate the factor scores $f_{j} \in \mathbf{F}$ from our derived factor loadings. This is a two step, where we base an estimate on a set of prior estimates. We won&rsquo;t dwell on the details here, but I want to stress the level of abstraction! When it comes to test the hypotheses about the underlying psychological phenomenon, this method has certain mathematical appeal but it is not above question. It is these contingencies: the bespoke assumptions of the model, but correlation and covariance relationship between the observed features and richness of the data required to discover the expected values of $\mathbf{L}, \mathbf{f}_j$ respectively, coupled with the difficulty of interpreting the factors in light of the original psychological concept.</p>
 
 <h2 id="an-example-in-code">An Example in Code.</h2>
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Factor Analysis on Examined Algorithms</title>
+    <link>http://nathanielf.github.io/tags/factor-analysis/</link>
+    <description>Recent content in Factor Analysis on Examined Algorithms</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
+    <lastBuildDate>Fri, 22 Jan 2021 10:19:36 +0000</lastBuildDate>
+    
+	<atom:link href="http://nathanielf.github.io/tags/factor-analysis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Theoretical Risks - Construct Validity, Sir Popper and Sir Fisher</title>
+      <link>http://nathanielf.github.io/post/theoretical_risks_meehl/</link>
+      <pubDate>Fri, 22 Jan 2021 10:19:36 +0000</pubDate>
+      
+      <guid>http://nathanielf.github.io/post/theoretical_risks_meehl/</guid>
+      <description>In a prescient paper in the 1970s Paul Meehl wrote about the lack of cumulative success in the psychologocial sciences, and how this should be attributed to poor methodology rather the sheer difficulty of the subject. This is not to denigrate the difficulty which the psychologist faces. To make the point he elaborates an impressive list of problems for any model of a psychological process. There are a few common themes and some of the problems interact with one another in ways which could make you despair for the discipline.</description>
+    </item>
+    
+  </channel>
+</rss>

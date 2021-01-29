@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:400|Alegreya:400,400i,700|Ubuntu:500);
+
+html *
+{
+  font-family: "Alegreya", "Hoefler Text", Times, serif !important;
+  font-weight: 400;
+  font-size: 14pt;
+}
+
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+

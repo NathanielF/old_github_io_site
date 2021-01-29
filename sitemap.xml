@@ -2,64 +2,64 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>/post/theoretical_risks_meehl/</loc>
+    <loc>http://nathanielf.github.io/post/theoretical_risks_meehl/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>http://nathanielf.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/construct-validity/</loc>
-    <lastmod>2021-01-22T10:19:36+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
+    <loc>http://nathanielf.github.io/tags/construct-validity/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/factor-analysis/</loc>
+    <loc>http://nathanielf.github.io/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/</loc>
+    <loc>http://nathanielf.github.io/tags/factor-analysis/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/publication/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/replicability/</loc>
+    <loc>http://nathanielf.github.io/post/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/significance-tests/</loc>
+    <loc>http://nathanielf.github.io/publication/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://nathanielf.github.io/tags/replicability/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>http://nathanielf.github.io/tags/significance-tests/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/publication/utility_and_representation/</loc>
+    <loc>http://nathanielf.github.io/tags/</loc>
+    <lastmod>2021-01-22T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://nathanielf.github.io/publication/utility_and_representation/</loc>
   </url>
   
 </urlset>

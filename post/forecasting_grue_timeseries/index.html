@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathaniel Forde's Homepage">
+  <meta name="author" content="Nathaniel Forde">
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@forde_nathaniel">
+    <meta name="twitter:creator" content="@forde_nathaniel">
+    <meta name="twitter:title" content="Timeseries Forecasting in a Grue World">
+    <meta name="twitter:description" content="In 1944 Trygve Haavelmo could argue sincerely that the hostility to mathematical statistics in economics was a mistake. He could argue that, in fact, economic questions could be phrased in the language of probability. Today that observation is palpably anachronistic, owing to the current trend of equating economists with soothsayers while expecting similar arcana and spell craft. The reality falls short of magic and is more interesting than the fantasy.">
+    <meta name="twitter:image" content="img/profile_2.jpg">
+
+    <meta property="og:url" content="/post/forecasting_grue_timeseries/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Timeseries Forecasting in a Grue World" />
+    <meta property="og:description" content="In 1944 Trygve Haavelmo could argue sincerely that the hostility to mathematical statistics in economics was a mistake. He could argue that, in fact, economic questions could be phrased in the language of probability. Today that observation is palpably anachronistic, owing to the current trend of equating economists with soothsayers while expecting similar arcana and spell craft. The reality falls short of magic and is more interesting than the fantasy." />
+    <meta property="og:image" content="img/profile_2.jpg" />
+
+
+  <title>Timeseries Forecasting in a Grue World</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+  
+  
+  
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://nathanielf.github.io/">Examined Algorithms</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/pdf/Nathaniel%20Forde%20Current.pdf">
+            <i class="fa fa-briefcase"></i>&nbsp;
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="/post/">
+            <i class="fa fa-code"></i>&nbsp;
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/publication/">
+            <i class="fa fa-files-o"></i>&nbsp;
+            Research
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  <div class="container blog-post">
+
+    
+    <div class="row">
+      <div class="col-md-3 hidden-sm hidden-xs text-right">
+        <h1 class="post-title">&nbsp;</h1>
+          <em>Jan 22, 2025</em><br />
+          
+          
+          
+          <span class="post-tags">
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/grue">grue</a>
+             &bull;   
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/structural-breaks">structural breaks</a>
+             &bull;  
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/timeseries">timeseries</a>
+             &bull;  
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/forecasting">forecasting</a>
+            
+            
+          </span>
+          
+          
+        </p>
+      </div>
+
+      <div class="col-md-7">
+        <h1 class="post-title">Timeseries Forecasting in a Grue World</h1>
+        <div class="hidden-md hidden-lg post-metadata">
+          <div>
+            <em>Jan 22, 2025</em>
+          </div>
+          
+          
+          
+          <p class="post-tags">
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/grue">grue</a>
+             &bull;   
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/structural-breaks">structural breaks</a>
+             &bull;  
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/timeseries">timeseries</a>
+             &bull;  
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/forecasting">forecasting</a>
+            
+            
+          </p>
+          
+          
+        </div>
+
+        <div class="post-body">
+          
+
+<p>In 1944 Trygve Haavelmo could argue sincerely that the hostility to mathematical statistics in economics was a mistake. He could argue that, in fact, economic questions <em>could</em> be phrased in the language of probability. Today that observation is palpably anachronistic, owing to the current trend of equating economists with soothsayers while expecting similar arcana and spell craft. The reality falls short of magic and is more interesting than the fantasy.</p>
+
+<h1 id="structural-and-random-components-in-autonomous-laws">Structural and Random Components in Autonomous Laws</h1>
+
+<p>Haavelmo locates the difficulty of economics primarily in the hierarchical and contingent nature of postulated economic laws. The goal of economics is to formulate somewhat &ldquo;autonomous&rdquo; laws of behaviour, laws which can stand on their own right without dependence on circumstance and prior theoretical commitments. However the degree of autonomy in heretofore discovered laws of economics is low, since the persistence of behaviour is highly contingent and the measurements of the behaviourial aspects are often indirect. Broadly most economic laws are postulated to have the following form:</p>
+
+<p>$$ (LN): \text{ } y_{i} = f_{i}(\underbrace{x_{1}, x_{2}&hellip;x_{n}}_{\text{ structural vars}}) + \underbrace{\epsilon_{i}}_{error} $$</p>
+
+<p>We could imagine that $y_{i}$ is the individual&rsquo;s value of a given product based on the descriptive features of that product $(x_{1}, x_{2} &hellip; x_3)$ in a market, and that we want to postulate a law of value or price discovery across all individual in the market. The value distribution can vary with the individual $i$ due to differences in either (a) how the structural variables enter in the individual&rsquo;s value function and (b) the unexplained variances, but Haavelmo will argue this is to the good when understood from the perspective of probability.</p>
+
+<blockquote>
+<p>[I]t seems rational to introduce the assumptions about the stochastical elements of our economic theoreies already in the &ldquo;laws&rdquo; of behaviour for the single individuals, firms, etc, as a characteristic of their behaviour and derive the average market relations or relations for the whole society, from the individual &ldquo;laws&rdquo;. It will then, for example, in many cases be possible to show that even under very weak assumptions about the distribution of the stochastical elements in these individual relations, the derived average or total relations for the whole market or the whole society will be characterised by certain compound stochastical variables (e.g. sums of individual error terms), which by the law of large numbers will be approximately <em>normally</em> distributed - <em>The Probability Approach in Economics</em> pg52</p>
+</blockquote>
+
+<p>Aggregation alone potentially solves issues for individual differences in (b), but the more fundamental issue stems from (a) and the deeply nested structure of the measurement schemes behind $(LN)$. If $y$ is a function of the vector $\mathbf{x}$, which in turn is a function of observations $\mathbf{z}$ &hellip; etc. If it&rsquo;s &ldquo;laws&rdquo; all the way down, the autonomy of $(LN)$ is proportionally weaker for each layer of dependence! A simple change in circumstance might break the dependency of $x_1$ on the ancillary $z_{3}$ and the original &ldquo;equation <em>might</em> still hold after such a break, but that would have to follow from another model&rdquo;.</p>
+
+<p>Assume the class of individuals splits on the basic techniques for measuring $z_{3}$, then we might (with enough data) discover two naturally bifurcated populations and derive two laws $(LN_{1}), (LN_{2})$ for two distinct patterns of behaviour. Alternatively, if there is a final authoritative measure of $z_{3}$ we might hope to subsume the two heterogenous populations under one law by aligning on the measurement scheme. Or if we&rsquo;re lucky $(LN)$ alone might be sufficiently rich that the differences over $z_3$ washes out. The art of theory construction is to find those relationships which are approximately invariant in the domain deployed.</p>
+
+<h1 id="a-example-in-timeseries-forecasting">A Example in Timeseries Forecasting</h1>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Haavelmo&rsquo;s novel contribution is to explicitly frame the problems as of economics as ones which <em>can</em> be interrogated by using probability theory and statistical inference informed by data. A proposed autonomous &ldquo;law&rdquo; may be made precise by means of a probability model under which we can test a variety of hypotheses against observed data. He distinguished clearly &ldquo;the stream of experiments that Nature is steadily turning out from her own enormous laboratory, and which we merely watch as passive observers&rdquo;, from ones we might orchestrate and advocated the testing of hypothetical against this flood of data.(pg14). These pieces, so familiar today, were strikingly innovative when first tied into a system.</p>
+
+
+          &nbsp;
+        </div>
+
+        <div>
+          <div class="post-back-link">
+    <a href="javascript: history.back()">
+        <i class="fa fa-arrow-left"></i> 
+        Back
+    </a>
+</div>
+        </div>
+      </div>
+    </div>
+    
+
+<footer style="padding-top: 1em;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/prism.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Grue on Examined Algorithms</title>
+    <link>http://nathanielf.github.io/tags/grue/</link>
+    <description>Recent content in Grue on Examined Algorithms</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
+    <lastBuildDate>Wed, 22 Jan 2025 10:19:36 +0000</lastBuildDate>
+    
+	<atom:link href="http://nathanielf.github.io/tags/grue/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Timeseries Forecasting in a Grue World</title>
+      <link>http://nathanielf.github.io/post/forecasting_grue_timeseries/</link>
+      <pubDate>Wed, 22 Jan 2025 10:19:36 +0000</pubDate>
+      
+      <guid>http://nathanielf.github.io/post/forecasting_grue_timeseries/</guid>
+      <description>In 1944 Trygve Haavelmo could argue sincerely that the hostility to mathematical statistics in economics was a mistake. He could argue that, in fact, economic questions could be phrased in the language of probability. Today that observation is palpably anachronistic, owing to the current trend of equating economists with soothsayers while expecting similar arcana and spell craft. The reality falls short of magic and is more interesting than the fantasy.</description>
+    </item>
+    
+  </channel>
+</rss>

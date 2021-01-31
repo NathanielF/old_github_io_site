@@ -24,6 +24,7 @@ pre code {
 
 .summary{
 font-family: "Alegreya", "Hoefler Text", Times, serif;
+font-size: 15px;
 }
 
 .summary > li:first-child {

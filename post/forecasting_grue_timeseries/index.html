@@ -106,16 +106,16 @@
           
           <span class="post-tags">
             
-            <a class="post-tag" href="http://nathanielf.github.io/tags/grue">grue</a>
-             &bull;   
-            
             <a class="post-tag" href="http://nathanielf.github.io/tags/structural-breaks">structural breaks</a>
-             &bull;  
+             &bull;   
             
             <a class="post-tag" href="http://nathanielf.github.io/tags/timeseries">timeseries</a>
              &bull;  
             
             <a class="post-tag" href="http://nathanielf.github.io/tags/forecasting">forecasting</a>
+             &bull;  
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/probability">probability</a>
             
             
           </span>
@@ -135,16 +135,16 @@
           
           <p class="post-tags">
             
-            <a class="post-tag" href="http://nathanielf.github.io/tags/grue">grue</a>
-             &bull;   
-            
             <a class="post-tag" href="http://nathanielf.github.io/tags/structural-breaks">structural breaks</a>
-             &bull;  
+             &bull;   
             
             <a class="post-tag" href="http://nathanielf.github.io/tags/timeseries">timeseries</a>
              &bull;  
             
             <a class="post-tag" href="http://nathanielf.github.io/tags/forecasting">forecasting</a>
+             &bull;  
+            
+            <a class="post-tag" href="http://nathanielf.github.io/tags/probability">probability</a>
             
             
           </p>
@@ -210,7 +210,7 @@ A similar consolidation can be done for GDP since:</p>
 
 <p>$$GDP_{t} = \alpha GDP_{t-1} + \epsilon_{ct} + \beta\alpha GDP_{t-1} + \beta\epsilon_{ct} - \beta(\alpha GDP_{t-2} + \epsilon_{ct-1}) + \epsilon_{it} $$</p>
 
-<p>Which means that we ought to be able to estimate current GDP conditional on the past distribution of GDP using the techniques of univariate timeseries forecasting to establish the values of the fixed parameters $\alpha, \beta$ There are no guarantees that the above model will be perfect, but we can at least determine whether it&rsquo;s a good fit to past data, and then further test whether it maintains reasonable predictive accuracy into the future. We make the notion of &ldquo;reasonable&rdquo; precise by postulating a theoretical distributions for the error terms $\epsilon_{i}, \epsilon_{c}$ and $GDP$ in the above equations. If the data appears consistent with hypothetical distribution, then the expected value of that theoretical is deemed a reasonable fit. The pattern is common is many economic problems, we ussually start with some notion of the interaction between various structural variables and need to express the system in a manner which (a) preserves some of the knowledge we have of the system and makes (b) makes for a tractable probability model.</p>
+<p>Which means that we ought to be able to estimate current GDP conditional on the past distribution of GDP using the techniques of univariate timeseries forecasting to establish the values of the fixed parameters $\alpha, \beta$ There are no guarantees that the above model will be perfect, but we can at least determine whether it&rsquo;s a good fit to past data, and then further test whether it maintains reasonable predictive accuracy into the future. We make the notion of &ldquo;reasonable&rdquo; precise by postulating a theoretical distributions for the error terms $\epsilon_{i}, \epsilon_{c}$ and $GDP$ in the above equations. If the data appears consistent with hypothetical distribution, then the expected value of that theoretical distribution is deemed a reasonable fit. The pattern is common is many economic problems, we ussually start with some notion of the interaction between various structural variables and need to express the system in a manner which (a) preserves some of the knowledge we have of the system and makes (b) makes for a tractable probability model.</p>
 
 <h2 id="bayesian-probability-modelling-a-brief-example-in-code">Bayesian Probability Modelling: A brief example in Code</h2>
 

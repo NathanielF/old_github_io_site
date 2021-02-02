@@ -330,7 +330,9 @@ $$ = \mathbf{L}\mathbf{L}^{'} + \Psi $$
 
 <h3 id="estimating-the-latent-factor-values">Estimating the latent factor values</h3>
 
-<p>Various techniques can be applied to estimate the loadings $\mathbf{L}$ based on a strategic decomposition of sample covariance matrix to derive the principal factors. The most typical technique is to use the eigenvalue decomposition, but a maximum likelihood method is also feasible. It is another question altogeher for how to estimate the factor scores $f_{j} \in \mathbf{F}$ from our derived factor loadings. This is a two step, where we base an estimate on a set of prior estimates. We won&rsquo;t dwell on the details here, but I want to stress the level of abstraction! When it comes to test the hypotheses about the underlying psychological phenomenon, this method has certain mathematical appeal but it is not above question. It is these contingencies: the bespoke assumptions of the model, but correlation and covariance relationship between the observed features and richness of the data required to discover the expected values of $\mathbf{L}, \mathbf{f}_j$ respectively, coupled with the difficulty of interpreting the factors in light of the original psychological concept.</p>
+<p>Various techniques can be applied to estimate the loadings $\mathbf{L}$ based on a strategic decomposition of sample covariance matrix to derive the principal factors. The typical technique is to use the eigenvalue decomposition, but a maximum likelihood method is also feasible. It is another question altogeher for how to estimate the factor scores $f_{j} \in \mathbf{F}$ from our derived factor loadings.</p>
+
+<p>This is a two step, where we base an estimate on a set of prior estimates. One or more latent factors are assumed, observable features postulated to be related are grouped and from these we derive a recipe for constructing the latent factor as a composite of the observed features. From this recipe, we can then by a process of optimisation derive estimates for the values of the latent feature. We won&rsquo;t dwell on the details here, but I want to stress the level of abstraction! When it comes to test the hypotheses about the underlying psychological phenomenon, this method has certain mathematical appeal but it is not above question. It is these kind of contingencies: the bespoke assumptions of the model, but correlation and covariance relationship between the observed features and richness of the data required to discover the expected values of $\mathbf{L}, \mathbf{f}_j$ respectively, coupled with the difficulty of interpreting the factors in light of the original psychological concept, that undermine cumulative progress in psychology.</p>
 
 <h2 id="confirming-the-hypothesis">Confirming the Hypothesis</h2>
 
@@ -346,6 +348,10 @@ for corroborating substantive theories in the soft areas is a terrible mistake, 
 <h2 id="factor-reliability-an-example-in-code">Factor Reliability: An Example in Code.</h2>
 
 <iframe width="100%" height="1000" name="iframe" src="/notebooks/TheoreticalRisks_Meehl.html"  frameborder="0" scrolling="yes" onload="resizeIframe(this)"></iframe>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>We&rsquo;ve seen a brief example of factor analysis, an attempt to derive a psychological construct from observable data. We&rsquo;ve shown how to deploy a measure of the factor&rsquo;s reliability in the Cronbach alpha measurement. But we&rsquo;ve only really shown that some features co-vary together, or show some degree of correlation. This alone is too quick and dirty to support any inference to the reality of the latent factor. Meehl&rsquo;s scepticism about significance testing in this domain, might have been too generous.</p>
 
 
           &nbsp;

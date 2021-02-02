@@ -12,18 +12,18 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@forde_nathaniel">
     <meta name="twitter:creator" content="@forde_nathaniel">
-    <meta name="twitter:title" content="Timeseries Forecasting in a Grue World">
+    <meta name="twitter:title" content="Timeseries Forecasting and Degrees of Autonomy">
     <meta name="twitter:description" content="In 1944 Trygve Haavelmo could argue sincerely that the hostility to mathematical statistics in economics was a mistake. He could argue that, in fact, economic questions could be phrased in the language of probability. Today that observation is palpably anachronistic, owing to the current trend of equating economists with soothsayers while expecting similar arcana and spell craft. The reality falls short of magic and is more interesting than the fantasy.">
     <meta name="twitter:image" content="img/agora.jpg">
 
     <meta property="og:url" content="/post/forecasting_grue_timeseries/" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Timeseries Forecasting in a Grue World" />
+    <meta property="og:title" content="Timeseries Forecasting and Degrees of Autonomy" />
     <meta property="og:description" content="In 1944 Trygve Haavelmo could argue sincerely that the hostility to mathematical statistics in economics was a mistake. He could argue that, in fact, economic questions could be phrased in the language of probability. Today that observation is palpably anachronistic, owing to the current trend of equating economists with soothsayers while expecting similar arcana and spell craft. The reality falls short of magic and is more interesting than the fantasy." />
     <meta property="og:image" content="img/agora.jpg" />
 
 
-  <title>Timeseries Forecasting in a Grue World</title>
+  <title>Timeseries Forecasting and Degrees of Autonomy</title>
 
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -125,7 +125,7 @@
       </div>
 
       <div class="col-md-7">
-        <h1 class="post-title">Timeseries Forecasting in a Grue World</h1>
+        <h1 class="post-title">Timeseries Forecasting and Degrees of Autonomy</h1>
         <div class="hidden-md hidden-lg post-metadata">
           <div>
             <em>Jan 31, 2021</em>
@@ -210,7 +210,7 @@ A similar consolidation can be done for GDP since:</p>
 
 <p>$$GDP_{t} = \alpha GDP_{t-1} + \epsilon_{ct} + \beta\alpha GDP_{t-1} + \beta\epsilon_{ct} - \beta(\alpha GDP_{t-2} + \epsilon_{ct-1}) + \epsilon_{it} $$</p>
 
-<p>Which means that we ought to be able to estimate current GDP conditional on the past distribution of GDP using the techniques of univariate timeseries forecasting to establish the values of the fixed parameters $\alpha, \beta$ There are no guarantees that the above model will be perfect, but we can at least determine whether it&rsquo;s a good fit to past data, and then further test whether it maintains reasonable predictive accuracy into the future. We make the notion of &ldquo;reasonable&rdquo; precise by postulating a theoretical distributions for the error terms $\epsilon_{i}, \epsilon_{c}$ and $GDP$ in the above equations. If the data appears consistent with hypothetical distribution, then the expected value of that theoretical distribution is deemed a reasonable fit. The pattern is common is many economic problems, we ussually start with some notion of the interaction between various structural variables and need to express the system in a manner which (a) preserves some of the knowledge we have of the system and makes (b) makes for a tractable probability model.</p>
+<p>Which means that we ought to be able to estimate current GDP conditional on the past distribution of GDP using the techniques of univariate timeseries forecasting to establish the values of the fixed parameters $\alpha, \beta$ There are no guarantees that the above model will be perfect, but we can at least determine whether it&rsquo;s a good fit to past data, and then further test whether it maintains reasonable predictive accuracy into the future. We make the notion of &ldquo;reasonable&rdquo; precise by postulating a theoretical distributions for the error terms $\epsilon_{i}, \epsilon_{c}$ and $GDP$ in the above equations. If the data appears consistent with the hypothetical mutlivariate distribution, then the expected value of that theoretical distribution is deemed a reasonable fit. The pattern is common is many economic problems - we start with some notion of the interaction between various structural variables and need to express the system in a manner which (a) preserves some of the knowledge we have of the system and makes (b) makes for a tractable probability model. From there we evaluate competing theories, revise and repeat.</p>
 
 <h2 id="bayesian-probability-modelling-a-brief-example-in-code">Bayesian Probability Modelling: A brief example in Code</h2>
 

@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Examined Algorithms</title>
-    <link>http://nathanielf.github.io/</link>
+    <link>https://nathanielf.github.io/</link>
     <description>Recent content on Examined Algorithms</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
     <lastBuildDate>Sun, 31 Jan 2021 10:19:36 +0000</lastBuildDate>
     
-	<atom:link href="http://nathanielf.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanielf.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Timeseries Forecasting and Degrees of Autonomy</title>
-      <link>http://nathanielf.github.io/post/forecasting_grue_timeseries/</link>
+      <link>https://nathanielf.github.io/post/forecasting_grue_timeseries/</link>
       <pubDate>Sun, 31 Jan 2021 10:19:36 +0000</pubDate>
       
-      <guid>http://nathanielf.github.io/post/forecasting_grue_timeseries/</guid>
+      <guid>https://nathanielf.github.io/post/forecasting_grue_timeseries/</guid>
       <description>In 1944 Trygve Haavelmo could argue sincerely that the hostility to mathematical statistics in economics was a mistake. He could argue that, in fact, economic questions could be phrased in the language of probability. Today that observation is palpably anachronistic, owing to the current trend of equating economists with soothsayers while expecting similar arcana and spell craft. The reality falls short of magic and is more interesting than the fantasy.</description>
     </item>
     
     <item>
       <title>Theoretical Risks - Factor Analysis, Sir Popper and Sir Fisher</title>
-      <link>http://nathanielf.github.io/post/theoretical_risks_meehl/</link>
+      <link>https://nathanielf.github.io/post/theoretical_risks_meehl/</link>
       <pubDate>Fri, 22 Jan 2021 10:19:36 +0000</pubDate>
       
-      <guid>http://nathanielf.github.io/post/theoretical_risks_meehl/</guid>
+      <guid>https://nathanielf.github.io/post/theoretical_risks_meehl/</guid>
       <description>In a prescient paper in the 1970s Paul Meehl wrote about the lack of cumulative success in the psychologocial sciences, and how this should be attributed to poor methodology rather than the sheer difficulty of the subject. He elaborates an impressive list of problems for modeling any psychological process. Common themes criss-cross the list and interact with one another in ways which could make you despair for the discipline. So it is, I think, somewhat surprising that Meehl locates the main problem not in the subject, but in the method of significance testing.</description>
     </item>
     
     <item>
       <title>Utility and Representation Theorems</title>
-      <link>http://nathanielf.github.io/publication/utility_and_representation/</link>
+      <link>https://nathanielf.github.io/publication/utility_and_representation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://nathanielf.github.io/publication/utility_and_representation/</guid>
+      <guid>https://nathanielf.github.io/publication/utility_and_representation/</guid>
       <description>The paper explores some the constructive themes in probability modelling. We discuss briefly the notion of construct validity and replicability in psychological science, before turning to a more pernicious example in the algorithm of expected value and the modelling of personal utility. Focusing first on how the probability measures and utility curves are constructed, and the role of these constructions in both Von Neumann &amp;amp; Morgenstern&amp;rsquo;s and Jeffrey&amp;rsquo;s famous representation theorems, we elaborate the difficult choices and idealisations that go into this paradigm of reasoning, and briefly compare how similar choices are made today in machine learning models throughout industry.</description>
     </item>
     

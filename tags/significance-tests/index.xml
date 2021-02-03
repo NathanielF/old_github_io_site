@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Significance Tests on Examined Algorithms</title>
-    <link>http://nathanielf.github.io/tags/significance-tests/</link>
+    <link>https://nathanielf.github.io/tags/significance-tests/</link>
     <description>Recent content in Significance Tests on Examined Algorithms</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
     <lastBuildDate>Fri, 22 Jan 2021 10:19:36 +0000</lastBuildDate>
     
-	<atom:link href="http://nathanielf.github.io/tags/significance-tests/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanielf.github.io/tags/significance-tests/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Theoretical Risks - Factor Analysis, Sir Popper and Sir Fisher</title>
-      <link>http://nathanielf.github.io/post/theoretical_risks_meehl/</link>
+      <link>https://nathanielf.github.io/post/theoretical_risks_meehl/</link>
       <pubDate>Fri, 22 Jan 2021 10:19:36 +0000</pubDate>
       
-      <guid>http://nathanielf.github.io/post/theoretical_risks_meehl/</guid>
+      <guid>https://nathanielf.github.io/post/theoretical_risks_meehl/</guid>
       <description>In a prescient paper in the 1970s Paul Meehl wrote about the lack of cumulative success in the psychologocial sciences, and how this should be attributed to poor methodology rather than the sheer difficulty of the subject. He elaborates an impressive list of problems for modeling any psychological process. Common themes criss-cross the list and interact with one another in ways which could make you despair for the discipline. So it is, I think, somewhat surprising that Meehl locates the main problem not in the subject, but in the method of significance testing.</description>
     </item>
     

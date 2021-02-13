@@ -11818,6 +11818,7 @@ div#notebook {
 <span class="n">s</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">a1</span><span class="o">*</span><span class="n">P</span> <span class="o">+</span> <span class="n">a2</span><span class="o">*</span><span class="n">W</span> <span class="o">+</span> <span class="n">a3</span><span class="o">*</span><span class="n">H</span> <span class="o">+</span> <span class="n">e_1</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">b0</span> <span class="o">+</span> <span class="n">b1</span><span class="o">*</span><span class="n">P</span> <span class="o">+</span><span class="n">b2</span><span class="o">*</span><span class="n">F</span> <span class="o">+</span> <span class="n">b3</span><span class="o">*</span><span class="n">O</span> <span class="o">+</span> <span class="n">e_2</span>
 
+<span class="c1"># True coeffs             3       5       10</span>
 <span class="n">X_supply</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="n">P</span> <span class="p">,</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span><span class="n">W</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span><span class="n">H</span><span class="p">})</span>
 <span class="n">X_supply</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_supply</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">X_supply</span><span class="p">)</span>
@@ -11920,7 +11921,8 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[252]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_demand</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="n">P</span> <span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span><span class="n">F</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span><span class="n">O</span><span class="p">})</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># True coeffs             6       2       7</span>
+<span class="n">X_demand</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="n">P</span> <span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span><span class="n">F</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span><span class="n">O</span><span class="p">})</span>
 <span class="n">X_demand</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_demand</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">X_demand</span><span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
@@ -12067,6 +12069,7 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">beta_hat_OLS</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">beta_hat_OLS</span>
+<span class="c1">#True coefficient values 2,  3</span>
 </pre></div>
 
 </div>
@@ -12108,7 +12111,10 @@ div#notebook {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">iv_estimate</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span>
             <span class="n">Z</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">))))</span>
+
+
 <span class="n">iv_estimate</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="c1">#True coefficient values 2,  3</span>
 </pre></div>
 
 </div>
@@ -12394,6 +12400,7 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">iv_estimate</span><span class="p">(</span><span class="n">Z_supply</span><span class="p">,</span> <span class="n">X_supply</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="c1">#True coefficient values 2, 3, 5, 10</span>
 </pre></div>
 
 </div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elasticity on Examined Algorithms</title>
+    <link>https://nathanielf.github.io/tags/elasticity/</link>
+    <description>Recent content in Elasticity on Examined Algorithms</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
+    <lastBuildDate>Sat, 06 Feb 2021 10:19:36 +0000</lastBuildDate>
+    
+	<atom:link href="https://nathanielf.github.io/tags/elasticity/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pricing: A Potted History</title>
+      <link>https://nathanielf.github.io/post/pricing_a_potted_history/</link>
+      <pubDate>Sat, 06 Feb 2021 10:19:36 +0000</pubDate>
+      
+      <guid>https://nathanielf.github.io/post/pricing_a_potted_history/</guid>
+      <description>Demand curve analysis is the academic study of tolerable robbery and stock market manias skew demand curves. You&amp;rsquo;ve likely seen the cobweb like diagrams that chart the trajectories of supply and demand as a function of price. These are aids to estimate the depth of your pockets. Acceptable elascticities of pricing always emerge as a consequence of tolerable changes in demand. A pricing strategy is a question of latitude, how far can we stretch your budget?</description>
+    </item>
+    
+  </channel>
+</rss>

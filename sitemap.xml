@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nathanielf.github.io/post/pricing_a_potted_history/</loc>
+    <lastmod>2021-02-06T10:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/post/forecasting_grue_timeseries/</loc>
     <lastmod>2021-01-31T10:19:36+00:00</lastmod>
   </url>
@@ -23,8 +28,20 @@
   </url>
   
   <url>
+    <loc>https://nathanielf.github.io/tags/demand/</loc>
+    <lastmod>2021-02-06T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/tags/elasticity/</loc>
+    <lastmod>2021-02-06T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/</loc>
-    <lastmod>2021-01-31T10:19:36+00:00</lastmod>
+    <lastmod>2021-02-06T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -42,7 +59,13 @@
   
   <url>
     <loc>https://nathanielf.github.io/post/</loc>
-    <lastmod>2021-01-31T10:19:36+00:00</lastmod>
+    <lastmod>2021-02-06T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/tags/pricing/</loc>
+    <lastmod>2021-02-06T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   

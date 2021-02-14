@@ -353,7 +353,7 @@ $$ = \mathbf{L}\mathbf{L}^{'} + \Psi $$
 
 <p>This is a two step, where we base an estimate on a set of prior estimates. One or more latent factors are assumed, observable features postulated to be related are grouped and from these we derive a recipe for constructing the latent factor as a composite of the observed features. From this recipe, we can then by a process of optimisation derive estimates for the values of the latent feature. We won&rsquo;t dwell on the details here, but I want to stress the level of abstraction! When it comes to test the hypotheses about the underlying psychological phenomenon, this method has certain mathematical appeal but it is not above question. It is these kind of contingencies: the bespoke assumptions of the model, but correlation and covariance relationship between the observed features and richness of the data required to discover the expected values of $\mathbf{L}, \mathbf{f}_j$ respectively, coupled with the difficulty of interpreting the factors in light of the original psychological concept, that undermine cumulative progress in psychology.</p>
 
-<h2 id="confirming-the-hypothesis">Confirming the Hypothesis</h2>
+<h2 id="weighing-the-hypothesis">Weighing the Hypothesis</h2>
 
 <p>These observations suggest that the notion construct validity is not easily resolved and as such our initial hypotheses are plagued by innumerable auxilary commitments. It is with these considerations in mind that Paul Meehl can write:</p>
 
@@ -362,15 +362,23 @@ $$ = \mathbf{L}\mathbf{L}^{'} + \Psi $$
 for corroborating substantive theories in the soft areas is a terrible mistake, is basically unsound, poor scientific strategy and one of the worst things that ever happened in theory of   psychology</em>&rdquo; - Theoretical Risks and Tabular Asteriks, Sir Karl, Sir Ronald and the Slow Progress of Soft Psychology</p>
 </blockquote>
 
-<p>The accumulation of auxilary commitments makes the cumulative confirmation of substantive psychological theory proportionaly unlikely. At best we may get lucky in some cases, but the character of the object under study is so dynamic that simple significance tests are next to useless.</p>
+<p>The accumulation of auxilary commitments makes the cumulative confirmation of substantive psychological theory proportionaly unlikely. At best we may get lucky in some cases, but the character of the object under study is so dynamic that simple significance tests are next to useless. The &ldquo;distance&rdquo; between the latent factor and our measurement of it supply an almost endless set of auxilary commitments which can come under pressure when evaluating a given hypothesis.</p>
+
+<p>But there is a tension since difficulty of measurement does not necessarily undermine the theory. In particular, there are theory&rsquo;s which have a high degree of intuitive plausibility (&ldquo;verisimilitude&rdquo;) but escape our ability to properly measure. Any measurement construct is at best an attempted proxy. There are some historic measures of construct validity such as Cronbach&rsquo;s alpha which at least test for a directional consistency in the observed features.</p>
 
 <h2 id="factor-reliability-an-example-in-code">Factor Reliability: An Example in Code.</h2>
 
 <iframe width="100%" height="1000" name="iframe" src="/notebooks/TheoreticalRisks_Meehl.html"  frameborder="0" scrolling="yes" onload="resizeIframe(this)"></iframe>
 
-<h1 id="conclusion">Conclusion</h1>
+<h1 id="generalisability-and-replicability">Generalisability and Replicability</h1>
 
 <p>We&rsquo;ve seen a brief example of factor analysis, an attempt to derive a psychological construct from observable data. We&rsquo;ve shown how to deploy a measure of the factor&rsquo;s reliability in the Cronbach alpha measurement. But we&rsquo;ve only really shown that some features co-vary together, or show some degree of correlation. This alone is too quick and dirty to support any inference to the reality of the latent factor. At this height of abstraction it&rsquo;s hard to see how any appeals to &ldquo;versimilitude&rdquo; could even get off the ground. Meehl&rsquo;s scepticism about significance testing in this domain might even have been too generous.</p>
+
+<p>But his framing is valuable. The problem stated suggests a rephrasal where we test a theory for replicability over a range of admissable auxilary and contextual commitments. Holding one fixed as we vary the other in a genuine exercise of exploratory experiementation.</p>
+
+<p>$$ \forall i \forall j \Bigg( T \wedge A_{i} \wedge C_{j} \Rightarrow O \Bigg) $$</p>
+
+<p>This emphasis concedes the difficulty of the subject and makes it explicit over the testing routine. Plausibility can then accrue to theory in a more gradual fashion as appropriate to the difficulties of the subject.</p>
 
 
         &nbsp;

@@ -176,7 +176,7 @@ ga('send', 'pageview');
 
 <p>There is a conceit of individuality and uniqueness - that our mind is our own and the choices we make are ours alone to know and learn from. We plot our own journies and cleave to their contours as if we can see the goal. The main players and places get reshuffled or recycled as we grow, the tale contorts and twists to our constant surprise. How then could we be so utterly predictable?</p>
 
-<h1 id="revealed-preference-an-political-need">Revealed Preference an Political Need</h1>
+<h1 id="revealed-preference-a-political-need">Revealed Preference: a Political Need</h1>
 
 <p>The hope of many marketers is that your individuality is irrelevant to your consumption. As long as you fall into an identifiable class of consumer, your habits can be exploited and directed. Your propensity to purchase might be inferred from the past behaviour of similar consumers. This slightly nefarious motivation obscures the audacity of the project. The notion that we can model and predict your behaviour based on estimating some unobserved or latent motivation is radical. It postulates a subjective measure of utility and aims to approximate those dimensions of your preferences. This is a theory that human motivations can be modeled and the question is how, not why.</p>
 
@@ -207,7 +207,7 @@ $$= Pr(\mathbf{X&rsquo;}\beta + v &gt; 0) $$
 $$ = Pr(v &gt; - \mathbf{X&rsquo;}\beta ) $$
 $$ = 1 - F(\mathbf{X&rsquo;}\beta ) $$</p>
 
-<p>where $F$ is the distribution of the unobserved random variable $e$. The challenge is using the correct distribution as this feeds the method of statistical estimation of the parameters $\beta$</p>
+<p>where $F$ is the distribution of the unobserved random variable $v$. The challenge is using the correct distribution as this feeds the method of statistical estimation of the parameters $\beta$</p>
 
 <p>$$U_{i,A} &gt; U_{i, B} $$</p>
 
@@ -364,7 +364,7 @@ res <span style="color: #555555">=</span> minimize(ll_mn_logistic, x0 <span styl
              options<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;disp&#39;</span>: <span style="color: #336666">True</span>, <span style="color: #CC3300">&#39;maxiter&#39;</span>:<span style="color: #FF6600">1000</span>})
 </pre></div>
 
-<p>The expressive power of these kinds of discrete choice model are to be admired. They map onto an innumerable range of practical problems. So it is all the more important to be aware of their limitations when deploying them at scale. The independence assumption and the linear structure of the latent utility model is not innocent, they&rsquo;re tantamount to very strong claims about the consistency and preference structure of the population. So long as we&rsquo;re aware of this the algorithms can be deployed profitably, sometimes consumers do have rational preferences - <em>the challenge is modelling the considerations that go into their reasoning.</em> It&rsquo;s utterly usefless to articulate preference over goods poorly described.</p>
+<p>The expressive power of these kinds of discrete choice model are to be admired. They map onto an innumerable range of practical problems in business, science and politics. So it is all the more important to be aware of their limitations when deploying them at scale. The independence assumption and the linear structure of the latent utility model is not innocent, they&rsquo;re tantamount to very strong claims about the consistency and preference structure of the population. So long as we&rsquo;re aware of this, the algorithms can be deployed profitably as sometimes consumers do have rational preferences - <em>the challenge is modelling the considerations that go into their reasoning.</em> It&rsquo;s utterly useless to articulate preference over goods poorly described.</p>
 
 <h2 id="bart-and-transportation-policy">BART and Transportation policy.</h2>
 
@@ -554,13 +554,15 @@ res<span style="color: #555555">.</span>round(<span style="color: #FF6600">3</sp
 <p>The laws [of individual economic man&rsquo;s behaviour] which we are about to trace out are to be conceived as theoretically true of the individual; they can only be practically verified as regards the aggregate transactions, productions and consumptions of a large body of people. But the laws of the aggregate depend of course upon the laws applying to individual cases. - quoted on pg 149 <em>The World in the Model</em> by Mary S. Morgan</p>
 </blockquote>
 
-<p>McFadden&rsquo;s work was exemplary and revolutionary. It showed a clear and principaled method for translating a theory of human motivation into a predictions of market movements. The results were perhaps a little fortunate, but the method is profoundly important. The hardwork and shoe-leather of testing numerous models against observation, trying to infer causal impact of the demographic factors all illustrated the right kind of scientific process - measurement, abstraction and forecast. The discrete choice models have some particular limitations when applied to complex choices over price. Apart from the fact that consumers will often exhibit irrational preferences, price of a product is correlated with the random components of the utility measure. This can prevent proper estimation of the model without making some adjustments. We won&rsquo;t dwell on the details here but it is enough to note that the urgency of the task is not diminished by the difficulty.</p>
+<p>McFadden&rsquo;s work was exemplary and revolutionary. It showed a clear and principaled method for translating a theory of human motivation into a predictions of market movements. The results were perhaps a little fortunate, but the method is profoundly important. The hardwork and shoe-leather of testing numerous models against observation, trying to infer causal impact of the demographic factors all illustrated the right kind of scientific process - measurement, abstraction and forecast.</p>
+
+<p>The discrete choice models have some particular limitations when applied to complex choices over price. Apart from the fact that consumers will often exhibit irrational preferences, price of a product is correlated with the random components of the utility measure. This can prevent proper estimation of the model without making some adjustments. We won&rsquo;t dwell on the details here but it is enough to note that the urgency of the task is not diminished by the difficulty.</p>
 
 <h1 id="the-tension-idealisation-reality-and-progress">The Tension: Idealisation, Reality and Progress</h1>
 
-<p>The challenge of an economic model is to create a measure that abstracts over the particulars without doing violence to the participants. These models enter into a feedback of policy and practice. If we&rsquo;re lucky our institutions learn from experimenting with these models and improve. If we&rsquo;re not, the tired tropes become a calcified status quo which supports a fortunate few and quashes the concerns of the unrepresented.</p>
+<p>The challenge of an economic model is to create a measure that abstracts over the particulars without doing violence to the participants. These models enter into a feedback loop of policy and practice. If we&rsquo;re lucky our institutions learn from experimenting with these models and improve. If we&rsquo;re not, the tired tropes become a calcified status quo which supports a fortunate few and quashes the concerns of the unrepresented. The models are always on a time-lag, optimised for past behaviour hoping to hold good in an uncertain future.</p>
 
-<p>The most likely outcomes are always conditional on the underlying distribution and it is somewhat of an art how to properly specify each probability model: how to choose the dimensions to measure, the interactions which are important, the parameters of the model? Your next action might be predictable if the modeler can adjust their expectations for the appropriate features, but even then you get lost in the mileau, swept up among the many. Even in the era of Big-Data, predictability is no substitute for understanding, no threat to individuality. The dynamics of the market move on and a once effective model decays&hellip; you&rsquo;re a moving target. Keep moving, drag the models forward.</p>
+<p>The most likely outcomes are always conditional on the underlying distribution and it is somewhat of an art how to properly specify each probability model: how to choose the dimensions to measure, which interaction effects are important, the parameters of the model? Your next action might be predictable if the modeler can adjust their expectations for the appropriate features, but even then you get lost in the mileau, swept up among the many. Even in the era of Big-Data, predictability is no substitute for understanding, no threat to individuality. The dynamics of the market move on and a once effective models decay&hellip; you&rsquo;re a moving target. Keep moving, drag the models forward.</p>
 
 
         &nbsp;

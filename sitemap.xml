@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nathanielf.github.io/post/mle_utility_and_choice/</loc>
+    <lastmod>2021-02-21T10:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/post/pricing_a_potted_history/</loc>
     <lastmod>2021-02-06T10:19:36+00:00</lastmod>
   </url>
@@ -14,6 +19,14 @@
   <url>
     <loc>https://nathanielf.github.io/post/theoretical_risks_meehl/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/extras/notable/</loc>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/extras/notable_2/</loc>
   </url>
   
   <url>
@@ -41,7 +54,12 @@
   
   <url>
     <loc>https://nathanielf.github.io/</loc>
-    <lastmod>2021-02-06T10:19:36+00:00</lastmod>
+    <lastmod>2021-02-21T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/extras/</loc>
     <priority>0</priority>
   </url>
   
@@ -64,8 +82,20 @@
   </url>
   
   <url>
+    <loc>https://nathanielf.github.io/tags/log-likelihood/</loc>
+    <lastmod>2021-02-21T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/tags/mle/</loc>
+    <lastmod>2021-02-21T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/post/</loc>
-    <lastmod>2021-02-06T10:19:36+00:00</lastmod>
+    <lastmod>2021-02-21T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -93,6 +123,12 @@
   </url>
   
   <url>
+    <loc>https://nathanielf.github.io/tags/revealed-preference/</loc>
+    <lastmod>2021-02-21T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/tags/significance-tests/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
@@ -113,6 +149,12 @@
   <url>
     <loc>https://nathanielf.github.io/tags/timeseries/</loc>
     <lastmod>2021-01-31T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/tags/utility/</loc>
+    <lastmod>2021-02-21T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   

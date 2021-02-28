@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathaniel Forde's Homepage">
+  <meta name="author" content="Nathaniel Forde">
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@forde_nathaniel">
+    <meta name="twitter:creator" content="@forde_nathaniel">
+    <meta name="twitter:title" content="Trains, Planes ...Utility and Maximum Likelihood">
+    <meta name="twitter:description" content="There is a conceit of individuality and uniqueness - that our mind is our own and the choices we make are ours alone to know and learn from. We plot our own journies and cleave to their contours as if we can see the goal. The main players and places get reshuffled or recycled as we grow, the tale contorts and twists to our constant surprise. How then could we be so utterly predictable?">
+    <meta name="twitter:image" content="img/flammiron_engraving.jpg">
+
+    <meta property="og:url" content="/post/mle_utility_and_choice/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Trains, Planes ...Utility and Maximum Likelihood" />
+    <meta property="og:description" content="There is a conceit of individuality and uniqueness - that our mind is our own and the choices we make are ours alone to know and learn from. We plot our own journies and cleave to their contours as if we can see the goal. The main players and places get reshuffled or recycled as we grow, the tale contorts and twists to our constant surprise. How then could we be so utterly predictable?" />
+    <meta property="og:image" content="img/flammiron_engraving.jpg" />
+
+
+  <title>Trains, Planes ...Utility and Maximum Likelihood</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+  
+  
+  
+  
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-188850615-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188850615-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-188850615-1');
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://nathanielf.github.io/">Examined Algorithms</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/pdf/Nathaniel%20Forde%20Current.pdf">
+            <i class="fa fa-briefcase"></i>&nbsp;
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="/post/">
+            <i class="fa fa-code"></i>&nbsp;
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/publication/">
+            <i class="fa fa-files-o"></i>&nbsp;
+            Research
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container blog-post">
+
+  
+  <div class="row">
+    <div class="col-md-3 hidden-sm hidden-xs text-right">
+      <h1 class="post-title">&nbsp;</h1>
+      <em>Feb 21, 2021</em><br />
+      
+      
+      
+      <span class="post-tags">
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/mle">mle</a>
+         &bull;   
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/revealed-preference">revealed preference</a>
+         &bull;  
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/log-likelihood">log-likelihood</a>
+         &bull;  
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/utility">utility</a>
+        
+        
+      </span>
+      
+      
+      </p>
+    </div>
+
+    <div class="col-md-7">
+      <h1 class="post-title">Trains, Planes ...Utility and Maximum Likelihood</h1>
+      <div class="hidden-md hidden-lg post-metadata">
+        <div>
+          <em>Feb 21, 2021</em>
+        </div>
+        
+        
+        
+        <p class="post-tags">
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/mle">mle</a>
+           &bull;   
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/revealed-preference">revealed preference</a>
+           &bull;  
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/log-likelihood">log-likelihood</a>
+           &bull;  
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/utility">utility</a>
+          
+          
+        </p>
+        
+        
+      </div>
+
+      <div class="post-body">
+        
+
+<p>There is a conceit of individuality and uniqueness - that our mind is our own and the choices we make are ours alone to know and learn from. We plot our own journies and cleave to their contours as if we can see the goal. The main players and places get reshuffled or recycled as we grow, the tale contorts and twists to our constant surprise. How then could we be so utterly predictable?</p>
+
+<p>In this blog post we&rsquo;ll dig into some of the details of Daniel McFadden&rsquo;s analyis of the BART transport system in San Francisco and the algorithmic approach he took to estimating the preferences of the San Francisco residents. He used this analysis to accurately predict the uptake in the rail-users within the city thereby showing that a sound understanding of the incentives and pressures on city infrastructure can lead to accurate predictions of citizenry.</p>
+
+<h1 id="revealed-preference-an-political-need">Revealed Preference an Political Need</h1>
+
+<p>The hope of many marketers is that your individuality is irrelevant to your consumption. As long as you fall into an identifiable class of consumer, your habits can be exploited and directed. Your propensity to purchase might be inferred from the past behaviour of similar consumers. This slightly nefarious motivation obscures the audacity of the project. The notion that we can model and predict your behaviour based on estimating some unobserved or latent motivation is radical. It postulates a subjective measure of utility and aims to approximate those dimensions of your preferences. This is a theory that human motivations can be modeled and the question is how, not why.</p>
+
+<p>But put aside the fears of conspiratorial manipulation, the task is hard and the measures of success are few and far between. More to the point, it is probably to our benefit as a society that some stability can be discerned from patterns of our behaviour. Policy research and politics more generally is based on the assumption that we ought to try and cater to the preferences of citizens. The question of how to discern those preferences is more urgent than how to market products. Representative democracies claim voting is revelatory while marketers maintain that consumption is a leading indicator but both are in the business of articulating need.</p>
+
+<h2 id="latent-utility-and-binary-preference">Latent Utility and Binary Preference</h2>
+
+<p>We&rsquo;ll start, following the presentation of Christopher Adam&rsquo;s <em>Learning Microeconometrics</em> with a simpler case of binary choice between goods $A, B$.</p>
+
+<p><strong>Revealed Preference Axiom</strong>: If there are two choices, A and B, and we
+observe a person choose A, then her utility from A is greater than her utility
+from B.</p>
+
+<p>We assume that the latent utility can be expressed as by the revealed preferences i.e. as the share or proportion of choices made by the customers. Some assumptions about the form of the utility distribution are crucial as our modeling efforts will go wrong if we know nothing about the latent utilities.
+The utility is some function of product and consumer&rsquo;s properties, perhaps mostly driven by price</p>
+
+<p>$$ utility = \mathbf{X&rsquo;}\beta + v$$</p>
+
+<p>and market share is an expression of that utility</p>
+
+<p>$$ demand_A = utility_{A} &gt; 0 $$</p>
+
+<p>In a choice context we&rsquo;re trying to determine if the implicit utility measure is sufficient to drive a purchase, and as such OLS models are inappropriate. This stems from the fact that we&rsquo;re&rsquo;trying to estimate a conditional probability over a binary choice not a unbounded continuous measure. The revealed preference assumption says that we can predict the purchase if the utility of the good is positive.</p>
+
+<p>$$Pr(demand_A = 1) = utility &gt; 0 $$
+$$= Pr(\mathbf{X&rsquo;}\beta + v &gt; 0) $$
+$$ = Pr(v &gt; - \mathbf{X&rsquo;}\beta ) $$
+$$ = 1 - F(\mathbf{X&rsquo;}\beta ) $$</p>
+
+<p>where $F$ is the distribution of the unobserved random variable $e$. The challenge is using the correct distribution as this feeds the method of statistical estimation of the parameters $\beta$</p>
+
+<p>$$U_{i,A} &gt; U_{i, B} $$</p>
+
+<p>just when</p>
+
+<p>$$ \mathbf{X&rsquo;}_{i, A}\beta + v_{i,A} &gt; \mathbf{X&rsquo;}_{i, B}\beta + v_{i,B}$$</p>
+
+<p>or</p>
+
+<p>$$  v_{i,A} -  v_{i,B} &gt; - (\mathbf{X&rsquo;}_{i, A}  - \mathbf{X&rsquo;}_{i, B})\beta $$</p>
+
+<p>but then the probability of demand is just</p>
+
+<p>$$Pr(demand_A = 1 | \mathbf{X&rsquo;}_{i, A}, \mathbf{X&rsquo;}_{i, B}) $$
+$$ = Pr\Bigg( v_{i,A} -  v_{i,B} &gt; - (\mathbf{X&rsquo;}_{i, A}  - \mathbf{X&rsquo;}_{i, B})\beta \Bigg) $$
+$$ = Pr\Bigg( -v_{i,A} -  v_{i,B} &lt; (\mathbf{X&rsquo;}_{i, A}  - \mathbf{X&rsquo;}_{i, B})\beta \Bigg) $$
+$$ = F\Bigg( (\mathbf{X&rsquo;}_{i, A}  - \mathbf{X&rsquo;}_{i, B})\beta \Bigg) $$</p>
+
+<p>There are a number of candidate distributions that might serve our purposes we&rsquo;ll look here at the logistic regression and probit binary classification modes.</p>
+
+<h2 id="probit-and-logit-regressions-for-binary-choice">Probit and Logit Regressions for Binary Choice</h2>
+
+<p>The probit and logit models are convenient distributions for modeling discrete choice. We&rsquo;ll initialise some fake data and build two models over the $X, y$ to infer the parameterisations that determined the utility driving of our choices. Note that we specify the distributions of the rror term differently for both models. In the probit case we say that the error term is normally distributed and in the logit case our error term is given a Weibull distribution.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>N <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+X_A <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>add_constant(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(N,<span style="color: #FF6600">2</span>))
+X_B <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>add_constant(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(N, <span style="color: #FF6600">2</span>))
+beta <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([<span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">2</span>, <span style="color: #FF6600">3</span>])
+
+<span style="color: #0099FF; font-style: italic">#probit we only need one normal error term since sums of normals are normal</span>
+v <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>, N)
+y <span style="color: #555555">=</span> (X_A<span style="color: #555555">.</span>dot(beta) <span style="color: #555555">-</span> X_B<span style="color: #555555">.</span>dot(beta)) <span style="color: #555555">+</span> v <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>
+X_diff <span style="color: #555555">=</span> X_A <span style="color: #555555">-</span> X_B
+X_diff[:, <span style="color: #FF6600">0</span>] <span style="color: #555555">=</span>  <span style="color: #FF6600">1</span>
+X_diff <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(X_diff, columns<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;const&#39;</span>, 
+<span style="color: #CC3300">&#39;product_desc&#39;</span>, <span style="color: #CC3300">&#39;product_desc1&#39;</span>])
+
+<span style="color: #0099FF; font-style: italic"># Fit Probit model</span>
+probit_mod <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>Probit(y, X_diff)
+probit_res <span style="color: #555555">=</span> probit_mod<span style="color: #555555">.</span>fit()
+
+v1 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>weibull(<span style="color: #FF6600">1</span>, N)
+v2 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>weibull(<span style="color: #FF6600">1</span>, N)
+y <span style="color: #555555">=</span> (X_A<span style="color: #555555">.</span>dot(beta) <span style="color: #555555">-</span> X_B<span style="color: #555555">.</span>dot(beta)) <span style="color: #555555">+</span> (v1 <span style="color: #555555">-</span> v2) <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>
+<span style="color: #0099FF; font-style: italic"># Fit logit model</span>
+logit_mod <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>Logit(y, X_diff)
+logit_res <span style="color: #555555">=</span> logit_mod<span style="color: #555555">.</span>fit()
+</pre></div>
+
+<p>The results are pretty good for both models - slightly better for the probit model in this case as the tails of the logit are wider. Both models discern the directionality and the correct magnitude of the parameters.</p>
+
+<table width=50%,>
+<caption>Binary Choice Probit and Logit Models</caption>
+<tbody><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:y</em></td></tr><tr><td style="text-align:left"></td></tr><tr><td></td><td colspan="1">Probit Model</td><td colspan="1">Logit Model</td></tr><tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">const</td><td>-0.255<sup></sup></td><td>-0.049<sup></sup></td></tr><tr><td style="text-align:left"></td><td>(0.156)</td><td>(0.246)</td></tr><tr><td style="text-align:left">product_desc</td><td>-1.491<sup>***</sup></td><td>-2.157<sup>***</sup></td></tr><tr><td style="text-align:left"></td><td>(0.445)</td><td>(0.690)</td></tr><tr><td style="text-align:left">product_desc1</td><td>2.964<sup>***</sup></td><td>3.833<sup>***</sup></td></tr><tr><td style="text-align:left"></td><td>(0.578)</td><td>(0.888)</td></tr><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align: left">Observations</td><td>100</td><td>100</td></tr><tr><td style="text-align: left">R<sup>2</sup></td><td></td><td></td></tr><tr><td style="text-align: left">Adjusted R<sup>2</sup></td><td></td><td></td></tr><tr><td style="text-align: left">Residual Std. Error</td><td>1.000 (df=97)</td><td>1.000 (df=97)</td></tr><tr><td style="text-align: left">F Statistic</td><td><sup></sup> (df=2; 97)</td><td><sup></sup> (df=2; 97)</td></tr><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align: left">Note:</td>
+ <td colspan="2" style="text-align: right">
+  <sup>*</sup>p&lt;0.1;
+  <sup>**</sup>p&lt;0.05;
+  <sup>***</sup>p&lt;0.01
+ </td></tr></tbody>
+ </table>
+
+<h2 id="maximum-likelihood-estimation-and-multiple-choice">Maximum Likelihood Estimation and Multiple Choice</h2>
+
+<p>Under the hood these models are fit using the technique of maximum likelihood estimation, which searches the parameter space over each distribution to find a setting so that the observed data is most probable. For computational convenience this often means that we minimise the value of negative log likelihood over a variety of parameter settings.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">log_probit_dist</span>(params, <span style="color: #555555">*</span>args):
+    X, y <span style="color: #555555">=</span> args[<span style="color: #FF6600">0</span>], args[<span style="color: #FF6600">1</span>]
+    beta <span style="color: #555555">=</span> [params[<span style="color: #FF6600">0</span>], params[<span style="color: #FF6600">1</span>], params[<span style="color: #FF6600">2</span>]]
+    mu, sd, <span style="color: #555555">=</span> params[<span style="color: #FF6600">3</span>], params[<span style="color: #FF6600">4</span>]
+    Xb <span style="color: #555555">=</span> X<span style="color: #555555">.</span>dot(beta)
+    q <span style="color: #555555">=</span> <span style="color: #FF6600">2</span><span style="color: #555555">*</span>y<span style="color: #555555">-</span><span style="color: #FF6600">1</span>
+    log_lik <span style="color: #555555">=</span> np<span style="color: #555555">.</span>log(stats<span style="color: #555555">.</span>norm<span style="color: #555555">.</span>cdf(q<span style="color: #555555">*</span>Xb))
+    <span style="color: #006699; font-weight: bold">return</span> <span style="color: #555555">-</span><span style="color: #336666">sum</span>(log_lik)
+
+<span style="color: #0099FF; font-style: italic">### Optimise the probit model for determining the parameters required to</span>
+<span style="color: #0099FF; font-style: italic">### estimate the underlying utility</span>
+<span style="color: #0099FF; font-style: italic">### True values of the parameters 2, 3, -4</span>
+res <span style="color: #555555">=</span> minimize(log_probit_dist, x0 <span style="color: #555555">=</span>[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span> ,<span style="color: #FF6600">0</span> , <span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>], 
+args <span style="color: #555555">=</span>(X, demand_A), options<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;disp&#39;</span>: <span style="color: #336666">True</span>})
+</pre></div>
+
+<p>But the situation is slightly more complex when we&rsquo;re trying to optimise over multiple possible choices. Even with three choices, we have to both measure each latent utility metric as a structural equation and compare the demand for each product $T, B, C$ against a specific reference product. In this case we&rsquo;ll choose $C$ if the utility exceeds that of $B$ and $C$.</p>
+
+<p>$$ U_{i,T} = \mathbf{X&rsquo;}\beta + v_{i,T} $$
+ $$ U_{i,B} = \mathbf{X&rsquo;}\beta + v_{i,B} $$
+ $$ U_{i,C} = \mathbf{X&rsquo;}\beta + v_{i,C} $$
+ $$ Pr(y_C = 1 | \mathbf{X}_{i, C}, \mathbf{X}_{i, T}) =
+      Pr\Big((v_{i, C} - v_{i, B} &gt; - \mathbf{X&rsquo;}_{i, C}\beta )  <br />
+      \text{ and } v_{i, C} - v_{i, T}  &gt; - (\mathbf{X}_{i, C}\beta - \mathbf{X}_{i, T})^{&lsquo;}\beta \Big) $$</p>
+
+<p>For some appropriate probability distribution. This is a strong restriction called <strong>The Irrelevance of Independent Alternatives</strong>, it bakes in the notion that our preferences are consistent and transitive. If we prefer $C$ to $B$ and $B$ to $T$ then we ought to prefer $C$ to $T$ too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale given by:</p>
+
+<p>$$ Pr(y_C = 1 | \mathbf{X}_{i, C}, \mathbf{X}_{i, T}) = \frac{ exp(\mathbf{X&rsquo;}\beta)_{i, C}}{1 + \sum_{i, j}^{j=N} exp(\mathbf{X&rsquo;}\beta)_{i, j} } \text{ where N = #products} $$</p>
+
+<p>which can be optimised for the best parameter fits through an maximum likelihood procedure as follows:</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">100</span>)
+N <span style="color: #555555">=</span> <span style="color: #FF6600">1000</span>
+mu <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>,<span style="color: #FF6600">0</span>]
+rho <span style="color: #555555">=</span> <span style="color: #FF6600">0.1</span>
+cov <span style="color: #555555">=</span> [[<span style="color: #FF6600">1</span>, rho], [rho, <span style="color: #FF6600">1</span>]]
+
+<span style="color: #0099FF; font-style: italic"># u is N*2</span>
+u <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>multivariate_normal(mu, cov, <span style="color: #FF6600">1000</span>)
+x1 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>uniform(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>, size<span style="color: #555555">=</span>(N,<span style="color: #FF6600">2</span>)) <span style="color: #0099FF; font-style: italic">#np.random.rand(N,2)</span>
+x2 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>uniform(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>, size<span style="color: #555555">=</span>(N,<span style="color: #FF6600">2</span>)) <span style="color: #0099FF; font-style: italic">#np.random.rand(N,2)</span>
+
+U <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span> <span style="color: #555555">+</span> <span style="color: #555555">-</span><span style="color: #FF6600">3</span><span style="color: #555555">*</span>x1 <span style="color: #555555">+</span> <span style="color: #FF6600">4</span><span style="color: #555555">*</span>x2 <span style="color: #555555">+</span> u
+
+y <span style="color: #555555">=</span> np<span style="color: #555555">.</span>zeros(shape<span style="color: #555555">=</span>(N, <span style="color: #FF6600">2</span>))
+y[:,<span style="color: #FF6600">0</span>] <span style="color: #555555">=</span> ((U[:,<span style="color: #FF6600">0</span>] <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>) <span style="color: #555555">&amp;</span> (U[:,<span style="color: #FF6600">0</span>] <span style="color: #555555">&gt;</span> U[:,<span style="color: #FF6600">1</span>]))
+y[:,<span style="color: #FF6600">1</span>] <span style="color: #555555">=</span> (U[:,<span style="color: #FF6600">1</span>] <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span> <span style="color: #555555">&amp;</span> (U[:,<span style="color: #FF6600">1</span>] <span style="color: #555555">&gt;</span> U[:,<span style="color: #FF6600">0</span>]))
+
+W1 <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame({<span style="color: #CC3300">&#39;x1&#39;</span>:x1[:,<span style="color: #FF6600">0</span>], <span style="color: #CC3300">&#39;x2&#39;</span>:x2[:,<span style="color: #FF6600">0</span>]})
+W2 <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame({<span style="color: #CC3300">&#39;x1&#39;</span>:x1[:,<span style="color: #FF6600">1</span>], <span style="color: #CC3300">&#39;x2&#39;</span>:x2[:,<span style="color: #FF6600">1</span>]})
+y_full <span style="color: #555555">=</span> np<span style="color: #555555">.</span>ones(shape<span style="color: #555555">=</span>(N<span style="color: #555555">*</span><span style="color: #FF6600">2</span>,<span style="color: #FF6600">1</span>))
+class_1 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>where(((U[:,<span style="color: #FF6600">0</span>] <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>) <span style="color: #555555">&amp;</span> (U[:,<span style="color: #FF6600">0</span>] <span style="color: #555555">&gt;</span> U[:,<span style="color: #FF6600">1</span>])), <span style="color: #CC3300">&#39;class_1&#39;</span>, <span style="color: #CC3300">&#39;class_0&#39;</span>)
+class_2 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>where((U[:,<span style="color: #FF6600">1</span>] <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span> <span style="color: #555555">&amp;</span> (U[:,<span style="color: #FF6600">1</span>] <span style="color: #555555">&gt;</span> U[:,<span style="color: #FF6600">0</span>])), <span style="color: #CC3300">&#39;class_2&#39;</span>, <span style="color: #CC3300">&#39;class_0&#39;</span>)
+y_full <span style="color: #555555">=</span> np<span style="color: #555555">.</span>append(class_1, class_2)
+W_full <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>add_constant(W1<span style="color: #555555">.</span>append(W2))<span style="color: #555555">.</span>reset_index(drop<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">cdf</span>(W, beta):
+    Wb <span style="color: #555555">=</span> np<span style="color: #555555">.</span>dot(W, beta)
+    eXB <span style="color: #555555">=</span> np<span style="color: #555555">.</span>exp(Wb)
+    eXB <span style="color: #555555">=</span> eXB <span style="color: #555555">/</span>eXB<span style="color: #555555">.</span>sum(<span style="color: #FF6600">1</span>)[:, <span style="color: #336666">None</span>]
+    <span style="color: #006699; font-weight: bold">return</span> eXB
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">take_log</span>(probs):
+    epsilon <span style="color: #555555">=</span> <span style="color: #FF6600">1e-20</span> 
+    <span style="color: #006699; font-weight: bold">return</span> np<span style="color: #555555">.</span>log(probs <span style="color: #555555">+</span> epsilon)
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">calc_ll</span>(logged, d):
+    ll <span style="color: #555555">=</span> d <span style="color: #555555">*</span> logged
+    <span style="color: #006699; font-weight: bold">return</span> ll
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">ll_mn_logistic</span>(params, <span style="color: #555555">*</span>args):
+    y, W, n_params, n_classes <span style="color: #555555">=</span> args[<span style="color: #FF6600">0</span>], args[<span style="color: #FF6600">1</span>], args[<span style="color: #FF6600">2</span>], args[<span style="color: #FF6600">3</span>]
+    beta <span style="color: #555555">=</span> [params[i] <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">0</span>, <span style="color: #336666">len</span>(params))]
+    beta <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array(beta)<span style="color: #555555">.</span>reshape(n_params, <span style="color: #555555">-</span><span style="color: #FF6600">1</span>, order<span style="color: #555555">=</span><span style="color: #CC3300">&#39;F&#39;</span>)
+    <span style="color: #0099FF; font-style: italic"># Ensures fit against a reference class</span>
+    beta[:,<span style="color: #FF6600">0</span>] <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span> <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">0</span>, n_params)]
+    
+    <span style="color: #0099FF; font-style: italic">## onehot_encode</span>
+    d <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>get_dummies(y, prefix<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Flag&#39;</span>)<span style="color: #555555">.</span>to_numpy()
+    
+    probs <span style="color: #555555">=</span> cdf(W, beta)
+    logged <span style="color: #555555">=</span> take_log(probs)
+    ll <span style="color: #555555">=</span> calc_ll(logged, d)
+    
+    <span style="color: #006699; font-weight: bold">return</span> <span style="color: #555555">-</span>np<span style="color: #555555">.</span>sum(ll)
+
+n_params <span style="color: #555555">=</span> <span style="color: #FF6600">3</span> 
+n_classes <span style="color: #555555">=</span> <span style="color: #FF6600">3</span>
+z <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(<span style="color: #FF6600">3</span>,<span style="color: #FF6600">3</span>)<span style="color: #555555">.</span>flatten()
+res <span style="color: #555555">=</span> minimize(ll_mn_logistic, x0 <span style="color: #555555">=</span>z, args <span style="color: #555555">=</span>(y_full, W_full, n_params, n_classes), 
+             options<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;disp&#39;</span>: <span style="color: #336666">True</span>, <span style="color: #CC3300">&#39;maxiter&#39;</span>:<span style="color: #FF6600">1000</span>})
+</pre></div>
+
+<p>The expressive power of these kinds of discrete choice model are to be admired. They map onto an innumerable range of practical problems. So it is all the more important to be aware of their limitations when deploying them at scale. The independence assumption and the linear structure of the latent utility model is not innocent, they&rsquo;re tantamount to very strong claims about the consistency and preference structure of the population. So long as we&rsquo;re aware of this the algorithms can be deployed profitably, sometimes consumers do have rational preferences - <em>the challenge is modelling the considerations that go into their reasoning.</em> It&rsquo;s utterly usefless to articulate preference over goods poorly described.</p>
+
+<h2 id="bart-and-transportation-policy">BART and Transportation policy.</h2>
+
+<p>The BART infrastructure in san Francisco was expensive to implement and such rail networks can have massive impacts on the face of a city, so it is important to evaluate the potential gains to the development. McFadden&rsquo;s analysis phrased this question a choice over the available modes of transport, and sought to predict the future demand for rail based on other demographic factors. The idea is that house size, ownership, income and proximity to a rail network determine uptake.</p>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>home</th>
+      <th>HHSIZE</th>
+      <th>income</th>
+      <th>urban1</th>
+      <th>density</th>
+      <th>CHOICE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>2</td>
+      <td>8.0</td>
+      <td>False</td>
+      <td>0.3</td>
+      <td>car</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>1.0</td>
+      <td>2</td>
+      <td>5.0</td>
+      <td>True</td>
+      <td>30.0</td>
+      <td>rail</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.0</td>
+      <td>3</td>
+      <td>5.0</td>
+      <td>True</td>
+      <td>3.0</td>
+      <td>bus</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.0</td>
+      <td>2</td>
+      <td>7.0</td>
+      <td>True</td>
+      <td>7.0</td>
+      <td>car</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>1.0</td>
+      <td>3</td>
+      <td>11.0</td>
+      <td>True</td>
+      <td>1.5</td>
+      <td>car</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It&rsquo;s hard to estimate demand for a new product directly, so instead he tried to develop a two step model which estimated the relative impact of the each of the demographic factors on rail use where there already existed some rail infrastructure and then project the demand as if the same conditions held throughout the city. The multinomial model fitted on parts of the city with existing infrastructure gives the following coefficient estimates for the demographic factors relative to a base choice of bus-transport.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>no_rail <span style="color: #555555">=</span> y_focus_nr[[<span style="color: #CC3300">&#39;home&#39;</span>, <span style="color: #CC3300">&#39;HHSIZE&#39;</span>, <span style="color: #CC3300">&#39;income&#39;</span>, <span style="color: #CC3300">&#39;urban1&#39;</span>, <span style="color: #CC3300">&#39;density&#39;</span>, <span style="color: #CC3300">&#39;rail&#39;</span>, <span style="color: #CC3300">&#39;CHOICE&#39;</span>]]<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
+rail <span style="color: #555555">=</span> y_focus_r[[<span style="color: #CC3300">&#39;home&#39;</span>, <span style="color: #CC3300">&#39;HHSIZE&#39;</span>, <span style="color: #CC3300">&#39;income&#39;</span>, <span style="color: #CC3300">&#39;urban1&#39;</span>, <span style="color: #CC3300">&#39;density&#39;</span>, <span style="color: #CC3300">&#39;rail&#39;</span>, <span style="color: #CC3300">&#39;CHOICE&#39;</span>]]<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
+full <span style="color: #555555">=</span> y_focus[[<span style="color: #CC3300">&#39;home&#39;</span>, <span style="color: #CC3300">&#39;HHSIZE&#39;</span>, <span style="color: #CC3300">&#39;income&#39;</span>, <span style="color: #CC3300">&#39;urban1&#39;</span>, <span style="color: #CC3300">&#39;density&#39;</span>, <span style="color: #CC3300">&#39;rail&#39;</span>, <span style="color: #CC3300">&#39;CHOICE&#39;</span>]]<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
+
+MN_logit_mod_r <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>MNLogit(np<span style="color: #555555">.</span>array(rail[<span style="color: #CC3300">&#39;CHOICE&#39;</span>]), 
+                       rail[[<span style="color: #CC3300">&quot;home&quot;</span>,<span style="color: #CC3300">&quot;HHSIZE&quot;</span>,<span style="color: #CC3300">&quot;income&quot;</span>,<span style="color: #CC3300">&quot;urban1&quot;</span>,<span style="color: #CC3300">&quot;density&quot;</span>]])
+MN_logit_res_r <span style="color: #555555">=</span> MN_logit_mod_r<span style="color: #555555">.</span>fit()
+MN_logit_res_r<span style="color: #555555">.</span>summary()
+</pre></div>
+
+<table class="simpletable">
+<caption>MNLogit Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>           <td>CHOICE</td>        <th>  No. Observations:  </th>   <td> 11624</td>  
+</tr>
+<tr>
+  <th>Model:</th>                <td>MNLogit</td>     <th>  Df Residuals:      </th>   <td> 11614</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     8</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Fri, 26 Feb 2021</td> <th>  Pseudo R-squ.:     </th>   <td>0.1071</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>00:45:00</td>     <th>  Log-Likelihood:    </th>  <td> -4499.7</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th>  <td> -5039.6</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>9.100e-228</td>
+</tr>
+</tbody></table>
+
+<table class="simpletable">
+<tbody><tr>
+   <th>y=car</th>     <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P&gt;|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>home</th>    <td>    1.0460</td> <td>    0.128</td> <td>    8.159</td> <td> 0.000</td> <td>    0.795</td> <td>    1.297</td>
+</tr>
+<tr>
+  <th>HHSIZE</th>  <td>    0.2411</td> <td>    0.046</td> <td>    5.234</td> <td> 0.000</td> <td>    0.151</td> <td>    0.331</td>
+</tr>
+<tr>
+  <th>income</th>  <td>    0.2235</td> <td>    0.021</td> <td>   10.829</td> <td> 0.000</td> <td>    0.183</td> <td>    0.264</td>
+</tr>
+<tr>
+  <th>urban1</th>  <td>    1.7447</td> <td>    0.150</td> <td>   11.619</td> <td> 0.000</td> <td>    1.450</td> <td>    2.039</td>
+</tr>
+<tr>
+  <th>density</th> <td>   -0.0847</td> <td>    0.006</td> <td>  -13.677</td> <td> 0.000</td> <td>   -0.097</td> <td>   -0.073</td>
+</tr>
+<tr>
+  <th>y=rail</th>     <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P&gt;|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>home</th>    <td>    0.3757</td> <td>    0.140</td> <td>    2.689</td> <td> 0.007</td> <td>    0.102</td> <td>    0.650</td>
+</tr>
+<tr>
+  <th>HHSIZE</th>  <td>   -0.0495</td> <td>    0.051</td> <td>   -0.973</td> <td> 0.331</td> <td>   -0.149</td> <td>    0.050</td>
+</tr>
+<tr>
+  <th>income</th>  <td>    0.1658</td> <td>    0.022</td> <td>    7.466</td> <td> 0.000</td> <td>    0.122</td> <td>    0.209</td>
+</tr>
+<tr>
+  <th>urban1</th>  <td>   -0.0949</td> <td>    0.167</td> <td>   -0.569</td> <td> 0.569</td> <td>   -0.422</td> <td>    0.232</td>
+</tr>
+<tr>
+  <th>density</th> <td>    0.0202</td> <td>    0.007</td> <td>    3.107</td> <td> 0.002</td> <td>    0.007</td> <td>    0.033</td>
+</tr>
+</tbody></table>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>nr_nd <span style="color: #555555">=</span> no_rail
+nr_nd[<span style="color: #CC3300">&#39;density&#39;</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
+nr_d <span style="color: #555555">=</span> no_rail
+nr_d[<span style="color: #CC3300">&#39;density&#39;</span>] <span style="color: #555555">=</span> r[<span style="color: #CC3300">&#39;density&#39;</span>]<span style="color: #555555">.</span>mean()
+full_d <span style="color: #555555">=</span> full
+full_d[full_d[<span style="color: #CC3300">&#39;rail&#39;</span>] <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>][<span style="color: #CC3300">&#39;density&#39;</span>] <span style="color: #555555">=</span> r[<span style="color: #CC3300">&#39;density&#39;</span>]<span style="color: #555555">.</span>mean()
+
+<span style="color: #0099FF; font-style: italic">#Predict full city uptake using model trained on rail data</span>
+res <span style="color: #555555">=</span> MN_logit_res_r<span style="color: #555555">.</span>predict(full<span style="color: #555555">.</span>drop(<span style="color: #CC3300">&#39;rail&#39;</span>, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>))<span style="color: #555555">.</span>mean()
+
+res <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(res)<span style="color: #555555">.</span>T
+res<span style="color: #555555">.</span>columns <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;Bus&#39;</span>, <span style="color: #CC3300">&#39;Car&#39;</span>, <span style="color: #CC3300">&#39;Train&#39;</span>]
+res<span style="color: #555555">.</span>round(<span style="color: #FF6600">3</span>) <span style="color: #555555">*</span> <span style="color: #FF6600">100</span>
+</pre></div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Bus</th>
+      <th>Car</th>
+      <th>Train</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.7</td>
+      <td>88.5</td>
+      <td>8.8</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As it turned out this estimate for rail uptake was almost perfect which raises the question: are we really predictable or was the model really lucky? There is an odd dynamic between economic models and normative behaviour - once one is formulated as an approximate theory of advantageous behaviour in a market, it seeps in the societal consciousness as we try to learn from it. In doing so we conform to a model and make it a better fit to the data. Jevon&rsquo;s would observe this characteristic as early as 1871</p>
+
+<blockquote>
+<p>The laws [of individual economic man&rsquo;s behaviour] which we are about to trace out are to be conceived as theoretically true of the individual; they can only be practically verified as regards the aggregate transactions, productions and consumptions of a large body of people. But the laws of the aggregate depend of course upon the laws applying to individual cases. - quoted on pg 149 <em>The World in the Model</em> by Mary S. Morgan</p>
+</blockquote>
+
+<p>McFadden&rsquo;s work was exemplary and revolutionary. It showed a clear and principaled method for translating a theory of human motivation into a predictions of market movements. The results were perhaps a little fortunate, but the method is profoundly important. The hardwork and shoe-leather of testing numerous models against observation, trying to infer causal impact of the demographic factors all illustrated the right kind of scientific process - measurement, abstraction and forecast. The discrete choice models have some particular limitations when applied to complex choices over price. Apart from the fact that consumers will often exhibit irrational preferences, price of a product is correlated with the random components of the utility measure. This can prevent proper estimation of the model without making some adjustments. We won&rsquo;t dwell on the details here but it is enough to note that the urgency of the task is not diminished by the difficulty.</p>
+
+<h1 id="the-tension-idealisation-and-reality">The Tension: Idealisation and Reality</h1>
+
+<p>The challenge of an economic model is to create a measure that abstracts over the particulars without doing violence to the participants. These models enter into a feedback of policy and practice. If we&rsquo;re lucky our institutions learn from experimenting with these models and improve. If we&rsquo;re not, the tired tropes become a calcified status quo which supports a fortunate few and quashes the concerns of the unrepresented.</p>
+
+<p>The most likely outcomes are always conditional on the underlying distribution and it is somewhat of an art how to properly specify each probability model: how to choose the dimensions to measure, the interactions which are important, the parameters of the model? Your next action might be predictable if the modeler can adjust their expectations for the appropriate features, but even then you get lost in the mileau, swept up among the many. Even in the era of Big-Data, predictability is no substitute for understanding, no threat to individuality. The dynamics of the market move on, and a once effective model decays&hellip; you&rsquo;re a moving target. Keep moving.</p>
+
+
+        &nbsp;
+      </div>
+
+      <div>
+        <div class="post-back-link">
+    <a href="javascript: history.back()">
+        <i class="fa fa-arrow-left"></i> 
+        Back
+    </a>
+</div>
+      </div>
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'examined-algorithms';
+    var disqus_identifier = 'https:\/\/nathanielf.github.io\/post\/mle_utility_and_choice\/';
+    var disqus_title = 'Trains, Planes ...Utility and Maximum Likelihood';
+    var disqus_url = 'https:\/\/nathanielf.github.io\/post\/mle_utility_and_choice\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+  </div>
+  
+
+  <footer style="padding-top: 1em;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/prism.js"></script>
+
+</body>
+
+</html>

@@ -6,18 +6,27 @@
     <description>Recent content in Posts on Examined Algorithms</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
-    <lastBuildDate>Sat, 06 Feb 2021 10:19:36 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Feb 2021 10:19:36 +0000</lastBuildDate>
     
 	<atom:link href="https://nathanielf.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Pricing: A Potted History</title>
+      <title>Trains, Planes ...Utility and Maximum Likelihood</title>
+      <link>https://nathanielf.github.io/post/mle_utility_and_choice/</link>
+      <pubDate>Sun, 21 Feb 2021 10:19:36 +0000</pubDate>
+      
+      <guid>https://nathanielf.github.io/post/mle_utility_and_choice/</guid>
+      <description>There is a conceit of individuality and uniqueness - that our mind is our own and the choices we make are ours alone to know and learn from. We plot our own journies and cleave to their contours as if we can see the goal. The main players and places get reshuffled or recycled as we grow, the tale contorts and twists to our constant surprise. How then could we be so utterly predictable?</description>
+    </item>
+    
+    <item>
+      <title>Pricing, Simultaneity and IV Regression</title>
       <link>https://nathanielf.github.io/post/pricing_a_potted_history/</link>
       <pubDate>Sat, 06 Feb 2021 10:19:36 +0000</pubDate>
       
       <guid>https://nathanielf.github.io/post/pricing_a_potted_history/</guid>
-      <description>Demand curve analysis is the academic study of tolerable robbery and stock market manias skew demand curves. You&amp;rsquo;ve likely seen the cobweb like diagrams that chart the trajectories of supply and demand as a function of price. These are aids to estimate the depth of your pockets. Acceptable elascticities of pricing always emerge as a consequence of tolerable changes in demand. A pricing strategy is a question of latitude, how far can we stretch your budget to account for &amp;ldquo;surplus value&amp;rdquo;?</description>
+      <description>Demand curve analysis is the academic study of tolerable robbery and stock market manias spike demand curves. You&amp;rsquo;ve likely seen the cobweb like diagrams that chart the trajectories of supply and demand as a function of price. These are aids to estimate the depth of your pockets. Acceptable elascticities of pricing always emerge as a consequence of tolerable changes in demand. A pricing strategy is a question of latitude, how far can we stretch your budget to account for &amp;ldquo;surplus value&amp;rdquo;?</description>
     </item>
     
     <item>

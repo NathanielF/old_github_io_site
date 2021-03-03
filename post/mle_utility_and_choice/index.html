@@ -298,7 +298,7 @@ args <span style="color: #555555">=</span>(X, demand_A), options<span style="col
 
 <p>For some appropriate probability distribution. This is a strong restriction called <strong>The Irrelevance of Independent Alternatives</strong>, it bakes in the notion that our preferences are consistent and transitive. If we prefer $C$ to $B$ and $B$ to $T$ then we ought to prefer $C$ to $T$ too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale given by:</p>
 
-<p>$$ Pr(y_C = 1 | \mathbf{X}_{i, C}, \mathbf{X}_{i, T}) = \frac{ exp(\mathbf{X&rsquo;}\beta)_{i, C}}{1 + \sum_{i, j}^{j=N} exp(\mathbf{X&rsquo;}\beta)_{i, j} } \text{ where N = #products} $$</p>
+<p>$$ Pr(y_C = 1 | \mathbf{X}_{i, C}, &hellip; \mathbf{X}_{i, j}) = \frac{ exp(\mathbf{X&rsquo;}\beta)_{i, C}}{1 + \sum_{i, j}^{j=N} exp(\mathbf{X&rsquo;}\beta)_{i, j} } \text{ where N = #products} $$</p>
 
 <p>which can be optimised for the best parameter fits through an maximum likelihood procedure as follows:</p>
 <div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">100</span>)

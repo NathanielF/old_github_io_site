@@ -125,7 +125,7 @@
 
 \title{Examining Algorithms}
 \author{Nathaniel Forde}
-\date{2021-01-31}
+\date{2021-03-03}
 
 \begin{document}
 \maketitle
@@ -134,97 +134,209 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{prerequisites}{%
-\chapter{Prerequisites}\label{prerequisites}}
+\hypertarget{preface}{%
+\chapter{Preface}\label{preface}}
 
-This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
-The \textbf{bookdown} package can be installed from CRAN or Github:
+What this book is
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{\# or the development version}
-\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{the-average-man}{%
+\chapter{The Average Man}\label{the-average-man}}
 
-\hypertarget{first-section-test}{%
-\section{First section test}\label{first-section-test}}
+In the 1840s the Average man stalked the nightmares of Augustin Cournot. The mathematician was haunted by a melange of imagined parts. A Frankenstein's monster of mismatched limbs, variously soldered, stapled or sown at the joints. He worried that no one but a ``physical monstrosity'' could exhibit the average, weight, height and other mean attributes in one body. \citep{stigler2016seven} But fantastical fears were no bar to a useful mathematical fiction. The notion of averaging was a technological breakthrough - applications of averaging multiplied without cease: polling, gambling, forecasting - statistics were recorded everywhere, compounding one on another; averages of averages tenuously tethered to observable facts by layers of abstraction and scales of measurement.
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
+Slowly, doubts began to creep back into the statistics. In the 1970s the psychologist Paul Meehl would worry that such brute approximations had stifled the development of the softer sciences and contributed to the mis-measurement of man. He would go on to elaborate twenty features of psychological science which made such measurement constructs inapt, unreliable and difficult to clearly falsify. This was progress! \citep{MeehlTheoretical} He then showed that the methods of validating such constructs were the main culprit and the likely cause of psychology's implausible claims to concrete, replicable results. Around thirty years later some of the same replication issues would come to be called a crisis. Cournot was right to fear.
 
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.name/tinytex/}.
+Seen from the perspective of a patient the difficulties are more urgent and stark. In 2019 Esme Yang would write with hope of the comfort given by a diagnosis, the knowledge that she was not ``pioneering an inexplicable experience.''\footnote{All remarks on Schizophrenia in the following draw on the precise and personal essays in \citep{WangSchizophrenia}} To find yourself described in the DSM provides: a framework and the glimmer of a cure, a chance to slot yourself into a category, a community of care and a medicinal regime. Frustrating then when the categories themselves are in flux. Diagnostic criteria arrayed over page after page attempting to capture the elusive core of a psychological dysfunction. Descriptions are derived from clinical interviews correlated and meshed with genetic markers, then poorly mapped to a family of ailments. Neither clearly bipolar disorder nor manic depression, schizophrenia, psychosis or schizo-affective disorder. But an idiosyncratic presentation (as they all must be), uniquely felt and individually suffered.
 
-\hypertarget{intro}{%
-\chapter{Introduction}\label{intro}}
+Wang's collection of schizophrenias defy easy taxonomy ``because there are just so many different ways in which people can develop a syndrome that looks like schizophrenia \ldots{} as we now define it.'' The task then becomes one of coping with uncertainty and adjusting expectations. It's not so exact a science that you can measure twice and cut once. The measurement schemes change and you need multiple cuts. You measure out the impact of treatments and the trade-offs - what's non-negotiable and how many side-effects are acceptable? What works for you versus what's advised by the professionals. Sterile cost-benefit considerations become suddenly dramatic and life changing.
 
-You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
+\hypertarget{and-expected-value}{%
+\section{\ldots and Expected Value}\label{and-expected-value}}
 
-Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively.
+There is an algorithm beloved by bureaucrats. An unsung hero of administrators and accountants. An algorithm both ubiquitous and under appreciated. It's pivotal for nearly every business and informs the actions of tech firms and policy makers the world over. It is only mildly hyperbolic to say that understanding this formula unlocks wealth and power. The algorithm lies at the heart of online A/B testing, all policy analysis, sound strategy and poker play.
+\[ EV(O)_{p} = p_{1}u(o_{1}) + p_{2}u(o_{2}) + ... + p_{k}u(o_{k}) \]
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+The expected financial value of a random process is just the sum of the utility (typically dollar outcomes) weighted by their probabilities.
+Outcomes can vary from deals of cards, to customer transactions, election results, continued sanity. Pascal can argue sincerely that such considerations compel even belief in God. The infinite downsides of hell at any likelihood ought to compel even the cynical sceptic. But the formula, glossed as a rule for rational action, merits your attention for more mundane wagers too. If you intend to maximise your expected value, the meaning of probability is not an idle concern. \footnote{For a typical example of how \(EV\) is used to express decisions under uncertainty see chapter 7 in the textbook \citep{BarberBR_ML}, but the paradigm owes much of its influence to decision theoretic work of Leonard Savage in \citep{savage54}} While statistics are often tortured to rubber stamp decisions and probabilities are abused to fit policy prescriptions with false precision, the crisp clarity of the rule has an enduring appeal that promises to sift the murky swamps of Big Data. It's a scalpel that anyone can wield to parse the syntax of statistical jargon and carve answers from an abstract space of probabilities. ``What's my expected return? My likely life-quality?'' - a simple question, with a surprisingly complex answer.
 
-\begin{figure}
+Whenever expected utility is used as a metric of profit there is a risk of pivot, a point where an explanatory model of rational expected action is substituted for more obscure black-box optimisation techniques. The focus switches from modelling the consumer or the patient to modelling returns based on the consumer and the firm's expected value. Swapping a customer catering model for a customer-as-commodity perspective focused on profit in aggregate and customer acquisition. The tendency is common because it's easier and profit often overwhelms all other priorities, but the loss of understanding typically amounts to a longer term net-loss. Shareholders take comfort from increased profit and algorithms deployed at scale, but it's rare that any single algorithm actually or always maximises the available profit. This dynamic enforces a kind of inescapable see-saw motion where the consumer modelling exercise goes through a constant feedback loop. A good model (informal or formal) of human needs and wants feeds a better a predictive model of individual action. When the latter fails we go back to the utility curves and the algorithm of expected value because it is (if not reliably predictive) a rich and deeply explanatory model of human action under uncertainty.
 
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/nice-fig-1} 
+Decision theory is an abstract formalism which purports to account for how you ought to reason under uncertainty, conditional on knowing your own mind, what you want and the likelihood of those outcomes. Wrestling with a diagnosis of schizophrenia you weigh your future in the face of sickness while knowing your mind could fail in the act, knowing, perhaps, you're not yourself. Schizophrenics are involuntarily detained if a medical professional deems them to have lost sufficient ``insight''\footnote{"The mind has been \emph{taken over}. The mind has \emph{lost the ability to make rational decisions} in \citep{WangSchizophrenia} pg58} , but the stated dysfunction assumes that these kinds of insight should be transparent when the psychiatric crisis is resolved. We'll see that the level of insight assumed by decision theory is, at best, hard won and far from transparent.
 
-}
+\hypertarget{probability-twin-aspects}{%
+\section{Probability: Twin Aspects}\label{probability-twin-aspects}}
 
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
+Probability emerged slowly and with a dual aspect. On one tradition probability refers to the long run tendency of a random process, on another probability is construed as the degree of belief in an outcome. On the first (frequentist) interpretation a probability distribution has certain fixed theoretical characteristics: as in a uniform probability distribution of a fair coin where all outcomes are equally likely, or as with the normal distribution where most outcomes cluster symmetrically about a central average. On the second (Bayesian) reading the characteristics of the probability distribution are learned from the data. The controversy centres around the fact that it's unclear how a frequentist could ascribe probabilities to unique events. Without appeal to a large set of observations (or known theoretical distribution) the claim that an event appears frequently or infrequently is not well defined. Consequently, tabulations of probability appear inappropriate for claims of unique or rare events. In contrast the Bayesian is content to ascribe probabilities to any all partial beliefs no matter how specific. For the Bayesian, the probability calculus is a set of edicts about how to rationally manage and modulate your beliefs. So it's acceptable to have a probabilistic belief in rare cases so long as you update those probabilities with new data when available.
 
-Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
+These two approaches are united by the Law of Large numbers which states that as the size of our sample increases our sample average will converge to the expected realisation of the theoretical process.
+
+\[  \frac{1}{N} \sum_{i = 1}^{N} O_{i} \text{ converges to }  E(O) \text{ as } N \text{ approaches } \infty \]
+
+In this graph we have fixed a Poisson distribution with a mean of 4.5 and can see three examples of how consecutive averaging from the increasing sample sizes results in a closer and closer convergence to the (true) population mean.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
+\CommentTok{\# set up the ground truth}
+\NormalTok{np.random.seed(}\DecValTok{100}\NormalTok{)}
+\NormalTok{sample\_size }\OperatorTok{=} \DecValTok{10000}
+\NormalTok{expected\_value }\OperatorTok{=}\NormalTok{ lambda\_ }\OperatorTok{=} \FloatTok{4.5}
+\NormalTok{poi }\OperatorTok{=}\NormalTok{ np.random.poisson}
+\NormalTok{N\_samples }\OperatorTok{=} \BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, sample\_size, }\DecValTok{100}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{3}\NormalTok{):}
+\NormalTok{    samples }\OperatorTok{=}\NormalTok{ poi(lambda\_, sample\_size)}
+\NormalTok{    partial\_average }\OperatorTok{=}\NormalTok{ [samples[:i].mean() }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ N\_samples]}
+\NormalTok{    plt.plot(N\_samples, partial\_average, lw}\OperatorTok{=}\FloatTok{1.5}\NormalTok{, label}\OperatorTok{=}\StringTok{"average \textbackslash{}}
+\StringTok{    of  $n$ samples; seq. }\SpecialCharTok{\%d}\StringTok{"} \OperatorTok{\%}\NormalTok{ k)}
+
+\NormalTok{plt.plot(N\_samples, expected\_value }\OperatorTok{*}\NormalTok{ np.ones\_like(partial\_average),}
+\NormalTok{         ls}\OperatorTok{=}\StringTok{"{-}{-}"}\NormalTok{, label}\OperatorTok{=}\StringTok{"true expected value"}\NormalTok{, c}\OperatorTok{=}\StringTok{"k"}\NormalTok{)}
+
+\NormalTok{plt.title(}\StringTok{"Convergence of the average of }\CharTok{\textbackslash{}n}\StringTok{ random variables to its \textbackslash{}}
+\StringTok{expected value"}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{"average of $n$ samples"}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{"\# of samples, $n$"}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{lims }\OperatorTok{=}\NormalTok{ plt.ylim(}\FloatTok{4.35}\NormalTok{, }\FloatTok{4.65}\NormalTok{)}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-3-1.pdf}
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rrrrl}
-\toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
-\midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
-\addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
-\bottomrule
-\end{tabular}
-\end{table}
+Though common knowledge today, in 1650 ``the very concept of averaging is {[}new{]}\ldots{} and most people could not observe an average because they did not take averages.\citep{HackingEmergence} Systematically grappling with the implications of observations is a somewhat recent human endeavour - one which is far from perfected. This tendency is now fundamental to the interpretation of probability. Take a game with fixed and fair odds and we see that repeated play will converge over time because of characteristics which govern the process. Dice are a homely example. In the wild we never know the characteristics which cause the observed spread of outcomes, but such is the influence of gambling on probability, that we assume there exists a stable pattern to be gamed. Partially this is pragmatic, the maths is more tractable if we can assume a well behaved underlying process. The results are compelling: The Normal (Bell Curve) distribution, the Poisson distribution the Bernoulli distribution (to name a few) are all rightly famous. Their shapes are characteristics of innumerable random processes. The distributions cleanly circumscribe and corral likely patterns of events.
 
-You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{normal }\OperatorTok{=}\NormalTok{ np.random.normal(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+\NormalTok{poisson }\OperatorTok{=}\NormalTok{ np.random.poisson(}\FloatTok{4.5}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+\NormalTok{uniform }\OperatorTok{=}\NormalTok{ np.random.uniform(}\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+\NormalTok{binomial }\OperatorTok{=}\NormalTok{ np.random.binomial(}\DecValTok{10}\NormalTok{, }\FloatTok{.8}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+
+\NormalTok{bins }\OperatorTok{=}\NormalTok{ np.linspace(}\OperatorTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+
+\NormalTok{h1 }\OperatorTok{=}\NormalTok{ plt.hist(normal, bins, alpha}\OperatorTok{=}\FloatTok{0.5}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}normal(0, 1)\textquotesingle{}}\NormalTok{)}
+\NormalTok{h2 }\OperatorTok{=}\NormalTok{ plt.hist(poisson, bins, alpha}\OperatorTok{=}\FloatTok{0.5}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}poisson(4.5)\textquotesingle{}}\NormalTok{)}
+\NormalTok{h3 }\OperatorTok{=}\NormalTok{ plt.hist(uniform, bins, label}\OperatorTok{=}\StringTok{\textquotesingle{}uniform({-}4, 4)\textquotesingle{}}\NormalTok{)}
+\NormalTok{h4 }\OperatorTok{=}\NormalTok{ plt.hist(binomial, bins, label}\OperatorTok{=}\StringTok{\textquotesingle{}binomial(10, .8)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{\textquotesingle{}upper left\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Variety of distributions with parameter specifcations"}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{"Realisation of Variable "}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{"Frequency of Observation"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+But the gambling paradigm clouds the fact that in practice we start on the left side of the law of large numbers (with samples) and we often start with small numbers resulting from a unknown number of data-generating processes. Well behaved probability distributions are rare beasts; a tiny fraction of the world's arbitrary menagerie. The fundamental question in probability is not whether probability is a measure of belief or frequency - it is whether we can safely assume that the underlying process adheres to a known model? The Bayesian focus is to try and learn from the new data the expected characteristics of the underlying process, while the Frequentist tries to gauge the accuracy of their assumptions about the underlying process. Both are attempts to validate the structure of the model's theoretical distribution to inform inference. If we can't validate a model, we're better learning what we can from the sample, trusting to wide confidence intervals and worst scenario planning. But in all cases when we need to make a decision, the following questions are inescapable : What are your expectations based on? How do they figure in our choices, and can we use them to improve our outcomes?
+
+\hypertarget{small-worlds-and-statistical-inference}{%
+\section{Small Worlds and Statistical Inference}\label{small-worlds-and-statistical-inference}}
+
+Anissa Weieir and Morgan Geyser, later diagnosed with schizopoty, were in 2017 trailed for the attempted murder of their friend Payton. While believing themselves to be acting at the behest of Slendar Man, they were ``willing to forgo even friendship for the sake {[}their{]} version of unreality" \footnote{``The Slender Man, the Nothing and Me'' in \citep{WangSchizophrenia}}. Just as in the depth of an obsession reality can be warped by a psychotic focus, a statistical model will accentuates some parts and ignores others.
+
+This narrowness can have devastating effects if deployed without care. But prediction is a visceral need, unavoidable, it precedes the sophistication of probability in any order of analysis. Without some regularity between \(X, Y\) we can only interpret their collisions as timorous noise. But even when there is a better than arbitrary correlation between \(X, Y\) we'll insist on ascribing a measurable probability to their association. Heuristics will kick in, and confidence will grow out of proportion to the evidence. So whether we view probabilities as a measure of credibility or frequency, the focus is always on a process which in reality reveals a pattern under repetition. Even tenuous connections can be enough to cause havoc. Models, more often than not, are deliberate simplifications of complexity, attempts to formulate a unobserved process within a mathematical structure. Lego-like versions of the world are built and rebuilt, in which we bash parts together to see what reliably sticks. Forget about the pieces we don't own. Count the pairs of blocks that: match, wedge, smash, click-into-place or break, then draw out the ratio of success and the spread of outcomes. Parse out the details of how reds go with greens, and blues with yellows. This is your sample distribution. The expected gain depends on both this uncertainty, measured in this small world, and the finer points of statistical inference.
+
+\begin{quote}
+A {[}small world{]} is\ldots{} completely satisfactory, only if it is actually a microcosm, that is, only if it leads to a probability measure \ldots{} that can be written down explicitly pg 88 \citep{savage54}{]} .
+\end{quote}
+
+The danger of shrinking your world comes when you mistake the map for the territory and act on that delusion.
+
+Small worlds are machines for figuring out expected values of a statistical process. We shrink the parameter set to better measure the variance and flux throughout the system. For any hypothetical system there can be multiple plausible approximations of the underlying process which need to be assessed comparatively on their ``goodness" of fit. We iterate through new and improved versions, each an attempt to make a conjectural connection between \$ X, Y \$ mathematically precise. But once built, they embed the errors and assumptions made in their design. McElreath dubs them Golems, primed and then loosed on the world, insensitive to subtlety and context they perform only as instructed. Consider how a basic regression model tries to predict an outcome \(Y\) as linear function of some observed features \(X\):
+
+\[ Y = const + \beta X + \epsilon  \]
+
+where \(\epsilon\) is a random variable representing the error (or noise). A modest notational device for disaster. While \(const, \beta\) are parameters estimated by an optimisation process to ensure the equation fits the data as neatly as possible. In the plot below we have a series characterised by change. After the first shock we can refit the model so that the line tracks well with the evolving data. After the second shock we try another refit, but the range the and variance of the data makes our basic model a poor fit, i.e.~the data no longer exhibits a linear relationship. This presents three examples of error in the modelling process: (i) it's difficult to identify (in the moment) those changepoints in the data which reflect structural change, (ii) the linearity assumptions that go into the model are sound but the parameters need be re-estimated based on the new data and (iii) the third linear model is simply a terrible match for the pattern in the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#\# Piecewise Linear Fits}
+
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{21}\NormalTok{],  dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{5}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{10}\NormalTok{,}
+              \FloatTok{28.92}\NormalTok{, }\FloatTok{42.81}\NormalTok{, }\FloatTok{56.7}\NormalTok{, }\FloatTok{70.59}\NormalTok{, }\FloatTok{84.47}\NormalTok{, }\FloatTok{75.36}\NormalTok{, }\FloatTok{112.25}\NormalTok{, }\FloatTok{100.14}\NormalTok{, }\FloatTok{140.03}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{50}\NormalTok{], dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+
+\KeywordTok{def}\NormalTok{ piecewise\_linear(x, b1, a1,  b2, a2, b3, a3):}
+\NormalTok{    funcs }\OperatorTok{=}\NormalTok{ [}\KeywordTok{lambda}\NormalTok{ x:b1}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ a1,}
+             \KeywordTok{lambda}\NormalTok{ x:b2}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ a2,}
+             \KeywordTok{lambda}\NormalTok{ x:b3}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ a3]}
+\NormalTok{    conds }\OperatorTok{=}\NormalTok{ [x }\OperatorTok{\textless{}} \DecValTok{7}\NormalTok{, ((x }\OperatorTok{\textgreater{}=} \DecValTok{7}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (x }\OperatorTok{\textless{}} \DecValTok{15}\NormalTok{)), x }\OperatorTok{\textgreater{}} \DecValTok{15}\NormalTok{]}
+    \ControlFlowTok{return}\NormalTok{ np.piecewise(x, conds, funcs)}
+
+\NormalTok{p , e }\OperatorTok{=}\NormalTok{ optimize.curve\_fit(piecewise\_linear, x, y, method}\OperatorTok{=}\StringTok{"trf"}\NormalTok{)}
+\NormalTok{a, b }\OperatorTok{=}\NormalTok{ polyfit(x, y, }\DecValTok{1}\NormalTok{)}
+\NormalTok{xd }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+
+\NormalTok{plt.plot(x, y, }\StringTok{"o"}\NormalTok{)}
+\NormalTok{plt.plot(x, a }\OperatorTok{+}\NormalTok{ b }\OperatorTok{*}\NormalTok{ x, }\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Global fit: }\SpecialCharTok{\{b: .2f\}}\StringTok{x + }\SpecialCharTok{\{a: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(b}\OperatorTok{=}\NormalTok{b, a}\OperatorTok{=}\NormalTok{a))}
+\NormalTok{plt.plot(xd, piecewise\_linear(xd, }\OperatorTok{*}\NormalTok{p), label}\OperatorTok{=}\StringTok{"Linear fit 1: }\SpecialCharTok{\{b: .2f\}}\StringTok{x + }\SpecialCharTok{\{a: .2f\}}\StringTok{ }\CharTok{\textbackslash{}n}\StringTok{"}
+                                             \StringTok{"Linear fit 2: }\SpecialCharTok{\{b1: .2f\}}\StringTok{x + }\SpecialCharTok{\{a1: .2f\}}\StringTok{ }\CharTok{\textbackslash{}n}\StringTok{"}
+                                             \StringTok{"Linear fit 3: }\SpecialCharTok{\{b2: .2f\}}\StringTok{x + }\SpecialCharTok{\{a2: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(b}\OperatorTok{=}\NormalTok{p[}\DecValTok{0}\NormalTok{], a}\OperatorTok{=}\NormalTok{p[}\DecValTok{1}\NormalTok{],}
+\NormalTok{                                                                                          b1}\OperatorTok{=}\NormalTok{p[}\DecValTok{2}\NormalTok{], a1}\OperatorTok{=}\NormalTok{p[}\DecValTok{3}\NormalTok{],}
+\NormalTok{                                                                                          b2}\OperatorTok{=}\NormalTok{p[}\DecValTok{4}\NormalTok{], a2}\OperatorTok{=}\NormalTok{p[}\DecValTok{5}\NormalTok{]))}
+                                                                              
+\NormalTok{plt.axvline(x}\OperatorTok{=}\DecValTok{7}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axvline(x}\OperatorTok{=}\DecValTok{15}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Piecewise Linear Fits of Series at Changepoints"}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+Every model is a guess as to the implicit order in apparent noise. Sometimes there is no order, and other times the patterns is too subtle for a dumb model to capture. In practice you never really know whether a single new error stems from a misfit but appropriate model or an entirely inappropriate model. As we increase our number of sample fits we hope to better approximate the true linear process (if any) generating the data. Imagine now that the data points in Figure 3 are repeatedly re-speckled over the canvas. We can refit a new model for each set of scattered data points and each refit gives us a new sample values for \$ const, \beta\$. If the underlying data generating process is stable, then the parameter fits will converge to the correct values of \(const, \beta\); correct in the sense that they can be used to draw the line of best fit for the data. A statistically stable process is one that can be modelled with errors \(\epsilon\) normally distributed around \(0\), so that the model will be \textit{ correct on average} because \(E(\epsilon) = 0\). Our predictions will overshoot in some cases but on the whole the errors up and down will cancel each other out.
+
+\begin{quote}
+``Typically, the assumptions in a statistical model are quite hard to prove or disprove, and little effort is spent in that direction. The strength of empircal claims made on the basis of such modeling therefore does not derive from the solidity of those assumptions. Equally, these beliefs cannot be justified by the complexity of the calculations\ldots{} These observations lead to uncomfortable questions'' \citep{freedman_2009}
+\end{quote}
+
+Forecasting with the parameters of best fit minimises our forecast errors because the fluctuations are stable about the centre of the line. These are the required assumptions for a process to exhibit the tendency of regression towards the mean. If they're not met, we will see poor parameter estimates and wild swings away from the linear path.
+The fundamental statistical assumption here is about the properties of our mistakes! The model is less plausible of is our judgements are made in the grip of a delusion.
+
+\hypertarget{modeling-improper-assumptions-and-skewed-expectations}{%
+\section{Modeling: Improper Assumptions and Skewed Expectations}\label{modeling-improper-assumptions-and-skewed-expectations}}
+
+Below we build two sampling distributions based on different models of an underlying processes. One in which the errors are independent, normally distributed around \(0\) and in the other the errors are correlated in a sine-wave like pattern, increasing and decreasing periodically. This is akin to the difference between measuring error when predicting the heights of randomly sampled people versus predicting the sales volumes on randomly selected days of the week. A random sample of daily sales risks clumping weekends together and skewing the expected values. No such risk exists when sampling from independent individuals.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#\#\# Sampling Distributions of Linear Fits}
+\CommentTok{\#\#\#\# Build True Model}
+\NormalTok{N }\OperatorTok{=} \DecValTok{1000}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ np.random.uniform(}\DecValTok{0}\NormalTok{, }\DecValTok{20}\NormalTok{, N)}
+\NormalTok{uncorrelated\_errors }\OperatorTok{=}\NormalTok{ np.random.normal(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, N)}
+\NormalTok{correlated\_errors }\OperatorTok{=}\NormalTok{ np.random.uniform (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) }\OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\OperatorTok{*}\NormalTok{np.pi, N)) }\OperatorTok{\textbackslash{}}
+          \OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\OperatorTok{*}\NormalTok{np.pi, N))}\OperatorTok{**}\DecValTok{2} \OperatorTok{\textbackslash{}}
+          \OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{6}\OperatorTok{*}\NormalTok{np.pi, N))}\OperatorTok{**}\DecValTok{2} \OperatorTok{+} \FloatTok{.6}\OperatorTok{*}\NormalTok{X}
+
+\NormalTok{Y\_corr }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{2} \OperatorTok{+} \FloatTok{3.5} \OperatorTok{*}\NormalTok{ X }\OperatorTok{+}\NormalTok{ correlated\_errors}
+\NormalTok{Y }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{2} \OperatorTok{+} \FloatTok{3.5} \OperatorTok{*}\NormalTok{ X }\OperatorTok{+}\NormalTok{ uncorrelated\_errors}
+\NormalTok{population }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{: X, }\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{: Y, }\StringTok{\textquotesingle{}Y\_corr\textquotesingle{}}\NormalTok{: Y\_corr\})}
+
+\NormalTok{fits }\OperatorTok{=}\NormalTok{ pd.DataFrame(columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}iid\_const\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}iid\_beta\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}corr\_const\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}corr\_beta\textquotesingle{}}\NormalTok{])}
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1000}\NormalTok{):}
+\NormalTok{    sample }\OperatorTok{=}\NormalTok{ population.sample(n}\OperatorTok{=}\DecValTok{100}\NormalTok{, replace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{    Y }\OperatorTok{=}\NormalTok{ sample[}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{]}\OperatorTok{;}\NormalTok{ X }\OperatorTok{=}\NormalTok{ sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{] }\OperatorTok{;}\NormalTok{ Y\_corr }\OperatorTok{=}\NormalTok{ sample[}\StringTok{\textquotesingle{}Y\_corr\textquotesingle{}}\NormalTok{]}
+\NormalTok{    X }\OperatorTok{=}\NormalTok{ sm.add\_constant(X)}
+\NormalTok{    iid\_model }\OperatorTok{=}\NormalTok{ sm.OLS(Y, X)}
+\NormalTok{    results }\OperatorTok{=}\NormalTok{ iid\_model.fit()}
+\NormalTok{    corr\_model }\OperatorTok{=}\NormalTok{ sm.OLS(Y\_corr, X)}
+\NormalTok{    results\_2 }\OperatorTok{=}\NormalTok{ corr\_model.fit()}
+\NormalTok{    row }\OperatorTok{=}\NormalTok{ [results.params[}\DecValTok{0}\NormalTok{], results.params[}\DecValTok{1}\NormalTok{], results\_2.params[}\DecValTok{0}\NormalTok{], results\_2.params[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{    fits.loc[}\BuiltInTok{len}\NormalTok{(fits)] }\OperatorTok{=}\NormalTok{ row}
+
+
+\NormalTok{fits.boxplot()}
+\NormalTok{plt.suptitle(}\StringTok{"The Sampling Distribution of Parameters for a Linear models"}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Based on 1000 fits on 100 observations"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-6-1.pdf}
 
 \hypertarget{literature}{%
 \chapter{Literature}\label{literature}}
@@ -252,6 +364,6 @@ Some \emph{significant} applications are demonstrated in this chapter.
 
 We have finished a nice book.
 
-  \bibliography{book.bib,packages.bib}
+  \bibliography{book.bib,packages.bib,library.bib}
 
 \end{document}

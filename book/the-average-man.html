@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 The Average Man | Examining Algorithms</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 The Average Man | Examining Algorithms" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="/NathanielF/NathanielF.github.io" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 The Average Man | Examining Algorithms" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Nathaniel Forde" />
+
+
+<meta name="date" content="2021-03-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="/images/favicons/fa search.png" type="image/x-icon" />
+<link rel="prev" href="index.html"/>
+<link rel="next" href="literature.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="assets/book.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="assets/custom_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://nathanielf.github.io/", style="font-size:20px">Examining Algorithms</a></li>
+<li><a href="./", style="font-size:15px">Essays on Philosophy and Mathematics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="the-average-man.html"><a href="the-average-man.html"><i class="fa fa-check"></i><b>2</b> The Average Man</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="the-average-man.html"><a href="the-average-man.html#and-expected-value"><i class="fa fa-check"></i><b>2.1</b> …and Expected Value</a></li>
+<li class="chapter" data-level="2.2" data-path="the-average-man.html"><a href="the-average-man.html#probability-twin-aspects"><i class="fa fa-check"></i><b>2.2</b> Probability: Twin Aspects</a></li>
+<li class="chapter" data-level="2.3" data-path="the-average-man.html"><a href="the-average-man.html#small-worlds-and-statistical-inference"><i class="fa fa-check"></i><b>2.3</b> Small Worlds and Statistical Inference</a></li>
+<li class="chapter" data-level="2.4" data-path="the-average-man.html"><a href="the-average-man.html#modeling-improper-assumptions-and-skewed-expectations"><i class="fa fa-check"></i><b>2.4</b> Modeling: Improper Assumptions and Skewed Expectations</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
+<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Examining Algorithms</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="custom_style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="bookdown-demo_files/figure-html/splash_image_books.png">
+</div>
+<div id="the-average-man" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> The Average Man</h1>
+<p>In the 1840s the Average man stalked the nightmares of Augustin Cournot. The mathematician was haunted by a melange of imagined parts. A Frankenstein’s monster of mismatched limbs, variously soldered, stapled or sown at the joints. He worried that no one but a “physical monstrosity” could exhibit the average, weight, height and other mean attributes in one body. <span class="citation">(<a href="references.html#ref-stigler2016seven" role="doc-biblioref">Stigler 2016</a>)</span> But fantastical fears were no bar to a useful mathematical fiction. The notion of averaging was a technological breakthrough - applications of averaging multiplied without cease: polling, gambling, forecasting - statistics were recorded everywhere, compounding one on another; averages of averages tenuously tethered to observable facts by layers of abstraction and scales of measurement.</p>
+<p>Slowly, doubts began to creep back into the statistics. In the 1970s the psychologist Paul Meehl would worry that such brute approximations had stifled the development of the softer sciences and contributed to the mis-measurement of man. He would go on to elaborate twenty features of psychological science which made such measurement constructs inapt, unreliable and difficult to clearly falsify. This was progress! <span class="citation">(<a href="references.html#ref-MeehlTheoretical" role="doc-biblioref">Meehl 1978</a>)</span> He then showed that the methods of validating such constructs were the main culprit and the likely cause of psychology’s implausible claims to concrete, replicable results. Around thirty years later some of the same replication issues would come to be called a crisis. Cournot was right to fear.</p>
+<p>Seen from the perspective of a patient the difficulties are more urgent and stark. In 2019 Esme Yang would write with hope of the comfort given by a diagnosis, the knowledge that she was not “pioneering an inexplicable experience.”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> To find yourself described in the DSM provides: a framework and the glimmer of a cure, a chance to slot yourself into a category, a community of care and a medicinal regime. Frustrating then when the categories themselves are in flux. Diagnostic criteria arrayed over page after page attempting to capture the elusive core of a psychological dysfunction. Descriptions are derived from clinical interviews correlated and meshed with genetic markers, then poorly mapped to a family of ailments. Neither clearly bipolar disorder nor manic depression, schizophrenia, psychosis or schizo-affective disorder. But an idiosyncratic presentation (as they all must be), uniquely felt and individually suffered.</p>
+<p>Wang’s collection of schizophrenias defy easy taxonomy “because there are just so many different ways in which people can develop a syndrome that looks like schizophrenia … as we now define it.” The task then becomes one of coping with uncertainty and adjusting expectations. It’s not so exact a science that you can measure twice and cut once. The measurement schemes change and you need multiple cuts. You measure out the impact of treatments and the trade-offs - what’s non-negotiable and how many side-effects are acceptable? What works for you versus what’s advised by the professionals. Sterile cost-benefit considerations become suddenly dramatic and life changing.</p>
+<div id="and-expected-value" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> …and Expected Value</h2>
+<p>There is an algorithm beloved by bureaucrats. An unsung hero of administrators and accountants. An algorithm both ubiquitous and under appreciated. It’s pivotal for nearly every business and informs the actions of tech firms and policy makers the world over. It is only mildly hyperbolic to say that understanding this formula unlocks wealth and power. The algorithm lies at the heart of online A/B testing, all policy analysis, sound strategy and poker play.
+<span class="math display">\[ EV(O)_{p} = p_{1}u(o_{1}) + p_{2}u(o_{2}) + ... + p_{k}u(o_{k}) \]</span></p>
+<p>The expected financial value of a random process is just the sum of the utility (typically dollar outcomes) weighted by their probabilities.
+Outcomes can vary from deals of cards, to customer transactions, election results, continued sanity. Pascal can argue sincerely that such considerations compel even belief in God. The infinite downsides of hell at any likelihood ought to compel even the cynical sceptic. But the formula, glossed as a rule for rational action, merits your attention for more mundane wagers too. If you intend to maximise your expected value, the meaning of probability is not an idle concern.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> While statistics are often tortured to rubber stamp decisions and probabilities are abused to fit policy prescriptions with false precision, the crisp clarity of the rule has an enduring appeal that promises to sift the murky swamps of Big Data. It’s a scalpel that anyone can wield to parse the syntax of statistical jargon and carve answers from an abstract space of probabilities. “What’s my expected return? My likely life-quality?” - a simple question, with a surprisingly complex answer.</p>
+<p>Whenever expected utility is used as a metric of profit there is a risk of pivot, a point where an explanatory model of rational expected action is substituted for more obscure black-box optimisation techniques. The focus switches from modelling the consumer or the patient to modelling returns based on the consumer and the firm’s expected value. Swapping a customer catering model for a customer-as-commodity perspective focused on profit in aggregate and customer acquisition. The tendency is common because it’s easier and profit often overwhelms all other priorities, but the loss of understanding typically amounts to a longer term net-loss. Shareholders take comfort from increased profit and algorithms deployed at scale, but it’s rare that any single algorithm actually or always maximises the available profit. This dynamic enforces a kind of inescapable see-saw motion where the consumer modelling exercise goes through a constant feedback loop. A good model (informal or formal) of human needs and wants feeds a better a predictive model of individual action. When the latter fails we go back to the utility curves and the algorithm of expected value because it is (if not reliably predictive) a rich and deeply explanatory model of human action under uncertainty.</p>
+<p>Decision theory is an abstract formalism which purports to account for how you ought to reason under uncertainty, conditional on knowing your own mind, what you want and the likelihood of those outcomes. Wrestling with a diagnosis of schizophrenia you weigh your future in the face of sickness while knowing your mind could fail in the act, knowing, perhaps, you’re not yourself. Schizophrenics are involuntarily detained if a medical professional deems them to have lost sufficient “insight”<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> , but the stated dysfunction assumes that these kinds of insight should be transparent when the psychiatric crisis is resolved. We’ll see that the level of insight assumed by decision theory is, at best, hard won and far from transparent.</p>
+</div>
+<div id="probability-twin-aspects" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Probability: Twin Aspects</h2>
+<p>Probability emerged slowly and with a dual aspect. On one tradition probability refers to the long run tendency of a random process, on another probability is construed as the degree of belief in an outcome. On the first (frequentist) interpretation a probability distribution has certain fixed theoretical characteristics: as in a uniform probability distribution of a fair coin where all outcomes are equally likely, or as with the normal distribution where most outcomes cluster symmetrically about a central average. On the second (Bayesian) reading the characteristics of the probability distribution are learned from the data. The controversy centres around the fact that it’s unclear how a frequentist could ascribe probabilities to unique events. Without appeal to a large set of observations (or known theoretical distribution) the claim that an event appears frequently or infrequently is not well defined. Consequently, tabulations of probability appear inappropriate for claims of unique or rare events. In contrast the Bayesian is content to ascribe probabilities to any all partial beliefs no matter how specific. For the Bayesian, the probability calculus is a set of edicts about how to rationally manage and modulate your beliefs. So it’s acceptable to have a probabilistic belief in rare cases so long as you update those probabilities with new data when available.</p>
+<p>These two approaches are united by the Law of Large numbers which states that as the size of our sample increases our sample average will converge to the expected realisation of the theoretical process.</p>
+<p><span class="math display">\[  \frac{1}{N} \sum_{i = 1}^{N} O_{i} \text{ converges to }  E(O) \text{ as } N \text{ approaches } \infty \]</span></p>
+<p>In this graph we have fixed a Poisson distribution with a mean of 4.5 and can see three examples of how consecutive averaging from the increasing sample sizes results in a closer and closer convergence to the (true) population mean.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="the-average-man.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up the ground truth</span></span>
+<span id="cb1-2"><a href="the-average-man.html#cb1-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">100</span>)</span>
+<span id="cb1-3"><a href="the-average-man.html#cb1-3" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb1-4"><a href="the-average-man.html#cb1-4" aria-hidden="true" tabindex="-1"></a>expected_value <span class="op">=</span> lambda_ <span class="op">=</span> <span class="fl">4.5</span></span>
+<span id="cb1-5"><a href="the-average-man.html#cb1-5" aria-hidden="true" tabindex="-1"></a>poi <span class="op">=</span> np.random.poisson</span>
+<span id="cb1-6"><a href="the-average-man.html#cb1-6" aria-hidden="true" tabindex="-1"></a>N_samples <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, sample_size, <span class="dv">100</span>)</span>
+<span id="cb1-7"><a href="the-average-man.html#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="the-average-man.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb1-9"><a href="the-average-man.html#cb1-9" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> poi(lambda_, sample_size)</span>
+<span id="cb1-10"><a href="the-average-man.html#cb1-10" aria-hidden="true" tabindex="-1"></a>    partial_average <span class="op">=</span> [samples[:i].mean() <span class="cf">for</span> i <span class="kw">in</span> N_samples]</span>
+<span id="cb1-11"><a href="the-average-man.html#cb1-11" aria-hidden="true" tabindex="-1"></a>    plt.plot(N_samples, partial_average, lw<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">&quot;average \</span></span>
+<span id="cb1-12"><a href="the-average-man.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">    of  $n$ samples; seq. </span><span class="sc">%d</span><span class="st">&quot;</span> <span class="op">%</span> k)</span>
+<span id="cb1-13"><a href="the-average-man.html#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="the-average-man.html#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.plot(N_samples, expected_value <span class="op">*</span> np.ones_like(partial_average),</span>
+<span id="cb1-15"><a href="the-average-man.html#cb1-15" aria-hidden="true" tabindex="-1"></a>         ls<span class="op">=</span><span class="st">&quot;--&quot;</span>, label<span class="op">=</span><span class="st">&quot;true expected value&quot;</span>, c<span class="op">=</span><span class="st">&quot;k&quot;</span>)</span>
+<span id="cb1-16"><a href="the-average-man.html#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="the-average-man.html#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Convergence of the average of </span><span class="ch">\n</span><span class="st"> random variables to its \</span></span>
+<span id="cb1-18"><a href="the-average-man.html#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="st">expected value&quot;</span>)</span>
+<span id="cb1-19"><a href="the-average-man.html#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;average of $n$ samples&quot;</span>)</span>
+<span id="cb1-20"><a href="the-average-man.html#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;# of samples, $n$&quot;</span>)</span>
+<span id="cb1-21"><a href="the-average-man.html#cb1-21" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-22"><a href="the-average-man.html#cb1-22" aria-hidden="true" tabindex="-1"></a>lims <span class="op">=</span> plt.ylim(<span class="fl">4.35</span>, <span class="fl">4.65</span>)</span>
+<span id="cb1-23"><a href="the-average-man.html#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Though common knowledge today, in 1650 ``the very concept of averaging is [new]… and most people could not observe an average because they did not take averages.<span class="citation">(<a href="references.html#ref-HackingEmergence" role="doc-biblioref">Hacking 2006</a>)</span> Systematically grappling with the implications of observations is a somewhat recent human endeavour - one which is far from perfected. This tendency is now fundamental to the interpretation of probability. Take a game with fixed and fair odds and we see that repeated play will converge over time because of characteristics which govern the process. Dice are a homely example. In the wild we never know the characteristics which cause the observed spread of outcomes, but such is the influence of gambling on probability, that we assume there exists a stable pattern to be gamed. Partially this is pragmatic, the maths is more tractable if we can assume a well behaved underlying process. The results are compelling: The Normal (Bell Curve) distribution, the Poisson distribution the Bernoulli distribution (to name a few) are all rightly famous. Their shapes are characteristics of innumerable random processes. The distributions cleanly circumscribe and corral likely patterns of events.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="the-average-man.html#cb2-1" aria-hidden="true" tabindex="-1"></a>normal <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-2"><a href="the-average-man.html#cb2-2" aria-hidden="true" tabindex="-1"></a>poisson <span class="op">=</span> np.random.poisson(<span class="fl">4.5</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-3"><a href="the-average-man.html#cb2-3" aria-hidden="true" tabindex="-1"></a>uniform <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-4"><a href="the-average-man.html#cb2-4" aria-hidden="true" tabindex="-1"></a>binomial <span class="op">=</span> np.random.binomial(<span class="dv">10</span>, <span class="fl">.8</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-5"><a href="the-average-man.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="the-average-man.html#cb2-6" aria-hidden="true" tabindex="-1"></a>bins <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb2-7"><a href="the-average-man.html#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="the-average-man.html#cb2-8" aria-hidden="true" tabindex="-1"></a>h1 <span class="op">=</span> plt.hist(normal, bins, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">&#39;normal(0, 1)&#39;</span>)</span>
+<span id="cb2-9"><a href="the-average-man.html#cb2-9" aria-hidden="true" tabindex="-1"></a>h2 <span class="op">=</span> plt.hist(poisson, bins, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">&#39;poisson(4.5)&#39;</span>)</span>
+<span id="cb2-10"><a href="the-average-man.html#cb2-10" aria-hidden="true" tabindex="-1"></a>h3 <span class="op">=</span> plt.hist(uniform, bins, label<span class="op">=</span><span class="st">&#39;uniform(-4, 4)&#39;</span>)</span>
+<span id="cb2-11"><a href="the-average-man.html#cb2-11" aria-hidden="true" tabindex="-1"></a>h4 <span class="op">=</span> plt.hist(binomial, bins, label<span class="op">=</span><span class="st">&#39;binomial(10, .8)&#39;</span>)</span>
+<span id="cb2-12"><a href="the-average-man.html#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)</span>
+<span id="cb2-13"><a href="the-average-man.html#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Variety of distributions with parameter specifcations&quot;</span>)</span>
+<span id="cb2-14"><a href="the-average-man.html#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;Realisation of Variable &quot;</span>)</span>
+<span id="cb2-15"><a href="the-average-man.html#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Frequency of Observation&quot;</span>)</span>
+<span id="cb2-16"><a href="the-average-man.html#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>But the gambling paradigm clouds the fact that in practice we start on the left side of the law of large numbers (with samples) and we often start with small numbers resulting from a unknown number of data-generating processes. Well behaved probability distributions are rare beasts; a tiny fraction of the world’s arbitrary menagerie. The fundamental question in probability is not whether probability is a measure of belief or frequency - it is whether we can safely assume that the underlying process adheres to a known model? The Bayesian focus is to try and learn from the new data the expected characteristics of the underlying process, while the Frequentist tries to gauge the accuracy of their assumptions about the underlying process. Both are attempts to validate the structure of the model’s theoretical distribution to inform inference. If we can’t validate a model, we’re better learning what we can from the sample, trusting to wide confidence intervals and worst scenario planning. But in all cases when we need to make a decision, the following questions are inescapable : What are your expectations based on? How do they figure in our choices, and can we use them to improve our outcomes?</p>
+</div>
+<div id="small-worlds-and-statistical-inference" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Small Worlds and Statistical Inference</h2>
+<p>Anissa Weieir and Morgan Geyser, later diagnosed with schizopoty, were in 2017 trailed for the attempted murder of their friend Payton. While believing themselves to be acting at the behest of Slendar Man, they were ``willing to forgo even friendship for the sake [their] version of unreality".<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> Just as in the depth of an obsession reality can be warped by a psychotic focus, a statistical model will accentuates some parts and ignores others.</p>
+<p>This narrowness can have devastating effects if deployed without care. But prediction is a visceral need, unavoidable, it precedes the sophistication of probability in any order of analysis. Without some regularity between <span class="math inline">\(X, Y\)</span> we can only interpret their collisions as timorous noise. But even when there is a better than arbitrary correlation between <span class="math inline">\(X, Y\)</span> we’ll insist on ascribing a measurable probability to their association. Heuristics will kick in, and confidence will grow out of proportion to the evidence. So whether we view probabilities as a measure of credibility or frequency, the focus is always on a process which in reality reveals a pattern under repetition. Even tenuous connections can be enough to cause havoc. Models, more often than not, are deliberate simplifications of complexity, attempts to formulate a unobserved process within a mathematical structure. Lego-like versions of the world are built and rebuilt, in which we bash parts together to see what reliably sticks. Forget about the pieces we don’t own. Count the pairs of blocks that: match, wedge, smash, click-into-place or break, then draw out the ratio of success and the spread of outcomes. Parse out the details of how reds go with greens, and blues with yellows. This is your sample distribution. The expected gain depends on both this uncertainty, measured in this small world, and the finer points of statistical inference.</p>
+<blockquote>
+<p>A [small world] is… completely satisfactory, only if it is actually a microcosm, that is, only if it leads to a probability measure … that can be written down explicitly pg 88 <span class="citation">(<a href="references.html#ref-savage54" role="doc-biblioref">Savage 1954</a>)</span>] .</p>
+</blockquote>
+<p>The danger of shrinking your world comes when you mistake the map for the territory and act on that delusion.</p>
+<p>Small worlds are machines for figuring out expected values of a statistical process. We shrink the parameter set to better measure the variance and flux throughout the system. For any hypothetical system there can be multiple plausible approximations of the underlying process which need to be assessed comparatively on their ``goodness" of fit. We iterate through new and improved versions, each an attempt to make a conjectural connection between $ X, Y $ mathematically precise. But once built, they embed the errors and assumptions made in their design. McElreath dubs them Golems, primed and then loosed on the world, insensitive to subtlety and context they perform only as instructed. Consider how a basic regression model tries to predict an outcome <span class="math inline">\(Y\)</span> as linear function of some observed features <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[ Y = const + \beta X + \epsilon  \]</span></p>
+<p>where <span class="math inline">\(\epsilon\)</span> is a random variable representing the error (or noise). A modest notational device for disaster. While <span class="math inline">\(const, \beta\)</span> are parameters estimated by an optimisation process to ensure the equation fits the data as neatly as possible. In the plot below we have a series characterised by change. After the first shock we can refit the model so that the line tracks well with the evolving data. After the second shock we try another refit, but the range the and variance of the data makes our basic model a poor fit, i.e. the data no longer exhibits a linear relationship. This presents three examples of error in the modelling process: (i) it’s difficult to identify (in the moment) those changepoints in the data which reflect structural change, (ii) the linearity assumptions that go into the model are sound but the parameters need be re-estimated based on the new data and (iii) the third linear model is simply a terrible match for the pattern in the data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="the-average-man.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Piecewise Linear Fits</span></span>
+<span id="cb3-2"><a href="the-average-man.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="the-average-man.html#cb3-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">21</span>],  dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb3-4"><a href="the-average-man.html#cb3-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">10</span>,</span>
+<span id="cb3-5"><a href="the-average-man.html#cb3-5" aria-hidden="true" tabindex="-1"></a>              <span class="fl">28.92</span>, <span class="fl">42.81</span>, <span class="fl">56.7</span>, <span class="fl">70.59</span>, <span class="fl">84.47</span>, <span class="fl">75.36</span>, <span class="fl">112.25</span>, <span class="fl">100.14</span>, <span class="fl">140.03</span>, <span class="dv">3</span>, <span class="dv">70</span>, <span class="dv">300</span>, <span class="dv">5</span>, <span class="dv">100</span>, <span class="dv">50</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb3-6"><a href="the-average-man.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="the-average-man.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> piecewise_linear(x, b1, a1,  b2, a2, b3, a3):</span>
+<span id="cb3-8"><a href="the-average-man.html#cb3-8" aria-hidden="true" tabindex="-1"></a>    funcs <span class="op">=</span> [<span class="kw">lambda</span> x:b1<span class="op">*</span>x <span class="op">+</span> a1,</span>
+<span id="cb3-9"><a href="the-average-man.html#cb3-9" aria-hidden="true" tabindex="-1"></a>             <span class="kw">lambda</span> x:b2<span class="op">*</span>x <span class="op">+</span> a2,</span>
+<span id="cb3-10"><a href="the-average-man.html#cb3-10" aria-hidden="true" tabindex="-1"></a>             <span class="kw">lambda</span> x:b3<span class="op">*</span>x <span class="op">+</span> a3]</span>
+<span id="cb3-11"><a href="the-average-man.html#cb3-11" aria-hidden="true" tabindex="-1"></a>    conds <span class="op">=</span> [x <span class="op">&lt;</span> <span class="dv">7</span>, ((x <span class="op">&gt;=</span> <span class="dv">7</span>) <span class="op">&amp;</span> (x <span class="op">&lt;</span> <span class="dv">15</span>)), x <span class="op">&gt;</span> <span class="dv">15</span>]</span>
+<span id="cb3-12"><a href="the-average-man.html#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.piecewise(x, conds, funcs)</span>
+<span id="cb3-13"><a href="the-average-man.html#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="the-average-man.html#cb3-14" aria-hidden="true" tabindex="-1"></a>p , e <span class="op">=</span> optimize.curve_fit(piecewise_linear, x, y, method<span class="op">=</span><span class="st">&quot;trf&quot;</span>)</span>
+<span id="cb3-15"><a href="the-average-man.html#cb3-15" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> polyfit(x, y, <span class="dv">1</span>)</span>
+<span id="cb3-16"><a href="the-average-man.html#cb3-16" aria-hidden="true" tabindex="-1"></a>xd <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">1000</span>)</span>
+<span id="cb3-17"><a href="the-average-man.html#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="the-average-man.html#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&quot;o&quot;</span>)</span>
+<span id="cb3-19"><a href="the-average-man.html#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x, a <span class="op">+</span> b <span class="op">*</span> x, <span class="st">&#39;--&#39;</span>, label<span class="op">=</span><span class="st">&quot;Global fit: </span><span class="sc">{b: .2f}</span><span class="st">x + </span><span class="sc">{a: .2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(b<span class="op">=</span>b, a<span class="op">=</span>a))</span>
+<span id="cb3-20"><a href="the-average-man.html#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.plot(xd, piecewise_linear(xd, <span class="op">*</span>p), label<span class="op">=</span><span class="st">&quot;Linear fit 1: </span><span class="sc">{b: .2f}</span><span class="st">x + </span><span class="sc">{a: .2f}</span><span class="st"> </span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb3-21"><a href="the-average-man.html#cb3-21" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Linear fit 2: </span><span class="sc">{b1: .2f}</span><span class="st">x + </span><span class="sc">{a1: .2f}</span><span class="st"> </span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb3-22"><a href="the-average-man.html#cb3-22" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Linear fit 3: </span><span class="sc">{b2: .2f}</span><span class="st">x + </span><span class="sc">{a2: .2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(b<span class="op">=</span>p[<span class="dv">0</span>], a<span class="op">=</span>p[<span class="dv">1</span>],</span>
+<span id="cb3-23"><a href="the-average-man.html#cb3-23" aria-hidden="true" tabindex="-1"></a>                                                                                          b1<span class="op">=</span>p[<span class="dv">2</span>], a1<span class="op">=</span>p[<span class="dv">3</span>],</span>
+<span id="cb3-24"><a href="the-average-man.html#cb3-24" aria-hidden="true" tabindex="-1"></a>                                                                                          b2<span class="op">=</span>p[<span class="dv">4</span>], a2<span class="op">=</span>p[<span class="dv">5</span>]))</span>
+<span id="cb3-25"><a href="the-average-man.html#cb3-25" aria-hidden="true" tabindex="-1"></a>                                                                              </span>
+<span id="cb3-26"><a href="the-average-man.html#cb3-26" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">7</span>, color<span class="op">=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb3-27"><a href="the-average-man.html#cb3-27" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">15</span>, color<span class="op">=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb3-28"><a href="the-average-man.html#cb3-28" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Piecewise Linear Fits of Series at Changepoints&quot;</span>)</span>
+<span id="cb3-29"><a href="the-average-man.html#cb3-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb3-30"><a href="the-average-man.html#cb3-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Every model is a guess as to the implicit order in apparent noise. Sometimes there is no order, and other times the patterns is too subtle for a dumb model to capture. In practice you never really know whether a single new error stems from a misfit but appropriate model or an entirely inappropriate model. As we increase our number of sample fits we hope to better approximate the true linear process (if any) generating the data. Imagine now that the data points in Figure 3 are repeatedly re-speckled over the canvas. We can refit a new model for each set of scattered data points and each refit gives us a new sample values for $ const, $. If the underlying data generating process is stable, then the parameter fits will converge to the correct values of <span class="math inline">\(const, \beta\)</span>; correct in the sense that they can be used to draw the line of best fit for the data. A statistically stable process is one that can be modelled with errors <span class="math inline">\(\epsilon\)</span> normally distributed around <span class="math inline">\(0\)</span>, so that the model will be  because <span class="math inline">\(E(\epsilon) = 0\)</span>. Our predictions will overshoot in some cases but on the whole the errors up and down will cancel each other out.</p>
+<blockquote>
+<p>“Typically, the assumptions in a statistical model are quite hard to prove or disprove, and little effort is spent in that direction. The strength of empircal claims made on the basis of such modeling therefore does not derive from the solidity of those assumptions. Equally, these beliefs cannot be justified by the complexity of the calculations… These observations lead to uncomfortable questions” <span class="citation">(<a href="references.html#ref-freedman_2009" role="doc-biblioref">Freedman 2009</a>)</span></p>
+</blockquote>
+<p>Forecasting with the parameters of best fit minimises our forecast errors because the fluctuations are stable about the centre of the line. These are the required assumptions for a process to exhibit the tendency of regression towards the mean. If they’re not met, we will see poor parameter estimates and wild swings away from the linear path.
+The fundamental statistical assumption here is about the properties of our mistakes! The model is less plausible of is our judgements are made in the grip of a delusion.</p>
+</div>
+<div id="modeling-improper-assumptions-and-skewed-expectations" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Modeling: Improper Assumptions and Skewed Expectations</h2>
+<p>Below we build two sampling distributions based on different models of an underlying processes. One in which the errors are independent, normally distributed around <span class="math inline">\(0\)</span> and in the other the errors are correlated in a sine-wave like pattern, increasing and decreasing periodically. This is akin to the difference between measuring error when predicting the heights of randomly sampled people versus predicting the sales volumes on randomly selected days of the week. A random sample of daily sales risks clumping weekends together and skewing the expected values. No such risk exists when sampling from independent individuals.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="the-average-man.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### Sampling Distributions of Linear Fits</span></span>
+<span id="cb4-2"><a href="the-average-man.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#### Build True Model</span></span>
+<span id="cb4-3"><a href="the-average-man.html#cb4-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb4-4"><a href="the-average-man.html#cb4-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">20</span>, N)</span>
+<span id="cb4-5"><a href="the-average-man.html#cb4-5" aria-hidden="true" tabindex="-1"></a>uncorrelated_errors <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">10</span>, N)</span>
+<span id="cb4-6"><a href="the-average-man.html#cb4-6" aria-hidden="true" tabindex="-1"></a>correlated_errors <span class="op">=</span> np.random.uniform (<span class="dv">0</span>, <span class="dv">10</span>) <span class="op">+</span> np.sin(np.linspace(<span class="dv">0</span>, <span class="dv">10</span><span class="op">*</span>np.pi, N)) <span class="op">\</span></span>
+<span id="cb4-7"><a href="the-average-man.html#cb4-7" aria-hidden="true" tabindex="-1"></a>          <span class="op">+</span> np.sin(np.linspace(<span class="dv">0</span>, <span class="dv">5</span><span class="op">*</span>np.pi, N))<span class="op">**</span><span class="dv">2</span> <span class="op">\</span></span>
+<span id="cb4-8"><a href="the-average-man.html#cb4-8" aria-hidden="true" tabindex="-1"></a>          <span class="op">+</span> np.sin(np.linspace(<span class="dv">1</span>, <span class="dv">6</span><span class="op">*</span>np.pi, N))<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">.6</span><span class="op">*</span>X</span>
+<span id="cb4-9"><a href="the-average-man.html#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="the-average-man.html#cb4-10" aria-hidden="true" tabindex="-1"></a>Y_corr <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> X <span class="op">+</span> correlated_errors</span>
+<span id="cb4-11"><a href="the-average-man.html#cb4-11" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> X <span class="op">+</span> uncorrelated_errors</span>
+<span id="cb4-12"><a href="the-average-man.html#cb4-12" aria-hidden="true" tabindex="-1"></a>population <span class="op">=</span> pd.DataFrame({<span class="st">&#39;X&#39;</span>: X, <span class="st">&#39;Y&#39;</span>: Y, <span class="st">&#39;Y_corr&#39;</span>: Y_corr})</span>
+<span id="cb4-13"><a href="the-average-man.html#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="the-average-man.html#cb4-14" aria-hidden="true" tabindex="-1"></a>fits <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">&#39;iid_const&#39;</span>, <span class="st">&#39;iid_beta&#39;</span>, <span class="st">&#39;corr_const&#39;</span>, <span class="st">&#39;corr_beta&#39;</span>])</span>
+<span id="cb4-15"><a href="the-average-man.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">1000</span>):</span>
+<span id="cb4-16"><a href="the-average-man.html#cb4-16" aria-hidden="true" tabindex="-1"></a>    sample <span class="op">=</span> population.sample(n<span class="op">=</span><span class="dv">100</span>, replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-17"><a href="the-average-man.html#cb4-17" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> sample[<span class="st">&#39;Y&#39;</span>]<span class="op">;</span> X <span class="op">=</span> sample[<span class="st">&#39;X&#39;</span>] <span class="op">;</span> Y_corr <span class="op">=</span> sample[<span class="st">&#39;Y_corr&#39;</span>]</span>
+<span id="cb4-18"><a href="the-average-man.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> sm.add_constant(X)</span>
+<span id="cb4-19"><a href="the-average-man.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    iid_model <span class="op">=</span> sm.OLS(Y, X)</span>
+<span id="cb4-20"><a href="the-average-man.html#cb4-20" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> iid_model.fit()</span>
+<span id="cb4-21"><a href="the-average-man.html#cb4-21" aria-hidden="true" tabindex="-1"></a>    corr_model <span class="op">=</span> sm.OLS(Y_corr, X)</span>
+<span id="cb4-22"><a href="the-average-man.html#cb4-22" aria-hidden="true" tabindex="-1"></a>    results_2 <span class="op">=</span> corr_model.fit()</span>
+<span id="cb4-23"><a href="the-average-man.html#cb4-23" aria-hidden="true" tabindex="-1"></a>    row <span class="op">=</span> [results.params[<span class="dv">0</span>], results.params[<span class="dv">1</span>], results_2.params[<span class="dv">0</span>], results_2.params[<span class="dv">1</span>]]</span>
+<span id="cb4-24"><a href="the-average-man.html#cb4-24" aria-hidden="true" tabindex="-1"></a>    fits.loc[<span class="bu">len</span>(fits)] <span class="op">=</span> row</span>
+<span id="cb4-25"><a href="the-average-man.html#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="the-average-man.html#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="the-average-man.html#cb4-27" aria-hidden="true" tabindex="-1"></a>fits.boxplot()</span>
+<span id="cb4-28"><a href="the-average-man.html#cb4-28" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">&quot;The Sampling Distribution of Parameters for a Linear models&quot;</span>)</span>
+<span id="cb4-29"><a href="the-average-man.html#cb4-29" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Based on 1000 fits on 100 observations&quot;</span>)</span>
+<span id="cb4-30"><a href="the-average-man.html#cb4-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>All remarks on Schizophrenia in the following draw on the precise and personal essays in <span class="citation">(<a href="references.html#ref-WangSchizophrenia" role="doc-biblioref">Wang 2019</a>)</span><a href="the-average-man.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>For a typical example of how <span class="math inline">\(EV\)</span> is used to express decisions under uncertainty see chapter 7 in the textbook <span class="citation">(<a href="references.html#ref-BarberBR_ML" role="doc-biblioref">Barber 2012</a>)</span>, but the paradigm owes much of its influence to decision theoretic work of Leonard Savage in <span class="citation">(<a href="references.html#ref-savage54" role="doc-biblioref">Savage 1954</a>)</span><a href="the-average-man.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>"The mind has been <em>taken over</em>. The mind has <em>lost the ability to make rational decisions</em> in <span class="citation">(<a href="references.html#ref-WangSchizophrenia" role="doc-biblioref">Wang 2019</a>)</span> pg58<a href="the-average-man.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>“The Slender Man, the Nothing and Me” in <span class="citation">(<a href="references.html#ref-WangSchizophrenia" role="doc-biblioref">Wang 2019</a>)</span><a href="the-average-man.html#fnref4" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="literature.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-Expected-Utility.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

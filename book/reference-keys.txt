@@ -1,8 +1,9 @@
-fig:nice-fig
-tab:nice-tab
-prerequisites
-first-section-test
-intro
+preface
+the-average-man
+and-expected-value
+probability-twin-aspects
+small-worlds-and-statistical-inference
+modeling-improper-assumptions-and-skewed-expectations
 literature
 methods
 applications

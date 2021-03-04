@@ -125,7 +125,7 @@
 
 \title{Examining Algorithms}
 \author{Nathaniel Forde}
-\date{2021-03-03}
+\date{2021-03-04}
 
 \begin{document}
 \maketitle
@@ -159,9 +159,9 @@ There is an algorithm beloved by bureaucrats. An unsung hero of administrators a
 The expected financial value of a random process is just the sum of the utility (typically dollar outcomes) weighted by their probabilities.
 Outcomes can vary from deals of cards, to customer transactions, election results, continued sanity. Pascal can argue sincerely that such considerations compel even belief in God. The infinite downsides of hell at any likelihood ought to compel even the cynical sceptic. But the formula, glossed as a rule for rational action, merits your attention for more mundane wagers too. If you intend to maximise your expected value, the meaning of probability is not an idle concern. \footnote{For a typical example of how \(EV\) is used to express decisions under uncertainty see chapter 7 in the textbook \citep{BarberBR_ML}, but the paradigm owes much of its influence to decision theoretic work of Leonard Savage in \citep{savage54}} While statistics are often tortured to rubber stamp decisions and probabilities are abused to fit policy prescriptions with false precision, the crisp clarity of the rule has an enduring appeal that promises to sift the murky swamps of Big Data. It's a scalpel that anyone can wield to parse the syntax of statistical jargon and carve answers from an abstract space of probabilities. ``What's my expected return? My likely life-quality?'' - a simple question, with a surprisingly complex answer.
 
-Whenever expected utility is used as a metric of profit there is a risk of pivot, a point where an explanatory model of rational expected action is substituted for more obscure black-box optimisation techniques. The focus switches from modelling the consumer or the patient to modelling returns based on the consumer and the firm's expected value. Swapping a customer catering model for a customer-as-commodity perspective focused on profit in aggregate and customer acquisition. The tendency is common because it's easier and profit often overwhelms all other priorities, but the loss of understanding typically amounts to a longer term net-loss. Shareholders take comfort from increased profit and algorithms deployed at scale, but it's rare that any single algorithm actually or always maximises the available profit. This dynamic enforces a kind of inescapable see-saw motion where the consumer modelling exercise goes through a constant feedback loop. A good model (informal or formal) of human needs and wants feeds a better a predictive model of individual action. When the latter fails we go back to the utility curves and the algorithm of expected value because it is (if not reliably predictive) a rich and deeply explanatory model of human action under uncertainty.
-
 Decision theory is an abstract formalism which purports to account for how you ought to reason under uncertainty, conditional on knowing your own mind, what you want and the likelihood of those outcomes. Wrestling with a diagnosis of schizophrenia you weigh your future in the face of sickness while knowing your mind could fail in the act, knowing, perhaps, you're not yourself. Schizophrenics are involuntarily detained if a medical professional deems them to have lost sufficient ``insight''\footnote{"The mind has been \emph{taken over}. The mind has \emph{lost the ability to make rational decisions} in \citep{WangSchizophrenia} pg58} , but the stated dysfunction assumes that these kinds of insight should be transparent when the psychiatric crisis is resolved. We'll see that the level of insight assumed by decision theory is, at best, hard won and far from transparent.
+
+There is a secondary complication in that whenever expected utility as used as an explanatory model of rational action, there is a risk of pivot, a point where it is substituted for more obscure black-box optimisation techniques over metrics of profit or overall accuracy. The focus switches from modelling the consumer or the patient to modelling returns based on the consumer and the firm's expected value. Swapping a customer catering model for a customer-as-commodity perspective focused on profit in aggregate and customer acquisition. The tendency is common because profit overwhelms all other priorities, but the loss of understanding typically amounts to a longer term net-loss. Shareholders take comfort from increased profit and algorithms deployed at scale, but it's rare that any single algorithm actually or always maximises the available profit. This dynamic enforces a kind of inescapable see-saw motion where the consumer modeling exercise goes through a constant feedback loop. A good model (informal or formal) of human needs and wants feeds a better a predictive model of individual action. When the latter fails we go back to the utility curves and the algorithm of expected value because it is (if not reliably predictive) a rich and deeply explanatory model of human action under uncertainty.
 
 \hypertarget{probability-twin-aspects}{%
 \section{Probability: Twin Aspects}\label{probability-twin-aspects}}
@@ -244,7 +244,7 @@ A {[}small world{]} is\ldots{} completely satisfactory, only if it is actually a
 
 The danger of shrinking your world comes when you mistake the map for the territory and act on that delusion.
 
-Small worlds are machines for figuring out expected values of a statistical process. We shrink the parameter set to better measure the variance and flux throughout the system. For any hypothetical system there can be multiple plausible approximations of the underlying process which need to be assessed comparatively on their ``goodness" of fit. We iterate through new and improved versions, each an attempt to make a conjectural connection between \$ X, Y \$ mathematically precise. But once built, they embed the errors and assumptions made in their design. McElreath dubs them Golems, primed and then loosed on the world, insensitive to subtlety and context they perform only as instructed. Consider how a basic regression model tries to predict an outcome \(Y\) as linear function of some observed features \(X\):
+Small worlds are machines for figuring out expected values of a statistical process. We shrink the parameter set to better measure the variance and flux throughout the system. For any hypothetical system there can be multiple plausible approximations of the underlying process which need to be assessed comparatively on their ``goodness'' of fit. We iterate through new and improved versions, each an attempt to make a conjectural connection between \(X, Y\) mathematically precise. But once built, they embed the errors and assumptions made in their design. McElreath dubs them Golems, primed and then loosed on the world, insensitive to subtlety and context they perform only as instructed. Consider how a basic regression model tries to predict an outcome \(Y\) as linear function of some observed features \(X\):
 
 \[ Y = const + \beta X + \epsilon  \]
 
@@ -293,11 +293,10 @@ Every model is a guess as to the implicit order in apparent noise. Sometimes the
 ``Typically, the assumptions in a statistical model are quite hard to prove or disprove, and little effort is spent in that direction. The strength of empircal claims made on the basis of such modeling therefore does not derive from the solidity of those assumptions. Equally, these beliefs cannot be justified by the complexity of the calculations\ldots{} These observations lead to uncomfortable questions'' \citep{freedman_2009}
 \end{quote}
 
-Forecasting with the parameters of best fit minimises our forecast errors because the fluctuations are stable about the centre of the line. These are the required assumptions for a process to exhibit the tendency of regression towards the mean. If they're not met, we will see poor parameter estimates and wild swings away from the linear path.
-The fundamental statistical assumption here is about the properties of our mistakes! The model is less plausible of is our judgements are made in the grip of a delusion.
+Forecasting with the parameters of best fit minimises our forecast errors because the fluctuations are stable about the centre of the line. These are the required assumptions for a process to exhibit the tendency of regression towards the mean. If they're not met, we will see poor parameter estimates and wild swings away from the linear path. The fundamental statistical assumption here is about the properties of our mistakes! The model is less plausible if our judgements are made in the grip of a delusion.
 
 \hypertarget{modeling-improper-assumptions-and-skewed-expectations}{%
-\section{Modeling: Improper Assumptions and Skewed Expectations}\label{modeling-improper-assumptions-and-skewed-expectations}}
+\subsection{Modeling: Improper Assumptions and Skewed Expectations}\label{modeling-improper-assumptions-and-skewed-expectations}}
 
 Below we build two sampling distributions based on different models of an underlying processes. One in which the errors are independent, normally distributed around \(0\) and in the other the errors are correlated in a sine-wave like pattern, increasing and decreasing periodically. This is akin to the difference between measuring error when predicting the heights of randomly sampled people versus predicting the sales volumes on randomly selected days of the week. A random sample of daily sales risks clumping weekends together and skewing the expected values. No such risk exists when sampling from independent individuals.
 
@@ -337,6 +336,285 @@ Below we build two sampling distributions based on different models of an underl
 \end{Shaded}
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+In the case with independent errors the expected value for our parameter estimates match almost exactly the true values of the process. In the second model with correlated errors the parameter estimate for our constant is 4.9 which is significantly different from the true value of -2, and will lead to systematically skewed predictions. Statistical models are just algebraic equations where we use regular sampling to solve for \(Y\) from \(X\). Because Y is also a random variable the regression model encodes a conditional expectation result.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ draw\_gaussian\_at(position, sample, ax\_main}\OperatorTok{=}\VariableTok{None}\NormalTok{, model}\OperatorTok{=}\StringTok{\textquotesingle{}iid\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}k\textquotesingle{}}\NormalTok{, }\OperatorTok{**}\NormalTok{kwargs):}
+\NormalTok{    filter\_var }\OperatorTok{=} \BuiltInTok{round}\NormalTok{(sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{], }\DecValTok{0}\NormalTok{) }\OperatorTok{==}\NormalTok{ position}
+\NormalTok{    avg }\OperatorTok{=}\NormalTok{ sample[filter\_var][}\StringTok{\textquotesingle{}predicted\_Y\_\textquotesingle{}} \OperatorTok{+}\NormalTok{ model].mean()}
+    \BuiltInTok{min} \OperatorTok{=}\NormalTok{ sample[filter\_var][}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{].}\BuiltInTok{min}\NormalTok{()}
+    \BuiltInTok{max} \OperatorTok{=}\NormalTok{ sample[filter\_var][}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{].}\BuiltInTok{max}\NormalTok{()}
+\NormalTok{    dist }\OperatorTok{=}\NormalTok{ pd.Series(sample[filter\_var][}\StringTok{\textquotesingle{}predicted\_error\_\textquotesingle{}}\OperatorTok{+}\NormalTok{ model].values)}
+\NormalTok{    kde }\OperatorTok{=}\NormalTok{ sm.nonparametric.KDEUnivariate(dist)}
+\NormalTok{    kde.fit()}
+\NormalTok{    density }\OperatorTok{=}\NormalTok{ kde.density}
+\NormalTok{    density }\OperatorTok{/=}\NormalTok{ density.}\BuiltInTok{max}\NormalTok{()}
+\NormalTok{    density }\OperatorTok{*=} \DecValTok{1}
+\NormalTok{    y\_axis }\OperatorTok{=}\NormalTok{ np.linspace(}\BuiltInTok{min}\NormalTok{, }\BuiltInTok{max}\NormalTok{, }\BuiltInTok{len}\NormalTok{(density))}
+\NormalTok{    label }\OperatorTok{=} \StringTok{"Expected error X = }\SpecialCharTok{\{x:\}}\StringTok{: }\SpecialCharTok{\{err: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(err }\OperatorTok{=}\NormalTok{ sample[filter\_var][}\StringTok{\textquotesingle{}predicted\_error\_\textquotesingle{}}\OperatorTok{+}\NormalTok{ model].mean(),}
+\NormalTok{                                                         x}\OperatorTok{=}\NormalTok{position)}
+\NormalTok{    ax\_main.plot((density }\OperatorTok{+}\NormalTok{ position), y\_axis, color}\OperatorTok{=}\NormalTok{color, label}\OperatorTok{=}\NormalTok{label)}
+
+\NormalTok{sample }\OperatorTok{=}\NormalTok{ population.sample(n}\OperatorTok{=}\DecValTok{1000}\NormalTok{, replace}\OperatorTok{=}\VariableTok{True}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{100}\NormalTok{)}
+\NormalTok{true\_model }\OperatorTok{=}\NormalTok{ sm.OLS(sample[}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{], sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{]).fit()}
+\NormalTok{error\_model }\OperatorTok{=}\NormalTok{ sm.OLS(sample[}\StringTok{\textquotesingle{}Y\_corr\textquotesingle{}}\NormalTok{], sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{]).fit()}
+\NormalTok{sample[}\StringTok{\textquotesingle{}predicted\_Y\_iid\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ true\_model.predict(sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{])}
+\NormalTok{sample[}\StringTok{\textquotesingle{}predicted\_Y\_corr\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ error\_model.predict(sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{])}
+\NormalTok{sample[}\StringTok{\textquotesingle{}predicted\_error\_iid\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ sample[}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ sample[}\StringTok{\textquotesingle{}predicted\_Y\_iid\textquotesingle{}}\NormalTok{]}
+\NormalTok{sample[}\StringTok{\textquotesingle{}predicted\_error\_corr\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ sample[}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ sample[}\StringTok{\textquotesingle{}predicted\_Y\_corr\textquotesingle{}}\NormalTok{]}
+\NormalTok{fig, ax1 }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{ax1.plot(sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{], sample[}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{],}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax1.plot(sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{], sample[}\StringTok{\textquotesingle{}predicted\_Y\_iid\textquotesingle{}}\NormalTok{])}
+\ControlFlowTok{for}\NormalTok{ each }\KeywordTok{in}\NormalTok{ [}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{,  }\DecValTok{15}\NormalTok{]:}
+\NormalTok{    d }\OperatorTok{=}\NormalTok{ draw\_gaussian\_at(position}\OperatorTok{=}\NormalTok{each, sample}\OperatorTok{=}\NormalTok{sample, ax\_main}\OperatorTok{=}\NormalTok{ax1, model}\OperatorTok{=}\StringTok{\textquotesingle{}iid\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Error Distributions around predicted Y values for the }\SpecialCharTok{\{model:\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(model}\OperatorTok{=}\StringTok{\textquotesingle{}iid model\textquotesingle{}}\NormalTok{))}
+\NormalTok{plt.legend()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\[ E(Y_{i} | X_{i} = x )\]
+
+For fixed values of X, the predictions \(Y_{i}\) can be spread in a pattern enforced by the various ways we can realise the linear function with estimates for \(\beta\) and \(const\). But the regression model selects the best parameter values to minimise the squared prediction error and represent the conditional expected distribution of \(Y\).
+
+\begin{quote}
+``The statement that regression approximates the {[}Conditional Expectation Function{]} lines up with our view of empirical work as an effort to describe the essential features of statistical relationships without necessarily trying to pin them down exactly'' p38 - \citep{angrist_mostly_2008}
+\end{quote}
+
+The consequent point predictions for \(Y\) are always expected values, skewed by the how the parameters are realised from sample data as much as by poor choices in model design and predictive features. So too then any measures of expected utility based on these models or inferences from these distributions.
+
+\hypertarget{frequentism-inference-from-expected-frequency}{%
+\subsection{Frequentism: Inference from Expected Frequency}\label{frequentism-inference-from-expected-frequency}}
+
+Making inference from a model is delicate thing. Even simple cases come with controversy. Count the number heads in a series of 5 successive coin flips, then repeat the process 1000 times and you'll arrive at a proportion which characterises that process. If it's a fair coin the long run expected result will be half the number of your coin flips. If the coin is weighted you might have as few as 0. This is the binomial distribution, and it really shines when you're trying to gauge fairness. If a process is biased, the distribution will be skewed. We can use this fact for inference. Consider a dispute over whether the game was rigged.
+
+\[ H_0 : \text{ true proportion of heads } = 0.4  \]
+\[ H_1 : \text{ true proportion of heads } =  0.5 \]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{samples }\OperatorTok{=} \DecValTok{5}
+\NormalTok{prop }\OperatorTok{=} \FloatTok{0.4}
+\NormalTok{successes }\OperatorTok{=} \DecValTok{3}
+
+\NormalTok{X }\OperatorTok{=}\NormalTok{ binom(samples, prop)}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ X.rvs(}\DecValTok{1000}\NormalTok{)}
+\NormalTok{points }\OperatorTok{=}\NormalTok{ sns.distplot(x, hist}\OperatorTok{=}\VariableTok{False}\NormalTok{, kde}\OperatorTok{=}\VariableTok{True}\NormalTok{).get\_lines()[}\DecValTok{0}\NormalTok{].get\_data()}
+\NormalTok{prob }\OperatorTok{=} \DecValTok{1} \OperatorTok{{-}}\NormalTok{ X.cdf(}\DecValTok{2}\NormalTok{)}
+\NormalTok{z }\OperatorTok{=}\NormalTok{ points[}\DecValTok{0}\NormalTok{]}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ points[}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{plt.fill\_between(z,y, where }\OperatorTok{=}\NormalTok{ z }\OperatorTok{\textgreater{}=}\NormalTok{ successes, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Probability \textgreater{}= 3:}\SpecialCharTok{\{p: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(p}\OperatorTok{=}\NormalTok{prob))}
+\NormalTok{plt.fill\_between(z,y, where }\OperatorTok{=}\NormalTok{ z }\OperatorTok{\textless{}}\NormalTok{ successes , color}\OperatorTok{=}\StringTok{\textquotesingle{}g\textquotesingle{}}\NormalTok{,}
+\NormalTok{                 label}\OperatorTok{=}\StringTok{"Probability \textless{} 3: }\SpecialCharTok{\{mean: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mean}\OperatorTok{=}\DecValTok{1}\OperatorTok{{-}}\NormalTok{prob))}
+\NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{\textquotesingle{}upper right\textquotesingle{}}\NormalTok{, title}\OperatorTok{=}\StringTok{\textquotesingle{}Legend\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"The P{-}Value for a sample of 5 with \textgreater{}=3 head }\CharTok{\textbackslash{}n}\StringTok{ given a biased coin with expected proportion 0.4"}\NormalTok{)}
+\NormalTok{xlim }\OperatorTok{=}\NormalTok{ plt.xlim((}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\NormalTok{ytck }\OperatorTok{=}\NormalTok{ plt.yticks([])}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+Take \((H0)\) as given then if we observe a sequence: \[ (3in5): H, H, H, T, T\] what does it say about the possibility that we're being hustled? If the coin is biased, then the count of heads in repeated sampling will reflect a clear bias. For any new data we can check if the data is consistent with the data generated by the biased coin. The pattern of reasoning is straightforward (i) make some assumptions about the structure of the random process under investigation, (ii) tease out the consequences of these assumptions (iii) evaluate the incoming data against these consequences to see if you need to revise your assumptions. The frequentist asks, does the data looks weird given the assumed shape of our probability distribution?
+
+\begin{quote}
+{[}I{]}n statistical terms \(H_{0}\) {[}the null hypothesis{]} refers to a probability model and the very word `model' implies idealization. With a very few possible exceptions it would be absurd to think that a mathematical model is an exact representation of a real system\ldots{} We use the term to mean that in the current state of knowledge it is reasonable to proceed as if the hypothesis was true." pg 31 \citep{cox2006pos}
+\end{quote}
+
+In this instance the shape of the binomial distribution defined by a 0.4 biased coin allows for significantly greater than 5\% chance for observing the above sequence. So we do not have enough reason to reject \((H0)\) at the traditional threshold. By design the assumed distribution builds in characteristics of long-run variance of the process, and the slim threshold for rejection is designed to minimise incorrect rejections of \((H0)\). We should remain suspicious that we're being conned. However, with a low number of observations the sample distribution is unlikely to be properly representative. This makes even small p-value thresholds unreliable. We cannot blindly take a sample poll to imply the spread or volatility of a population, and with low or un-representative samples it's hard to justify any kind of inference from expectation, since we are not in a position to justify the choice of the null model either! If your hypothesis is both derived and validated against small samples, you risk being swayed by recent observations.
+
+More fundamentally the notion of statistical significance usually cannot falsify the hypothesis under consideration. The sheer number of auxiliary variables that you might need to control for, makes the practical task of definitively rejecting the null almost impossible. There are too many imagined ways in which the auxiliary conditions, sufficiently modified, would have resulted in observations that corroborate the null model. This problem is especially acute in psychological science where the auxiliary contingencies of designing a measurement scale and checking diagnostic criteria are almost always questionable. So the null hypothesis is not confirmed, but not refuted either, it is just preserved in useless stasis.
+
+\begin{quote}
+``{[}I{]}t did not get integrated into the total nomological network, nor did it get clearly liquidated as a nothing concept, it did not get killed or resurrected or transformed or solidified; it just kind of dried up and blew away\ldots{}'' pg807 in \citep{MeehlTheoretical}
+\end{quote}
+
+\hypertarget{bayesian-inference-inference-to-expected-value}{%
+\subsection{Bayesian Inference: Inference to Expected Value}\label{bayesian-inference-inference-to-expected-value}}
+
+If instead we use probability to calibrate our beliefs, then we can be more explicit in our assessment of \((H0), (H1)\). Let's assume that our prior beliefs about whether the game is rigged is 50/50. Then we evaluate the two hypothesis using Bayes's rule for incorporating our prior belief and the data. The Bayesian asks whether our hypothesis is a good explanation of the data compared to alternatives. How, upon observing the data, should we view our hypothesis?
+
+\[ \overset{posterior}{p(H_{i} | Data)} = \frac{\overset{prior}{p(H_{i})}\overset{liklihood}{p(Data | H_{i})}}{\underset{evidence}{\sum_{i=1}^{i =K} p(Data | H_{i})p(H_i)}}\]
+
+where \$ 1 \leq i \leq K\$ spans the ways in which the data could have been realised across all competing hypotheses.Then, in our toy example, we have:
+
+\[ \frac{p(H_1 | 3 in 5)}{p(H_{0} | 3 in 5)} = \frac{\frac{.5\cdot .23}{.5\cdot .32 + .5 \cdot .23}}{\frac{.5\cdot .32}{.5\cdot .32 + .5 \cdot .23}} = \frac{.57}{.42} \]
+
+which would lead us to infer that the coin was fair. The really radical move in the Bayesian setting is that you're allowed to ascribe a probability to any event regardless of whether there is any long-run sequence to observe. You may know nothing about your opponent or the coin, but for Bayesians this is no bar to assigning suspicion in the form of expected probability, so long as you act in accordance with the axioms of probability and weigh the probabilities accordingly. In particular it promotes the direct comparison of competing hypotheses conditional on the evidence. It's this free choice of prior which can seem arbitrary and unmotivated or even paradoxical, but in practice probabilities are rarely ascribed entirely without reason and it's frankly irresponsible to ignore those reasons.
+
+\begin{quote}
+``When a piece of evidence E is produced in a court investigating the guilt G or innocence I of the defendant, it is not enough merely to consider the probability of E assuming G; one must also contemplate the probability of E supposing I. In fact, the relevant quantity is the ratio of the two probabilities. Generally if evidence is produced to support some thesis, one must also consider the reasonableness of the evidence were the thesis false. Whenever courses of action are contemplated, it is not the merits or demerits of any course that matter, but only the comparison of these qualities with those of other courses.'\,' in \citep{LindleyTea}
+\end{quote}
+
+Neither the Bayesian or Frequentist analysis ends with these simple calculations, both should continue to probe the limits of each hypothesis. We'd have to consider things like sample size, sensitivity testing, model performance, the cost of errors and appropriateness of the priors. The point is just that there are reasons for dispute. Bayesian inference acts like a logic engine for evidence, whereas the frequentist approach is more focused on diagnosing the possibility of error. In general they are complementary methods, and when they conflict the assumptions should be scrutinised. The frequentist evaluation of our biased coin is very sensitive to the choice of hypotheses, while the Bayesian approach is influenced by the choice of prior. Why set up a significance test against assumed cheating rather than assumed fairness? Why attribute equal weight to both hypotheses? Why use a 5\% threshold if you're concerned about systematic cheating? This example shows the heart of the conflict in the dual aspect of probability. There is enough latitude in the manner in which we set up a probability model that the mathematics of inference can yield inconsistent results. Both offer strategies for managing uncertainty, but both approaches come with baggage and in practice not all tests are equally taxing. Consider a more concrete example in the Bayesian spirit.
+
+\hypertarget{example-website-traffic}{%
+\subsection{Example: Website Traffic}\label{example-website-traffic}}
+
+Websites and apps collect traffic and log interactions. Your details are captured and pulled into vast aggregates of consumer data. I can route and re-route your trajectory across an online environment. Applying the same pressures to tens of thousands of others, we can trace out how the topology of particular sites throw up speed bumps on the customer's journey. Imagine we're running a website which aims to funnel customers through to a number of different purchase plans. The historic patterns are relatively stable with only 10\% of customers dropping out of our conversion funnel on a daily basis. We can sample actions online (Figure 7) under differing pressures with a view to evaluating expected values of repeated coercive prompts.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\#\#\# Multinomial distribution}
+\NormalTok{m\_var }\OperatorTok{=}\NormalTok{ stats.multinomial(n}\OperatorTok{=}\DecValTok{100}\NormalTok{, p}\OperatorTok{=}\NormalTok{[}\FloatTok{.3}\NormalTok{, }\FloatTok{.4}\NormalTok{, }\FloatTok{.2}\NormalTok{, }\FloatTok{.1}\NormalTok{])}
+\NormalTok{m\_var\_sample }\OperatorTok{=}\NormalTok{ m\_var.rvs(}\DecValTok{1000}\NormalTok{)}
+\NormalTok{m\_var\_2 }\OperatorTok{=}\NormalTok{ stats.multinomial(n}\OperatorTok{=}\DecValTok{100}\NormalTok{, p}\OperatorTok{=}\NormalTok{[}\FloatTok{.3}\NormalTok{, }\FloatTok{.4}\NormalTok{, }\FloatTok{.1}\NormalTok{, }\FloatTok{.2}\NormalTok{])}
+\NormalTok{m\_var\_2\_sample }\OperatorTok{=}\NormalTok{ m\_var\_2.rvs(}\DecValTok{20}\NormalTok{)}
+\NormalTok{base }\OperatorTok{=}\NormalTok{ datetime.datetime.today() }\OperatorTok{{-}}\NormalTok{ datetime.timedelta(days}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(m\_var\_sample, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{])}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ df.append(pd.DataFrame(m\_var\_2\_sample, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]),ignore\_index}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+\NormalTok{df[}\StringTok{\textquotesingle{}totals\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{] }\OperatorTok{+}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{] }\OperatorTok{+}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{] }\OperatorTok{+}\NormalTok{ df[}\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]}
+\NormalTok{df[}\StringTok{\textquotesingle{}plan\_1\_rate\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{] }\OperatorTok{/}\NormalTok{ df[}\StringTok{\textquotesingle{}totals\textquotesingle{}}\NormalTok{]}
+\NormalTok{df[}\StringTok{\textquotesingle{}plan\_2\_rate\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{] }\OperatorTok{/}\NormalTok{ df[}\StringTok{\textquotesingle{}totals\textquotesingle{}}\NormalTok{]}
+\NormalTok{df[}\StringTok{\textquotesingle{}plan\_3\_rate\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{] }\OperatorTok{/}\NormalTok{ df[}\StringTok{\textquotesingle{}totals\textquotesingle{}}\NormalTok{]}
+\NormalTok{df[}\StringTok{\textquotesingle{}no\_plan\_rate\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{] }\OperatorTok{/}\NormalTok{ df[}\StringTok{\textquotesingle{}totals\textquotesingle{}}\NormalTok{]}
+\NormalTok{date\_list }\OperatorTok{=}\NormalTok{ [base }\OperatorTok{+}\NormalTok{ datetime.timedelta(days}\OperatorTok{=}\NormalTok{x) }\ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\BuiltInTok{len}\NormalTok{(df))]}
+\NormalTok{df.index }\OperatorTok{=}\NormalTok{ date\_list}
+\ControlFlowTok{for}\NormalTok{ i, column }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{([x }\ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in}\NormalTok{ df.columns }\ControlFlowTok{if} \StringTok{\textquotesingle{}rate\textquotesingle{}} \KeywordTok{in}\NormalTok{ x]):}
+\NormalTok{    ax }\OperatorTok{=}\NormalTok{ plt.plot(df[column], label}\OperatorTok{=}\NormalTok{column)}
+
+\NormalTok{plt.title(}\StringTok{"Outcomes of Signup Process after Website Change"}\NormalTok{)}
+\NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{"upper left"}\NormalTok{)}
+\NormalTok{xticks}\OperatorTok{=}\NormalTok{ plt.xticks(rotation}\OperatorTok{=}\DecValTok{45}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+Assume the particular values for each plan, then the expected value of customer journey is just: \(p_{1}\$(o_{1}) + p_{2}\$(o_{2}) + p_{3}\$(o_{3}) + p_{4}\$(o_{4}) = .3*\$10 + .4*\$7 + .2*\$12 + .1*\$0 = \$8.20\) Now imagine there was a change to the website and we observe the following pattern for the next 20 days. The change was made on the hypothesis (\(H+\)) that it would bring a positive boost to revenue. How much more positive? A slight expected increase makes it harder to conclusively reject the \(H+\) even in the fact of contrary indicators. If we observe the above pattern, then what is the new expected value? Have we decisively falisifed \(H+\)? From the frequentist point of view the macro distributional properties haven't significantly changed. But given what we know about the change to the website it would be foolish to accept such a static distributional assumption. Looking only at the small sample of new data, the variance will be large and the estimates of rates of sign-up for each plan will be unstable. Following the Bayesian paradigm we can condition our expectations on the new data, the old data or all the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#\#\# Calculate Expected Revenue}
+
+\KeywordTok{def}\NormalTok{ expected\_revenue(posterior\_samples):}
+    \ControlFlowTok{return} \DecValTok{10}\OperatorTok{*}\NormalTok{posterior\_samples[:, }\DecValTok{0}\NormalTok{] }\OperatorTok{+} \DecValTok{7}\OperatorTok{*}\NormalTok{posterior\_samples[:, }\DecValTok{1}\NormalTok{] }\OperatorTok{+} \OperatorTok{\textbackslash{}}
+           \DecValTok{12}\OperatorTok{*}\NormalTok{posterior\_samples[:, }\DecValTok{2}\NormalTok{] }\OperatorTok{+} \DecValTok{0}\OperatorTok{*}\NormalTok{posterior\_samples[:, }\DecValTok{3}\NormalTok{]}
+
+\NormalTok{full\_data }\OperatorTok{=}\NormalTok{ df[[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]]}
+\NormalTok{weird\_data2 }\OperatorTok{=}\NormalTok{ df[[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]].tail(}\DecValTok{20}\NormalTok{)}
+\NormalTok{normal\_data }\OperatorTok{=}\NormalTok{ df[[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]].head(}\DecValTok{1000}\NormalTok{)}
+
+\CommentTok{\# Bayesian Posterior}
+\NormalTok{multinomial\_posterior\_new }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+
+\CommentTok{\# Empirical Bayes}
+\NormalTok{multinomial\_posterior\_full }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(full\_data.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+\CommentTok{\# Bayesain Posterior Prior Data}
+\NormalTok{multinomial\_posterior\_old }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(normal\_data.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+\NormalTok{multinomial\_posterior\_new\_empirical\_prior }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{300}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+\NormalTok{multinomial\_posterior\_crazy\_prior }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{0}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+
+\NormalTok{expected\_value\_new }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_new)}
+\NormalTok{expected\_value\_old }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_old)}
+\NormalTok{expected\_value\_full\_data }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_full)}
+\NormalTok{expected\_value\_new\_bias }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_new\_empirical\_prior)}
+\NormalTok{expected\_value\_crazy }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_crazy\_prior)}
+
+\NormalTok{h1 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_new, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{)}
+\NormalTok{h2 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_old, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue Old Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{h3 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_full\_data, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue Full Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{h4 }\OperatorTok{=}\NormalTok{plt.hist(expected\_value\_new\_bias, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Empirical Prior "}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{h5 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_crazy, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Optimistic Prior "}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Expected Revenue of Multinomial Posterior given Data"}\NormalTok{)}
+\NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{"upper left"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+The above graph illustrates the spread in values expected revenue calculated on different slices of our data using Bayes Rule. Using a large number of observations, the influence of our priors are minimal and washed out by the data, giving us a strong point estimate with low variance stable around 8.2, but since the recent data involves a step change, we might be better off ignoring the old data. But we can also see that if we condition our expectations only on the new data with different priors drawn from the past data or hope, we can positively bias our expectations. Suppose we're naive and accept either the optimistic prior or retain a frequentist approach, and accept that the website change is associated with a slight drop in revenue, do we revert to the old website or try to explain the dip by contingencies of the market and preserve our test for another thirty days?
+
+This pattern is not rare. Nearly all substantial decisions are made with small samples in circumstances where past behaviour is not a guide. Past behavioural patterns are exactly what we're trying to avoid or change. If you want to know whether the change on your website will drive a material change in financial revenue, you won't have long run patterns to rely on, and it's an open question on how to weight the new data. If you want to judge the long term consequences of a new symptom the same limitation of information applies. All models smuggle-in a host of statistical assumptions and these can be range from reasonable to absurd. Even when reasonable they're only supported by large sample sizes, and most questions of interest are driven by novelty (or specificity) that short circuits appeal to robust patterns of history. Reasoning from small samples is common, best done with caution and plenty of caveats, but better reason than not. Expectations should be modified accordingly.
+
+\hypertarget{utility-curves}{%
+\section{Utility Curves}\label{utility-curves}}
+
+\hypertarget{the-stakes-from-utility-to-indifference}{%
+\subsection{The Stakes: From Utility to Indifference}\label{the-stakes-from-utility-to-indifference}}
+
+Our views of probability can flex up and down in response to facts, but it's less clear how our estimates of utility change. Too much of a good thing often tends to the bad. So we dabble, sample and share. In pursuit of variety we swap our goods, shunning stale options in favour of the novel exchange. For a given good we can differ in our appetites but it's relatively straightforward to find the point where - one more donut is one too many. While it can be a bit unclear how we should measure utility, once we've decided on a metric the mathematical characteristics are meaningful. If the scale is donuts, we can infer aspects of your attitudes from your acquisition and enthusiasm for donuts. In most cases we're interested not just in your pursuit of pastries, but how you'd be willing to trade for those pastries.
+
+We seek competitive advantage for our own produce to balance the cost owed to the skills of others. This coordinated compromise lies at the core of maximising subjective utility in a market, but at the limit some scenarios do not admit any admixture of goods. Not all babies can be cut in half. But in most cases a consumer will try to optimise their bundle of goods over an entire marketplace, preserving enough on one key good; money, to remain liquid. So, to a first approximation our utility estimate would seem to be a multivariate function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\KeywordTok{def}\NormalTok{ linear\_utility(x, a}\OperatorTok{=}\DecValTok{2}\NormalTok{, b}\OperatorTok{=}\DecValTok{4}\NormalTok{):}
+    \CommentTok{\# This works fine on smaller numbers}
+    \ControlFlowTok{return}\NormalTok{ a }\OperatorTok{+}\NormalTok{ b}\OperatorTok{*}\NormalTok{x}
+
+\KeywordTok{def}\NormalTok{ quadriatic\_utility(x, b}\OperatorTok{=}\FloatTok{0.5}\NormalTok{):}
+    \ControlFlowTok{return}\NormalTok{ x }\OperatorTok{{-}}\NormalTok{ (b)}\OperatorTok{*}\NormalTok{(x}\OperatorTok{**}\DecValTok{2}\NormalTok{)}
+
+\KeywordTok{def}\NormalTok{ logarithmic\_utility(x, a, b):}
+    \ControlFlowTok{return}\NormalTok{ np.log(a) }\OperatorTok{+}\NormalTok{ b}\OperatorTok{*}\NormalTok{np.log(x)}
+
+\KeywordTok{def}\NormalTok{ negative\_exp\_utility(x, c}\OperatorTok{=}\FloatTok{.5}\NormalTok{):}
+    \ControlFlowTok{return} \OperatorTok{{-}}\NormalTok{np.exp(}\OperatorTok{{-}}\NormalTok{(c}\OperatorTok{*}\NormalTok{x))}
+
+\KeywordTok{def}\NormalTok{ narrow\_power(x, B}\OperatorTok{=}\DecValTok{2}\NormalTok{):}
+    \ControlFlowTok{return}\NormalTok{ (B }\OperatorTok{/}\NormalTok{ (B }\OperatorTok{{-}} \DecValTok{1}\NormalTok{))}\OperatorTok{*}\NormalTok{(x}\OperatorTok{**}\NormalTok{(}\DecValTok{1} \OperatorTok{{-}}\NormalTok{ (}\DecValTok{1}\OperatorTok{/}\NormalTok{B)))}
+
+\NormalTok{xdata }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{negExp }\OperatorTok{=}\NormalTok{ negative\_exp\_utility(xdata, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{quad }\OperatorTok{=}\NormalTok{ quadriatic\_utility(xdata, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{narrow\_pow }\OperatorTok{=}\NormalTok{ narrow\_power(xdata, }\DecValTok{2}\NormalTok{)}
+\NormalTok{lin }\OperatorTok{=}\NormalTok{ linear\_utility(xdata, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+
+\CommentTok{\# Create plot}
+\NormalTok{fig, ((ax0, ax1), (ax2, ax3)) }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+
+\NormalTok{ax0.plot(xdata, negExp, label}\OperatorTok{=}\StringTok{"{-}exp({-}b*Q)"}\NormalTok{)}
+\NormalTok{ax0.set\_title(}\StringTok{"Negative Exponential Utility Curve"}\NormalTok{)}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax0.set\_xticks([])}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax0.set\_yticks([])}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ax0.set\_ylabel(}\StringTok{"U(Q)"}\NormalTok{)}
+\NormalTok{ax0.legend()}
+\NormalTok{ax0.titlesize }\OperatorTok{=} \DecValTok{10}
+
+\NormalTok{ax1.plot(xdata, quad, label}\OperatorTok{=}\StringTok{"Q {-} b*Q\^{}2"}\NormalTok{)}
+\NormalTok{ax1.set\_title(}\StringTok{"Quadratic Utility Curve"}\NormalTok{)}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax1.set\_xticks([])}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax1.set\_yticks([])}
+\NormalTok{ax1.legend()}
+
+\NormalTok{ax2.plot(xdata, lin, label}\OperatorTok{=}\StringTok{"a + b*Q"}\NormalTok{)}
+\NormalTok{ax2.set\_title(}\StringTok{"Linear Utility Curve"}\NormalTok{)}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax2.set\_yticks([])}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax2.set\_xticks([])}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax2.set\_ylabel(}\StringTok{"U(Q)"}\NormalTok{)}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax2.set\_xlabel(}\StringTok{"Q"}\NormalTok{)}
+\NormalTok{ax2.legend()}
+
+\NormalTok{ax3.plot(xdata, narrow\_pow, label}\OperatorTok{=}\StringTok{"(b / (b{-}1))*Q\^{}(1{-}(1/b))"}\NormalTok{)}
+\NormalTok{ax3.set\_title(}\StringTok{"Narrow Power Utility Curve"}\NormalTok{)}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax3.set\_yticks([])}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax3.set\_xticks([])}
+\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax3.set\_xlabel(}\StringTok{"Q"}\NormalTok{)}
+\NormalTok{ax3.legend()}
+
+\ControlFlowTok{for}\NormalTok{ \_ax }\KeywordTok{in}\NormalTok{ [ax0, ax1, ax2, ax3]:}
+\NormalTok{    \_ax.spines[}\StringTok{"right"}\NormalTok{].set\_visible(}\VariableTok{False}\NormalTok{)}
+\NormalTok{    \_ax.spines[}\StringTok{"top"}\NormalTok{].set\_visible(}\VariableTok{False}\NormalTok{)}
+
+\NormalTok{fig.suptitle(}\StringTok{"Utility measures over increasing quantities of a good"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 \hypertarget{literature}{%
 \chapter{Literature}\label{literature}}

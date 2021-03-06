@@ -1,7 +1,11 @@
+thm:unnamed-chunk-14
+def:unnamed-chunk-15
+thm:unnamed-chunk-16
 preface
-the-average-man
+expected-utility-a-primer
+average-man
 and-expected-value
-probability-twin-aspects
+probability-dual-aspects
 small-worlds-and-statistical-inference
 modeling-improper-assumptions-and-skewed-expectations
 frequentism-inference-from-expected-frequency
@@ -10,6 +14,13 @@ example-website-traffic
 utility-curves
 the-stakes-from-utility-to-indifference
 optimising-utility
+representation-theorems
+rational-preference-from-indifference-to-utility
+von-neumann-and-morgernsterns-representation-theorem
+bolkers-representation-theorem
+from-neutrality-to-desire
+machine-learning-and-the-models-of-utility
+maximum-likelihood-estimation-and-multiple-choice
 literature
 methods
 applications

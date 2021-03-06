@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Average Man | Examining Algorithms</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Average Man | Examining Algorithms" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="/NathanielF/NathanielF.github.io" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Average Man | Examining Algorithms" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Nathaniel Forde" />
+
+
+<meta name="date" content="2021-03-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="/images/favicons/fa search.png" type="image/x-icon" />
+<link rel="prev" href="index.html"/>
+<link rel="next" href="literature.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="assets/book.js"></script>
+
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+<script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-188850615-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="assets/custom_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://nathanielf.github.io/", style="font-size:20px">Examining Algorithms</a></li>
+<li><a href="./", style="font-size:15px">Essays on Philosophy and Statistics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="average-man.html"><a href="average-man.html"><i class="fa fa-check"></i><b>2</b> Average Man</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="average-man.html"><a href="average-man.html#and-expected-value"><i class="fa fa-check"></i><b>2.1</b> …and Expected Value</a></li>
+<li class="chapter" data-level="2.2" data-path="average-man.html"><a href="average-man.html#probability-dual-aspects"><i class="fa fa-check"></i><b>2.2</b> Probability: Dual Aspects</a></li>
+<li class="chapter" data-level="2.3" data-path="average-man.html"><a href="average-man.html#small-worlds-and-statistical-inference"><i class="fa fa-check"></i><b>2.3</b> Small Worlds and Statistical Inference</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="average-man.html"><a href="average-man.html#modeling-improper-assumptions-and-skewed-expectations"><i class="fa fa-check"></i><b>2.3.1</b> Modeling: Improper Assumptions and Skewed Expectations</a></li>
+<li class="chapter" data-level="2.3.2" data-path="average-man.html"><a href="average-man.html#frequentism-inference-from-expected-frequency"><i class="fa fa-check"></i><b>2.3.2</b> Frequentism: Inference from Expected Frequency</a></li>
+<li class="chapter" data-level="2.3.3" data-path="average-man.html"><a href="average-man.html#bayesian-inference-inference-to-expected-value"><i class="fa fa-check"></i><b>2.3.3</b> Bayesian Inference: Inference to Expected Value</a></li>
+<li class="chapter" data-level="2.3.4" data-path="average-man.html"><a href="average-man.html#example-website-traffic"><i class="fa fa-check"></i><b>2.3.4</b> Example: Website Traffic</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="average-man.html"><a href="average-man.html#utility-curves"><i class="fa fa-check"></i><b>2.4</b> Utility Curves</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="average-man.html"><a href="average-man.html#the-stakes-from-utility-to-indifference"><i class="fa fa-check"></i><b>2.4.1</b> The Stakes: From Utility to Indifference</a></li>
+<li class="chapter" data-level="2.4.2" data-path="average-man.html"><a href="average-man.html#optimising-utility"><i class="fa fa-check"></i><b>2.4.2</b> Optimising Utility</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="average-man.html"><a href="average-man.html#representation-theorems"><i class="fa fa-check"></i><b>2.5</b> Representation Theorems</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="average-man.html"><a href="average-man.html#rational-preference-from-indifference-to-utility"><i class="fa fa-check"></i><b>2.5.1</b> Rational Preference: From Indifference to Utility</a></li>
+<li class="chapter" data-level="2.5.2" data-path="average-man.html"><a href="average-man.html#von-neumann-and-morgernsterns-representation-theorem"><i class="fa fa-check"></i><b>2.5.2</b> Von Neumann and Morgernstern’s Representation Theorem</a></li>
+<li class="chapter" data-level="2.5.3" data-path="average-man.html"><a href="average-man.html#bolkers-representation-theorem"><i class="fa fa-check"></i><b>2.5.3</b> Bolker’s Representation Theorem</a></li>
+<li class="chapter" data-level="2.5.4" data-path="average-man.html"><a href="average-man.html#from-neutrality-to-desire"><i class="fa fa-check"></i><b>2.5.4</b> From Neutrality to Desire</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="average-man.html"><a href="average-man.html#machine-learning-and-the-models-of-utility"><i class="fa fa-check"></i><b>2.6</b> Machine Learning and the Models of Utility</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="average-man.html"><a href="average-man.html#maximum-likelihood-estimation-and-multiple-choice"><i class="fa fa-check"></i><b>2.6.1</b> Maximum Likelihood Estimation and Multiple Choice</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
+<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Examining Algorithms</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<link href="custom_style.css" rel="stylesheet">
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="bookdown-demo_files/figure-html/splash_image_books.png">
+</div>
+<div id="average-man" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Average Man</h1>
+<p>In the 1840s the Average man stalked the nightmares of Augustin Cournot. The mathematician was haunted by a melange of imagined parts. A Frankenstein’s monster of mismatched limbs, variously soldered, stapled or sown at the joints. He worried that no one but a “physical monstrosity” could exhibit the average, weight, height and other mean attributes in one body. <span class="citation">(<a href="references.html#ref-stigler2016seven" role="doc-biblioref">Stigler 2016</a>)</span> But fantastical fears were no bar to a useful mathematical fiction. The notion of averaging was a technological breakthrough - applications of averaging multiplied without cease: polling, gambling, forecasting - statistics were recorded everywhere, compounding one on another; averages of averages tenuously tethered to observable facts by layers of abstraction and scales of measurement.</p>
+<p>Slowly, doubts began to creep back into the statistics. In the 1970s the psychologist Paul Meehl would worry that such brute approximations had stifled the development of the softer sciences and contributed to the mis-measurement of man. He would go on to elaborate twenty features of psychological science which made such measurement constructs inapt, unreliable and difficult to clearly falsify. This was progress! <span class="citation">(<a href="references.html#ref-MeehlTheoretical" role="doc-biblioref">Meehl 1978</a>)</span> He then showed that the methods of validating such constructs were the main culprit and the likely cause of psychology’s implausible claims to concrete, replicable results. Around thirty years later some of the same replication issues would come to be called a crisis. Cournot was right to fear.</p>
+<p>Seen from the perspective of a patient the difficulties are more urgent and stark. In 2019 Esme Yang would write with hope of the comfort given by a diagnosis, the knowledge that she was not “pioneering an inexplicable experience.”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> To find yourself described in the DSM provides: a framework and the glimmer of a cure, a chance to slot yourself into a category, a community of care and a medicinal regime. Frustrating then when the categories themselves are in flux. Diagnostic criteria arrayed over page after page attempting to capture the elusive core of a psychological dysfunction. Descriptions are derived from clinical interviews correlated and meshed with genetic markers, then poorly mapped to a family of ailments. Neither clearly bipolar disorder nor manic depression, schizophrenia, psychosis or schizo-affective disorder. But an idiosyncratic presentation (as they all must be), uniquely felt and individually suffered.</p>
+<p>Wang’s collection of schizophrenias defy easy taxonomy “because there are just so many different ways in which people can develop a syndrome that looks like schizophrenia … as we now define it.” The task then becomes one of coping with uncertainty and adjusting expectations. It’s not so exact a science that you can measure twice and cut once. The measurement schemes change and you need multiple cuts. You measure out the impact of treatments and the trade-offs - what’s non-negotiable and how many side-effects are acceptable? What works for you versus what’s advised by the professionals. Sterile cost-benefit considerations become suddenly dramatic and life changing.</p>
+<div id="and-expected-value" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> …and Expected Value</h2>
+<p>There is an algorithm beloved by bureaucrats. An unsung hero of administrators and accountants. An algorithm both ubiquitous and under appreciated. It’s pivotal for nearly every business and informs the actions of tech firms and policy makers the world over. It is only mildly hyperbolic to say that understanding this formula unlocks wealth and power. The algorithm lies at the heart of online A/B testing, all policy analysis, sound strategy and poker play. <span class="math display">\[ EV(O)_{p} = p_{1}u(o_{1}) + p_{2}u(o_{2}) + ... + p_{k}u(o_{k}) \]</span></p>
+<p>The expected financial value of a random process is just the sum of the utility (typically dollar outcomes) weighted by their probabilities. Outcomes can vary from deals of cards, to customer transactions, election results, continued sanity. Pascal can argue sincerely that such considerations compel even belief in God. The infinite downsides of hell at any likelihood ought to compel even the cynical sceptic. But the formula, glossed as a rule for rational action, merits your attention for more mundane wagers too. If you intend to maximise your expected value, the meaning of probability is not an idle concern.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> While statistics are often tortured to rubber stamp decisions and probabilities are abused to fit policy prescriptions with false precision, the crisp clarity of the rule has an enduring appeal that promises to sift the murky swamps of Big Data. It’s a scalpel that anyone can wield to parse the syntax of statistical jargon and carve answers from an abstract space of probabilities. “What’s my expected return? My likely life-quality?” - a simple question, with a surprisingly complex answer.</p>
+<p>Decision theory is an abstract formalism which purports to account for how you ought to reason under uncertainty, conditional on knowing your own mind, what you want and the likelihood of those outcomes. Wrestling with a diagnosis of schizophrenia you weigh your future in the face of sickness while knowing your mind could fail in the act, knowing, perhaps, you’re not yourself. Schizophrenics are involuntarily detained if a medical professional deems them to have lost sufficient “insight”<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> , but the stated dysfunction assumes that these kinds of insight should be transparent when the psychiatric crisis is resolved. We’ll see that the level of insight assumed by decision theory is, at best, hard won and far from transparent.</p>
+<p>There is a secondary complication in that whenever expected utility as used as an explanatory model of rational action, there is a risk of pivot, a point where it is substituted for more obscure black-box optimisation techniques over metrics of profit or overall accuracy. The focus switches from modelling the consumer or the patient to modelling returns based on the consumer and the firm’s expected value. Swapping a customer catering model for a customer-as-commodity perspective focused on profit in aggregate and customer acquisition. The tendency is common because profit overwhelms all other priorities, but the loss of understanding typically amounts to a longer term net-loss. Shareholders take comfort from increased profit and algorithms deployed at scale, but it’s rare that any single algorithm actually or always maximises the available profit. This dynamic enforces a kind of inescapable see-saw motion where the consumer modeling exercise goes through a constant feedback loop. A good model (informal or formal) of human needs and wants feeds a better a predictive model of individual action. When the latter fails we go back to the utility curves and the algorithm of expected value because it is (if not reliably predictive) a rich and deeply explanatory model of human action under uncertainty.</p>
+</div>
+<div id="probability-dual-aspects" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Probability: Dual Aspects</h2>
+<p>Probability emerged slowly and with dual aspects. On one tradition probability refers to the long run tendency of a random process, on another probability is construed as the degree of belief in an outcome. On the first (frequentist) interpretation a probability distribution has certain fixed theoretical characteristics: as in a uniform probability distribution of a fair coin where all outcomes are equally likely, or as with the normal distribution where most outcomes cluster symmetrically about a central average. On the second (Bayesian) reading the characteristics of the probability distribution are learned from the data. The controversy centres around the fact that it’s unclear how a frequentist could ascribe probabilities to unique events. Without appeal to a large set of observations (or known theoretical distribution) the claim that an event appears frequently or infrequently is not well defined. Consequently, tabulations of probability appear inappropriate for claims of unique or rare events. In contrast the Bayesian is content to ascribe probabilities to any all partial beliefs no matter how specific. For the Bayesian, the probability calculus is a set of edicts about how to rationally manage and modulate your beliefs. So it’s acceptable to have a probabilistic belief in rare cases so long as you update those probabilities with new data when available.</p>
+<p>These two approaches are united by the Law of Large numbers which states that as the size of our sample increases our sample average will converge to the expected realisation of the theoretical process.</p>
+<p><span class="math display">\[  \frac{1}{N} \sum_{i = 1}^{N} O_{i} \text{ converges to }  E(O) \text{ as } N \text{ approaches } \infty \]</span></p>
+<p>In this graph we have fixed a Poisson distribution with a mean of 4.5 and can see three examples of how consecutive averaging from the increasing sample sizes results in a closer and closer convergence to the (true) population mean.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="average-man.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up the ground truth</span></span>
+<span id="cb1-2"><a href="average-man.html#cb1-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">100</span>)</span>
+<span id="cb1-3"><a href="average-man.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="average-man.html#cb1-4" aria-hidden="true" tabindex="-1"></a>sample_size <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb1-5"><a href="average-man.html#cb1-5" aria-hidden="true" tabindex="-1"></a>expected_value <span class="op">=</span> lambda_ <span class="op">=</span> <span class="fl">4.6</span></span>
+<span id="cb1-6"><a href="average-man.html#cb1-6" aria-hidden="true" tabindex="-1"></a>poi <span class="op">=</span> np.random.poisson</span>
+<span id="cb1-7"><a href="average-man.html#cb1-7" aria-hidden="true" tabindex="-1"></a>N_samples <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, sample_size, <span class="dv">100</span>)</span>
+<span id="cb1-8"><a href="average-man.html#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="average-man.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb1-10"><a href="average-man.html#cb1-10" aria-hidden="true" tabindex="-1"></a>    samples <span class="op">=</span> poi(lambda_, sample_size)</span>
+<span id="cb1-11"><a href="average-man.html#cb1-11" aria-hidden="true" tabindex="-1"></a>    partial_average <span class="op">=</span> [samples[:i].mean() <span class="cf">for</span> i <span class="kw">in</span> N_samples]</span>
+<span id="cb1-12"><a href="average-man.html#cb1-12" aria-hidden="true" tabindex="-1"></a>    plt.plot(N_samples, partial_average, lw<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">&quot;average \</span></span>
+<span id="cb1-13"><a href="average-man.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st">    of  $n$ samples; seq. </span><span class="sc">%d</span><span class="st">&quot;</span> <span class="op">%</span> k)</span>
+<span id="cb1-14"><a href="average-man.html#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="average-man.html#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.plot(N_samples, expected_value <span class="op">*</span> np.ones_like(partial_average),</span>
+<span id="cb1-16"><a href="average-man.html#cb1-16" aria-hidden="true" tabindex="-1"></a>         ls<span class="op">=</span><span class="st">&quot;--&quot;</span>, label<span class="op">=</span><span class="st">&quot;true expected value&quot;</span>, c<span class="op">=</span><span class="st">&quot;k&quot;</span>)</span>
+<span id="cb1-17"><a href="average-man.html#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="average-man.html#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Convergence of the average of </span><span class="ch">\n</span><span class="st"> random variables to its \</span></span>
+<span id="cb1-19"><a href="average-man.html#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="st">expected value&quot;</span>)</span>
+<span id="cb1-20"><a href="average-man.html#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;average of $n$ samples&quot;</span>)</span>
+<span id="cb1-21"><a href="average-man.html#cb1-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;# of samples, $n$&quot;</span>)</span>
+<span id="cb1-22"><a href="average-man.html#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb1-23"><a href="average-man.html#cb1-23" aria-hidden="true" tabindex="-1"></a>lims <span class="op">=</span> plt.ylim(<span class="fl">4.35</span>, <span class="fl">4.65</span>)</span>
+<span id="cb1-24"><a href="average-man.html#cb1-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Though common knowledge today, in 1650 ``the very concept of averaging is [new]… and most people could not observe an average because they did not take averages.<span class="citation">(<a href="references.html#ref-HackingEmergence" role="doc-biblioref">Hacking 2006</a>)</span> Systematically grappling with the implications of observations is a somewhat recent human endeavour - one which is far from perfected. This tendency is now fundamental to the interpretation of probability. Take a game with fixed and fair odds and we see that repeated play will converge over time because of characteristics which govern the process. Dice are a homely example. In the wild we never know the characteristics which cause the observed spread of outcomes, but such is the influence of gambling on probability, that we assume there exists a stable pattern to be gamed. Partially this is pragmatic, the maths is more tractable if we can assume a well behaved underlying process. The results are compelling: The Normal (Bell Curve) distribution, the Poisson distribution the Bernoulli distribution (to name a few) are all rightly famous. Their shapes are characteristics of innumerable random processes. The distributions cleanly circumscribe and corral likely patterns of events.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="average-man.html#cb2-1" aria-hidden="true" tabindex="-1"></a>normal <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-2"><a href="average-man.html#cb2-2" aria-hidden="true" tabindex="-1"></a>poisson <span class="op">=</span> np.random.poisson(<span class="fl">4.5</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-3"><a href="average-man.html#cb2-3" aria-hidden="true" tabindex="-1"></a>uniform <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-4"><a href="average-man.html#cb2-4" aria-hidden="true" tabindex="-1"></a>binomial <span class="op">=</span> np.random.binomial(<span class="dv">10</span>, <span class="fl">.8</span>, <span class="dv">1000</span>)</span>
+<span id="cb2-5"><a href="average-man.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="average-man.html#cb2-6" aria-hidden="true" tabindex="-1"></a>bins <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb2-7"><a href="average-man.html#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="average-man.html#cb2-8" aria-hidden="true" tabindex="-1"></a>h1 <span class="op">=</span> plt.hist(normal, bins, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">&#39;normal(0, 1)&#39;</span>)</span>
+<span id="cb2-9"><a href="average-man.html#cb2-9" aria-hidden="true" tabindex="-1"></a>h2 <span class="op">=</span> plt.hist(poisson, bins, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">&#39;poisson(4.5)&#39;</span>)</span>
+<span id="cb2-10"><a href="average-man.html#cb2-10" aria-hidden="true" tabindex="-1"></a>h3 <span class="op">=</span> plt.hist(uniform, bins, label<span class="op">=</span><span class="st">&#39;uniform(-4, 4)&#39;</span>)</span>
+<span id="cb2-11"><a href="average-man.html#cb2-11" aria-hidden="true" tabindex="-1"></a>h4 <span class="op">=</span> plt.hist(binomial, bins, label<span class="op">=</span><span class="st">&#39;binomial(10, .8)&#39;</span>)</span>
+<span id="cb2-12"><a href="average-man.html#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&#39;upper left&#39;</span>)</span>
+<span id="cb2-13"><a href="average-man.html#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Variety of distributions with parameter specifcations&quot;</span>)</span>
+<span id="cb2-14"><a href="average-man.html#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;Realisation of Variable &quot;</span>)</span>
+<span id="cb2-15"><a href="average-man.html#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Frequency of Observation&quot;</span>)</span>
+<span id="cb2-16"><a href="average-man.html#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>But the gambling paradigm clouds the fact that in practice we start on the left side of the law of large numbers (with samples) and we often start with small numbers resulting from a unknown number of data-generating processes. Well behaved probability distributions are rare beasts; a tiny fraction of the world’s arbitrary menagerie. The fundamental question in probability is not whether probability is a measure of belief or frequency - it is whether we can safely assume that the underlying process adheres to a known model? The Bayesian focus is to try and learn from the new data the expected characteristics of the underlying process, while the Frequentist tries to gauge the accuracy of their assumptions about the underlying process. Both are attempts to validate the structure of the model’s theoretical distribution to inform inference. If we can’t validate a model, we’re better learning what we can from the sample, trusting to wide confidence intervals and worst scenario planning. But in all cases when we need to make a decision, the following questions are inescapable : What are your expectations based on? How do they figure in our choices, and can we use them to improve our outcomes?</p>
+</div>
+<div id="small-worlds-and-statistical-inference" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Small Worlds and Statistical Inference</h2>
+<p>Anissa Weieir and Morgan Geyser, later diagnosed with schizopoty, were in 2017 trailed for the attempted murder of their friend Payton. While believing themselves to be acting at the behest of Slendar Man, they were ``willing to forgo even friendship for the sake [their] version of unreality".<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> Just as in the depth of an obsession reality can be warped by a psychotic focus, a statistical model will accentuates some parts and ignores others.</p>
+<p>This narrowness can have devastating effects if deployed without care. But prediction is a visceral need, unavoidable, it precedes the sophistication of probability in any order of analysis. Without some regularity between <span class="math inline">\(X, Y\)</span> we can only interpret their collisions as timorous noise. But even when there is a better than arbitrary correlation between <span class="math inline">\(X, Y\)</span> we’ll insist on ascribing a measurable probability to their association. Heuristics will kick in, and confidence will grow out of proportion to the evidence. So whether we view probabilities as a measure of credibility or frequency, the focus is always on a process which in reality reveals a pattern under repetition. Even tenuous connections can be enough to cause havoc. Models, more often than not, are deliberate simplifications of complexity, attempts to formulate a unobserved process within a mathematical structure. Lego-like versions of the world are built and rebuilt, in which we bash parts together to see what reliably sticks. Forget about the pieces we don’t own. Count the pairs of blocks that: match, wedge, smash, click-into-place or break, then draw out the ratio of success and the spread of outcomes. Parse out the details of how reds go with greens, and blues with yellows. This is your sample distribution. The expected gain depends on both this uncertainty, measured in this small world, and the finer points of statistical inference.</p>
+<blockquote>
+<p>A [small world] is… completely satisfactory, only if it is actually a microcosm, that is, only if it leads to a probability measure … that can be written down explicitly pg 88 <span class="citation">(<a href="references.html#ref-savage54" role="doc-biblioref">Savage 1954</a>)</span>] .</p>
+</blockquote>
+<p>The danger of shrinking your world comes when you mistake the map for the territory and act on that delusion.</p>
+<p>Small worlds are machines for figuring out expected values of a statistical process. We shrink the parameter set to better measure the variance and flux throughout the system. For any hypothetical system there can be multiple plausible approximations of the underlying process which need to be assessed comparatively on their “goodness” of fit. We iterate through new and improved versions, each an attempt to make a conjectural connection between <span class="math inline">\(X, Y\)</span> mathematically precise. But once built, they embed the errors and assumptions made in their design. McElreath dubs them Golems, primed and then loosed on the world, insensitive to subtlety and context they perform only as instructed. Consider how a basic regression model tries to predict an outcome <span class="math inline">\(Y\)</span> as linear function of some observed features <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[ Y = const + \beta X + \epsilon  \]</span></p>
+<p>where <span class="math inline">\(\epsilon\)</span> is a random variable representing the error (or noise). A modest notational device for disaster. While <span class="math inline">\(const, \beta\)</span> are parameters estimated by an optimisation process to ensure the equation fits the data as neatly as possible. In the plot below we have a series characterised by change. After the first shock we can refit the model so that the line tracks well with the evolving data. After the second shock we try another refit, but the range the and variance of the data makes our basic model a poor fit, i.e. the data no longer exhibits a linear relationship. This presents three examples of error in the modelling process: (i) it’s difficult to identify (in the moment) those changepoints in the data which reflect structural change, (ii) the linearity assumptions that go into the model are sound but the parameters need be re-estimated based on the new data and (iii) the third linear model is simply a terrible match for the pattern in the data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="average-man.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Piecewise Linear Fits</span></span>
+<span id="cb3-2"><a href="average-man.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="average-man.html#cb3-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">21</span>],  dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb3-4"><a href="average-man.html#cb3-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">5</span>, <span class="dv">12</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">10</span>,</span>
+<span id="cb3-5"><a href="average-man.html#cb3-5" aria-hidden="true" tabindex="-1"></a>              <span class="fl">28.92</span>, <span class="fl">42.81</span>, <span class="fl">56.7</span>, <span class="fl">70.59</span>, <span class="fl">84.47</span>, <span class="fl">75.36</span>, <span class="fl">112.25</span>, <span class="fl">100.14</span>, <span class="fl">140.03</span>, <span class="dv">3</span>, <span class="dv">70</span>, <span class="dv">300</span>, <span class="dv">5</span>, <span class="dv">100</span>, <span class="dv">50</span>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb3-6"><a href="average-man.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="average-man.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> piecewise_linear(x, b1, a1,  b2, a2, b3, a3):</span>
+<span id="cb3-8"><a href="average-man.html#cb3-8" aria-hidden="true" tabindex="-1"></a>    funcs <span class="op">=</span> [<span class="kw">lambda</span> x:b1<span class="op">*</span>x <span class="op">+</span> a1,</span>
+<span id="cb3-9"><a href="average-man.html#cb3-9" aria-hidden="true" tabindex="-1"></a>             <span class="kw">lambda</span> x:b2<span class="op">*</span>x <span class="op">+</span> a2,</span>
+<span id="cb3-10"><a href="average-man.html#cb3-10" aria-hidden="true" tabindex="-1"></a>             <span class="kw">lambda</span> x:b3<span class="op">*</span>x <span class="op">+</span> a3]</span>
+<span id="cb3-11"><a href="average-man.html#cb3-11" aria-hidden="true" tabindex="-1"></a>    conds <span class="op">=</span> [x <span class="op">&lt;</span> <span class="dv">7</span>, ((x <span class="op">&gt;=</span> <span class="dv">7</span>) <span class="op">&amp;</span> (x <span class="op">&lt;</span> <span class="dv">15</span>)), x <span class="op">&gt;</span> <span class="dv">15</span>]</span>
+<span id="cb3-12"><a href="average-man.html#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.piecewise(x, conds, funcs)</span>
+<span id="cb3-13"><a href="average-man.html#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="average-man.html#cb3-14" aria-hidden="true" tabindex="-1"></a>p , e <span class="op">=</span> optimize.curve_fit(piecewise_linear, x, y, method<span class="op">=</span><span class="st">&quot;trf&quot;</span>)</span>
+<span id="cb3-15"><a href="average-man.html#cb3-15" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> polyfit(x, y, <span class="dv">1</span>)</span>
+<span id="cb3-16"><a href="average-man.html#cb3-16" aria-hidden="true" tabindex="-1"></a>xd <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">1000</span>)</span>
+<span id="cb3-17"><a href="average-man.html#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="average-man.html#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">&quot;o&quot;</span>)</span>
+<span id="cb3-19"><a href="average-man.html#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.plot(x, a <span class="op">+</span> b <span class="op">*</span> x, <span class="st">&#39;--&#39;</span>, label<span class="op">=</span><span class="st">&quot;Global fit: </span><span class="sc">{b: .2f}</span><span class="st">x + </span><span class="sc">{a: .2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(b<span class="op">=</span>b, a<span class="op">=</span>a))</span>
+<span id="cb3-20"><a href="average-man.html#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.plot(xd, piecewise_linear(xd, <span class="op">*</span>p), label<span class="op">=</span><span class="st">&quot;Linear fit 1: </span><span class="sc">{b: .2f}</span><span class="st">x + </span><span class="sc">{a: .2f}</span><span class="st"> </span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb3-21"><a href="average-man.html#cb3-21" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Linear fit 2: </span><span class="sc">{b1: .2f}</span><span class="st">x + </span><span class="sc">{a1: .2f}</span><span class="st"> </span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb3-22"><a href="average-man.html#cb3-22" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Linear fit 3: </span><span class="sc">{b2: .2f}</span><span class="st">x + </span><span class="sc">{a2: .2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(b<span class="op">=</span>p[<span class="dv">0</span>], a<span class="op">=</span>p[<span class="dv">1</span>],</span>
+<span id="cb3-23"><a href="average-man.html#cb3-23" aria-hidden="true" tabindex="-1"></a>                                                                                          b1<span class="op">=</span>p[<span class="dv">2</span>], a1<span class="op">=</span>p[<span class="dv">3</span>],</span>
+<span id="cb3-24"><a href="average-man.html#cb3-24" aria-hidden="true" tabindex="-1"></a>                                                                                          b2<span class="op">=</span>p[<span class="dv">4</span>], a2<span class="op">=</span>p[<span class="dv">5</span>]))</span>
+<span id="cb3-25"><a href="average-man.html#cb3-25" aria-hidden="true" tabindex="-1"></a>                                                                              </span>
+<span id="cb3-26"><a href="average-man.html#cb3-26" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">7</span>, color<span class="op">=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb3-27"><a href="average-man.html#cb3-27" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span><span class="dv">15</span>, color<span class="op">=</span><span class="st">&#39;red&#39;</span>)</span>
+<span id="cb3-28"><a href="average-man.html#cb3-28" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Piecewise Linear Fits of Series at Changepoints&quot;</span>)</span>
+<span id="cb3-29"><a href="average-man.html#cb3-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb3-30"><a href="average-man.html#cb3-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Every model is a guess as to the implicit order in apparent noise. Sometimes there is no order, and other times the patterns is too subtle for a dumb model to capture. In practice you never really know whether a single new error stems from a misfit but appropriate model or an entirely inappropriate model. As we increase our number of sample fits we hope to better approximate the true linear process (if any) generating the data. Imagine now that the data points in Figure 3 are repeatedly re-speckled over the canvas. We can refit a new model for each set of scattered data points and each refit gives us a new sample values for <span class="math inline">\(const, \beta\)</span>. If the underlying data generating process is stable, then the parameter fits will converge to the correct values of <span class="math inline">\(const, \beta\)</span>; correct in the sense that they can be used to draw the line of best fit for the data. A statistically stable process is one that can be modelled with errors <span class="math inline">\(\epsilon\)</span> normally distributed around <span class="math inline">\(0\)</span>, so that the model will be  because <span class="math inline">\(E(\epsilon) = 0\)</span>. Our predictions will overshoot in some cases but on the whole the errors up and down will cancel each other out.</p>
+<blockquote>
+<p>“Typically, the assumptions in a statistical model are quite hard to prove or disprove, and little effort is spent in that direction. The strength of empircal claims made on the basis of such modeling therefore does not derive from the solidity of those assumptions. Equally, these beliefs cannot be justified by the complexity of the calculations… These observations lead to uncomfortable questions” <span class="citation">(<a href="references.html#ref-freedman_2009" role="doc-biblioref">Freedman 2009</a>)</span></p>
+</blockquote>
+<p>Forecasting with the parameters of best fit minimises our forecast errors because the fluctuations are stable about the centre of the line. These are the required assumptions for a process to exhibit the tendency of regression towards the mean. If they’re not met, we will see poor parameter estimates and wild swings away from the linear path. The fundamental statistical assumption here is about the properties of our mistakes! The model is less plausible if our judgements are made in the grip of a delusion.</p>
+<div id="modeling-improper-assumptions-and-skewed-expectations" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Modeling: Improper Assumptions and Skewed Expectations</h3>
+<p>Below we build two sampling distributions based on different models of an underlying processes. One in which the errors are independent, normally distributed around <span class="math inline">\(0\)</span> and in the other the errors are correlated in a sine-wave like pattern, increasing and decreasing periodically. This is akin to the difference between measuring error when predicting the heights of randomly sampled people versus predicting the sales volumes on randomly selected days of the week. A random sample of daily sales risks clumping weekends together and skewing the expected values. No such risk exists when sampling from independent individuals.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="average-man.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### Sampling Distributions of Linear Fits</span></span>
+<span id="cb4-2"><a href="average-man.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#### Build True Model</span></span>
+<span id="cb4-3"><a href="average-man.html#cb4-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb4-4"><a href="average-man.html#cb4-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">20</span>, N)</span>
+<span id="cb4-5"><a href="average-man.html#cb4-5" aria-hidden="true" tabindex="-1"></a>uncorrelated_errors <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">10</span>, N)</span>
+<span id="cb4-6"><a href="average-man.html#cb4-6" aria-hidden="true" tabindex="-1"></a>correlated_errors <span class="op">=</span> np.random.uniform (<span class="dv">0</span>, <span class="dv">10</span>) <span class="op">+</span> np.sin(np.linspace(<span class="dv">0</span>, <span class="dv">10</span><span class="op">*</span>np.pi, N)) <span class="op">\</span></span>
+<span id="cb4-7"><a href="average-man.html#cb4-7" aria-hidden="true" tabindex="-1"></a>          <span class="op">+</span> np.sin(np.linspace(<span class="dv">0</span>, <span class="dv">5</span><span class="op">*</span>np.pi, N))<span class="op">**</span><span class="dv">2</span> <span class="op">\</span></span>
+<span id="cb4-8"><a href="average-man.html#cb4-8" aria-hidden="true" tabindex="-1"></a>          <span class="op">+</span> np.sin(np.linspace(<span class="dv">1</span>, <span class="dv">6</span><span class="op">*</span>np.pi, N))<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">.6</span><span class="op">*</span>X</span>
+<span id="cb4-9"><a href="average-man.html#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="average-man.html#cb4-10" aria-hidden="true" tabindex="-1"></a>Y_corr <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> X <span class="op">+</span> correlated_errors</span>
+<span id="cb4-11"><a href="average-man.html#cb4-11" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">+</span> <span class="fl">3.5</span> <span class="op">*</span> X <span class="op">+</span> uncorrelated_errors</span>
+<span id="cb4-12"><a href="average-man.html#cb4-12" aria-hidden="true" tabindex="-1"></a>population <span class="op">=</span> pd.DataFrame({<span class="st">&#39;X&#39;</span>: X, <span class="st">&#39;Y&#39;</span>: Y, <span class="st">&#39;Y_corr&#39;</span>: Y_corr})</span>
+<span id="cb4-13"><a href="average-man.html#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="average-man.html#cb4-14" aria-hidden="true" tabindex="-1"></a>fits <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">&#39;iid_const&#39;</span>, <span class="st">&#39;iid_beta&#39;</span>, <span class="st">&#39;corr_const&#39;</span>, <span class="st">&#39;corr_beta&#39;</span>])</span>
+<span id="cb4-15"><a href="average-man.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">1000</span>):</span>
+<span id="cb4-16"><a href="average-man.html#cb4-16" aria-hidden="true" tabindex="-1"></a>    sample <span class="op">=</span> population.sample(n<span class="op">=</span><span class="dv">100</span>, replace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-17"><a href="average-man.html#cb4-17" aria-hidden="true" tabindex="-1"></a>    Y <span class="op">=</span> sample[<span class="st">&#39;Y&#39;</span>]<span class="op">;</span> X <span class="op">=</span> sample[<span class="st">&#39;X&#39;</span>] <span class="op">;</span> Y_corr <span class="op">=</span> sample[<span class="st">&#39;Y_corr&#39;</span>]</span>
+<span id="cb4-18"><a href="average-man.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> sm.add_constant(X)</span>
+<span id="cb4-19"><a href="average-man.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    iid_model <span class="op">=</span> sm.OLS(Y, X)</span>
+<span id="cb4-20"><a href="average-man.html#cb4-20" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> iid_model.fit()</span>
+<span id="cb4-21"><a href="average-man.html#cb4-21" aria-hidden="true" tabindex="-1"></a>    corr_model <span class="op">=</span> sm.OLS(Y_corr, X)</span>
+<span id="cb4-22"><a href="average-man.html#cb4-22" aria-hidden="true" tabindex="-1"></a>    results_2 <span class="op">=</span> corr_model.fit()</span>
+<span id="cb4-23"><a href="average-man.html#cb4-23" aria-hidden="true" tabindex="-1"></a>    row <span class="op">=</span> [results.params[<span class="dv">0</span>], results.params[<span class="dv">1</span>], results_2.params[<span class="dv">0</span>], results_2.params[<span class="dv">1</span>]]</span>
+<span id="cb4-24"><a href="average-man.html#cb4-24" aria-hidden="true" tabindex="-1"></a>    fits.loc[<span class="bu">len</span>(fits)] <span class="op">=</span> row</span>
+<span id="cb4-25"><a href="average-man.html#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="average-man.html#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="average-man.html#cb4-27" aria-hidden="true" tabindex="-1"></a>fits.boxplot()</span>
+<span id="cb4-28"><a href="average-man.html#cb4-28" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">&quot;The Sampling Distribution of Parameters for a Linear models&quot;</span>)</span>
+<span id="cb4-29"><a href="average-man.html#cb4-29" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Based on 1000 fits on 100 observations&quot;</span>)</span>
+<span id="cb4-30"><a href="average-man.html#cb4-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>In the case with independent errors the expected value for our parameter estimates match almost exactly the true values of the process. In the second model with correlated errors the parameter estimate for our constant is 4.9 which is significantly different from the true value of -2, and will lead to systematically skewed predictions. Statistical models are just algebraic equations where we use regular sampling to solve for <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span>. Because Y is also a random variable the regression model encodes a conditional expectation result.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="average-man.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_gaussian_at(position, sample, ax_main<span class="op">=</span><span class="va">None</span>, model<span class="op">=</span><span class="st">&#39;iid&#39;</span>, color<span class="op">=</span><span class="st">&#39;k&#39;</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb5-2"><a href="average-man.html#cb5-2" aria-hidden="true" tabindex="-1"></a>    filter_var <span class="op">=</span> <span class="bu">round</span>(sample[<span class="st">&#39;X&#39;</span>], <span class="dv">0</span>) <span class="op">==</span> position</span>
+<span id="cb5-3"><a href="average-man.html#cb5-3" aria-hidden="true" tabindex="-1"></a>    avg <span class="op">=</span> sample[filter_var][<span class="st">&#39;predicted_Y_&#39;</span> <span class="op">+</span> model].mean()</span>
+<span id="cb5-4"><a href="average-man.html#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">min</span> <span class="op">=</span> sample[filter_var][<span class="st">&#39;Y&#39;</span>].<span class="bu">min</span>()</span>
+<span id="cb5-5"><a href="average-man.html#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">max</span> <span class="op">=</span> sample[filter_var][<span class="st">&#39;Y&#39;</span>].<span class="bu">max</span>()</span>
+<span id="cb5-6"><a href="average-man.html#cb5-6" aria-hidden="true" tabindex="-1"></a>    dist <span class="op">=</span> pd.Series(sample[filter_var][<span class="st">&#39;predicted_error_&#39;</span><span class="op">+</span> model].values)</span>
+<span id="cb5-7"><a href="average-man.html#cb5-7" aria-hidden="true" tabindex="-1"></a>    kde <span class="op">=</span> sm.nonparametric.KDEUnivariate(dist)</span>
+<span id="cb5-8"><a href="average-man.html#cb5-8" aria-hidden="true" tabindex="-1"></a>    kde.fit()</span>
+<span id="cb5-9"><a href="average-man.html#cb5-9" aria-hidden="true" tabindex="-1"></a>    density <span class="op">=</span> kde.density</span>
+<span id="cb5-10"><a href="average-man.html#cb5-10" aria-hidden="true" tabindex="-1"></a>    density <span class="op">/=</span> density.<span class="bu">max</span>()</span>
+<span id="cb5-11"><a href="average-man.html#cb5-11" aria-hidden="true" tabindex="-1"></a>    density <span class="op">*=</span> <span class="dv">1</span></span>
+<span id="cb5-12"><a href="average-man.html#cb5-12" aria-hidden="true" tabindex="-1"></a>    y_axis <span class="op">=</span> np.linspace(<span class="bu">min</span>, <span class="bu">max</span>, <span class="bu">len</span>(density))</span>
+<span id="cb5-13"><a href="average-man.html#cb5-13" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="st">&quot;Expected error X = </span><span class="sc">{x:}</span><span class="st">: </span><span class="sc">{err: .2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(err <span class="op">=</span> sample[filter_var][<span class="st">&#39;predicted_error_&#39;</span><span class="op">+</span> model].mean(),</span>
+<span id="cb5-14"><a href="average-man.html#cb5-14" aria-hidden="true" tabindex="-1"></a>                                                         x<span class="op">=</span>position)</span>
+<span id="cb5-15"><a href="average-man.html#cb5-15" aria-hidden="true" tabindex="-1"></a>    ax_main.plot((density <span class="op">+</span> position), y_axis, color<span class="op">=</span>color, label<span class="op">=</span>label)</span>
+<span id="cb5-16"><a href="average-man.html#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="average-man.html#cb5-17" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> population.sample(n<span class="op">=</span><span class="dv">1000</span>, replace<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb5-18"><a href="average-man.html#cb5-18" aria-hidden="true" tabindex="-1"></a>true_model <span class="op">=</span> sm.OLS(sample[<span class="st">&#39;Y&#39;</span>], sample[<span class="st">&#39;X&#39;</span>]).fit()</span>
+<span id="cb5-19"><a href="average-man.html#cb5-19" aria-hidden="true" tabindex="-1"></a>error_model <span class="op">=</span> sm.OLS(sample[<span class="st">&#39;Y_corr&#39;</span>], sample[<span class="st">&#39;X&#39;</span>]).fit()</span>
+<span id="cb5-20"><a href="average-man.html#cb5-20" aria-hidden="true" tabindex="-1"></a>sample[<span class="st">&#39;predicted_Y_iid&#39;</span>] <span class="op">=</span> true_model.predict(sample[<span class="st">&#39;X&#39;</span>])</span>
+<span id="cb5-21"><a href="average-man.html#cb5-21" aria-hidden="true" tabindex="-1"></a>sample[<span class="st">&#39;predicted_Y_corr&#39;</span>] <span class="op">=</span> error_model.predict(sample[<span class="st">&#39;X&#39;</span>])</span>
+<span id="cb5-22"><a href="average-man.html#cb5-22" aria-hidden="true" tabindex="-1"></a>sample[<span class="st">&#39;predicted_error_iid&#39;</span>] <span class="op">=</span> sample[<span class="st">&#39;Y&#39;</span>] <span class="op">-</span> sample[<span class="st">&#39;predicted_Y_iid&#39;</span>]</span>
+<span id="cb5-23"><a href="average-man.html#cb5-23" aria-hidden="true" tabindex="-1"></a>sample[<span class="st">&#39;predicted_error_corr&#39;</span>] <span class="op">=</span> sample[<span class="st">&#39;Y&#39;</span>] <span class="op">-</span> sample[<span class="st">&#39;predicted_Y_corr&#39;</span>]</span>
+<span id="cb5-24"><a href="average-man.html#cb5-24" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-25"><a href="average-man.html#cb5-25" aria-hidden="true" tabindex="-1"></a>ax1.plot(sample[<span class="st">&#39;X&#39;</span>], sample[<span class="st">&#39;Y&#39;</span>],<span class="st">&#39;o&#39;</span>)</span>
+<span id="cb5-26"><a href="average-man.html#cb5-26" aria-hidden="true" tabindex="-1"></a>ax1.plot(sample[<span class="st">&#39;X&#39;</span>], sample[<span class="st">&#39;predicted_Y_iid&#39;</span>])</span>
+<span id="cb5-27"><a href="average-man.html#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> each <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">5</span>,  <span class="dv">15</span>]:</span>
+<span id="cb5-28"><a href="average-man.html#cb5-28" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> draw_gaussian_at(position<span class="op">=</span>each, sample<span class="op">=</span>sample, ax_main<span class="op">=</span>ax1, model<span class="op">=</span><span class="st">&#39;iid&#39;</span>, color<span class="op">=</span><span class="st">&#39;r&#39;</span>)</span>
+<span id="cb5-29"><a href="average-man.html#cb5-29" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Error Distributions around predicted Y values for the </span><span class="sc">{model:}</span><span class="st">&quot;</span>.<span class="bu">format</span>(model<span class="op">=</span><span class="st">&#39;iid model&#39;</span>))</span>
+<span id="cb5-30"><a href="average-man.html#cb5-30" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb5-31"><a href="average-man.html#cb5-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><span class="math display">\[ E(Y_{i} | X_{i} = x )\]</span></p>
+<p>For fixed values of X, the predictions <span class="math inline">\(Y_{i}\)</span> can be spread in a pattern enforced by the various ways we can realise the linear function with estimates for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(const\)</span>. But the regression model selects the best parameter values to minimise the squared prediction error and represent the conditional expected distribution of <span class="math inline">\(Y\)</span>.</p>
+<blockquote>
+<p>“The statement that regression approximates the [Conditional Expectation Function] lines up with our view of empirical work as an effort to describe the essential features of statistical relationships without necessarily trying to pin them down exactly” p38 - <span class="citation">(<a href="references.html#ref-angrist_mostly_2008" role="doc-biblioref">Angrist and Pischke 2008</a>)</span></p>
+</blockquote>
+<p>The consequent point predictions for <span class="math inline">\(Y\)</span> are always expected values, skewed by the how the parameters are realised from sample data as much as by poor choices in model design and predictive features. So too then any measures of expected utility based on these models or inferences from these distributions.</p>
+</div>
+<div id="frequentism-inference-from-expected-frequency" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Frequentism: Inference from Expected Frequency</h3>
+<p>Making inference from a model is delicate thing. Even simple cases come with controversy. Count the number heads in a series of 5 successive coin flips, then repeat the process 1000 times and you’ll arrive at a proportion which characterises that process. If it’s a fair coin the long run expected result will be half the number of your coin flips. If the coin is weighted you might have as few as 0. This is the binomial distribution, and it really shines when you’re trying to gauge fairness. If a process is biased, the distribution will be skewed. We can use this fact for inference. Consider a dispute over whether the game was rigged.</p>
+<p><span class="math display">\[ H_0 : \text{ true proportion of heads } = 0.4  \]</span> <span class="math display">\[ H_1 : \text{ true proportion of heads } =  0.5 \]</span></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="average-man.html#cb6-1" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb6-2"><a href="average-man.html#cb6-2" aria-hidden="true" tabindex="-1"></a>prop <span class="op">=</span> <span class="fl">0.4</span></span>
+<span id="cb6-3"><a href="average-man.html#cb6-3" aria-hidden="true" tabindex="-1"></a>successes <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb6-4"><a href="average-man.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="average-man.html#cb6-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> binom(samples, prop)</span>
+<span id="cb6-6"><a href="average-man.html#cb6-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> X.rvs(<span class="dv">1000</span>)</span>
+<span id="cb6-7"><a href="average-man.html#cb6-7" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> sns.distplot(x, hist<span class="op">=</span><span class="va">False</span>, kde<span class="op">=</span><span class="va">True</span>).get_lines()[<span class="dv">0</span>].get_data()</span>
+<span id="cb6-8"><a href="average-man.html#cb6-8" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> X.cdf(<span class="dv">2</span>)</span>
+<span id="cb6-9"><a href="average-man.html#cb6-9" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> points[<span class="dv">0</span>]</span>
+<span id="cb6-10"><a href="average-man.html#cb6-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> points[<span class="dv">1</span>]</span>
+<span id="cb6-11"><a href="average-man.html#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="average-man.html#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.fill_between(z,y, where <span class="op">=</span> z <span class="op">&gt;=</span> successes, color<span class="op">=</span><span class="st">&#39;r&#39;</span>, label<span class="op">=</span><span class="st">&quot;Probability &gt;= 3:</span><span class="sc">{p: .2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(p<span class="op">=</span>prob))</span>
+<span id="cb6-13"><a href="average-man.html#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.fill_between(z,y, where <span class="op">=</span> z <span class="op">&lt;</span> successes , color<span class="op">=</span><span class="st">&#39;g&#39;</span>,</span>
+<span id="cb6-14"><a href="average-man.html#cb6-14" aria-hidden="true" tabindex="-1"></a>                 label<span class="op">=</span><span class="st">&quot;Probability &lt; 3: </span><span class="sc">{mean: .2f}</span><span class="st">&quot;</span>.<span class="bu">format</span>(mean<span class="op">=</span><span class="dv">1</span><span class="op">-</span>prob))</span>
+<span id="cb6-15"><a href="average-man.html#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&#39;upper right&#39;</span>, title<span class="op">=</span><span class="st">&#39;Legend&#39;</span>)</span>
+<span id="cb6-16"><a href="average-man.html#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;The P-Value for a sample of 5 with &gt;=3 head </span><span class="ch">\n</span><span class="st"> given a biased coin with expected proportion 0.4&quot;</span>)</span>
+<span id="cb6-17"><a href="average-man.html#cb6-17" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> plt.xlim((<span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb6-18"><a href="average-man.html#cb6-18" aria-hidden="true" tabindex="-1"></a>ytck <span class="op">=</span> plt.yticks([])</span>
+<span id="cb6-19"><a href="average-man.html#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Take <span class="math inline">\((H0)\)</span> as given then if we observe a sequence: <span class="math display">\[ (3in5): H, H, H, T, T\]</span> what does it say about the possibility that we’re being hustled? If the coin is biased, then the count of heads in repeated sampling will reflect a clear bias. For any new data we can check if the data is consistent with the data generated by the biased coin. The pattern of reasoning is straightforward (i) make some assumptions about the structure of the random process under investigation, (ii) tease out the consequences of these assumptions (iii) evaluate the incoming data against these consequences to see if you need to revise your assumptions. The frequentist asks, does the data looks weird given the assumed shape of our probability distribution?</p>
+<blockquote>
+<p>[I]n statistical terms <span class="math inline">\(H_{0}\)</span> [the null hypothesis] refers to a probability model and the very word `model’ implies idealization. With a very few possible exceptions it would be absurd to think that a mathematical model is an exact representation of a real system… We use the term to mean that in the current state of knowledge it is reasonable to proceed as if the hypothesis was true." pg 31 <span class="citation">(<a href="references.html#ref-cox2006pos" role="doc-biblioref">Cox 2006</a>)</span></p>
+</blockquote>
+<p>In this instance the shape of the binomial distribution defined by a 0.4 biased coin allows for significantly greater than 5% chance for observing the above sequence. So we do not have enough reason to reject <span class="math inline">\((H0)\)</span> at the traditional threshold. By design the assumed distribution builds in characteristics of long-run variance of the process, and the slim threshold for rejection is designed to minimise incorrect rejections of <span class="math inline">\((H0)\)</span>. We should remain suspicious that we’re being conned. However, with a low number of observations the sample distribution is unlikely to be properly representative. This makes even small p-value thresholds unreliable. We cannot blindly take a sample poll to imply the spread or volatility of a population, and with low or un-representative samples it’s hard to justify any kind of inference from expectation, since we are not in a position to justify the choice of the null model either! If your hypothesis is both derived and validated against small samples, you risk being swayed by recent observations.</p>
+<p>More fundamentally the notion of statistical significance usually cannot falsify the hypothesis under consideration. The sheer number of auxiliary variables that you might need to control for, makes the practical task of definitively rejecting the null almost impossible. There are too many imagined ways in which the auxiliary conditions, sufficiently modified, would have resulted in observations that corroborate the null model. This problem is especially acute in psychological science where the auxiliary contingencies of designing a measurement scale and checking diagnostic criteria are almost always questionable. So the null hypothesis is not confirmed, but not refuted either, it is just preserved in useless stasis.</p>
+<blockquote>
+<p>“[I]t did not get integrated into the total nomological network, nor did it get clearly liquidated as a nothing concept, it did not get killed or resurrected or transformed or solidified; it just kind of dried up and blew away…” pg807 in <span class="citation">(<a href="references.html#ref-MeehlTheoretical" role="doc-biblioref">Meehl 1978</a>)</span></p>
+</blockquote>
+</div>
+<div id="bayesian-inference-inference-to-expected-value" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Bayesian Inference: Inference to Expected Value</h3>
+<p>If instead we use probability to calibrate our beliefs, then we can be more explicit in our assessment of <span class="math inline">\((H0), (H1)\)</span>. Let’s assume that our prior beliefs about whether the game is rigged is 50/50. Then we evaluate the two hypothesis using Bayes’s rule for incorporating our prior belief and the data. The Bayesian asks whether our hypothesis is a good explanation of the data compared to alternatives. How, upon observing the data, should we view our hypothesis?</p>
+<p><span class="math display">\[ \overset{posterior}{p(H_{i} | Data)} = \frac{\overset{prior}{p(H_{i})}\overset{liklihood}{p(Data | H_{i})}}{\underset{evidence}{\sum_{i=1}^{i =K} p(Data | H_{i})p(H_i)}}\]</span></p>
+<p>where $ 1 i K$ spans the ways in which the data could have been realised across all competing hypotheses.Then, in our toy example, we have:</p>
+<p><span class="math display">\[ \frac{p(H_1 | 3 in 5)}{p(H_{0} | 3 in 5)} = \frac{\frac{.5\cdot .23}{.5\cdot .32 + .5 \cdot .23}}{\frac{.5\cdot .32}{.5\cdot .32 + .5 \cdot .23}} = \frac{.57}{.42} \]</span></p>
+<p>which would lead us to infer that the coin was fair. The really radical move in the Bayesian setting is that you’re allowed to ascribe a probability to any event regardless of whether there is any long-run sequence to observe. You may know nothing about your opponent or the coin, but for Bayesians this is no bar to assigning suspicion in the form of expected probability, so long as you act in accordance with the axioms of probability and weigh the probabilities accordingly. In particular it promotes the direct comparison of competing hypotheses conditional on the evidence. It’s this free choice of prior which can seem arbitrary and unmotivated or even paradoxical, but in practice probabilities are rarely ascribed entirely without reason and it’s frankly irresponsible to ignore those reasons.</p>
+<blockquote>
+<p>“When a piece of evidence E is produced in a court investigating the guilt G or innocence I of the defendant, it is not enough merely to consider the probability of E assuming G; one must also contemplate the probability of E supposing I. In fact, the relevant quantity is the ratio of the two probabilities. Generally if evidence is produced to support some thesis, one must also consider the reasonableness of the evidence were the thesis false. Whenever courses of action are contemplated, it is not the merits or demerits of any course that matter, but only the comparison of these qualities with those of other courses.” in <span class="citation">(<a href="references.html#ref-LindleyTea" role="doc-biblioref">Lindley 1993</a>)</span></p>
+</blockquote>
+<p>Neither the Bayesian or Frequentist analysis ends with these simple calculations, both should continue to probe the limits of each hypothesis. We’d have to consider things like sample size, sensitivity testing, model performance, the cost of errors and appropriateness of the priors. The point is just that there are reasons for dispute. Bayesian inference acts like a logic engine for evidence, whereas the frequentist approach is more focused on diagnosing the possibility of error. In general they are complementary methods, and when they conflict the assumptions should be scrutinised. The frequentist evaluation of our biased coin is very sensitive to the choice of hypotheses, while the Bayesian approach is influenced by the choice of prior. Why set up a significance test against assumed cheating rather than assumed fairness? Why attribute equal weight to both hypotheses? Why use a 5% threshold if you’re concerned about systematic cheating? This example shows the heart of the conflict in the dual aspect of probability. There is enough latitude in the manner in which we set up a probability model that the mathematics of inference can yield inconsistent results. Both offer strategies for managing uncertainty, but both approaches come with baggage and in practice not all tests are equally taxing. Consider a more concrete example in the Bayesian spirit.</p>
+</div>
+<div id="example-website-traffic" class="section level3" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Example: Website Traffic</h3>
+<p>Websites and apps collect traffic and log interactions. Your details are captured and pulled into vast aggregates of consumer data. I can route and re-route your trajectory across an online environment. Applying the same pressures to tens of thousands of others, we can trace out how the topology of particular sites throw up speed bumps on the customer’s journey. Imagine we’re running a website which aims to funnel customers through to a number of different purchase plans. The historic patterns are relatively stable with only 10% of customers dropping out of our conversion funnel on a daily basis. We can sample actions online (Figure 7) under differing pressures with a view to evaluating expected values of repeated coercive prompts.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="average-man.html#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="average-man.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">### Multinomial distribution</span></span>
+<span id="cb7-3"><a href="average-man.html#cb7-3" aria-hidden="true" tabindex="-1"></a>m_var <span class="op">=</span> stats.multinomial(n<span class="op">=</span><span class="dv">100</span>, p<span class="op">=</span>[<span class="fl">.3</span>, <span class="fl">.4</span>, <span class="fl">.2</span>, <span class="fl">.1</span>])</span>
+<span id="cb7-4"><a href="average-man.html#cb7-4" aria-hidden="true" tabindex="-1"></a>m_var_sample <span class="op">=</span> m_var.rvs(<span class="dv">1000</span>)</span>
+<span id="cb7-5"><a href="average-man.html#cb7-5" aria-hidden="true" tabindex="-1"></a>m_var_2 <span class="op">=</span> stats.multinomial(n<span class="op">=</span><span class="dv">100</span>, p<span class="op">=</span>[<span class="fl">.3</span>, <span class="fl">.4</span>, <span class="fl">.1</span>, <span class="fl">.2</span>])</span>
+<span id="cb7-6"><a href="average-man.html#cb7-6" aria-hidden="true" tabindex="-1"></a>m_var_2_sample <span class="op">=</span> m_var_2.rvs(<span class="dv">20</span>)</span>
+<span id="cb7-7"><a href="average-man.html#cb7-7" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> datetime.datetime.today() <span class="op">-</span> datetime.timedelta(days<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb7-8"><a href="average-man.html#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="average-man.html#cb7-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(m_var_sample, columns<span class="op">=</span>[<span class="st">&#39;plan_1&#39;</span>, <span class="st">&#39;plan_2&#39;</span>, <span class="st">&#39;plan_3&#39;</span>,<span class="st">&#39;no_plan&#39;</span>])</span>
+<span id="cb7-10"><a href="average-man.html#cb7-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.append(pd.DataFrame(m_var_2_sample, columns<span class="op">=</span>[<span class="st">&#39;plan_1&#39;</span>, <span class="st">&#39;plan_2&#39;</span>, <span class="st">&#39;plan_3&#39;</span>, <span class="st">&#39;no_plan&#39;</span>]),ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-11"><a href="average-man.html#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="average-man.html#cb7-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;totals&#39;</span>] <span class="op">=</span> df[<span class="st">&#39;plan_1&#39;</span>] <span class="op">+</span> df[<span class="st">&#39;plan_2&#39;</span>] <span class="op">+</span> df[<span class="st">&#39;plan_3&#39;</span>] <span class="op">+</span> df[<span class="st">&#39;no_plan&#39;</span>]</span>
+<span id="cb7-13"><a href="average-man.html#cb7-13" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;plan_1_rate&#39;</span>] <span class="op">=</span> df[<span class="st">&#39;plan_1&#39;</span>] <span class="op">/</span> df[<span class="st">&#39;totals&#39;</span>]</span>
+<span id="cb7-14"><a href="average-man.html#cb7-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;plan_2_rate&#39;</span>] <span class="op">=</span> df[<span class="st">&#39;plan_2&#39;</span>] <span class="op">/</span> df[<span class="st">&#39;totals&#39;</span>]</span>
+<span id="cb7-15"><a href="average-man.html#cb7-15" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;plan_3_rate&#39;</span>] <span class="op">=</span> df[<span class="st">&#39;plan_3&#39;</span>] <span class="op">/</span> df[<span class="st">&#39;totals&#39;</span>]</span>
+<span id="cb7-16"><a href="average-man.html#cb7-16" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;no_plan_rate&#39;</span>] <span class="op">=</span> df[<span class="st">&#39;no_plan&#39;</span>] <span class="op">/</span> df[<span class="st">&#39;totals&#39;</span>]</span>
+<span id="cb7-17"><a href="average-man.html#cb7-17" aria-hidden="true" tabindex="-1"></a>date_list <span class="op">=</span> [base <span class="op">+</span> datetime.timedelta(days<span class="op">=</span>x) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(df))]</span>
+<span id="cb7-18"><a href="average-man.html#cb7-18" aria-hidden="true" tabindex="-1"></a>df.index <span class="op">=</span> date_list</span>
+<span id="cb7-19"><a href="average-man.html#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, column <span class="kw">in</span> <span class="bu">enumerate</span>([x <span class="cf">for</span> x <span class="kw">in</span> df.columns <span class="cf">if</span> <span class="st">&#39;rate&#39;</span> <span class="kw">in</span> x]):</span>
+<span id="cb7-20"><a href="average-man.html#cb7-20" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> plt.plot(df[column], label<span class="op">=</span>column)</span>
+<span id="cb7-21"><a href="average-man.html#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="average-man.html#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Outcomes of Signup Process after Website Change&quot;</span>)</span>
+<span id="cb7-23"><a href="average-man.html#cb7-23" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&quot;upper left&quot;</span>)</span>
+<span id="cb7-24"><a href="average-man.html#cb7-24" aria-hidden="true" tabindex="-1"></a>xticks<span class="op">=</span> plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb7-25"><a href="average-man.html#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Assume the particular values for each plan, then the expected value of customer journey is just: <span class="math inline">\(p_{1}\$(o_{1}) + p_{2}\$(o_{2}) + p_{3}\$(o_{3}) + p_{4}\$(o_{4}) = .3*\$10 + .4*\$7 + .2*\$12 + .1*\$0 = \$8.20\)</span> Now imagine there was a change to the website and we observe the following pattern for the next 20 days. The change was made on the hypothesis (<span class="math inline">\(H+\)</span>) that it would bring a positive boost to revenue. How much more positive? A slight expected increase makes it harder to conclusively reject the <span class="math inline">\(H+\)</span> even in the fact of contrary indicators. If we observe the above pattern, then what is the new expected value? Have we decisively falisifed <span class="math inline">\(H+\)</span>? From the frequentist point of view the macro distributional properties haven’t significantly changed. But given what we know about the change to the website it would be foolish to accept such a static distributional assumption. Looking only at the small sample of new data, the variance will be large and the estimates of rates of sign-up for each plan will be unstable. Following the Bayesian paradigm we can condition our expectations on the new data, the old data or all the data.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="average-man.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### Calculate Expected Revenue</span></span>
+<span id="cb8-2"><a href="average-man.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="average-man.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expected_revenue(posterior_samples):</span>
+<span id="cb8-4"><a href="average-man.html#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">10</span><span class="op">*</span>posterior_samples[:, <span class="dv">0</span>] <span class="op">+</span> <span class="dv">7</span><span class="op">*</span>posterior_samples[:, <span class="dv">1</span>] <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb8-5"><a href="average-man.html#cb8-5" aria-hidden="true" tabindex="-1"></a>           <span class="dv">12</span><span class="op">*</span>posterior_samples[:, <span class="dv">2</span>] <span class="op">+</span> <span class="dv">0</span><span class="op">*</span>posterior_samples[:, <span class="dv">3</span>]</span>
+<span id="cb8-6"><a href="average-man.html#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="average-man.html#cb8-7" aria-hidden="true" tabindex="-1"></a>full_data <span class="op">=</span> df[[<span class="st">&#39;plan_1&#39;</span>, <span class="st">&#39;plan_2&#39;</span>, <span class="st">&#39;plan_3&#39;</span>, <span class="st">&#39;no_plan&#39;</span>]]</span>
+<span id="cb8-8"><a href="average-man.html#cb8-8" aria-hidden="true" tabindex="-1"></a>weird_data2 <span class="op">=</span> df[[<span class="st">&#39;plan_1&#39;</span>, <span class="st">&#39;plan_2&#39;</span>, <span class="st">&#39;plan_3&#39;</span>, <span class="st">&#39;no_plan&#39;</span>]].tail(<span class="dv">20</span>)</span>
+<span id="cb8-9"><a href="average-man.html#cb8-9" aria-hidden="true" tabindex="-1"></a>normal_data <span class="op">=</span> df[[<span class="st">&#39;plan_1&#39;</span>, <span class="st">&#39;plan_2&#39;</span>, <span class="st">&#39;plan_3&#39;</span>, <span class="st">&#39;no_plan&#39;</span>]].head(<span class="dv">1000</span>)</span>
+<span id="cb8-10"><a href="average-man.html#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="average-man.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Bayesian Posterior</span></span>
+<span id="cb8-12"><a href="average-man.html#cb8-12" aria-hidden="true" tabindex="-1"></a>multinomial_posterior_new <span class="op">=</span> np.random.dirichlet(np.array([<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>]) <span class="op">+</span> np.array(weird_data2.<span class="bu">sum</span>()), size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb8-13"><a href="average-man.html#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="average-man.html#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Empirical Bayes</span></span>
+<span id="cb8-15"><a href="average-man.html#cb8-15" aria-hidden="true" tabindex="-1"></a>multinomial_posterior_full <span class="op">=</span> np.random.dirichlet(np.array([<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>]) <span class="op">+</span> np.array(full_data.<span class="bu">sum</span>()), size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb8-16"><a href="average-man.html#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Bayesain Posterior Prior Data</span></span>
+<span id="cb8-17"><a href="average-man.html#cb8-17" aria-hidden="true" tabindex="-1"></a>multinomial_posterior_old <span class="op">=</span> np.random.dirichlet(np.array([<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>]) <span class="op">+</span> np.array(normal_data.<span class="bu">sum</span>()), size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb8-18"><a href="average-man.html#cb8-18" aria-hidden="true" tabindex="-1"></a>multinomial_posterior_new_empirical_prior <span class="op">=</span> np.random.dirichlet(np.array([<span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">200</span>, <span class="dv">100</span>]) <span class="op">+</span> np.array(weird_data2.<span class="bu">sum</span>()), size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb8-19"><a href="average-man.html#cb8-19" aria-hidden="true" tabindex="-1"></a>multinomial_posterior_crazy_prior <span class="op">=</span> np.random.dirichlet(np.array([<span class="dv">100</span>, <span class="dv">400</span>, <span class="dv">500</span>, <span class="dv">0</span>]) <span class="op">+</span> np.array(weird_data2.<span class="bu">sum</span>()), size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb8-20"><a href="average-man.html#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="average-man.html#cb8-21" aria-hidden="true" tabindex="-1"></a>expected_value_new <span class="op">=</span> expected_revenue(multinomial_posterior_new)</span>
+<span id="cb8-22"><a href="average-man.html#cb8-22" aria-hidden="true" tabindex="-1"></a>expected_value_old <span class="op">=</span> expected_revenue(multinomial_posterior_old)</span>
+<span id="cb8-23"><a href="average-man.html#cb8-23" aria-hidden="true" tabindex="-1"></a>expected_value_full_data <span class="op">=</span> expected_revenue(multinomial_posterior_full)</span>
+<span id="cb8-24"><a href="average-man.html#cb8-24" aria-hidden="true" tabindex="-1"></a>expected_value_new_bias <span class="op">=</span> expected_revenue(multinomial_posterior_new_empirical_prior)</span>
+<span id="cb8-25"><a href="average-man.html#cb8-25" aria-hidden="true" tabindex="-1"></a>expected_value_crazy <span class="op">=</span> expected_revenue(multinomial_posterior_crazy_prior)</span>
+<span id="cb8-26"><a href="average-man.html#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="average-man.html#cb8-27" aria-hidden="true" tabindex="-1"></a>h1 <span class="op">=</span> plt.hist(expected_value_new, histtype<span class="op">=</span><span class="st">&#39;stepfilled&#39;</span>, label<span class="op">=</span><span class="st">&quot;Expected Revenue New (20) Obs Flat Prior&quot;</span>, bins<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb8-28"><a href="average-man.html#cb8-28" aria-hidden="true" tabindex="-1"></a>h2 <span class="op">=</span> plt.hist(expected_value_old, histtype<span class="op">=</span><span class="st">&#39;stepfilled&#39;</span>, label<span class="op">=</span><span class="st">&quot;Expected Revenue Old Obs Flat Prior&quot;</span>, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb8-29"><a href="average-man.html#cb8-29" aria-hidden="true" tabindex="-1"></a>h3 <span class="op">=</span> plt.hist(expected_value_full_data, histtype<span class="op">=</span><span class="st">&#39;stepfilled&#39;</span>, label<span class="op">=</span><span class="st">&quot;Expected Revenue Full Obs Flat Prior&quot;</span>, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb8-30"><a href="average-man.html#cb8-30" aria-hidden="true" tabindex="-1"></a>h4 <span class="op">=</span>plt.hist(expected_value_new_bias, histtype<span class="op">=</span><span class="st">&#39;stepfilled&#39;</span>, label<span class="op">=</span><span class="st">&quot;Expected Revenue New (20) Obs Empirical Prior &quot;</span>, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb8-31"><a href="average-man.html#cb8-31" aria-hidden="true" tabindex="-1"></a>h5 <span class="op">=</span> plt.hist(expected_value_crazy, histtype<span class="op">=</span><span class="st">&#39;stepfilled&#39;</span>, label<span class="op">=</span><span class="st">&quot;Expected Revenue New (20) Obs Optimistic Prior &quot;</span>, bins<span class="op">=</span><span class="dv">50</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb8-32"><a href="average-man.html#cb8-32" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Expected Revenue of Multinomial Posterior given Data&quot;</span>)</span>
+<span id="cb8-33"><a href="average-man.html#cb8-33" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&quot;upper left&quot;</span>)</span>
+<span id="cb8-34"><a href="average-man.html#cb8-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The above graph illustrates the spread in values expected revenue calculated on different slices of our data using Bayes Rule. Using a large number of observations, the influence of our priors are minimal and washed out by the data, giving us a strong point estimate with low variance stable around 8.2, but since the recent data involves a step change, we might be better off ignoring the old data. But we can also see that if we condition our expectations only on the new data with different priors drawn from the past data or hope, we can positively bias our expectations. Suppose we’re naive and accept either the optimistic prior or retain a frequentist approach, and accept that the website change is associated with a slight drop in revenue, do we revert to the old website or try to explain the dip by contingencies of the market and preserve our test for another thirty days?</p>
+<p>This pattern is not rare. Nearly all substantial decisions are made with small samples in circumstances where past behaviour is not a guide. Past behavioural patterns are exactly what we’re trying to avoid or change. If you want to know whether the change on your website will drive a material change in financial revenue, you won’t have long run patterns to rely on, and it’s an open question on how to weight the new data. If you want to judge the long term consequences of a new symptom the same limitation of information applies. All models smuggle-in a host of statistical assumptions and these can be range from reasonable to absurd. Even when reasonable they’re only supported by large sample sizes, and most questions of interest are driven by novelty (or specificity) that short circuits appeal to robust patterns of history. Reasoning from small samples is common, best done with caution and plenty of caveats, but better reason than not. Expectations should be modified accordingly.</p>
+</div>
+</div>
+<div id="utility-curves" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Utility Curves</h2>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+General Introduction to the idea of Utility</li>
+</ul>
+<div id="the-stakes-from-utility-to-indifference" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> The Stakes: From Utility to Indifference</h3>
+<p>Our views of probability can flex up and down in response to facts, but it’s less clear how our estimates of utility change. Too much of a good thing often tends to the bad. So we dabble, sample and share. In pursuit of variety we swap our goods, shunning stale options in favour of the novel exchange. For a given good we can differ in our appetites but it’s relatively straightforward to find the point where - one more donut is one too many. While it can be a bit unclear how we should measure utility, once we’ve decided on a metric the mathematical characteristics are meaningful. If the scale is donuts, we can infer aspects of your attitudes from your acquisition and enthusiasm for donuts. In most cases we’re interested not just in your pursuit of pastries, but how you’d be willing to trade for those pastries.</p>
+<p>We seek competitive advantage for our own produce to balance the cost owed to the skills of others. This coordinated compromise lies at the core of maximising subjective utility in a market, but at the limit some scenarios do not admit any admixture of goods. Not all babies can be cut in half. But in most cases a consumer will try to optimise their bundle of goods over an entire marketplace, preserving enough on one key good; money, to remain liquid. So, to a first approximation our utility estimate would seem to be a multivariate function.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="average-man.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linear_utility(x, a<span class="op">=</span><span class="dv">2</span>, b<span class="op">=</span><span class="dv">4</span>):</span>
+<span id="cb9-2"><a href="average-man.html#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># This works fine on smaller numbers</span></span>
+<span id="cb9-3"><a href="average-man.html#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">*</span>x</span>
+<span id="cb9-4"><a href="average-man.html#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="average-man.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quadriatic_utility(x, b<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb9-6"><a href="average-man.html#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">-</span> (b)<span class="op">*</span>(x<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb9-7"><a href="average-man.html#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="average-man.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> logarithmic_utility(x, a, b):</span>
+<span id="cb9-9"><a href="average-man.html#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.log(a) <span class="op">+</span> b<span class="op">*</span>np.log(x)</span>
+<span id="cb9-10"><a href="average-man.html#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="average-man.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> negative_exp_utility(x, c<span class="op">=</span><span class="fl">.5</span>):</span>
+<span id="cb9-12"><a href="average-man.html#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.exp(<span class="op">-</span>(c<span class="op">*</span>x))</span>
+<span id="cb9-13"><a href="average-man.html#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="average-man.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> narrow_power(x, B<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb9-15"><a href="average-man.html#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (B <span class="op">/</span> (B <span class="op">-</span> <span class="dv">1</span>))<span class="op">*</span>(x<span class="op">**</span>(<span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span><span class="op">/</span>B)))</span>
+<span id="cb9-16"><a href="average-man.html#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="average-man.html#cb9-17" aria-hidden="true" tabindex="-1"></a>xdata <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb9-18"><a href="average-man.html#cb9-18" aria-hidden="true" tabindex="-1"></a>negExp <span class="op">=</span> negative_exp_utility(xdata, <span class="fl">0.5</span>)</span>
+<span id="cb9-19"><a href="average-man.html#cb9-19" aria-hidden="true" tabindex="-1"></a>quad <span class="op">=</span> quadriatic_utility(xdata, <span class="fl">0.5</span>)</span>
+<span id="cb9-20"><a href="average-man.html#cb9-20" aria-hidden="true" tabindex="-1"></a>narrow_pow <span class="op">=</span> narrow_power(xdata, <span class="dv">2</span>)</span>
+<span id="cb9-21"><a href="average-man.html#cb9-21" aria-hidden="true" tabindex="-1"></a>lin <span class="op">=</span> linear_utility(xdata, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb9-22"><a href="average-man.html#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="average-man.html#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb9-24"><a href="average-man.html#cb9-24" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb9-25"><a href="average-man.html#cb9-25" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">&quot;-exp(-b*Q)&quot;</span>, <span class="st">&quot;Q - b*Q^2&quot;</span>, <span class="st">&quot;a + b*Q&quot;</span>, <span class="st">&quot;(b / (b-1))*Q^(1-(1/b))&quot;</span>]</span>
+<span id="cb9-26"><a href="average-man.html#cb9-26" aria-hidden="true" tabindex="-1"></a>titles <span class="op">=</span> [<span class="st">&quot;Negative Exponential Utility Curve&quot;</span>, <span class="st">&quot;Quadratic Utility Curve&quot;</span>, </span>
+<span id="cb9-27"><a href="average-man.html#cb9-27" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;Linear Utility Curve&quot;</span>,<span class="st">&quot;Narrow Power Utility Curve&quot;</span>]</span>
+<span id="cb9-28"><a href="average-man.html#cb9-28" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> [negExp, quad, lin, narrow_pow]</span>
+<span id="cb9-29"><a href="average-man.html#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="average-man.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(np.hstack(axes)):</span>
+<span id="cb9-31"><a href="average-man.html#cb9-31" aria-hidden="true" tabindex="-1"></a>    ax.plot(xdata, y[i], label<span class="op">=</span>labels[i])</span>
+<span id="cb9-32"><a href="average-man.html#cb9-32" aria-hidden="true" tabindex="-1"></a>    ax.set_title(titles[i])</span>
+<span id="cb9-33"><a href="average-man.html#cb9-33" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> ax.set_xticks([])</span>
+<span id="cb9-34"><a href="average-man.html#cb9-34" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> ax.set_yticks([])</span>
+<span id="cb9-35"><a href="average-man.html#cb9-35" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">&quot;U(Q)&quot;</span>)</span>
+<span id="cb9-36"><a href="average-man.html#cb9-36" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">&quot;Q&quot;</span>)</span>
+<span id="cb9-37"><a href="average-man.html#cb9-37" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb9-38"><a href="average-man.html#cb9-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-39"><a href="average-man.html#cb9-39" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">&quot;Utility measures over increasing quantities of a good&quot;</span>)</span>
+<span id="cb9-40"><a href="average-man.html#cb9-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><span class="math display">\[ u(\mathbf{g}) = f(g_{0}, g_{1} ... g_{n}) \]</span></p>
+<p>There are number of ways we can specify a utility function as seen in Figure 10, but a typical example is the Cobb-Douglas function.</p>
+<p><span class="math display">\[ u(\mathbf{g}) = g_{0}^{\alpha_{0}}g_{1}^{\alpha_{1}} ... g_{n}^{\alpha_{n}} \text{ where } \forall i \sum \alpha_i = 1\]</span></p>
+<p>Then taking the case of two goods <span class="math inline">\(g1, g2\)</span> we can determine an indifference curve where you would be willing to exchange quantities of <span class="math inline">\(g1\)</span> for an agreeable amount of <span class="math inline">\(g2\)</span>. The task is to express the value of a given good as priced in terms of the other goods. Set</p>
+<p><span class="math display">\[u(\mathbf{g}) = k =  g_{1}^{\frac{1}{2}}g_{2}^{\frac{1}{2}} = (g_{1}g_{2})^{\frac{1}{2}}  = \sqrt{g_{1}g_{2}}\]</span> <span class="math display">\[ \Rightarrow k^{2} = g_{1}g_{2} \Rightarrow \frac{k^{2}}{g_{2}} = g_{1}\]</span></p>
+<p>Using this formula we can express how the quantities of fair exchange vary based on a fixed utility value. This is not to say that these curves represent an actual or objectively fair price, just that when measured in terms of our utility these are mappings of quantities of goods we would be happy to exchange. Your view of a fair price is encoded in your utility theory. It’s at this point when utility theory can be said to verge on empirical science. If we can model your preferences as a utility function characteristic of some general attitude toward acquisition, we might also hope to be able to predict future trades and cater for individual desires.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="average-man.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cobb_douglas(g1, g2, a1, a2):</span>
+<span id="cb10-2"><a href="average-man.html#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> g1<span class="op">**</span>a1 <span class="op">*</span> g2<span class="op">**</span>a2</span>
+<span id="cb10-3"><a href="average-man.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="average-man.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="average-man.html#cb10-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-6"><a href="average-man.html#cb10-6" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb10-7"><a href="average-man.html#cb10-7" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">100</span>).reshape((<span class="dv">100</span>, <span class="dv">1</span>))</span>
+<span id="cb10-8"><a href="average-man.html#cb10-8" aria-hidden="true" tabindex="-1"></a>contours <span class="op">=</span> ax.contourf(g1, g2.flatten(), cobb_douglas(g1, g2, <span class="fl">.5</span>, <span class="fl">.5</span>))</span>
+<span id="cb10-9"><a href="average-man.html#cb10-9" aria-hidden="true" tabindex="-1"></a>tmp <span class="op">=</span> fig.colorbar(contours)</span>
+<span id="cb10-10"><a href="average-man.html#cb10-10" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">&quot;g1&quot;</span>)</span>
+<span id="cb10-11"><a href="average-man.html#cb10-11" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">&quot;g2&quot;</span>)</span>
+<span id="cb10-12"><a href="average-man.html#cb10-12" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">&quot;Cobb Douglas: g1^(.5)*g2^(1-(.5))&quot;</span>)</span>
+<span id="cb10-13"><a href="average-man.html#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Contrast the case of a schizophrenic’s patient’s utility as they try to weight aspects of their health. Even if you could measure each dimension simultaneously, what scale captures the worth of autonomy and measures the trade off against clarity, delusion and paranoia? How do you plan for children in the fear of what your genetics could seed? Do you fear the harm done through inheritance or the looming lifelong responsibility of care for an affected child? Even adoption foists onto the child the burden of having you as a parent. The disease calibrates the cost, but the equations are hard to solve.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+</div>
+<div id="optimising-utility" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Optimising Utility</h3>
+<p>A further complication arises when we try to account for a consumer’s budget or resources. The shape of the Cobb-Douglas function in Figure 12 shows that the utility surface is constantly increasing with our rate of acquisition. So without any constraints the consumer would not achieve satisfaction, but continue like a glutton consuming forever without cease. Add a budgetary constraint and natural trade-offs between desire and cost mean that we need to find the maximum point at which an indifference curve intersects with our budgetary line. Instead of solving the equation:</p>
+<p><span class="math display">\[ \text{ Find } g_{1}, g_{2} \text{ such that } u(g_{1}, g_{2}) = \lambda \]</span></p>
+<p>we need to solve a constrained optimisation problem: <span class="math display">\[ \text{ maximize } u(g_{1}, g_{2})  \text{ subject to } cost(g_{1}, g_{2}) =  \lambda\]</span></p>
+<p>This style of problem can be approached with the method of Lagrange multipliers. If we let:</p>
+<p><span class="math display">\[ L = g_{1}^{\frac{1}{2}}g_{2}^{\frac{1}{2}} - \lambda(2g_{1} + 3g_{2} - 40) \]</span></p>
+<p>where <span class="math inline">\(2\)</span> and <span class="math inline">\(3\)</span> are the unit cost of the respective goods, and <span class="math inline">\(40\)</span> is our total budget. This <span class="math inline">\(\lambda\)</span> is our Lagrangian multiplier - a term used to re-express the algebra of our equation as a function of the consumer’s capacity to spend.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="average-man.html#cb11-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>)</span>
+<span id="cb11-2"><a href="average-man.html#cb11-2" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> np.linspace(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">100</span>).reshape((<span class="dv">100</span>, <span class="dv">1</span>))</span>
+<span id="cb11-3"><a href="average-man.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="average-man.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g1_indifference(g2, k, alpha<span class="op">=</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>):</span>
+<span id="cb11-5"><a href="average-man.html#cb11-5" aria-hidden="true" tabindex="-1"></a>    orig <span class="op">=</span> k<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>alpha)) <span class="op">*</span> g2<span class="op">**</span>(<span class="op">-</span>alpha<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>alpha))</span>
+<span id="cb11-6"><a href="average-man.html#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> orig</span>
+<span id="cb11-7"><a href="average-man.html#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="average-man.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_indifference_curves(ax, alpha<span class="op">=</span><span class="fl">.5</span>):</span>
+<span id="cb11-9"><a href="average-man.html#cb11-9" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">14</span>, <span class="dv">3</span>)</span>
+<span id="cb11-10"><a href="average-man.html#cb11-10" aria-hidden="true" tabindex="-1"></a>    ax.plot(g2, g1_indifference(g2, k, alpha))</span>
+<span id="cb11-11"><a href="average-man.html#cb11-11" aria-hidden="true" tabindex="-1"></a>    ax.legend([<span class="st">&quot;U(g1^.5, g2^.5)&quot;</span> <span class="op">+</span> <span class="st">&quot; = </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(i) <span class="cf">for</span> i <span class="kw">in</span> k])</span>
+<span id="cb11-12"><a href="average-man.html#cb11-12" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">&quot;g2&quot;</span>)</span>
+<span id="cb11-13"><a href="average-man.html#cb11-13" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">&quot;g1 &quot;</span>)</span>
+<span id="cb11-14"><a href="average-man.html#cb11-14" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&quot;Indifference Curves with Budget Constraint&quot;</span>)</span>
+<span id="cb11-15"><a href="average-man.html#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="average-man.html#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> budget(g, W<span class="op">=</span><span class="dv">50</span>, price<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb11-17"><a href="average-man.html#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (W <span class="op">-</span> g) <span class="op">/</span> price</span>
+<span id="cb11-18"><a href="average-man.html#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="average-man.html#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_budget_constraint(ax, W<span class="op">=</span><span class="dv">40</span>, price<span class="op">=</span><span class="dv">2</span>):</span>
+<span id="cb11-20"><a href="average-man.html#cb11-20" aria-hidden="true" tabindex="-1"></a>    g2 <span class="op">=</span> np.array([<span class="dv">0</span>, W])</span>
+<span id="cb11-21"><a href="average-man.html#cb11-21" aria-hidden="true" tabindex="-1"></a>    g1 <span class="op">=</span> budget(g2, W, price)</span>
+<span id="cb11-22"><a href="average-man.html#cb11-22" aria-hidden="true" tabindex="-1"></a>    ax.plot(g2, g1)</span>
+<span id="cb11-23"><a href="average-man.html#cb11-23" aria-hidden="true" tabindex="-1"></a>    ax.fill_between(g2, <span class="dv">0</span>, g1, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb11-24"><a href="average-man.html#cb11-24" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">&quot;g2&quot;</span>)</span>
+<span id="cb11-25"><a href="average-man.html#cb11-25" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">&quot;g1&quot;</span>)</span>
+<span id="cb11-26"><a href="average-man.html#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ax</span>
+<span id="cb11-27"><a href="average-man.html#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="average-man.html#cb11-28" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb11-29"><a href="average-man.html#cb11-29" aria-hidden="true" tabindex="-1"></a>plot_indifference_curves(ax)</span>
+<span id="cb11-30"><a href="average-man.html#cb11-30" aria-hidden="true" tabindex="-1"></a>plot_budget_constraint(ax)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>We can discover where utility is maximised when the gradient of the “curve” can be set to zero. This is the theory behind the “hill climbing” algorithms of gradient descent. When the curvature of the “slope” has plateaued i.e. is zero, then we’ve reached a maximum or minimum in the multivariate space of the function. As before we want to use this fact to express the implicit function of <span class="math inline">\(g_{1}\)</span> in terms of <span class="math inline">\(g_{2}\)</span>, but this time including the constraints on our budget.</p>
+<p><span class="math display">\[
+\nabla L = dL /  d\mathbf{g} =
+    \begin{pmatrix}
+       \dfrac{\partial u(\mathbf{g})}{\partial g_1} , \dfrac{\partial u(\mathbf{g})}{\partial g_2}
+    \end{pmatrix} = \begin{pmatrix}
+    \frac{1}{2}g_{1}^{-\frac{1}{2}}g_{2}^{\frac{1}{2} } - 2\lambda ,
+    \frac{1}{2}g_{2}^{-\frac{1}{2}}g_{1}^{\frac{1}{2} } - 3\lambda
+    \end{pmatrix} = \mathbf{0}
+\]</span></p>
+<p><span class="math display">\[ \Rightarrow \lambda = \frac{1}{4}g_{1}^{-\frac{1}{2}}\sqrt{g_{2}} = \frac{4}{25}g_{2}^{-\frac{1}{2}}\sqrt{g_{1}}\]</span></p>
+<p><span class="math display">\[ \Rightarrow  (\frac{1}{4})^2\frac{1}{g_{1}}g_{2} = (\frac{4}{25})^2\frac{1}{g_{2}}g_{1} \Rightarrow (\frac{1}{4})^2 g_{2} = (\frac{4}{25})^2\frac{1}{g_{2}}g_{1}^2  \Rightarrow (\frac{1}{4})^2g_{2}^{2} = (\frac{4}{25})^2g_{1}^2 \]</span></p>
+<p><span class="math display">\[ \Rightarrow g_{2} = \frac{16}{25}g_{1}\]</span></p>
+<p>The same pattern holds for cases with more than two goods. We can express the value of given good <span class="math inline">\(g_n\)</span> in terms of a function <span class="math inline">\(f(g_{1}, ... g_{n-1})\)</span>. Then substituting this value into our constraint we get:</p>
+<p><span class="math display">\[ 2g_{1} + 3(\frac{16}{25})g_{1} = 40 \Rightarrow 2g_{1} + 1.92g_{1} = 40 \Rightarrow 3.92g_{1} = 40\]</span> Proving the optimial settings are <span class="math inline">\(g_{1}^{*} = 10.20 \text{ and } g_{2}^{*} = 6.52 \text{ and } \lambda^{*} = 0.20\)</span></p>
+<p>The above proof shows how we triangulate a consumer’s view of any good as expressed through the medium of their utility function. But the method of Lagrangian multipliers is more than a mere algebraic trick. We can interpret the <span class="math inline">\(\lambda\)</span> term as the rate of change of the consumer’s utility as a function of the cost to our resources. How taxing is our treatment, how exhausted is your wallet? The proof is a little more involved, but the significance of this interpretation should be obvious. If we knew our consumers adhered to a particular style of utility function we could model how “price-changes” would impact their returns to utility and select strategies for maximum gain. The challenge lies in deriving a customer’s utility profile.</p>
+</div>
+</div>
+<div id="representation-theorems" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Representation Theorems</h2>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+General Introduction to the idea of Representation</li>
+</ul>
+<div id="rational-preference-from-indifference-to-utility" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Rational Preference: From Indifference to Utility</h3>
+<p>The core idea is that an agent’s utility metric ought to reflect their preferences, so if we can elicit preference statements from our consumer, we should be able to construct their utility curve! One method suggests itself; first canvas a customer for their preferences or observe their preference as expressed by purchases. Then map the maximal and least preferred options to convenient polarities. For instance:</p>
+<p><span class="math display">\[ g_{1} \succ g_{2} \succ g_{3} \succ g_{4} \succ g_{5} \]</span></p>
+<p>where:</p>
+<p><span class="math display">\[ u(g_{1}) = 0 \text{ and } u(g_{5}) = 1 \]</span></p>
+<p>then each of the intermediary options can be measured in the interval between 0 and 1. However, not all relations map to preference structures e.g. there are an infinite number of simple ordinal mappings that would work, but a strict ordering does nothing to convey the degree of feeling associated with each option. Extra constraints need to be placed on the utility metric if it is to reflect the properties of a genuine preference relation. Our preferences need to respect certain axioms of rationality.</p>
+<p>Let <span class="math inline">\(R\)</span> denote a binary relation over a set of states <span class="math inline">\(S\)</span>.
+We can place a variety of conditions on the <span class="math inline">\(R\)</span> preference relation:</p>
+<ul>
+<li><p><span class="math inline">\(\textbf{Reflexivity}\)</span> <span class="math inline">\(\forall \phi \in S: \phi R \phi\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Completeness}\)</span> <span class="math inline">\(\forall \phi, \psi \in S: (\phi \neq \psi) \rightarrow (\phi R \psi \vee \phi R \psi)\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Transitivity}\)</span> <span class="math inline">\(\forall \phi, \psi, \chi \in S: \phi R \psi \wedge \psi R \chi \rightarrow \phi R \chi\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Anti-Symmetry}\)</span> <span class="math inline">\(\forall \phi, \psi \in S: (\phi R \psi \wedge \psi R \phi) \rightarrow \phi = \psi\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Asymmetry}\)</span> <span class="math inline">\(\forall \phi, \psi \in S: \phi R \psi \rightarrow \neg(\psi R \phi)\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Symmetry}\)</span> <span class="math inline">\(\forall \phi, \psi \in S: \phi R \psi \rightarrow \psi R \phi\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Acyclic}\)</span> <span class="math inline">\(\forall \phi_{1} ... \phi_{j} ( \phi_{1} R \phi_{2} .... R \phi_{j} \rightarrow \neg(\phi_{j} R \phi_{1})\)</span></p></li>
+</ul>
+<p><span class="math inline">\(\textbf{Definition: (Individual Preference Structure )}\)</span> <span class="math inline">\(\langle S, \succeq, \succ, \sim \rangle\)</span> is a (relational) structure where <span class="math inline">\(\succeq\)</span> is a weak preference ordering on the set <span class="math inline">\(S\)</span> if <span class="math inline">\(\succeq\)</span> is a transitive, reflexive and complete. While <span class="math inline">\(\succ\)</span> is a strict preference ordering if <span class="math inline">\({\forall \phi, \psi : \phi \succ \psi \Leftrightarrow \phi \succeq \psi \wedge \neg(\psi \succeq \phi)}\)</span>. Finally, we have <span class="math inline">\(\sim\)</span> as an indifference relation just when <span class="math inline">\({ \forall \phi, \psi : \phi \sim \psi \Leftrightarrow \phi \succeq \psi \wedge \psi \succeq \phi}\)</span>
+</p>
+<p> We let  be a choice function when <span class="math inline">\({C: S \mapsto S^{*} \subseteq S}\)</span> just when <span class="math inline">\({S^{*} \neq \emptyset \text{ unless } S = \emptyset }\)</span>. For example we have a choice function with respect to a preference structure when <span class="math inline">\({C^{\succeq}(S) = \{ \Phi \in S : \forall \Psi \in S, \Phi \succeq \Psi \}}\)</span></p>
+<p>The technique pursued by Von Neumann and Morgernstern is to calibrate utility scales based on decisions made about offered bets. Each individual good can be assessed against a simple win-loss lottery between the two most extreme outcomes. If the consumer is indifferent between the sure prospect of the good and a fixed odds lottery on their most (and least) preferred outcomes, they’ve implicitly weighed their utility of the good.</p>
+<p><span class="math display">\[ \forall g_i \exists  p :  g _{i} \sim [p \cdot g_{1}, (1-p)\cdot g_{5}] \rightarrow u(g_{i}) = p \]</span></p>
+<p>So whenever we are indifferent between a sure thing and a win-loss lottery over the best and worst outcomes we have implicitly chosen the utility of the of good on a 0-1 scale. In this manner we can construct a utility curve across the entire range of options to reflect an underlying preference relation.Von Neumann’s choice function is set so that we maximise the expected utility of our choices as determined by our preferences.</p>
+</div>
+<div id="von-neumann-and-morgernsterns-representation-theorem" class="section level3" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Von Neumann and Morgernstern’s Representation Theorem</h3>
+<p>The most famous result in decision theory is von Neumann and Morgenstern’s Representation theorem. It shows, using the technique discussed above, how expressed preferences (which adhere to certain axioms of rationality) can track with a utility measure. As such the agents can be interpreted as making choices to maximise their expected utility. But the theorem is limited to decisions over well-defined lotteries, and as such makes a poor model for general choice under uncertainty where the odds are approximate, unknown or unclear. Nevertheless the theorem serves as an alternative explanation for the tendency to make decisions based on expected value.</p>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-14" class="theorem"><strong>Theorem 2.1  (Von Neumann Morgenstern’s Representation Theorem)  </strong></span>If an individuals preference relation <span class="math inline">\(\succeq\)</span> is transitive, complete and satisfies:</p>
+<ul>
+<li><p>(Continuity): <span class="math inline">\(\forall g_{1} , g_{2} , g_{3} : ( g_{1} \succeq g_{2} \succeq g_{3}) \rightarrow \exists v \in [0, 1] \wedge g_{2} \sim_{i} [v g_{1}, (1-v) g_{3}]_{Lot}\)</span></p></li>
+<li><p>(Monotonicity): If <span class="math inline">\(v_{1}, v_{2} \in [0, 1]\)</span> and $ g_{1} g_{2}$ then <span class="math inline">\(\Big( [ v_{1} g_{1}, (1-v_{1})g_{2}]_{Lot} \succeq [ v_{2} g_{1}, (1-v_{2})g_{2}]_{Lot} \Big) \Leftrightarrow v_{1} \geq v_{2}\)</span></p></li>
+<li><p>(Reduction of Compound lotteries): Each compound lottery <span class="math inline">\({[q_{1}Lot_{p_{1}}, ..., q_{n}Lot_{p_{n}}]}\)</span> reduces to a simple lottery where each good <span class="math inline">\((1, .. k)\)</span> is weighted across all branches of the nested decision tree <span class="math inline">\({[(q_{1}p^{k}_{1} + q_{2}p^{k}_{2} ... + q_{n}p^{k}_{n})g_{k} .... , (q_{1}p^{k-1}_{1} , ...)g_{k-1} + ... (q_{1}p^{1}_{1} , ...)g_{1}]_{Lot}}\)</span> by the usual rules of conditional probability for branching events such that <span class="math inline">\(\widehat{Lot} \sim Lot\)</span></p></li>
+<li><p>(Independence) If <span class="math inline">\(\widehat{Lot} = [q_{1}Lot_{1}, ..., q_{j}Lot_{j}...q_{n}Lot_{n}]\)</span> and <span class="math inline">\(L_{j} \sim M\)</span>, then <span class="math inline">\(\widehat{Lot} \sim \widehat{Lot}^{&#39;} = [q_{1}Lot_{1}, ..., q_{j}M...q_{n}Lot_{n}]\)</span></p></li>
+</ul>
+<p>then <span class="math inline">\(\exists u_{p} :\widehat{Lot} \mapsto \text{ Val }\)</span> where
+<span class="math inline">\(u_{p}(\widehat{Lot}) = p_{1}u(g_{1}) + ... + p_{k}u(g_{k})\)</span> and <span class="math inline">\(u(\widehat{Lot}) \geq u(\widehat{Lot}^{*}) \Leftrightarrow \widehat{Lot} \succeq \widehat{Lot}^{*}\)</span> so that <span class="math inline">\(u\)</span> represents <span class="math inline">\(\succeq\)</span> unique up to a positive linear transformation.</p>
+</div>
+<p>For a well defined and fixed probability function <span class="math inline">\(p\)</span> over the goods <span class="math inline">\(g_{1} ..... g_{n}\)</span> the above axioms of rationality are sufficient to define a sensible utility function based on an agent’s expressed preferences.</p>
+<blockquote>
+<p>“The point is that there is no need to assume or philosophize about, the existence of an underlying subjective utility function, for we are not attempting to account for the preferences or the rules of consistency. We only wish to devise a convenient way to <em>represent</em> them.” p32 <span class="citation">(<a href="references.html#ref-luce1989games" role="doc-biblioref">Luce and Raiffa 1989</a>)</span></p>
+</blockquote>
+<p><img src="assets/images/compound_lotteries.png" alt="drawing" height="500"/></p>
+<p>The thought gives hope to the idea that you would be able to predict an individual’s actions in any environment where you knew both their preferences and the objective probabilities at play. This is the basic model for understanding poker play - the probabilities are generally known and it just remains to determine the game theoretical dynamics, assuming the other players act consistently and intelligently to pursue rational preferences.</p>
+</div>
+<div id="bolkers-representation-theorem" class="section level3" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> Bolker’s Representation Theorem</h3>
+<p>For this interpretation to work we need some extra structure to represent simple algorithmic rules for composition of belief. Taking simple cases and aggregating or combining them in a way which adheres to obviously sensible procedures in the base case, and generalises across a total range of arbitrary complexity.</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-15" class="definition"><strong>Definition 2.1  (Boolean Algebra)  </strong></span> A Boolean Algebra is a relational structure <span class="math inline">\(\Omega = \langle S, \wedge, \vee, \neg, \top, \bot \rangle\)</span> such that the following axioms hold:</p>
+<ul>
+<li><p><span class="math inline">\(\textbf{Associativity }\)</span> <span class="math inline">\(\alpha \wedge (\beta \wedge \gamma) = (\alpha \wedge \beta) \wedge \gamma \text{      and      } \alpha \vee (\beta \vee \gamma) = (\alpha \vee \beta) \vee \gamma\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Commutativity}\)</span> <span class="math inline">\(\alpha \vee \beta = \beta \vee \alpha \text{      and      } \alpha \wedge \beta = \beta \wedge \alpha\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Absorption}\)</span> <span class="math inline">\(\alpha \vee (\alpha \wedge \beta) = \alpha \text{      and      } \alpha \wedge (\alpha \vee \beta) = \alpha\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Idempotence}\)</span> <span class="math inline">\(\alpha \wedge \top = \alpha \text{      and      } \alpha \vee \bot = \alpha\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Normality}\)</span> <span class="math inline">\(\alpha \vee \neg\alpha = \top \text{      and      } \alpha \wedge \neg\alpha = \bot\)</span></p></li>
+<li><p><span class="math inline">\(\textbf{Distributivity}\)</span> <span class="math inline">\(\alpha \wedge (\beta \vee \gamma) = (\alpha \wedge \beta) \vee (\alpha \wedge \gamma) \text{      and      } \alpha \vee (\beta \wedge \gamma) = (\alpha \vee \beta) \wedge (\alpha \vee \gamma)\)</span></p></li>
+</ul>
+<p><span class="math inline">\(\textbf{Example:}\)</span> The classical propositional calculus forms a boolean algebra where the elements <span class="math inline">\({\top, \bot \in S}\)</span> are interpreted as Truth and Falsity. The set of well-formed formulas of propositional logic are: <span class="math inline">\(\alpha \  | \  \alpha \wedge \beta \  | \  \alpha \vee \beta \  | \  \neg\alpha \ |\)</span> and we have an interpretation function <span class="math inline">\({ [[ \cdot ]] : \Omega \mapsto \{1, 0 \}}\)</span> across the signature of the language in the usual truth functional manner.</p>
+<p><span class="math display">\[ [[ \alpha \wedge \beta  ]]  = [[ \alpha  ]] \wedge [[ \beta  ]] \]</span>
+<span class="math display">\[ [[ \alpha \vee \beta  ]]  = [[ \alpha  ]] \vee [[ \beta  ]] \]</span>
+<span class="math display">\[ [[ \neg\alpha ]]  = \neg [[ \alpha  ]] \]</span></p>
+<p>The mapping defines an implication relation <span class="math inline">\(\alpha \models \beta \Leftrightarrow [[ \alpha \vee \beta ]] = [[ \beta ]] \Leftrightarrow [[ \beta \wedge \alpha ]] = [[ \alpha ]] \\ \Leftrightarrow [[ \alpha ]] \leq [[ \beta ]]\)</span> defines an ordering.</p>
+</div>
+</div>
+<div id="from-neutrality-to-desire" class="section level3" number="2.5.4">
+<h3><span class="header-section-number">2.5.4</span> From Neutrality to Desire</h3>
+<p>One of the issues with eliciting a utility curve with appeals to bets over lotteries stems from the stigma associated with gambling. An alternative approach, more in the spirit of Bayesian philosophy is to try to elicit the desirability of a prospect by situating it between two polarities and repeatedly seeking a third prospect, midpoint between the two, which is half as desirable by construction. The method originally proposed by Frank Ramsey relies on the idea that we express preferences over a boolean algebra of propositions and we can gauge utility by appeal to an “Ethically Neutral” proposition <span class="math inline">\(Neutral\)</span> - one which if it exists is such that for all other prospects <span class="math inline">\(\alpha\)</span> we’re utterly indifferent between:</p>
+<p><span class="math display">\[(Neutral \wedge \alpha) \sim \alpha \sim (\neg Neutral \wedge \alpha)\]</span>.</p>
+<p>We can gauge desire by offers of repeatedly refined contracts based on an ethically neutral proposition. This sequence of offers can be used to construct a utility curve. This is Bayesian in spirit because it allows for the expression of a probability measure for any proposition even if there is no canonical probability distribution over the considered outcomes.</p>
+<p>First observe that</p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+[ \alpha \text{ if } Neutral, \omega \text{ if } \neg Neutral ]_{contract_{1}} \\  \sim [ \omega  \text{ if } Neutral, \alpha \text{ if } \neg Neutral ]_{contract_{2}} \\   \Rightarrow u(contract_{1})  = u(contract_{2})   \\  \Rightarrow EU(contract_{1}) \\ = u(\alpha)p(Neutral) + u(\omega)(1-p(Neutral)) \\ 
+= u(\omega)p(Neutral) + u(\alpha)(1-p(Neutral)) \\ 
+= EU(contract_{2})  
+\\ \Leftrightarrow p(Neutral) = 0.5
+\end{split}
+\end{equation}\]</span></p>
+<p>Then we can take any two extremes <span class="math inline">\(u(\alpha) = 1, u(\omega) = 0\)</span> and we can use our test for indifference to situate any third proposition <span class="math inline">\(\gamma\)</span> on a desirability scale since:
+<span class="math display">\[\begin{equation} 
+\begin{split}
+ [\gamma \text{ if } Neutral, \gamma \text{ if } \neg Neutral]_{contract_1} \\ 
+ \sim   [\alpha \text{ if } Neutral, \omega \text{ if } \neg Neutral ]_{contract_2} \\
+ \Leftrightarrow EU(contract_{2}) = u(alpha)\frac{1}{2}  + u(omega)\frac{1}{2} = .5  \\ = u(\gamma) = EU(contract_{1})
+\end{split}
+\end{equation}\]</span></p>
+<p>Repeating this step we can find a contract on a sure-thing <span class="math inline">\(\psi\)</span> for which we’re indifferent between:
+<span class="math display">\[\begin{equation} 
+\begin{split}
+[\psi \text{ if } Neutral, \psi \text{ if } \neg Neutral]_{contract_1}  \\
+ \sim   [\alpha \text{ if } Neutral, \gamma \text{ if } \neg Neutral ]_{contract_2} \\
+  \Rightarrow u(\psi) = .75
+   \\ . . . etc
+ \end{split}
+\end{equation}\]</span></p>
+<p><img src="assets/images/utility_construct.png" alt="drawing"/></p>
+<p>Repeating this process indefinitely we can refine our utility scale as exactly as we please, by repeatedly finding prospects with a utility precisely on the mid-point between two poles. If these measures adhere to certain basic constraints of rationality regarding consistency of utility we can show how a Bayesian agent can be seen to maximise their expected utility when making decisions under uncertainty. But unlike the Von Neumann representation theorem, for a Bayesian the probability function over prospects is not unique. We can have multiple pairs <span class="math inline">\(\langle p, u \rangle\)</span> which are representative of an individual’s preference ordering <span class="math inline">\(\succeq\)</span> without converging on the particular probabilities ascribed by one individual. This is precisely the content of the following theorem.</p>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-16" class="theorem"><strong>Theorem 2.2  (Bolker’s Representation Theorem)  </strong></span>Let <span class="math inline">\(\mathbb{B} = \langle \Omega, \succeq \rangle\)</span> be Bolker structure if <span class="math inline">\(\Omega\)</span> is an atomless Boolean algebra and <span class="math inline">\(\models\)</span> forms an implication relation over <span class="math inline">\(\Omega\)</span>, while <span class="math inline">\(\succeq\)</span> is complete, transitive, continuous over <span class="math inline">\(\Omega \setminus \bot\)</span> and the following hold:</p>
+<ul>
+<li><p>(Impartiality) Suppose $$ and <span class="math inline">\(\exists \gamma (\neg(\gamma \sim \alpha))\)</span> such that <span class="math inline">\(\alpha \wedge \gamma = \bot = \beta \wedge \gamma\)</span> and $$ Then $ ( )$</p></li>
+<li><p>(Averaging) If <span class="math inline">\(\alpha \wedge \beta = \bot\)</span> then <span class="math inline">\(\alpha \succeq \beta \Leftrightarrow \alpha \succeq \alpha \vee \beta \succeq \beta\)</span></p></li>
+</ul>
+<p>Then there is a probability measure and utility (desirability) metric <span class="math inline">\(\langle p, u \rangle\)</span> on <span class="math inline">\(\Omega\)</span> such that if the following axioms hold:</p>
+<ul>
+<li>(A0) <span class="math inline">\(p(\top) = 1\)</span></li>
+<li>(A1) <span class="math inline">\(p(\alpha) \geq 0\)</span></li>
+<li>(A2) <span class="math inline">\(\alpha \wedge \beta = \bot \rightarrow p(\alpha \vee \beta) = p(\alpha) + p(\beta)\)</span></li>
+<li>(A3) <span class="math inline">\(u(\top) = 0\)</span></li>
+<li>(A4) <span class="math inline">\({\alpha \wedge \beta = \bot \wedge p(\alpha \vee \beta) \neq 0}\)</span> implies <span class="math inline">\({u(\alpha \vee \beta) = \dfrac{u(\alpha)p(\alpha) + u(\beta)p(\beta)}{p(\alpha \vee \beta)} }\)</span></li>
+</ul>
+<p>then it follows that
+<span class="math display">\[  u(\alpha) \geq u(\beta) \Leftrightarrow \alpha \succeq \beta \]</span></p>
+<p>and there is another such set of functions <span class="math inline">\(\langle p^{*}, u^{*} \rangle\)</span> if and only if <span class="math inline">\(u^{*}\)</span> is a fractional linear transformation of <span class="math inline">\(u\)</span> i.e. <span class="math inline">\({ \exists a &gt; 0}\)</span> and <span class="math inline">\({\exists c , cu(\alpha) &gt; -1}\)</span>
+<span class="math display">\[ p^{*}(\alpha) = p(\alpha) \cdot (cu(\alpha) + 1) \]</span>
+<span class="math display">\[u^{*}(\alpha) = \frac{au(\alpha)}{cu(\alpha)+1} \]</span></p>
+</div>
+<p>The mathematical machinery used to prove this result is a little more involved, ranging over every possible boolean combination of beliefs measured on three axes: preference, probability and desirability. In addition to the usual probability axioms, (A3) and (A4) tie subjective probability and subjective utility together. The axiom (A3) works to normalise the utility scale so that no sure prospect has any positive utility. This, in a sense, enshrines the requirement that there is only a utility to novel information. While (A4) ensures that the utility of any disjunction is the weighted average of the ways in which it can occur. More importantly it implies:
+<span class="math display">\[u(\alpha \vee \neg\alpha) = u(\top) = p(\alpha)u(\alpha) + p(\neg\alpha)u(\neg\alpha)\]</span><br />
+<span class="math display">\[= p(\alpha)u(\alpha) + u(\neg\alpha) - p(\alpha)u(\neg\alpha) \]</span>
+<span class="math display">\[ \Rightarrow u(\top) - u(\neg\alpha) = p(\alpha)u(\alpha)  - p(\alpha)u(\neg\alpha)\]</span>
+<span class="math display">\[ \Rightarrow p(\alpha) = \frac{u(\top) - u(\neg\alpha)}{ u(\alpha)  - u(\neg\alpha)} \text{  if } u(\alpha) \neq u(\neg\alpha) \]</span></p>
+<p>Which confirms how the relationship between probability of a given proposition can be expressed in terms of the desirability or utility of the same proposition and it’s negation. This is a view of probability profoundly different from measure of risk we ascribe to players calculating pot-odds in poker. It is not a fixed unique distribution determined by observation across repeated sampling, and consequently much harder to model. The probabilities reflect the dynamics and eccentricities of individual beliefs and the agent is seen as maximising their subjective expectations. Given how the average consumer cannot then be modelled with respect to a fixed reference probability distribution, you might despair of ever predicting an individual’s actions. Fortunately crowding promotes conformity and what seems mysterious at the micro level becomes clearer at the macro scale.</p>
+</div>
+</div>
+<div id="machine-learning-and-the-models-of-utility" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> Machine Learning and the Models of Utility</h2>
+<p>The most influential approach to automating the representation theorems above stem from the work of Daniel McFadden. Hi s analyis of the BART transport system in San Francisco and the algorithmic approach he took to estimating the preferences of the San Francisco residents. He used this analysis to accurately predict the uptake in the rail-users within the city thereby showing that a sound understanding of the incentives and pressures on city infrastructure can influence the preferences of the citizenry. The core insight treats utility as a latent factor driving demand in the market. The utility is some function of product and consumer’s properties, perhaps mostly driven by price</p>
+<p><span class="math display">\[ utility = \mathbf{X&#39;}\beta + v\]</span></p>
+<p>and market share is an expression of that utility</p>
+<p><span class="math display">\[ demand\_A = utility\_{A} &gt; 0 \]</span></p>
+<p>So we can use the observed facts of market demand to estimate <span class="math inline">\(\beta\)</span> coefficients which determine subjective utility ranking across the market.
+The revealed preference assumption says that we can predict the purchase if the utility of the good is positive.</p>
+<p><span class="math display">\[Pr(demand_A = 1) = utility &gt; 0 \]</span>
+<span class="math display">\[= Pr(\mathbf{X&#39;}\beta + v &gt; 0) \]</span>
+<span class="math display">\[ = Pr(v &gt; - \mathbf{X&#39;}\beta ) \]</span>
+<span class="math display">\[ = 1 - F(\mathbf{X&#39;}\beta ) \]</span></p>
+<p>where <span class="math inline">\(F\)</span> is the distribution of the unobserved random variable <span class="math inline">\(v\)</span>. The challenge is using the correct distribution as this feeds the method of statistical estimation of the parameters <span class="math inline">\(\beta\)</span>. So in the case of a choice over two goods, we have two equations and the utility of the product A is estimated as its positive difference over the reference product B.</p>
+<p><span class="math display">\[U_{i,A} &gt; U_{i, B} \]</span></p>
+<p>just when</p>
+<p><span class="math display">\[ \mathbf{X&#39;}_{i, A}\beta + v_{i,A} &gt; \mathbf{X&#39;}_{i, B}\beta + v_{i,B}\]</span></p>
+<p>or</p>
+<p><span class="math display">\[  v_{i,A} -  v_{i,B} &gt; - (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \]</span></p>
+<p>but then the probability of demand is just</p>
+<p><span class="math display">\[Pr(demand_A = 1 | \mathbf{X&#39;}\_{i, A}, \mathbf{X&#39;}\_{i, B}) \]</span>
+<span class="math display">\[ = Pr\Bigg( v_{i,A} -  v_{i,B} &gt; - (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) \]</span>
+<span class="math display">\[ = Pr\Bigg( -v_{i,A} -  v\_{i,B} &lt; (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) \]</span>
+<span class="math display">\[ = F\Bigg( (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) \]</span></p>
+<div id="maximum-likelihood-estimation-and-multiple-choice" class="section level3" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Maximum Likelihood Estimation and Multiple Choice</h3>
+<p>These equations are typically estimated by means of a maximum likelihood technique over classification algorithms. Which in practice tend to be estimated with logistic regression model in the binary case and the multinomial logistic regression in model when there are more goods to be considered.</p>
+<p><span class="math display">\[ Pr(y_A = 1 | \mathbf{X}_{i, A}, ...  \mathbf{X}_{i, j}) = \frac{ exp(\mathbf{X&#39;}\beta)_{i, A}}{1 + \sum_{i, j}^{j=N} exp(\mathbf{X&#39;}\beta)_{i, j} }  \]</span>
+The method of maximum likelihood involves taking the underlying probability distribution and finding the parameters <span class="math inline">\(\beta\)</span> which maximise the probability of the observed data. Imagine the latent utility equation is linear over properties of the goods on offer, we simulate some fake data and observe how the method works.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="average-man.html#cb12-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">100</span>)</span>
+<span id="cb12-2"><a href="average-man.html#cb12-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb12-3"><a href="average-man.html#cb12-3" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">0</span>]</span>
+<span id="cb12-4"><a href="average-man.html#cb12-4" aria-hidden="true" tabindex="-1"></a>rho <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb12-5"><a href="average-man.html#cb12-5" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> [[<span class="dv">1</span>, rho], [rho, <span class="dv">1</span>]]</span>
+<span id="cb12-6"><a href="average-man.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="average-man.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># u is N*2</span></span>
+<span id="cb12-8"><a href="average-man.html#cb12-8" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.random.multivariate_normal(mu, cov, <span class="dv">1000</span>)</span>
+<span id="cb12-9"><a href="average-man.html#cb12-9" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>(N,<span class="dv">2</span>)) <span class="co">#np.random.rand(N,2)</span></span>
+<span id="cb12-10"><a href="average-man.html#cb12-10" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>(N,<span class="dv">2</span>)) <span class="co">#np.random.rand(N,2)</span></span>
+<span id="cb12-11"><a href="average-man.html#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="average-man.html#cb12-12" aria-hidden="true" tabindex="-1"></a>U <span class="op">=</span> <span class="op">-</span><span class="dv">1</span> <span class="op">+</span> <span class="op">-</span><span class="dv">3</span><span class="op">*</span>x1 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2 <span class="op">+</span> u</span>
+<span id="cb12-13"><a href="average-man.html#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="average-man.html#cb12-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros(shape<span class="op">=</span>(N, <span class="dv">2</span>))</span>
+<span id="cb12-15"><a href="average-man.html#cb12-15" aria-hidden="true" tabindex="-1"></a>y[:,<span class="dv">0</span>] <span class="op">=</span> ((U[:,<span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&amp;</span> (U[:,<span class="dv">0</span>] <span class="op">&gt;</span> U[:,<span class="dv">1</span>]))</span>
+<span id="cb12-16"><a href="average-man.html#cb12-16" aria-hidden="true" tabindex="-1"></a>y[:,<span class="dv">1</span>] <span class="op">=</span> (U[:,<span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;</span> (U[:,<span class="dv">1</span>] <span class="op">&gt;</span> U[:,<span class="dv">0</span>]))</span>
+<span id="cb12-17"><a href="average-man.html#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="average-man.html#cb12-18" aria-hidden="true" tabindex="-1"></a>W1 <span class="op">=</span> pd.DataFrame({<span class="st">&#39;x1&#39;</span>:x1[:,<span class="dv">0</span>], <span class="st">&#39;x2&#39;</span>:x2[:,<span class="dv">0</span>]})</span>
+<span id="cb12-19"><a href="average-man.html#cb12-19" aria-hidden="true" tabindex="-1"></a>W2 <span class="op">=</span> pd.DataFrame({<span class="st">&#39;x1&#39;</span>:x1[:,<span class="dv">1</span>], <span class="st">&#39;x2&#39;</span>:x2[:,<span class="dv">1</span>]})</span>
+<span id="cb12-20"><a href="average-man.html#cb12-20" aria-hidden="true" tabindex="-1"></a>y_full <span class="op">=</span> np.ones(shape<span class="op">=</span>(N<span class="op">*</span><span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb12-21"><a href="average-man.html#cb12-21" aria-hidden="true" tabindex="-1"></a>class_1 <span class="op">=</span> np.where(((U[:,<span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&amp;</span> (U[:,<span class="dv">0</span>] <span class="op">&gt;</span> U[:,<span class="dv">1</span>])), <span class="st">&#39;class_1&#39;</span>, <span class="st">&#39;class_0&#39;</span>)</span>
+<span id="cb12-22"><a href="average-man.html#cb12-22" aria-hidden="true" tabindex="-1"></a>class_2 <span class="op">=</span> np.where((U[:,<span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;</span> (U[:,<span class="dv">1</span>] <span class="op">&gt;</span> U[:,<span class="dv">0</span>])), <span class="st">&#39;class_2&#39;</span>, <span class="st">&#39;class_0&#39;</span>)</span>
+<span id="cb12-23"><a href="average-man.html#cb12-23" aria-hidden="true" tabindex="-1"></a>y_full <span class="op">=</span> np.append(class_1, class_2)</span>
+<span id="cb12-24"><a href="average-man.html#cb12-24" aria-hidden="true" tabindex="-1"></a>W_full <span class="op">=</span> sm.add_constant(W1.append(W2)).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-25"><a href="average-man.html#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="average-man.html#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="average-man.html#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cdf(W, beta):</span>
+<span id="cb12-28"><a href="average-man.html#cb12-28" aria-hidden="true" tabindex="-1"></a>    Wb <span class="op">=</span> np.dot(W, beta)</span>
+<span id="cb12-29"><a href="average-man.html#cb12-29" aria-hidden="true" tabindex="-1"></a>    eXB <span class="op">=</span> np.exp(Wb)</span>
+<span id="cb12-30"><a href="average-man.html#cb12-30" aria-hidden="true" tabindex="-1"></a>    eXB <span class="op">=</span> eXB <span class="op">/</span>eXB.<span class="bu">sum</span>(<span class="dv">1</span>)[:, <span class="va">None</span>]</span>
+<span id="cb12-31"><a href="average-man.html#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> eXB</span>
+<span id="cb12-32"><a href="average-man.html#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="average-man.html#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> take_log(probs):</span>
+<span id="cb12-34"><a href="average-man.html#cb12-34" aria-hidden="true" tabindex="-1"></a>    epsilon <span class="op">=</span> <span class="fl">1e-20</span> </span>
+<span id="cb12-35"><a href="average-man.html#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.log(probs <span class="op">+</span> epsilon)</span>
+<span id="cb12-36"><a href="average-man.html#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="average-man.html#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_ll(logged, d):</span>
+<span id="cb12-38"><a href="average-man.html#cb12-38" aria-hidden="true" tabindex="-1"></a>    ll <span class="op">=</span> d <span class="op">*</span> logged</span>
+<span id="cb12-39"><a href="average-man.html#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ll</span>
+<span id="cb12-40"><a href="average-man.html#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a href="average-man.html#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ll_mn_logistic(params, <span class="op">*</span>args):</span>
+<span id="cb12-42"><a href="average-man.html#cb12-42" aria-hidden="true" tabindex="-1"></a>    y, W, n_params, n_classes <span class="op">=</span> args[<span class="dv">0</span>], args[<span class="dv">1</span>], args[<span class="dv">2</span>], args[<span class="dv">3</span>]</span>
+<span id="cb12-43"><a href="average-man.html#cb12-43" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> [params[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(params))]</span>
+<span id="cb12-44"><a href="average-man.html#cb12-44" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> np.array(beta).reshape(n_params, <span class="op">-</span><span class="dv">1</span>, order<span class="op">=</span><span class="st">&#39;F&#39;</span>)</span>
+<span id="cb12-45"><a href="average-man.html#cb12-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensures fit against a reference class</span></span>
+<span id="cb12-46"><a href="average-man.html#cb12-46" aria-hidden="true" tabindex="-1"></a>    beta[:,<span class="dv">0</span>] <span class="op">=</span> [<span class="dv">0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, n_params)]</span>
+<span id="cb12-47"><a href="average-man.html#cb12-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-48"><a href="average-man.html#cb12-48" aria-hidden="true" tabindex="-1"></a>    <span class="co">## onehot_encode</span></span>
+<span id="cb12-49"><a href="average-man.html#cb12-49" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> pd.get_dummies(y, prefix<span class="op">=</span><span class="st">&#39;Flag&#39;</span>).to_numpy()</span>
+<span id="cb12-50"><a href="average-man.html#cb12-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-51"><a href="average-man.html#cb12-51" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> cdf(W, beta)</span>
+<span id="cb12-52"><a href="average-man.html#cb12-52" aria-hidden="true" tabindex="-1"></a>    logged <span class="op">=</span> take_log(probs)</span>
+<span id="cb12-53"><a href="average-man.html#cb12-53" aria-hidden="true" tabindex="-1"></a>    ll <span class="op">=</span> calc_ll(logged, d)</span>
+<span id="cb12-54"><a href="average-man.html#cb12-54" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-55"><a href="average-man.html#cb12-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.<span class="bu">sum</span>(ll)</span>
+<span id="cb12-56"><a href="average-man.html#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-57"><a href="average-man.html#cb12-57" aria-hidden="true" tabindex="-1"></a>n_params <span class="op">=</span> <span class="dv">3</span> </span>
+<span id="cb12-58"><a href="average-man.html#cb12-58" aria-hidden="true" tabindex="-1"></a>n_classes <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb12-59"><a href="average-man.html#cb12-59" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.random.rand(<span class="dv">3</span>,<span class="dv">3</span>).flatten()</span>
+<span id="cb12-60"><a href="average-man.html#cb12-60" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> optimize.minimize(ll_mn_logistic, x0 <span class="op">=</span>z, args <span class="op">=</span>(y_full, W_full, n_params, n_classes), options<span class="op">=</span>{<span class="st">&#39;disp&#39;</span>: <span class="va">True</span>, <span class="st">&#39;maxiter&#39;</span>:<span class="dv">1000</span>})</span></code></pre></div>
+<pre><code>## Optimization terminated successfully.
+##          Current function value: 1260.782799
+##          Iterations: 24
+##          Function evaluations: 280
+##          Gradient evaluations: 28</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="average-man.html#cb14-1" aria-hidden="true" tabindex="-1"></a>res.x[<span class="dv">3</span>:<span class="dv">9</span>]</span></code></pre></div>
+<pre><code>## array([-2.66658492, -4.77244721,  6.27997328, -2.72927852, -4.48757305,
+##         6.4437963 ])</code></pre>
+<p>The estimates are correct in magnitude and direction for the actual parameters driving the latent utility equation, but a little bit wide of the true values. This is in part due to the indirect nature of the estimation but also the wide tails of the logistic distribution. The estimation strategy involves taking one of the product classes as a reference class evaluate the relative probability of demand. We loop through each the products defining their respective worth in terms of the reference product. This is a strong restriction called <strong>The Irrelevance of Independent Alternatives</strong>, as it bakes in the notion that our preferences are consistent and transitive, and the coefficient weights are to be understood as the relative impact of each feature has on the choice of product over and above the impact of that the feature on the choice of the reference product.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="average-man.html#cb16-1" aria-hidden="true" tabindex="-1"></a>mn_logit <span class="op">=</span> sm.MNLogit(y_full, W_full)</span>
+<span id="cb16-2"><a href="average-man.html#cb16-2" aria-hidden="true" tabindex="-1"></a>mn_logit_res <span class="op">=</span> mn_logit.fit()</span></code></pre></div>
+<pre><code>## Optimization terminated successfully.
+##          Current function value: 0.630391
+##          Iterations 7</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="average-man.html#cb18-1" aria-hidden="true" tabindex="-1"></a>mn_logit_res.summary()</span></code></pre></div>
+<pre><code>## &lt;class &#39;statsmodels.iolib.summary.Summary&#39;&gt;
+## &quot;&quot;&quot;
+##                           MNLogit Regression Results                          
+## ==============================================================================
+## Dep. Variable:                      y   No. Observations:                 2000
+## Model:                        MNLogit   Df Residuals:                     1994
+## Method:                           MLE   Df Model:                            4
+## Date:                Sat, 06 Mar 2021   Pseudo R-squ.:                  0.2924
+## Time:                        22:50:20   Log-Likelihood:                -1260.8
+## converged:                       True   LL-Null:                       -1781.9
+## Covariance Type:            nonrobust   LLR p-value:                2.587e-224
+## ==============================================================================
+##  y=class_1       coef    std err          z      P&gt;|z|      [0.025      0.975]
+## ------------------------------------------------------------------------------
+## const         -2.6666      0.219    -12.201      0.000      -3.095      -2.238
+## x1            -4.7724      0.315    -15.143      0.000      -5.390      -4.155
+## x2             6.2800      0.360     17.461      0.000       5.575       6.985
+## ------------------------------------------------------------------------------
+##  y=class_2       coef    std err          z      P&gt;|z|      [0.025      0.975]
+## ------------------------------------------------------------------------------
+## const         -2.7293      0.212    -12.865      0.000      -3.145      -2.313
+## x1            -4.4876      0.299    -15.004      0.000      -5.074      -3.901
+## x2             6.4438      0.348     18.497      0.000       5.761       7.127
+## ==============================================================================
+## &quot;&quot;&quot;</code></pre>
+<p>McFadden’s analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer <span class="math inline">\(C\)</span> to <span class="math inline">\(B\)</span> and <span class="math inline">\(B\)</span> to <span class="math inline">\(T\)</span> then we ought to prefer <span class="math inline">\(C\)</span> to <span class="math inline">\(T\)</span> too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden’s work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail.</p>
+<p><img src="assets/images/multinomial_regression.png" alt="drawing"/ height=500px></p>
+<p>These modelling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, but there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool.</p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>All remarks on Schizophrenia in the following draw on the precise and personal essays in <span class="citation">(<a href="references.html#ref-WangSchizophrenia" role="doc-biblioref">Wang 2019</a>)</span><a href="average-man.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>For a typical example of how <span class="math inline">\(EV\)</span> is used to express decisions under uncertainty see chapter 7 in the textbook <span class="citation">(<a href="references.html#ref-BarberBR_ML" role="doc-biblioref">Barber 2012</a>)</span>, but the paradigm owes much of its influence to decision theoretic work of Leonard Savage in <span class="citation">(<a href="references.html#ref-savage54" role="doc-biblioref">Savage 1954</a>)</span><a href="average-man.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>"The mind has been <em>taken over</em>. The mind has <em>lost the ability to make rational decisions</em> in <span class="citation">(<a href="references.html#ref-WangSchizophrenia" role="doc-biblioref">Wang 2019</a>)</span> pg58<a href="average-man.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>“The Slender Man, the Nothing and Me” in <span class="citation">(<a href="references.html#ref-WangSchizophrenia" role="doc-biblioref">Wang 2019</a>)</span><a href="average-man.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>See ``The Choice of Children" in <span class="citation">(<a href="references.html#ref-WangSchizophrenia" role="doc-biblioref">Wang 2019</a>)</span><a href="average-man.html#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="literature.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-Expected-Utility.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

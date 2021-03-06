@@ -127,3 +127,12 @@ a.anchor {
 visibility: hidden;
   }
 }
+
+/* -----------EXAMPLE_BOX -------------*/
+
+div.EXAMPLE_BOX {
+  padding: 1em;
+  border: 2px solid red;
+  border-radius: 10px;
+  margin: 20px;
+}

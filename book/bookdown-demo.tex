@@ -125,7 +125,7 @@
 
 \title{Examining Algorithms}
 \author{Nathaniel Forde}
-\date{2021-03-04}
+\date{2021-03-06}
 
 \begin{document}
 \maketitle
@@ -153,11 +153,9 @@ Wang's collection of schizophrenias defy easy taxonomy ``because there are just 
 \hypertarget{and-expected-value}{%
 \section{\ldots and Expected Value}\label{and-expected-value}}
 
-There is an algorithm beloved by bureaucrats. An unsung hero of administrators and accountants. An algorithm both ubiquitous and under appreciated. It's pivotal for nearly every business and informs the actions of tech firms and policy makers the world over. It is only mildly hyperbolic to say that understanding this formula unlocks wealth and power. The algorithm lies at the heart of online A/B testing, all policy analysis, sound strategy and poker play.
-\[ EV(O)_{p} = p_{1}u(o_{1}) + p_{2}u(o_{2}) + ... + p_{k}u(o_{k}) \]
+There is an algorithm beloved by bureaucrats. An unsung hero of administrators and accountants. An algorithm both ubiquitous and under appreciated. It's pivotal for nearly every business and informs the actions of tech firms and policy makers the world over. It is only mildly hyperbolic to say that understanding this formula unlocks wealth and power. The algorithm lies at the heart of online A/B testing, all policy analysis, sound strategy and poker play. \[ EV(O)_{p} = p_{1}u(o_{1}) + p_{2}u(o_{2}) + ... + p_{k}u(o_{k}) \]
 
-The expected financial value of a random process is just the sum of the utility (typically dollar outcomes) weighted by their probabilities.
-Outcomes can vary from deals of cards, to customer transactions, election results, continued sanity. Pascal can argue sincerely that such considerations compel even belief in God. The infinite downsides of hell at any likelihood ought to compel even the cynical sceptic. But the formula, glossed as a rule for rational action, merits your attention for more mundane wagers too. If you intend to maximise your expected value, the meaning of probability is not an idle concern. \footnote{For a typical example of how \(EV\) is used to express decisions under uncertainty see chapter 7 in the textbook \citep{BarberBR_ML}, but the paradigm owes much of its influence to decision theoretic work of Leonard Savage in \citep{savage54}} While statistics are often tortured to rubber stamp decisions and probabilities are abused to fit policy prescriptions with false precision, the crisp clarity of the rule has an enduring appeal that promises to sift the murky swamps of Big Data. It's a scalpel that anyone can wield to parse the syntax of statistical jargon and carve answers from an abstract space of probabilities. ``What's my expected return? My likely life-quality?'' - a simple question, with a surprisingly complex answer.
+The expected financial value of a random process is just the sum of the utility (typically dollar outcomes) weighted by their probabilities. Outcomes can vary from deals of cards, to customer transactions, election results, continued sanity. Pascal can argue sincerely that such considerations compel even belief in God. The infinite downsides of hell at any likelihood ought to compel even the cynical sceptic. But the formula, glossed as a rule for rational action, merits your attention for more mundane wagers too. If you intend to maximise your expected value, the meaning of probability is not an idle concern. \footnote{For a typical example of how \(EV\) is used to express decisions under uncertainty see chapter 7 in the textbook \citep{BarberBR_ML}, but the paradigm owes much of its influence to decision theoretic work of Leonard Savage in \citep{savage54}} While statistics are often tortured to rubber stamp decisions and probabilities are abused to fit policy prescriptions with false precision, the crisp clarity of the rule has an enduring appeal that promises to sift the murky swamps of Big Data. It's a scalpel that anyone can wield to parse the syntax of statistical jargon and carve answers from an abstract space of probabilities. ``What's my expected return? My likely life-quality?'' - a simple question, with a surprisingly complex answer.
 
 Decision theory is an abstract formalism which purports to account for how you ought to reason under uncertainty, conditional on knowing your own mind, what you want and the likelihood of those outcomes. Wrestling with a diagnosis of schizophrenia you weigh your future in the face of sickness while knowing your mind could fail in the act, knowing, perhaps, you're not yourself. Schizophrenics are involuntarily detained if a medical professional deems them to have lost sufficient ``insight''\footnote{"The mind has been \emph{taken over}. The mind has \emph{lost the ability to make rational decisions} in \citep{WangSchizophrenia} pg58} , but the stated dysfunction assumes that these kinds of insight should be transparent when the psychiatric crisis is resolved. We'll see that the level of insight assumed by decision theory is, at best, hard won and far from transparent.
 
@@ -178,8 +176,9 @@ In this graph we have fixed a Poisson distribution with a mean of 4.5 and can se
 \begin{Highlighting}[]
 \CommentTok{\# set up the ground truth}
 \NormalTok{np.random.seed(}\DecValTok{100}\NormalTok{)}
+
 \NormalTok{sample\_size }\OperatorTok{=} \DecValTok{10000}
-\NormalTok{expected\_value }\OperatorTok{=}\NormalTok{ lambda\_ }\OperatorTok{=} \FloatTok{4.5}
+\NormalTok{expected\_value }\OperatorTok{=}\NormalTok{ lambda\_ }\OperatorTok{=} \FloatTok{4.6}
 \NormalTok{poi }\OperatorTok{=}\NormalTok{ np.random.poisson}
 \NormalTok{N\_samples }\OperatorTok{=} \BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, sample\_size, }\DecValTok{100}\NormalTok{)}
 
@@ -287,7 +286,7 @@ where \(\epsilon\) is a random variable representing the error (or noise). A mod
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-5-1.pdf}
 
-Every model is a guess as to the implicit order in apparent noise. Sometimes there is no order, and other times the patterns is too subtle for a dumb model to capture. In practice you never really know whether a single new error stems from a misfit but appropriate model or an entirely inappropriate model. As we increase our number of sample fits we hope to better approximate the true linear process (if any) generating the data. Imagine now that the data points in Figure 3 are repeatedly re-speckled over the canvas. We can refit a new model for each set of scattered data points and each refit gives us a new sample values for \$ const, \beta\$. If the underlying data generating process is stable, then the parameter fits will converge to the correct values of \(const, \beta\); correct in the sense that they can be used to draw the line of best fit for the data. A statistically stable process is one that can be modelled with errors \(\epsilon\) normally distributed around \(0\), so that the model will be \textit{ correct on average} because \(E(\epsilon) = 0\). Our predictions will overshoot in some cases but on the whole the errors up and down will cancel each other out.
+Every model is a guess as to the implicit order in apparent noise. Sometimes there is no order, and other times the patterns is too subtle for a dumb model to capture. In practice you never really know whether a single new error stems from a misfit but appropriate model or an entirely inappropriate model. As we increase our number of sample fits we hope to better approximate the true linear process (if any) generating the data. Imagine now that the data points in Figure 3 are repeatedly re-speckled over the canvas. We can refit a new model for each set of scattered data points and each refit gives us a new sample values for \(const, \beta\). If the underlying data generating process is stable, then the parameter fits will converge to the correct values of \(const, \beta\); correct in the sense that they can be used to draw the line of best fit for the data. A statistically stable process is one that can be modelled with errors \(\epsilon\) normally distributed around \(0\), so that the model will be \textit{ correct on average} because \(E(\epsilon) = 0\). Our predictions will overshoot in some cases but on the whole the errors up and down will cancel each other out.
 
 \begin{quote}
 ``Typically, the assumptions in a statistical model are quite hard to prove or disprove, and little effort is spent in that direction. The strength of empircal claims made on the basis of such modeling therefore does not derive from the solidity of those assumptions. Equally, these beliefs cannot be justified by the complexity of the calculations\ldots{} These observations lead to uncomfortable questions'' \citep{freedman_2009}
@@ -392,8 +391,7 @@ The consequent point predictions for \(Y\) are always expected values, skewed by
 
 Making inference from a model is delicate thing. Even simple cases come with controversy. Count the number heads in a series of 5 successive coin flips, then repeat the process 1000 times and you'll arrive at a proportion which characterises that process. If it's a fair coin the long run expected result will be half the number of your coin flips. If the coin is weighted you might have as few as 0. This is the binomial distribution, and it really shines when you're trying to gauge fairness. If a process is biased, the distribution will be skewed. We can use this fact for inference. Consider a dispute over whether the game was rigged.
 
-\[ H_0 : \text{ true proportion of heads } = 0.4  \]
-\[ H_1 : \text{ true proportion of heads } =  0.5 \]
+\[ H_0 : \text{ true proportion of heads } = 0.4  \] \[ H_1 : \text{ true proportion of heads } =  0.5 \]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -550,7 +548,6 @@ We seek competitive advantage for our own produce to balance the cost owed to th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-
 \KeywordTok{def}\NormalTok{ linear\_utility(x, a}\OperatorTok{=}\DecValTok{2}\NormalTok{, b}\OperatorTok{=}\DecValTok{4}\NormalTok{):}
     \CommentTok{\# This works fine on smaller numbers}
     \ControlFlowTok{return}\NormalTok{ a }\OperatorTok{+}\NormalTok{ b}\OperatorTok{*}\NormalTok{x}
@@ -574,47 +571,138 @@ We seek competitive advantage for our own produce to balance the cost owed to th
 \NormalTok{lin }\OperatorTok{=}\NormalTok{ linear\_utility(xdata, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
 
 \CommentTok{\# Create plot}
-\NormalTok{fig, ((ax0, ax1), (ax2, ax3)) }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{labels }\OperatorTok{=}\NormalTok{ [}\StringTok{"{-}exp({-}b*Q)"}\NormalTok{, }\StringTok{"Q {-} b*Q\^{}2"}\NormalTok{, }\StringTok{"a + b*Q"}\NormalTok{, }\StringTok{"(b / (b{-}1))*Q\^{}(1{-}(1/b))"}\NormalTok{]}
+\NormalTok{titles }\OperatorTok{=}\NormalTok{ [}\StringTok{"Negative Exponential Utility Curve"}\NormalTok{, }\StringTok{"Quadratic Utility Curve"}\NormalTok{, }
+          \StringTok{"Linear Utility Curve"}\NormalTok{,}\StringTok{"Narrow Power Utility Curve"}\NormalTok{]}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ [negExp, quad, lin, narrow\_pow]}
 
-\NormalTok{ax0.plot(xdata, negExp, label}\OperatorTok{=}\StringTok{"{-}exp({-}b*Q)"}\NormalTok{)}
-\NormalTok{ax0.set\_title(}\StringTok{"Negative Exponential Utility Curve"}\NormalTok{)}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax0.set\_xticks([])}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax0.set\_yticks([])}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ax0.set\_ylabel(}\StringTok{"U(Q)"}\NormalTok{)}
-\NormalTok{ax0.legend()}
-\NormalTok{ax0.titlesize }\OperatorTok{=} \DecValTok{10}
-
-\NormalTok{ax1.plot(xdata, quad, label}\OperatorTok{=}\StringTok{"Q {-} b*Q\^{}2"}\NormalTok{)}
-\NormalTok{ax1.set\_title(}\StringTok{"Quadratic Utility Curve"}\NormalTok{)}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax1.set\_xticks([])}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax1.set\_yticks([])}
-\NormalTok{ax1.legend()}
-
-\NormalTok{ax2.plot(xdata, lin, label}\OperatorTok{=}\StringTok{"a + b*Q"}\NormalTok{)}
-\NormalTok{ax2.set\_title(}\StringTok{"Linear Utility Curve"}\NormalTok{)}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax2.set\_yticks([])}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax2.set\_xticks([])}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax2.set\_ylabel(}\StringTok{"U(Q)"}\NormalTok{)}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax2.set\_xlabel(}\StringTok{"Q"}\NormalTok{)}
-\NormalTok{ax2.legend()}
-
-\NormalTok{ax3.plot(xdata, narrow\_pow, label}\OperatorTok{=}\StringTok{"(b / (b{-}1))*Q\^{}(1{-}(1/b))"}\NormalTok{)}
-\NormalTok{ax3.set\_title(}\StringTok{"Narrow Power Utility Curve"}\NormalTok{)}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax3.set\_yticks([])}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax3.set\_xticks([])}
-\NormalTok{temp }\OperatorTok{=}\NormalTok{ ax3.set\_xlabel(}\StringTok{"Q"}\NormalTok{)}
-\NormalTok{ax3.legend()}
-
-\ControlFlowTok{for}\NormalTok{ \_ax }\KeywordTok{in}\NormalTok{ [ax0, ax1, ax2, ax3]:}
-\NormalTok{    \_ax.spines[}\StringTok{"right"}\NormalTok{].set\_visible(}\VariableTok{False}\NormalTok{)}
-\NormalTok{    \_ax.spines[}\StringTok{"top"}\NormalTok{].set\_visible(}\VariableTok{False}\NormalTok{)}
-
+\ControlFlowTok{for}\NormalTok{ i, ax }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(np.hstack(axes)):}
+\NormalTok{    ax.plot(xdata, y[i], label}\OperatorTok{=}\NormalTok{labels[i])}
+\NormalTok{    ax.set\_title(titles[i])}
+\NormalTok{    tmp }\OperatorTok{=}\NormalTok{ ax.set\_xticks([])}
+\NormalTok{    tmp }\OperatorTok{=}\NormalTok{ ax.set\_yticks([])}
+\NormalTok{    ax.set\_ylabel(}\StringTok{"U(Q)"}\NormalTok{)}
+\NormalTok{    ax.set\_xlabel(}\StringTok{"Q"}\NormalTok{)}
+\NormalTok{    ax.legend()}
+    
 \NormalTok{fig.suptitle(}\StringTok{"Utility measures over increasing quantities of a good"}\NormalTok{)}
 \NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\[ u(\mathbf{g}) = f(g_{0}, g_{1} ... g_{n}) \]
+
+\noindent There are number of ways we can specify a utility function as seen in Figure 10, but a typical example is the Cobb-Douglas function.
+
+\[ u(\mathbf{g}) = g_{0}^{\alpha_{0}}g_{1}^{\alpha_{1}} ... g_{n}^{\alpha_{n}} \text{ where } \forall i \sum \alpha_i = 1\]
+
+Then taking the case of two goods \(g1, g2\) we can determine an indifference curve where you would be willing to exchange quantities of \(g1\) for an agreeable amount of \(g2\). The task is to express the value of a given good as priced in terms of the other goods. Set
+
+\[u(\mathbf{g}) = k =  g_{1}^{\frac{1}{2}}g_{2}^{\frac{1}{2}} = (g_{1}g_{2})^{\frac{1}{2}}  = \sqrt{g_{1}g_{2}}\] \[ \Rightarrow k^{2} = g_{1}g_{2} \Rightarrow \frac{k^{2}}{g_{2}} = g_{1}\]
+
+Using this formula we can express how the quantities of fair exchange vary based on a fixed utility value. This is not to say that these curves represent an actual or objectively fair price, just that when measured in terms of our utility these are mappings of quantities of goods we would be happy to exchange. Your view of a fair price is encoded in your utility theory. It's at this point when utility theory can be said to verge on empirical science. If we can model your preferences as a utility function characteristic of some general attitude toward acquisition, we might also hope to be able to predict future trades and cater for individual desires.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ cobb\_douglas(g1, g2, a1, a2):}
+    \ControlFlowTok{return}\NormalTok{ g1}\OperatorTok{**}\NormalTok{a1 }\OperatorTok{*}\NormalTok{ g2}\OperatorTok{**}\NormalTok{a2}
+
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{g1 }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{g2 }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{100}\NormalTok{).reshape((}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\NormalTok{contours }\OperatorTok{=}\NormalTok{ ax.contourf(g1, g2.flatten(), cobb\_douglas(g1, g2, }\FloatTok{.5}\NormalTok{, }\FloatTok{.5}\NormalTok{))}
+\NormalTok{tmp }\OperatorTok{=}\NormalTok{ fig.colorbar(contours)}
+\NormalTok{ax.set\_xlabel(}\StringTok{"g1"}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\StringTok{"g2"}\NormalTok{)}
+\NormalTok{ax.set\_title(}\StringTok{"Cobb Douglas: g1\^{}(.5)*g2\^{}(1{-}(.5))"}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+Contrast the case of a schizophrenic's patient's utility as they try to weight aspects of their health. Even if you could measure each dimension simultaneously, what scale captures the worth of autonomy and measures the trade off against clarity, delusion and paranoia? How do you plan for children in the fear of what your genetics could seed? Do you fear the harm done through inheritance or the looming lifelong responsibility of care for an affected child? Even adoption foists onto the child the burden of having you as a parent. The disease calibrates the cost, but the equations are hard to solve.\footnote{See ``The Choice of Children" in \citep{WangSchizophrenia}}
+
+\hypertarget{optimising-utility}{%
+\section{Optimising Utility}\label{optimising-utility}}
+
+A further complication arises when we try to account for a consumer's budget or resources. The shape of the Cobb-Douglas function in Figure 12 shows that the utility surface is constantly increasing with our rate of acquisition. So without any constraints the consumer would not achieve satisfaction, but continue like a glutton consuming forever without cease. Add a budgetary constraint and natural trade-offs between desire and cost mean that we need to find the maximum point at which an indifference curve intersects with our budgetary line. Instead of solving the equation:
+
+\[ \text{ Find } g_{1}, g_{2} \text{ such that } u(g_{1}, g_{2}) = \lambda \]
+
+\noindent we need to solve a constrained optimisation problem: \[ \text{ maximize } u(g_{1}, g_{2})  \text{ subject to } cost(g_{1}, g_{2}) =  \lambda\]
+
+\noindent This style of problem can be approached with the method of Lagrange multipliers. If we let:
+
+\[ L = g_{1}^{\frac{1}{2}}g_{2}^{\frac{1}{2}} - \lambda(2g_{1} + 3g_{2} - 40) \]
+
+\noindent where \(2\) and \(3\) are the unit cost of the respective goods, and \(40\) is our total budget. This \(\lambda\) is our Lagrangian multiplier - a term used to re-express the algebra of our equation as a function of the consumer's capacity to spend.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g1 }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\NormalTok{g2 }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{100}\NormalTok{).reshape((}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+
+\KeywordTok{def}\NormalTok{ g1\_indifference(g2, k, alpha}\OperatorTok{=}\DecValTok{1}\OperatorTok{/}\DecValTok{3}\NormalTok{):}
+\NormalTok{    orig }\OperatorTok{=}\NormalTok{ k}\OperatorTok{**}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{{-}}\NormalTok{alpha)) }\OperatorTok{*}\NormalTok{ g2}\OperatorTok{**}\NormalTok{(}\OperatorTok{{-}}\NormalTok{alpha}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{{-}}\NormalTok{alpha))}
+    \ControlFlowTok{return}\NormalTok{ orig}
+
+\KeywordTok{def}\NormalTok{ plot\_indifference\_curves(ax, alpha}\OperatorTok{=}\FloatTok{.5}\NormalTok{):}
+\NormalTok{    k }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{1}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{    ax.plot(g2, g1\_indifference(g2, k, alpha))}
+\NormalTok{    ax.legend([}\StringTok{"U(g1\^{}.5, g2\^{}.5)"} \OperatorTok{+} \StringTok{" = }\SpecialCharTok{\{\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(i) }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ k])}
+\NormalTok{    ax.set\_xlabel(}\StringTok{"g2"}\NormalTok{)}
+\NormalTok{    ax.set\_ylabel(}\StringTok{"g1 "}\NormalTok{)}
+\NormalTok{    plt.title(}\StringTok{"Indifference Curves with Budget Constraint"}\NormalTok{)}
+
+\KeywordTok{def}\NormalTok{ budget(g, W}\OperatorTok{=}\DecValTok{50}\NormalTok{, price}\OperatorTok{=}\DecValTok{2}\NormalTok{):}
+    \ControlFlowTok{return}\NormalTok{ (W }\OperatorTok{{-}}\NormalTok{ g) }\OperatorTok{/}\NormalTok{ price}
+
+\KeywordTok{def}\NormalTok{ plot\_budget\_constraint(ax, W}\OperatorTok{=}\DecValTok{40}\NormalTok{, price}\OperatorTok{=}\DecValTok{2}\NormalTok{):}
+\NormalTok{    g2 }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{0}\NormalTok{, W])}
+\NormalTok{    g1 }\OperatorTok{=}\NormalTok{ budget(g2, W, price)}
+\NormalTok{    ax.plot(g2, g1)}
+\NormalTok{    ax.fill\_between(g2, }\DecValTok{0}\NormalTok{, g1, alpha}\OperatorTok{=}\FloatTok{0.2}\NormalTok{)}
+\NormalTok{    ax.set\_xlabel(}\StringTok{"g2"}\NormalTok{)}
+\NormalTok{    ax.set\_ylabel(}\StringTok{"g1"}\NormalTok{)}
+    \ControlFlowTok{return}\NormalTok{ ax}
+
+\NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
+\NormalTok{plot\_indifference\_curves(ax)}
+\NormalTok{plot\_budget\_constraint(ax)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+We can discover where utility is maximised when the gradient of the ``curve'' can be set to zero. This is the theory behind the ``hill climbing'' algorithms of gradient descent. When the curvature of the ``slope'' has plateaued i.e.~is zero, then we've reached a maximum or minimum in the multivariate space of the function. As before we want to use this fact to express the implicit function of \(g_{1}\) in terms of \(g_{2}\), but this time including the constraints on our budget.
+
+\[
+\nabla L = dL /  d\mathbf{g} =
+    \begin{pmatrix}
+       \dfrac{\partial u(\mathbf{g})}{\partial g_1} , \dfrac{\partial u(\mathbf{g})}{\partial g_2}
+    \end{pmatrix} = \begin{pmatrix}
+    \frac{1}{2}g_{1}^{-\frac{1}{2}}g_{2}^{\frac{1}{2} } - 2\lambda ,
+    \frac{1}{2}g_{2}^{-\frac{1}{2}}g_{1}^{\frac{1}{2} } - 3\lambda
+    \end{pmatrix} = \mathbf{0}
+  \]
+
+\[ \Rightarrow \lambda = \frac{1}{4}g_{1}^{-\frac{1}{2}}\sqrt{g_{2}} = \frac{4}{25}g_{2}^{-\frac{1}{2}}\sqrt{g_{1}}\]
+
+\[ \Rightarrow  (\frac{1}{4})^2\frac{1}{g_{1}}g_{2} = (\frac{4}{25})^2\frac{1}{g_{2}}g_{1} \Rightarrow (\frac{1}{4})^2 g_{2} = (\frac{4}{25})^2\frac{1}{g_{2}}g_{1}^2  \Rightarrow (\frac{1}{4})^2g_{2}^{2} = (\frac{4}{25})^2g_{1}^2 \]
+
+\[ \Rightarrow g_{2} = \frac{16}{25}g_{1}\]
+
+The same pattern holds for cases with more than two goods. We can express the value of given good \(g_n\) in terms of a function \(f(g_{1}, ... g_{n-1})\). Then substituting this value into our constraint we get:
+
+\[ 2g_{1} + 3(\frac{16}{25})g_{1} = 40 \Rightarrow 2g_{1} + 1.92g_{1} = 40 \Rightarrow 3.92g_{1} = 40\]
+Proving the optimial settings are \(g_{1}^{*} = 10.20 \text{ and } g_{2}^{*} = 6.52 \text{ and } \lambda^{*} = 0.20\)
+
+The above proof shows how we triangulate a consumer's view of any good as expressed through the medium of their utility function. But the method of Lagrangian multipliers is more than a mere algebraic trick. We can interpret the \(\lambda\) term as the rate of change of the consumer's utility as a function of the cost to our resources. How taxing is our treatment, how exhausted is your wallet? The proof is a little more involved, but the significance of this interpretation should be obvious. If we knew our consumers adhered to a particular style of utility function we could model how ``price-changes" would impact their returns to utility and select strategies for maximum gain. The challenge lies in deriving a customer's utility profile.
 
 \hypertarget{literature}{%
 \chapter{Literature}\label{literature}}

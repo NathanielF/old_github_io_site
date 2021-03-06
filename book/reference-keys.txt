@@ -9,10 +9,10 @@ bayesian-inference-inference-to-expected-value
 example-website-traffic
 utility-curves
 the-stakes-from-utility-to-indifference
+optimising-utility
 literature
 methods
 applications
 example-one
 example-two
 final-words
-optimising-utility

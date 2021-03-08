@@ -13,7 +13,7 @@ bayesian-inference-inference-to-expected-value
 example-website-traffic
 utility-curves
 the-stakes-from-utility-to-indifference
-optimising-utility
+optimising-utility-with-constraints
 representation-theorems
 rational-preference-from-indifference-to-utility
 von-neumann-and-morgernsterns-representation-theorem

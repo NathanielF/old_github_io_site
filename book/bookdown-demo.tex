@@ -125,8 +125,23 @@
 
 \title{Examining Algorithms}
 \author{Nathaniel Forde}
-\date{2021-03-06}
+\date{2021-03-09}
 
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -137,10 +152,15 @@
 \hypertarget{preface}{%
 \chapter{Preface}\label{preface}}
 
-What this book is
+This book is written in the conviction that understanding the philosophical foundations of data science can help the data scientist build better models and that the programming of these algorithms clarify the abstractions of philosophical theory. My own path into data science was indirect through philosophy, mathematical logic and, briefly, software engineering. During the lifetime of an engineering project technical debt accrues building complexity by abstraction. There is a direct parallel with accretions of philosophical assumptions that crust over predictive algorithms. The choices made in model design, feature selection and measurement, all embed the kinds of presuppositions about the data generating process that merit doubt and rethinking. More subtle than this though is the intellectual debts that shape even the available choices of models, methodologies and the manner in which we frame a problem and explain our solution others.
 
-\hypertarget{the-average-man}{%
-\chapter{The Average Man}\label{the-average-man}}
+A data science project is simultaneously an effort at translation and persuasion. An attempt to express a problem that is a plausible mathematical approximation of the original problem and renders it amenable to some kind of optimisation. There is a trade-off between the goals of an interpretable model and maximising performance on some key metric. In the short term you may get away with a black-box, but when it breaks (and it will break), you had better be able to explain why. In a business context this often entails articulating a problem in a language familiar to your stakeholders laden with assumptions about the shape of the solution. It's not a trivial task to re-frame the problem if expectations skew in the opposite direction or received wisdom implies the contrary conclusion.
+
+\hypertarget{expected-utility-a-primer}{%
+\chapter{Expected Utility: A Primer}\label{expected-utility-a-primer}}
+
+\hypertarget{average-man}{%
+\section{Average Man}\label{average-man}}
 
 In the 1840s the Average man stalked the nightmares of Augustin Cournot. The mathematician was haunted by a melange of imagined parts. A Frankenstein's monster of mismatched limbs, variously soldered, stapled or sown at the joints. He worried that no one but a ``physical monstrosity'' could exhibit the average, weight, height and other mean attributes in one body. \citep{stigler2016seven} But fantastical fears were no bar to a useful mathematical fiction. The notion of averaging was a technological breakthrough - applications of averaging multiplied without cease: polling, gambling, forecasting - statistics were recorded everywhere, compounding one on another; averages of averages tenuously tethered to observable facts by layers of abstraction and scales of measurement.
 
@@ -151,7 +171,7 @@ Seen from the perspective of a patient the difficulties are more urgent and star
 Wang's collection of schizophrenias defy easy taxonomy ``because there are just so many different ways in which people can develop a syndrome that looks like schizophrenia \ldots{} as we now define it.'' The task then becomes one of coping with uncertainty and adjusting expectations. It's not so exact a science that you can measure twice and cut once. The measurement schemes change and you need multiple cuts. You measure out the impact of treatments and the trade-offs - what's non-negotiable and how many side-effects are acceptable? What works for you versus what's advised by the professionals. Sterile cost-benefit considerations become suddenly dramatic and life changing.
 
 \hypertarget{and-expected-value}{%
-\section{\ldots and Expected Value}\label{and-expected-value}}
+\subsection{\ldots and Expected Value}\label{and-expected-value}}
 
 There is an algorithm beloved by bureaucrats. An unsung hero of administrators and accountants. An algorithm both ubiquitous and under appreciated. It's pivotal for nearly every business and informs the actions of tech firms and policy makers the world over. It is only mildly hyperbolic to say that understanding this formula unlocks wealth and power. The algorithm lies at the heart of online A/B testing, all policy analysis, sound strategy and poker play. \[ EV(O)_{p} = p_{1}u(o_{1}) + p_{2}u(o_{2}) + ... + p_{k}u(o_{k}) \]
 
@@ -161,10 +181,10 @@ Decision theory is an abstract formalism which purports to account for how you o
 
 There is a secondary complication in that whenever expected utility as used as an explanatory model of rational action, there is a risk of pivot, a point where it is substituted for more obscure black-box optimisation techniques over metrics of profit or overall accuracy. The focus switches from modelling the consumer or the patient to modelling returns based on the consumer and the firm's expected value. Swapping a customer catering model for a customer-as-commodity perspective focused on profit in aggregate and customer acquisition. The tendency is common because profit overwhelms all other priorities, but the loss of understanding typically amounts to a longer term net-loss. Shareholders take comfort from increased profit and algorithms deployed at scale, but it's rare that any single algorithm actually or always maximises the available profit. This dynamic enforces a kind of inescapable see-saw motion where the consumer modeling exercise goes through a constant feedback loop. A good model (informal or formal) of human needs and wants feeds a better a predictive model of individual action. When the latter fails we go back to the utility curves and the algorithm of expected value because it is (if not reliably predictive) a rich and deeply explanatory model of human action under uncertainty.
 
-\hypertarget{probability-twin-aspects}{%
-\section{Probability: Twin Aspects}\label{probability-twin-aspects}}
+\hypertarget{probability-dual-aspects}{%
+\section{Probability: Dual Aspects}\label{probability-dual-aspects}}
 
-Probability emerged slowly and with a dual aspect. On one tradition probability refers to the long run tendency of a random process, on another probability is construed as the degree of belief in an outcome. On the first (frequentist) interpretation a probability distribution has certain fixed theoretical characteristics: as in a uniform probability distribution of a fair coin where all outcomes are equally likely, or as with the normal distribution where most outcomes cluster symmetrically about a central average. On the second (Bayesian) reading the characteristics of the probability distribution are learned from the data. The controversy centres around the fact that it's unclear how a frequentist could ascribe probabilities to unique events. Without appeal to a large set of observations (or known theoretical distribution) the claim that an event appears frequently or infrequently is not well defined. Consequently, tabulations of probability appear inappropriate for claims of unique or rare events. In contrast the Bayesian is content to ascribe probabilities to any all partial beliefs no matter how specific. For the Bayesian, the probability calculus is a set of edicts about how to rationally manage and modulate your beliefs. So it's acceptable to have a probabilistic belief in rare cases so long as you update those probabilities with new data when available.
+Probability emerged slowly and with dual aspects. On one tradition probability refers to the long run tendency of a random process, on another probability is construed as the degree of belief in an outcome. On the first (frequentist) interpretation a probability distribution has certain fixed theoretical characteristics: as in a uniform probability distribution of a fair coin where all outcomes are equally likely, or as with the normal distribution where most outcomes cluster symmetrically about a central average. On the second (Bayesian) reading the characteristics of the probability distribution are learned from the data. The controversy centres around the fact that it's unclear how a frequentist could ascribe probabilities to unique events. Without appeal to a large set of observations (or known theoretical distribution) the claim that an event appears frequently or infrequently is not well defined. Consequently, tabulations of probability appear inappropriate for claims of unique or rare events. In contrast the Bayesian is content to ascribe probabilities to any all partial beliefs no matter how specific. For the Bayesian, the probability calculus is a set of edicts about how to rationally manage and modulate your beliefs. So it's acceptable to have a probabilistic belief in rare cases so long as you update those probabilities with new data when available.
 
 These two approaches are united by the Law of Large numbers which states that as the size of our sample increases our sample average will converge to the expected realisation of the theoretical process.
 
@@ -303,7 +323,7 @@ Below we build two sampling distributions based on different models of an underl
 \begin{Highlighting}[]
 \CommentTok{\#\#\#\# Sampling Distributions of Linear Fits}
 \CommentTok{\#\#\#\# Build True Model}
-\NormalTok{N }\OperatorTok{=} \DecValTok{1000}
+\NormalTok{N }\OperatorTok{=} \DecValTok{10000}
 \NormalTok{X }\OperatorTok{=}\NormalTok{ np.random.uniform(}\DecValTok{0}\NormalTok{, }\DecValTok{20}\NormalTok{, N)}
 \NormalTok{uncorrelated\_errors }\OperatorTok{=}\NormalTok{ np.random.normal(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, N)}
 \NormalTok{correlated\_errors }\OperatorTok{=}\NormalTok{ np.random.uniform (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) }\OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\OperatorTok{*}\NormalTok{np.pi, N)) }\OperatorTok{\textbackslash{}}
@@ -440,7 +460,7 @@ If instead we use probability to calibrate our beliefs, then we can be more expl
 
 \[ \overset{posterior}{p(H_{i} | Data)} = \frac{\overset{prior}{p(H_{i})}\overset{liklihood}{p(Data | H_{i})}}{\underset{evidence}{\sum_{i=1}^{i =K} p(Data | H_{i})p(H_i)}}\]
 
-where \$ 1 \leq i \leq K\$ spans the ways in which the data could have been realised across all competing hypotheses.Then, in our toy example, we have:
+where \(1 \leq i \leq K\) spans the ways in which the data could have been realised across all competing hypotheses.Then, in our toy example, we have:
 
 \[ \frac{p(H_1 | 3 in 5)}{p(H_{0} | 3 in 5)} = \frac{\frac{.5\cdot .23}{.5\cdot .32 + .5 \cdot .23}}{\frac{.5\cdot .32}{.5\cdot .32 + .5 \cdot .23}} = \frac{.57}{.42} \]
 
@@ -489,7 +509,15 @@ Websites and apps collect traffic and log interactions. Your details are capture
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-9-1.pdf}
 
-Assume the particular values for each plan, then the expected value of customer journey is just: \(p_{1}\$(o_{1}) + p_{2}\$(o_{2}) + p_{3}\$(o_{3}) + p_{4}\$(o_{4}) = .3*\$10 + .4*\$7 + .2*\$12 + .1*\$0 = \$8.20\) Now imagine there was a change to the website and we observe the following pattern for the next 20 days. The change was made on the hypothesis (\(H+\)) that it would bring a positive boost to revenue. How much more positive? A slight expected increase makes it harder to conclusively reject the \(H+\) even in the fact of contrary indicators. If we observe the above pattern, then what is the new expected value? Have we decisively falisifed \(H+\)? From the frequentist point of view the macro distributional properties haven't significantly changed. But given what we know about the change to the website it would be foolish to accept such a static distributional assumption. Looking only at the small sample of new data, the variance will be large and the estimates of rates of sign-up for each plan will be unstable. Following the Bayesian paradigm we can condition our expectations on the new data, the old data or all the data.
+Assume the particular values for each plan, then the expected value of customer journey is just:
+
+\begin{equation}
+\begin{split}
+EV(O) =  p_{1}\$(o_{1}) + p_{2}\$(o_{2}) + p_{3}\$(o_{3}) + p_{4}\$(o_{4})  = \\ .3*\$10 + .4*\$7 + .2*\$12 + .1*\$0  = \\ \$8.20 
+\end{split}
+\end{equation}
+
+Now imagine there was a change to the website and we observe the following pattern for the next 20 days. The change was made on the hypothesis (\(H+\)) that it would bring a positive boost to revenue. How much more positive? A slight expected increase makes it harder to conclusively reject the \(H+\) even in the fact of contrary indicators. If we observe the above pattern, then what is the new expected value? Have we decisively falisifed \(H+\)? From the frequentist point of view the macro distributional properties haven't significantly changed. But given what we know about the change to the website it would be foolish to accept such a static distributional assumption. Looking only at the small sample of new data, the variance will be large and the estimates of rates of sign-up for each plan will be unstable. Following the Bayesian paradigm we can condition our expectations on the new data, the old data or all the data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -539,12 +567,22 @@ This pattern is not rare. Nearly all substantial decisions are made with small s
 \hypertarget{utility-curves}{%
 \section{Utility Curves}\label{utility-curves}}
 
+We've discussed the slippery notion of a statistical model and how they hook onto the world. How they bake in statistical assumptions and roughly latch to reality by measuring proxies seeking to express expectations. We've seen also that inference from a model is not a straightforward step and depends on our needs and wants. What we seek to optimise over decisions stems from our measures of utility over those choices. This is itself a pregnant model of human rationality - one which achieved its most complete expression in the field of economics. Jevons would observe the difficulty as early as 1871:
+
+\begin{quote}
+The laws {[}of individual economic man's behaviour{]} which we are about to trace out are to be conceived as theoretically true of the individual; they can only be practically verified as regards the aggregate transactions, productions and consumptions of a large body of people. But the laws of the aggregate depend of course upon the laws applying to individual cases. - quoted on pg 149 \emph{The World in the Model} by Mary S. Morgan
+\end{quote}
+
+Morgan notes how the core insight here is that the individual preferences determine the aggregate behaviour, and they cannot be ignored or assumed to cancel out. There is a respect for the subjective core of each individual's decisions. We'll return to the question of how to estimate such subjective utility, but for the moment it's worth examining how (if granted) the model lends itself to the strategising over human action.
+
 \hypertarget{the-stakes-from-utility-to-indifference}{%
 \subsection{The Stakes: From Utility to Indifference}\label{the-stakes-from-utility-to-indifference}}
 
 Our views of probability can flex up and down in response to facts, but it's less clear how our estimates of utility change. Too much of a good thing often tends to the bad. So we dabble, sample and share. In pursuit of variety we swap our goods, shunning stale options in favour of the novel exchange. For a given good we can differ in our appetites but it's relatively straightforward to find the point where - one more donut is one too many. While it can be a bit unclear how we should measure utility, once we've decided on a metric the mathematical characteristics are meaningful. If the scale is donuts, we can infer aspects of your attitudes from your acquisition and enthusiasm for donuts. In most cases we're interested not just in your pursuit of pastries, but how you'd be willing to trade for those pastries.
 
 We seek competitive advantage for our own produce to balance the cost owed to the skills of others. This coordinated compromise lies at the core of maximising subjective utility in a market, but at the limit some scenarios do not admit any admixture of goods. Not all babies can be cut in half. But in most cases a consumer will try to optimise their bundle of goods over an entire marketplace, preserving enough on one key good; money, to remain liquid. So, to a first approximation our utility estimate would seem to be a multivariate function.
+
+\[ u(\mathbf{g}) = f(g_{0}, g_{1} ... g_{n}) \]
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -572,7 +610,7 @@ We seek competitive advantage for our own produce to balance the cost owed to th
 
 \CommentTok{\# Create plot}
 \NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
-\NormalTok{labels }\OperatorTok{=}\NormalTok{ [}\StringTok{"{-}exp({-}b*Q)"}\NormalTok{, }\StringTok{"Q {-} b*Q\^{}2"}\NormalTok{, }\StringTok{"a + b*Q"}\NormalTok{, }\StringTok{"(b / (b{-}1))*Q\^{}(1{-}(1/b))"}\NormalTok{]}
+\NormalTok{labels }\OperatorTok{=}\NormalTok{ [}\VerbatimStringTok{r"{-}exp({-}b*Q)"}\NormalTok{, }\VerbatimStringTok{r"Q {-} b*Q$\^{}2$"}\NormalTok{, }\StringTok{"a + b*Q"}\NormalTok{, }\VerbatimStringTok{r"$(b / (b{-}1))*Q\^{}\{1{-}(1/b)\}$"}\NormalTok{]}
 \NormalTok{titles }\OperatorTok{=}\NormalTok{ [}\StringTok{"Negative Exponential Utility Curve"}\NormalTok{, }\StringTok{"Quadratic Utility Curve"}\NormalTok{, }
           \StringTok{"Linear Utility Curve"}\NormalTok{,}\StringTok{"Narrow Power Utility Curve"}\NormalTok{]}
 \NormalTok{y }\OperatorTok{=}\NormalTok{ [negExp, quad, lin, narrow\_pow]}
@@ -593,9 +631,7 @@ We seek competitive advantage for our own produce to balance the cost owed to th
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf}
 
-\[ u(\mathbf{g}) = f(g_{0}, g_{1} ... g_{n}) \]
-
-There are number of ways we can specify a utility function as seen in Figure 10, but a typical example is the Cobb-Douglas function.
+There are number of ways we can specify a utility function as seen, but a typical example is the Cobb-Douglas function.
 
 \[ u(\mathbf{g}) = g_{0}^{\alpha_{0}}g_{1}^{\alpha_{1}} ... g_{n}^{\alpha_{n}} \text{ where } \forall i \sum \alpha_i = 1\]
 
@@ -603,7 +639,7 @@ Then taking the case of two goods \(g1, g2\) we can determine an indifference cu
 
 \[u(\mathbf{g}) = k =  g_{1}^{\frac{1}{2}}g_{2}^{\frac{1}{2}} = (g_{1}g_{2})^{\frac{1}{2}}  = \sqrt{g_{1}g_{2}}\] \[ \Rightarrow k^{2} = g_{1}g_{2} \Rightarrow \frac{k^{2}}{g_{2}} = g_{1}\]
 
-Using this formula we can express how the quantities of fair exchange vary based on a fixed utility value. This is not to say that these curves represent an actual or objectively fair price, just that when measured in terms of our utility these are mappings of quantities of goods we would be happy to exchange. Your view of a fair price is encoded in your utility theory. It's at this point when utility theory can be said to verge on empirical science. If we can model your preferences as a utility function characteristic of some general attitude toward acquisition, we might also hope to be able to predict future trades and cater for individual desires.
+Using this formula we can express how the quantities of fair exchange vary based on a fixed utility value. This is not to say that these curves represent an actual or objectively fair price, just that when measured in terms of our utility these are mappings of quantities of goods we would be happy to exchange. Your view of a fair price is encoded in your utility theory. It's at this point when utility theory can be said to verge on empirical science. If we can model your preferences as a utility function characteristic of some general attitude toward acquisition, we might also hope to be able to predict future trades and cater for individual desires. Given your particular utility function we can derive your indifference curves over multiple goods - those points at which you're happy to accept \(n\) of one for \(m\) of the other.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -614,11 +650,11 @@ Using this formula we can express how the quantities of fair exchange vary based
 \NormalTok{fig, ax }\OperatorTok{=}\NormalTok{ plt.subplots()}
 \NormalTok{g1 }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{)}
 \NormalTok{g2 }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{100}\NormalTok{).reshape((}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{))}
-\NormalTok{contours }\OperatorTok{=}\NormalTok{ ax.contourf(g1, g2.flatten(), cobb\_douglas(g1, g2, }\FloatTok{.5}\NormalTok{, }\FloatTok{.5}\NormalTok{))}
+\NormalTok{contours }\OperatorTok{=}\NormalTok{ ax.contourf(g1, g2.flatten(), cobb\_douglas(g1, g2, }\FloatTok{.5}\NormalTok{, }\FloatTok{.5}\NormalTok{), cmap}\OperatorTok{=}\NormalTok{cm.coolwarm)}
 \NormalTok{tmp }\OperatorTok{=}\NormalTok{ fig.colorbar(contours)}
 \NormalTok{ax.set\_xlabel(}\StringTok{"g1"}\NormalTok{)}
 \NormalTok{ax.set\_ylabel(}\StringTok{"g2"}\NormalTok{)}
-\NormalTok{ax.set\_title(}\StringTok{"Cobb Douglas: g1\^{}(.5)*g2\^{}(1{-}(.5))"}\NormalTok{)}
+\NormalTok{ax.set\_title(}\VerbatimStringTok{r"Cobb Douglas: $g\_}\SpecialCharTok{\{1\}}\VerbatimStringTok{\^{}\{1/2\}g\_}\SpecialCharTok{\{2\}}\VerbatimStringTok{\^{}\{1{-}(1/2)\}$"}\NormalTok{)}
 \NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
@@ -627,10 +663,10 @@ Using this formula we can express how the quantities of fair exchange vary based
 
 Contrast the case of a schizophrenic's patient's utility as they try to weight aspects of their health. Even if you could measure each dimension simultaneously, what scale captures the worth of autonomy and measures the trade off against clarity, delusion and paranoia? How do you plan for children in the fear of what your genetics could seed? Do you fear the harm done through inheritance or the looming lifelong responsibility of care for an affected child? Even adoption foists onto the child the burden of having you as a parent. The disease calibrates the cost, but the equations are hard to solve.\footnote{See ``The Choice of Children" in \citep{WangSchizophrenia}}
 
-\hypertarget{optimising-utility}{%
-\section{Optimising Utility}\label{optimising-utility}}
+\hypertarget{optimising-utility-with-constraints}{%
+\subsection{Optimising Utility with Constraints}\label{optimising-utility-with-constraints}}
 
-A further complication arises when we try to account for a consumer's budget or resources. The shape of the Cobb-Douglas function in Figure 12 shows that the utility surface is constantly increasing with our rate of acquisition. So without any constraints the consumer would not achieve satisfaction, but continue like a glutton consuming forever without cease. Add a budgetary constraint and natural trade-offs between desire and cost mean that we need to find the maximum point at which an indifference curve intersects with our budgetary line. Instead of solving the equation:
+A further complication arises when we try to account for a consumer's budget or resources. The shape of the Cobb-Douglas function in plot shows that the utility surface is constantly increasing with our rate of acquisition. So without any constraints the consumer would not achieve satisfaction, but continue like a glutton consuming forever without cease. Add a budgetary constraint and natural trade-offs between desire and cost mean that we need to find the maximum point at which an indifference curve intersects with our budgetary line. Instead of solving the equation:
 
 \[ \text{ Find } g_{1}, g_{2} \text{ such that } u(g_{1}, g_{2}) = \lambda \]
 
@@ -654,7 +690,7 @@ where \(2\) and \(3\) are the unit cost of the respective goods, and \(40\) is o
 \KeywordTok{def}\NormalTok{ plot\_indifference\_curves(ax, alpha}\OperatorTok{=}\FloatTok{.5}\NormalTok{):}
 \NormalTok{    k }\OperatorTok{=}\NormalTok{ np.arange(}\DecValTok{1}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{3}\NormalTok{)}
 \NormalTok{    ax.plot(g2, g1\_indifference(g2, k, alpha))}
-\NormalTok{    ax.legend([}\StringTok{"U(g1\^{}.5, g2\^{}.5)"} \OperatorTok{+} \StringTok{" = }\SpecialCharTok{\{\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(i) }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ k])}
+\NormalTok{    ax.legend([}\VerbatimStringTok{r"$U(g1\^{}\{.5\}, g2\^{}\{.5\})"} \OperatorTok{+} \StringTok{" = }\SpecialCharTok{\{\}}\StringTok{$"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(i) }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ k])}
 \NormalTok{    ax.set\_xlabel(}\StringTok{"g2"}\NormalTok{)}
 \NormalTok{    ax.set\_ylabel(}\StringTok{"g1 "}\NormalTok{)}
 \NormalTok{    plt.title(}\StringTok{"Indifference Curves with Budget Constraint"}\NormalTok{)}
@@ -689,7 +725,7 @@ We can discover where utility is maximised when the gradient of the ``curve'' ca
     \frac{1}{2}g_{1}^{-\frac{1}{2}}g_{2}^{\frac{1}{2} } - 2\lambda ,
     \frac{1}{2}g_{2}^{-\frac{1}{2}}g_{1}^{\frac{1}{2} } - 3\lambda
     \end{pmatrix} = \mathbf{0}
-  \]
+\]
 
 \[ \Rightarrow \lambda = \frac{1}{4}g_{1}^{-\frac{1}{2}}\sqrt{g_{2}} = \frac{4}{25}g_{2}^{-\frac{1}{2}}\sqrt{g_{1}}\]
 
@@ -702,6 +738,436 @@ The same pattern holds for cases with more than two goods. We can express the va
 \[ 2g_{1} + 3(\frac{16}{25})g_{1} = 40 \Rightarrow 2g_{1} + 1.92g_{1} = 40 \Rightarrow 3.92g_{1} = 40\] Proving the optimial settings are \(g_{1}^{*} = 10.20 \text{ and } g_{2}^{*} = 6.52 \text{ and } \lambda^{*} = 0.20\)
 
 The above proof shows how we triangulate a consumer's view of any good as expressed through the medium of their utility function. But the method of Lagrangian multipliers is more than a mere algebraic trick. We can interpret the \(\lambda\) term as the rate of change of the consumer's utility as a function of the cost to our resources. How taxing is our treatment, how exhausted is your wallet? The proof is a little more involved, but the significance of this interpretation should be obvious. If we knew our consumers adhered to a particular style of utility function we could model how ``price-changes'' would impact their returns to utility and select strategies for maximum gain. The challenge lies in deriving a customer's utility profile.
+
+\hypertarget{representation-theorems}{%
+\section{Representation Theorems}\label{representation-theorems}}
+
+\hypertarget{rational-preference-from-indifference-to-utility}{%
+\subsection{Rational Preference: From Indifference to Utility}\label{rational-preference-from-indifference-to-utility}}
+
+The core idea is that an agent's utility metric ought to reflect their preferences, so if we can elicit preference statements from our consumer, we should be able to construct their utility curve! One method suggests itself; first canvas a customer for their preferences or observe their preference as expressed by purchases. Then map the maximal and least preferred options to convenient polarities. For instance:
+
+\[ g_{1} \succ g_{2} \succ g_{3} \succ g_{4} \succ g_{5} \]
+
+where:
+
+\[ u(g_{1}) = 0 \text{ and } u(g_{5}) = 1 \]
+
+then each of the intermediary options can be measured in the interval between 0 and 1. However, not all relations map to preference structures e.g.~there are an infinite number of simple ordinal mappings that would work, but a strict ordering does nothing to convey the degree of feeling associated with each option. Extra constraints need to be placed on the utility metric if it is to reflect the properties of a genuine preference relation. Our preferences need to respect certain axioms of rationality.
+
+Let \(R\) denote a binary relation over a set of states \(S\).
+We can place a variety of conditions on the \(R\) preference relation:
+
+\begin{itemize}
+\item
+  \(\textbf{Reflexivity}\) \(\forall \phi \in S: \phi R \phi\)
+\item
+  \(\textbf{Completeness}\) \(\forall \phi, \psi \in S: (\phi \neq \psi) \rightarrow (\phi R \psi \vee \phi R \psi)\)
+\item
+  \(\textbf{Transitivity}\) \(\forall \phi, \psi, \chi \in S: \phi R \psi \wedge \psi R \chi \rightarrow \phi R \chi\)
+\item
+  \(\textbf{Anti-Symmetry}\) \(\forall \phi, \psi \in S: (\phi R \psi \wedge \psi R \phi) \rightarrow \phi = \psi\)
+\item
+  \(\textbf{Asymmetry}\) \(\forall \phi, \psi \in S: \phi R \psi \rightarrow \neg(\psi R \phi)\)
+\item
+  \(\textbf{Symmetry}\) \(\forall \phi, \psi \in S: \phi R \psi \rightarrow \psi R \phi\)
+\item
+  \(\textbf{Acyclic}\) \(\forall \phi_{1} ... \phi_{j} ( \phi_{1} R \phi_{2} .... R \phi_{j} \rightarrow \neg(\phi_{j} R \phi_{1})\)
+\end{itemize}
+
+\(\textbf{Definition: (Individual Preference Structure )}\) \(\langle S, \succeq, \succ, \sim \rangle\) is a (relational) structure where \(\succeq\) is a weak preference ordering on the set \(S\) if \(\succeq\) is a transitive, reflexive and complete. While \(\succ\) is a strict preference ordering if \({\forall \phi, \psi : \phi \succ \psi \Leftrightarrow \phi \succeq \psi \wedge \neg(\psi \succeq \phi)}\). Finally, we have \(\sim\) as an indifference relation just when \({ \forall \phi, \psi : \phi \sim \psi \Leftrightarrow \phi \succeq \psi \wedge \psi \succeq \phi}\)
+\linebreak
+
+\textbf{Definition: (Choice Functions)} We let \textbf{$C$} be a choice function when \({C: S \mapsto S^{*} \subseteq S}\) just when \({S^{*} \neq \emptyset \text{ unless } S = \emptyset }\). For example we have a choice function with respect to a preference structure when \({C^{\succeq}(S) = \{ \Phi \in S : \forall \Psi \in S, \Phi \succeq \Psi \}}\)
+
+The technique pursued by Von Neumann and Morgernstern is to calibrate utility scales based on decisions made about offered bets. Each individual good can be assessed against a simple win-loss lottery between the two most extreme outcomes. If the consumer is indifferent between the sure prospect of the good and a fixed odds lottery on their most (and least) preferred outcomes, they've implicitly weighed their utility of the good.
+
+\[ \forall g_i \exists  p :  g _{i} \sim [p \cdot g_{1}, (1-p)\cdot g_{5}] \rightarrow u(g_{i}) = p \]
+
+\noindent So whenever we are indifferent between a sure thing and a win-loss lottery over the best and worst outcomes we have implicitly chosen the utility of the of good on a 0-1 scale. In this manner we can construct a utility curve across the entire range of options to reflect an underlying preference relation.Von Neumann's choice function is set so that we maximise the expected utility of our choices as determined by our preferences.
+
+\hypertarget{von-neumann-and-morgernsterns-representation-theorem}{%
+\subsection{Von Neumann and Morgernstern's Representation Theorem}\label{von-neumann-and-morgernsterns-representation-theorem}}
+
+The most famous result in decision theory is von Neumann and Morgenstern's Representation theorem. It shows, using the technique discussed above, how expressed preferences (which adhere to certain axioms of rationality) can track with a utility measure. As such the agents can be interpreted as making choices to maximise their expected utility. But the theorem is limited to decisions over well-defined lotteries, and as such makes a poor model for general choice under uncertainty where the odds are approximate, unknown or unclear. Nevertheless the theorem serves as an alternative explanation for the tendency to make decisions based on expected value.
+
+\begin{theorem}[Von Neumann Morgenstern's Representation Theorem]
+\protect\hypertarget{thm:unnamed-chunk-14}{}{\label{thm:unnamed-chunk-14} \iffalse (Von Neumann Morgenstern's Representation Theorem) \fi{} }If an individuals preference relation \(\succeq\) is transitive, complete and satisfies:
+
+\begin{itemize}
+\item
+  (Continuity): \(\forall g_{1} , g_{2} , g_{3} : ( g_{1} \succeq g_{2} \succeq g_{3}) \rightarrow \exists v \in [0, 1] \wedge g_{2} \sim_{i} [v g_{1}, (1-v) g_{3}]_{Lot}\)
+\item
+  (Monotonicity): If \(v_{1}, v_{2} \in [0, 1]\) and \(g_{1} \succ g_{2}\) then \(\Big( [ v_{1} g_{1}, (1-v_{1})g_{2}]_{Lot} \succeq [ v_{2} g_{1}, (1-v_{2})g_{2}]_{Lot} \Big) \Leftrightarrow v_{1} \geq v_{2}\)
+\item
+  (Reduction of Compound lotteries): Each compound lottery \({[q_{1}Lot_{p_{1}}, ..., q_{n}Lot_{p_{n}}]}\) reduces to a simple lottery where each good \((1, .. k)\) is weighted across all branches of the nested decision tree \({[(q_{1}p^{k}_{1} + q_{2}p^{k}_{2} ... + q_{n}p^{k}_{n})g_{k} .... , (q_{1}p^{k-1}_{1} , ...)g_{k-1} + ... (q_{1}p^{1}_{1} , ...)g_{1}]_{Lot}}\) by the usual rules of conditional probability for branching events such that \(\widehat{Lot} \sim Lot\)
+\item
+  (Independence) If \(\widehat{Lot} = [q_{1}Lot_{1}, ..., q_{j}Lot_{j}...q_{n}Lot_{n}]\) and \(L_{j} \sim M\), then \(\widehat{Lot} \sim \widehat{Lot}^{'} = [q_{1}Lot_{1}, ..., q_{j}M...q_{n}Lot_{n}]\)
+\end{itemize}
+
+then \(\exists u_{p} :\widehat{Lot} \mapsto \text{ Val }\) where
+\(u_{p}(\widehat{Lot}) = p_{1}u(g_{1}) + ... + p_{k}u(g_{k})\) and \(u(\widehat{Lot}) \geq u(\widehat{Lot}^{*}) \Leftrightarrow \widehat{Lot} \succeq \widehat{Lot}^{*}\) so that \(u\) represents \(\succeq\) unique up to a positive linear transformation.
+\end{theorem}
+
+For a well defined and fixed probability function \(p\) over the goods \(g_{1} ..... g_{n}\) the above axioms of rationality are sufficient to define a sensible utility function based on an agent's expressed preferences.
+
+\begin{quote}
+``The point is that there is no need to assume or philosophize about, the existence of an underlying subjective utility function, for we are not attempting to account for the preferences or the rules of consistency. We only wish to devise a convenient way to \emph{represent} them''. p32 \citep{luce1989games}
+\end{quote}
+
+The thought gives hope to the idea that you would be able to predict an individual's actions in any environment where you knew both their preferences and the objective probabilities at play. This is the basic model for understanding poker play - the probabilities are generally known and it just remains to determine the game theoretical dynamics, assuming the other players act consistently and intelligently to pursue rational preferences.
+
+\hypertarget{bolkers-representation-theorem}{%
+\subsection{Bolker's Representation Theorem}\label{bolkers-representation-theorem}}
+
+For this interpretation to work we need some extra structure to represent simple algorithmic rules for composition of belief. Taking simple cases and aggregating or combining them in a way which adheres to obviously sensible procedures in the base case, and generalises across a total range of arbitrary complexity.
+
+\begin{definition}[Boolean Algebra]
+\protect\hypertarget{def:unnamed-chunk-15}{}{\label{def:unnamed-chunk-15} \iffalse (Boolean Algebra) \fi{} } A Boolean Algebra is a relational structure \(\Omega = \langle S, \wedge, \vee, \neg, \top, \bot \rangle\) such that the following axioms hold:
+
+\begin{itemize}
+\item
+  \(\textbf{Associativity }\) \(\alpha \wedge (\beta \wedge \gamma) = (\alpha \wedge \beta) \wedge \gamma \text{      and      } \alpha \vee (\beta \vee \gamma) = (\alpha \vee \beta) \vee \gamma\)
+\item
+  \(\textbf{Commutativity}\) \(\alpha \vee \beta = \beta \vee \alpha \text{      and      } \alpha \wedge \beta = \beta \wedge \alpha\)
+\item
+  \(\textbf{Absorption}\) \(\alpha \vee (\alpha \wedge \beta) = \alpha \text{      and      } \alpha \wedge (\alpha \vee \beta) = \alpha\)
+\item
+  \(\textbf{Idempotence}\) \(\alpha \wedge \top = \alpha \text{      and      } \alpha \vee \bot = \alpha\)
+\item
+  \(\textbf{Normality}\) \(\alpha \vee \neg\alpha = \top \text{      and      } \alpha \wedge \neg\alpha = \bot\)
+\item
+  \(\textbf{Distributivity}\) \(\alpha \wedge (\beta \vee \gamma) = (\alpha \wedge \beta) \vee (\alpha \wedge \gamma) \text{      and      } \alpha \vee (\beta \wedge \gamma) = (\alpha \vee \beta) \wedge (\alpha \vee \gamma)\)
+\end{itemize}
+
+\(\textbf{Example:}\) The classical propositional calculus forms a boolean algebra where the elements \({\top, \bot \in S}\) are interpreted as Truth and Falsity. The set of well-formed formulas of propositional logic are: \(\alpha \  | \  \alpha \wedge \beta \  | \  \alpha \vee \beta \  | \  \neg\alpha \ |\) and we have an interpretation function \({ [[ \cdot ]] : \Omega \mapsto \{1, 0 \}}\) across the signature of the language in the usual truth functional manner.
+
+\[ [[ \alpha \wedge \beta  ]]  = [[ \alpha  ]] \wedge [[ \beta  ]] \]
+\[ [[ \alpha \vee \beta  ]]  = [[ \alpha  ]] \vee [[ \beta  ]] \]
+\[ [[ \neg\alpha ]]  = \neg [[ \alpha  ]] \]
+
+The mapping defines an implication relation \(\alpha \models \beta \Leftrightarrow [[ \alpha \vee \beta ]] = [[ \beta ]] \Leftrightarrow [[ \beta \wedge \alpha ]] = [[ \alpha ]] \Leftrightarrow [[ \alpha ]] \leq [[ \beta ]]\) defines an ordering.
+\end{definition}
+
+\hypertarget{from-neutrality-to-desire}{%
+\subsection{From Neutrality to Desire}\label{from-neutrality-to-desire}}
+
+One of the issues with eliciting a utility curve with appeals to bets over lotteries stems from the stigma associated with gambling. An alternative approach, more in the spirit of Bayesian philosophy is to try to elicit the desirability of a prospect by situating it between two polarities and repeatedly seeking a third prospect, midpoint between the two, which is half as desirable by construction. The method originally proposed by Frank Ramsey relies on the idea that we express preferences over a boolean algebra of propositions and we can gauge utility by appeal to an ``Ethically Neutral'' proposition \(Neutral\) - one which if it exists is such that for all other prospects \(\alpha\) we're utterly indifferent between:
+
+\[(Neutral \wedge \alpha) \sim \alpha \sim (\neg Neutral \wedge \alpha)\].
+
+We can gauge desire by offers of repeatedly refined contracts based on an ethically neutral proposition. This sequence of offers can be used to construct a utility curve. This is Bayesian in spirit because it allows for the expression of a probability measure for any proposition even if there is no canonical probability distribution over the considered outcomes.
+
+\noindent First observe that
+
+\begin{equation}
+\begin{split}
+[ \alpha \text{ if } Neutral, \omega \text{ if } \neg Neutral ]_{contract_{1}} \\  \sim [ \omega  \text{ if } Neutral, \alpha \text{ if } \neg Neutral ]_{contract_{2}} \\   \Rightarrow u(contract_{1})  = u(contract_{2})   \\  \Rightarrow EU(contract_{1}) \\ = u(\alpha)p(Neutral) + u(\omega)(1-p(Neutral)) \\ 
+= u(\omega)p(Neutral) + u(\alpha)(1-p(Neutral)) \\ 
+= EU(contract_{2})  
+\\ \Leftrightarrow p(Neutral) = 0.5
+\end{split}
+\end{equation}
+
+\noindent Then we can take any two extremes \(u(\alpha) = 1, u(\omega) = 0\) and we can use our test for indifference to situate any third proposition \(\gamma\) on a desirability scale since:
+\begin{equation} 
+\begin{split}
+ [\gamma \text{ if } Neutral, \gamma \text{ if } \neg Neutral]_{contract_1} \\ 
+ \sim   [\alpha \text{ if } Neutral, \omega \text{ if } \neg Neutral ]_{contract_2} \\
+ \Leftrightarrow EU(contract_{2}) = u(alpha)\frac{1}{2}  + u(omega)\frac{1}{2} = .5  \\ = u(\gamma) = EU(contract_{1})
+\end{split}
+\end{equation}
+
+Repeating this step we can find a contract on a sure-thing \(\psi\) for which we're indifferent between:
+\begin{equation} 
+\begin{split}
+[\psi \text{ if } Neutral, \psi \text{ if } \neg Neutral]_{contract_1}  \\
+ \sim   [\alpha \text{ if } Neutral, \gamma \text{ if } \neg Neutral ]_{contract_2} \\
+  \Rightarrow u(\psi) = .75
+   \\ . . . etc
+ \end{split}
+\end{equation}
+
+Repeating this process indefinitely we can refine our utility scale as exactly as we please, by repeatedly finding prospects with a utility precisely on the mid-point between two poles. If these measures adhere to certain basic constraints of rationality regarding consistency of utility we can show how a Bayesian agent can be seen to maximise their expected utility when making decisions under uncertainty. But unlike the Von Neumann representation theorem, for a Bayesian the probability function over prospects is not unique. We can have multiple pairs \(\langle p, u \rangle\) which are representative of an individual's preference ordering \(\succeq\) without converging on the particular probabilities ascribed by one individual. This is precisely the content of the following theorem.
+
+\begin{theorem}[Bolker's Representation Theorem]
+\protect\hypertarget{thm:unnamed-chunk-16}{}{\label{thm:unnamed-chunk-16} \iffalse (Bolker's Representation Theorem) \fi{} }Let \(\mathbb{B} = \langle \Omega, \succeq \rangle\) be Bolker structure if \(\Omega\) is an atomless Boolean algebra and \(\models\) forms an implication relation over \(\Omega\), while \(\succeq\) is complete, transitive, continuous over \(\Omega \setminus \bot\) and the following hold:
+
+\begin{itemize}
+\item
+  (Impartiality) Suppose \(\alpha \sim \beta\) and \(\exists \gamma (\neg(\gamma \sim \alpha))\) such that \(\alpha \wedge \gamma = \bot = \beta \wedge \gamma\) and \(\alpha \vee \gamma \sim \beta \vee \gamma\) Then \(\forall \gamma ( \alpha \vee \gamma \sim \beta \vee \gamma )\)
+\item
+  (Averaging) If \(\alpha \wedge \beta = \bot\) then \(\alpha \succeq \beta \Leftrightarrow \alpha \succeq \alpha \vee \beta \succeq \beta\)
+\end{itemize}
+
+Then there is a probability measure and utility (desirability) metric \(\langle p, u \rangle\) on \(\Omega\) such that if the following axioms hold:
+
+\begin{itemize}
+\tightlist
+\item
+  (A0) \(p(\top) = 1\)
+\item
+  (A1) \(p(\alpha) \geq 0\)
+\item
+  (A2) \(\alpha \wedge \beta = \bot \rightarrow p(\alpha \vee \beta) = p(\alpha) + p(\beta)\)
+\item
+  (A3) \(u(\top) = 0\)
+\item
+  (A4) \({\alpha \wedge \beta = \bot \wedge p(\alpha \vee \beta) \neq 0}\) implies \({u(\alpha \vee \beta) = \dfrac{u(\alpha)p(\alpha) + u(\beta)p(\beta)}{p(\alpha \vee \beta)} }\)
+\end{itemize}
+
+then it follows that
+\[  u(\alpha) \geq u(\beta) \Leftrightarrow \alpha \succeq \beta \]
+
+and there is another such set of functions \(\langle p^{*}, u^{*} \rangle\) if and only if \(u^{*}\) is a fractional linear transformation of \(u\) i.e.~\({ \exists a > 0}\) and \({\exists c , cu(\alpha) > -1}\)
+\[ p^{*}(\alpha) = p(\alpha) \cdot (cu(\alpha) + 1) \]
+\[u^{*}(\alpha) = \frac{au(\alpha)}{cu(\alpha)+1} \]
+\end{theorem}
+
+The mathematical machinery used to prove this result is a little more involved, ranging over every possible boolean combination of beliefs measured on three axes: preference, probability and desirability. In addition to the usual probability axioms, (A3) and (A4) tie subjective probability and subjective utility together. The axiom (A3) works to normalise the utility scale so that no sure prospect has any positive utility. This, in a sense, enshrines the requirement that there is only a utility to novel information. While (A4) ensures that the utility of any disjunction is the weighted average of the ways in which it can occur. More importantly it implies:
+\[u(\alpha \vee \neg\alpha) = u(\top) = p(\alpha)u(\alpha) + p(\neg\alpha)u(\neg\alpha)\]\\
+\[= p(\alpha)u(\alpha) + u(\neg\alpha) - p(\alpha)u(\neg\alpha) \]
+\[ \Rightarrow u(\top) - u(\neg\alpha) = p(\alpha)u(\alpha)  - p(\alpha)u(\neg\alpha)\]
+\[ \Rightarrow p(\alpha) = \frac{u(\top) - u(\neg\alpha)}{ u(\alpha)  - u(\neg\alpha)} \text{  if } u(\alpha) \neq u(\neg\alpha) \]
+
+Which confirms how the relationship between probability of a given proposition can be expressed in terms of the desirability or utility of the same proposition and it's negation. This is a view of probability profoundly different from measure of risk we ascribe to players calculating pot-odds in poker. It is not a fixed unique distribution determined by observation across repeated sampling, and consequently much harder to model. The probabilities reflect the dynamics and eccentricities of individual beliefs and the agent is seen as maximising their subjective expectations. Given how the average consumer cannot then be modelled with respect to a fixed reference probability distribution, you might despair of ever predicting an individual's actions. Fortunately crowding promotes conformity and what seems mysterious at the micro level becomes clearer at the macro scale.
+
+\hypertarget{machine-learning-and-the-models-of-utility}{%
+\section{Machine Learning and the Models of Utility}\label{machine-learning-and-the-models-of-utility}}
+
+The most influential approach to automating the representation theorems above stem from the work of Daniel McFadden. Hi s analyis of the BART transport system in San Francisco and the algorithmic approach he took to estimating the preferences of the San Francisco residents. He used this analysis to accurately predict the uptake in the rail-users within the city thereby showing that a sound understanding of the incentives and pressures on city infrastructure can influence the preferences of the citizenry. The core insight treats utility as a latent factor driving demand in the market. The utility is some function of product and consumer's properties, perhaps mostly driven by price
+
+\[ utility = \mathbf{X'}\beta + v\]
+
+and market share is an expression of that utility
+
+\[ demand_A = utility_{A} > 0 \]
+
+So we can use the observed facts of market demand to estimate \(\beta\) coefficients which determine subjective utility ranking across the market.
+The revealed preference assumption says that we can predict the purchase if the utility of the good is positive.
+
+\begin{equation}
+\begin{split}
+  p(demand_A = 1) = utility > 0 
+\\ = p(\mathbf{X'}\beta + v > 0) 
+\\ = p(v > - \mathbf{X'}\beta ) 
+\\ = 1 - F(\mathbf{X'}\beta ) 
+\end{split}
+\end{equation}
+
+where \(F\) is the distribution of the unobserved random variable \(v\). The challenge is using the correct distribution as this feeds the method of statistical estimation of the parameters \(\beta\). So in the case of a choice over two goods, we have two equations and the utility of the product A is estimated as its positive difference over the reference product B.
+
+\[U_{i,A} > U_{i, B} \text{ just when } \mathbf{X'}_{i, A}\beta + v_{i,A} > \mathbf{X'}_{i, B}\beta + v_{i,B}\]
+or
+
+\[  v_{i,A} -  v_{i,B} > - (\mathbf{X'}_{i, A}  - \mathbf{X'}_{i, B})\beta \]
+
+but then the probability of demand is just
+
+\begin{equation}
+\begin{split}
+p(demand_A = 1 | \mathbf{X'}_{i, A}, \mathbf{X'}_{i, B}) 
+\\ = p\Bigg( v_{i,A} -  v_{i,B} > - (\mathbf{X'}_{i, A}  - \mathbf{X'}_{i, B})\beta \Bigg) 
+\\ = p\Bigg( -v_{i,A} -  v\_{i,B} < (\mathbf{X'}_{i, A}  - \mathbf{X'}_{i, B})\beta \Bigg) 
+\\ = F\Bigg( (\mathbf{X'}_{i, A}  - \mathbf{X'}_{i, B})\beta \Bigg) 
+\end{split}
+\end{equation}
+
+\hypertarget{maximum-likelihood-estimation-and-multiple-choice}{%
+\subsection{Maximum Likelihood Estimation and Multiple Choice}\label{maximum-likelihood-estimation-and-multiple-choice}}
+
+These equations are typically estimated by means of a maximum likelihood technique over classification algorithms. The method of maximum likelihood involves taking the underlying probability distribution and finding the parameters \(\theta\) which maximise the probability of the observed data. The basic set up for MLE is to take the likelihood question:
+
+\[ MLE(\hat{\theta}) = \underbrace{\text{arg max}}_{\theta} \ \ p(X | \theta) \]
+We'll first demonstrate the technique in the familiar case of the normal distribution. We want to maximise the observed data \(X\) over the parameter space \(\mu, \sigma\). For computational purposes it's easier to maximise the log likelihood than the likelihood.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\KeywordTok{def}\NormalTok{ normal\_likelihood(mu, sigma, X):}
+\NormalTok{  ll }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(stats.norm.logpdf(X, loc}\OperatorTok{=}\NormalTok{mu, scale}\OperatorTok{=}\NormalTok{sigma))}
+  \ControlFlowTok{return}\NormalTok{ ll}
+
+\NormalTok{n }\OperatorTok{=} \DecValTok{50}
+\NormalTok{np.random.seed(}\DecValTok{101}\NormalTok{)}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ stats.norm.rvs(loc}\OperatorTok{=}\DecValTok{2}\NormalTok{, scale}\OperatorTok{=}\DecValTok{1}\NormalTok{, size}\OperatorTok{=}\NormalTok{n)}
+
+\NormalTok{mu\_vals }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, n)}
+\NormalTok{sig\_vals }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, n)}
+\NormalTok{ll\_vals }\OperatorTok{=}\NormalTok{ np.zeros((n, n))}
+
+\NormalTok{max\_settings }\OperatorTok{=}\NormalTok{ [}\OperatorTok{{-}}\DecValTok{1000}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{]}
+\NormalTok{triples }\OperatorTok{=}\NormalTok{ []}
+\ControlFlowTok{for}\NormalTok{ mu\_ind }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n):}
+  \ControlFlowTok{for}\NormalTok{ sig\_ind }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n):}
+\NormalTok{    ll }\OperatorTok{=}\NormalTok{ normal\_likelihood(mu\_vals[mu\_ind],sig\_vals[sig\_ind], X)}
+\NormalTok{    ll\_vals[mu\_ind, sig\_ind] }\OperatorTok{=}\NormalTok{ ll}
+\NormalTok{    triples.append([mu\_vals[mu\_ind], sig\_vals[sig\_ind], ll])}
+    \ControlFlowTok{if}\NormalTok{ ll }\OperatorTok{\textgreater{}}\NormalTok{ max\_settings[}\DecValTok{0}\NormalTok{]:}
+\NormalTok{        max\_settings[}\DecValTok{0}\NormalTok{] }\OperatorTok{=}\NormalTok{ ll}
+\NormalTok{        max\_settings[}\DecValTok{1}\NormalTok{] }\OperatorTok{=}\NormalTok{ mu\_vals[mu\_ind]}
+\NormalTok{        max\_settings[}\DecValTok{2}\NormalTok{] }\OperatorTok{=}\NormalTok{ sig\_vals[sig\_ind]}
+                                                   
+\NormalTok{mu\_mesh, sig\_mesh }\OperatorTok{=}\NormalTok{ np.meshgrid(mu\_vals, sig\_vals)}
+
+\NormalTok{fig }\OperatorTok{=}\NormalTok{ plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{))}
+\NormalTok{ax }\OperatorTok{=}\NormalTok{ plt.axes(projection}\OperatorTok{=}\StringTok{\textquotesingle{}3d\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.plot\_surface(mu\_mesh, sig\_mesh, ll\_vals, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}coolwarm\_r\textquotesingle{}}\NormalTok{, rstride}\OperatorTok{=}\DecValTok{1}\NormalTok{, cstride}\OperatorTok{=}\DecValTok{1}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{1}\NormalTok{, antialiased}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{cset }\OperatorTok{=}\NormalTok{ ax.contourf(mu\_mesh, sig\_mesh, ll\_vals, zdir}\OperatorTok{=}\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{, offset}\OperatorTok{={-}}\DecValTok{150}\NormalTok{, cmap}\OperatorTok{=}\NormalTok{cm.coolwarm\_r)}
+\CommentTok{\#ax.view\_init(20, 25)}
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}MLE for values of mu = }\SpecialCharTok{\{mu\}}\StringTok{ and sigma = }\SpecialCharTok{\{sig\}}\StringTok{\textquotesingle{}}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mu}\OperatorTok{=}\BuiltInTok{round}\NormalTok{(max\_settings[}\DecValTok{1}\NormalTok{],}\DecValTok{2}\NormalTok{), sig}\OperatorTok{=}\BuiltInTok{round}\NormalTok{(max\_settings[}\DecValTok{2}\NormalTok{], }\DecValTok{2}\NormalTok{)))}
+\NormalTok{ax.set\_xlabel(}\VerbatimStringTok{r\textquotesingle{}$\textbackslash{}mu$\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_ylabel(}\VerbatimStringTok{r\textquotesingle{}$\textbackslash{}sigma$\textquotesingle{}}\NormalTok{)}
+\NormalTok{ax.set\_zlabel(}\VerbatimStringTok{r\textquotesingle{}LL\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+Now imagine the latent utility equation is linear over properties of the goods on offer, we simulate some fake data and observe how the method works.
+These parameters can be estimated with logistic regression model in the binary case and the multinomial logistic regression in model when there are more goods to be considered.
+
+\[ p(y_A = 1 | \mathbf{X}_{i, A}, ...  \mathbf{X}_{i, j}) = \frac{ exp(\mathbf{X'}\beta)_{i, A}}{1 + \sum_{i, j}^{j=N} exp(\mathbf{X'}\beta)_{i, j} }  \]
+
+As in the representation theorems we need a scale on which to calibrate the preferences, so we pick a particular good as our reference class and estimate the probabilities of purchase for all other goods relative to that one. We want to estimate a vector of \(\beta\) for each of products. The estimation strategy involves taking one of the product classes as a reference class evaluate the relative probability of demand. We loop through each the products defining their respective worth in terms of the reference product. This is a strong restriction called \textbf{The Irrelevance of Independent Alternatives}, as it bakes in the notion that our preferences are consistent and transitive, and the coefficient weights are to be understood as the relative impact of each feature has on the choice of product over and above the impact of that the feature on the choice of the reference product.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{np.random.seed(}\DecValTok{100}\NormalTok{)}
+\NormalTok{N }\OperatorTok{=} \DecValTok{1000}
+\NormalTok{mu }\OperatorTok{=}\NormalTok{ [}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{]}
+\NormalTok{rho }\OperatorTok{=} \FloatTok{0.1}
+\NormalTok{cov }\OperatorTok{=}\NormalTok{ [[}\DecValTok{1}\NormalTok{, rho], [rho, }\DecValTok{1}\NormalTok{]]}
+
+\CommentTok{\# u is N*2}
+\NormalTok{u }\OperatorTok{=}\NormalTok{ np.random.multivariate\_normal(mu, cov, }\DecValTok{1000}\NormalTok{)}
+\NormalTok{x1 }\OperatorTok{=}\NormalTok{ np.random.uniform(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, size}\OperatorTok{=}\NormalTok{(N,}\DecValTok{2}\NormalTok{)) }\CommentTok{\#np.random.rand(N,2)}
+\NormalTok{x2 }\OperatorTok{=}\NormalTok{ np.random.uniform(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, size}\OperatorTok{=}\NormalTok{(N,}\DecValTok{2}\NormalTok{)) }\CommentTok{\#np.random.rand(N,2)}
+
+\NormalTok{U }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{1} \OperatorTok{+} \OperatorTok{{-}}\DecValTok{3}\OperatorTok{*}\NormalTok{x1 }\OperatorTok{+} \DecValTok{4}\OperatorTok{*}\NormalTok{x2 }\OperatorTok{+}\NormalTok{ u}
+
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.zeros(shape}\OperatorTok{=}\NormalTok{(N, }\DecValTok{2}\NormalTok{))}
+\NormalTok{y[:,}\DecValTok{0}\NormalTok{] }\OperatorTok{=}\NormalTok{ ((U[:,}\DecValTok{0}\NormalTok{] }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (U[:,}\DecValTok{0}\NormalTok{] }\OperatorTok{\textgreater{}}\NormalTok{ U[:,}\DecValTok{1}\NormalTok{]))}
+\NormalTok{y[:,}\DecValTok{1}\NormalTok{] }\OperatorTok{=}\NormalTok{ (U[:,}\DecValTok{1}\NormalTok{] }\OperatorTok{\textgreater{}} \DecValTok{0} \OperatorTok{\&}\NormalTok{ (U[:,}\DecValTok{1}\NormalTok{] }\OperatorTok{\textgreater{}}\NormalTok{ U[:,}\DecValTok{0}\NormalTok{]))}
+
+\NormalTok{W1 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}\StringTok{\textquotesingle{}x1\textquotesingle{}}\NormalTok{:x1[:,}\DecValTok{0}\NormalTok{], }\StringTok{\textquotesingle{}x2\textquotesingle{}}\NormalTok{:x2[:,}\DecValTok{0}\NormalTok{]\})}
+\NormalTok{W2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}\StringTok{\textquotesingle{}x1\textquotesingle{}}\NormalTok{:x1[:,}\DecValTok{1}\NormalTok{], }\StringTok{\textquotesingle{}x2\textquotesingle{}}\NormalTok{:x2[:,}\DecValTok{1}\NormalTok{]\})}
+\NormalTok{y\_full }\OperatorTok{=}\NormalTok{ np.ones(shape}\OperatorTok{=}\NormalTok{(N}\OperatorTok{*}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\NormalTok{class\_1 }\OperatorTok{=}\NormalTok{ np.where(((U[:,}\DecValTok{0}\NormalTok{] }\OperatorTok{\textgreater{}} \DecValTok{0}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (U[:,}\DecValTok{0}\NormalTok{] }\OperatorTok{\textgreater{}}\NormalTok{ U[:,}\DecValTok{1}\NormalTok{])), }\StringTok{\textquotesingle{}class\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}class\_0\textquotesingle{}}\NormalTok{)}
+\NormalTok{class\_2 }\OperatorTok{=}\NormalTok{ np.where((U[:,}\DecValTok{1}\NormalTok{] }\OperatorTok{\textgreater{}} \DecValTok{0} \OperatorTok{\&}\NormalTok{ (U[:,}\DecValTok{1}\NormalTok{] }\OperatorTok{\textgreater{}}\NormalTok{ U[:,}\DecValTok{0}\NormalTok{])), }\StringTok{\textquotesingle{}class\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}class\_0\textquotesingle{}}\NormalTok{)}
+\NormalTok{y\_full }\OperatorTok{=}\NormalTok{ np.append(class\_1, class\_2)}
+\NormalTok{W\_full }\OperatorTok{=}\NormalTok{ sm.add\_constant(W1.append(W2)).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+
+\KeywordTok{def}\NormalTok{ cdf(W, beta):}
+\NormalTok{    Wb }\OperatorTok{=}\NormalTok{ np.dot(W, beta)}
+\NormalTok{    eXB }\OperatorTok{=}\NormalTok{ np.exp(Wb)}
+\NormalTok{    eXB }\OperatorTok{=}\NormalTok{ eXB }\OperatorTok{/}\NormalTok{eXB.}\BuiltInTok{sum}\NormalTok{(}\DecValTok{1}\NormalTok{)[:, }\VariableTok{None}\NormalTok{]}
+    \ControlFlowTok{return}\NormalTok{ eXB}
+
+\KeywordTok{def}\NormalTok{ take\_log(probs):}
+\NormalTok{    epsilon }\OperatorTok{=} \FloatTok{1e{-}20} 
+    \ControlFlowTok{return}\NormalTok{ np.log(probs }\OperatorTok{+}\NormalTok{ epsilon)}
+
+\KeywordTok{def}\NormalTok{ calc\_ll(logged, d):}
+\NormalTok{    ll }\OperatorTok{=}\NormalTok{ d }\OperatorTok{*}\NormalTok{ logged}
+    \ControlFlowTok{return}\NormalTok{ ll}
+
+\KeywordTok{def}\NormalTok{ ll\_mn\_logistic(params, }\OperatorTok{*}\NormalTok{args):}
+\NormalTok{    y, W, n\_params, n\_classes }\OperatorTok{=}\NormalTok{ args[}\DecValTok{0}\NormalTok{], args[}\DecValTok{1}\NormalTok{], args[}\DecValTok{2}\NormalTok{], args[}\DecValTok{3}\NormalTok{]}
+\NormalTok{    beta }\OperatorTok{=}\NormalTok{ [params[i] }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, }\BuiltInTok{len}\NormalTok{(params))]}
+\NormalTok{    beta }\OperatorTok{=}\NormalTok{ np.array(beta).reshape(n\_params, }\OperatorTok{{-}}\DecValTok{1}\NormalTok{, order}\OperatorTok{=}\StringTok{\textquotesingle{}F\textquotesingle{}}\NormalTok{)}
+    \CommentTok{\# Zero out reference class weights ensures fit against a reference class}
+\NormalTok{    beta[:,}\DecValTok{0}\NormalTok{] }\OperatorTok{=}\NormalTok{ [}\DecValTok{0} \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, n\_params)]}
+    
+    \CommentTok{\#\# onehot\_encode}
+\NormalTok{    d }\OperatorTok{=}\NormalTok{ pd.get\_dummies(y, prefix}\OperatorTok{=}\StringTok{\textquotesingle{}Flag\textquotesingle{}}\NormalTok{).to\_numpy()}
+    
+\NormalTok{    probs }\OperatorTok{=}\NormalTok{ cdf(W, beta)}
+\NormalTok{    logged }\OperatorTok{=}\NormalTok{ take\_log(probs)}
+\NormalTok{    ll }\OperatorTok{=}\NormalTok{ calc\_ll(logged, d)}
+    
+    \ControlFlowTok{return} \OperatorTok{{-}}\NormalTok{np.}\BuiltInTok{sum}\NormalTok{(ll)}
+
+\NormalTok{n\_params }\OperatorTok{=} \DecValTok{3} 
+\NormalTok{n\_classes }\OperatorTok{=} \DecValTok{3}
+\NormalTok{z }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{).flatten()}
+\NormalTok{res }\OperatorTok{=}\NormalTok{ optimize.minimize(ll\_mn\_logistic, x0 }\OperatorTok{=}\NormalTok{z, args }\OperatorTok{=}\NormalTok{(y\_full, W\_full, n\_params, n\_classes), options}\OperatorTok{=}\NormalTok{\{}\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{: }\VariableTok{True}\NormalTok{, }\StringTok{\textquotesingle{}maxiter\textquotesingle{}}\NormalTok{:}\DecValTok{1000}\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Optimization terminated successfully.
+##          Current function value: 1260.782799
+##          Iterations: 24
+##          Function evaluations: 280
+##          Gradient evaluations: 28
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res.x[}\DecValTok{3}\NormalTok{:}\DecValTok{9}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## array([-2.66658492, -4.77244721,  6.27997328, -2.72927852, -4.48757305,
+##         6.4437963 ])
+\end{verbatim}
+
+The estimates are correct in magnitude and direction for the actual parameters driving the latent utility equation, but a little bit wide of the true values. This is in part due to the indirect nature of the estimation but also the wide tails of the logistic distribution
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mn\_logit }\OperatorTok{=}\NormalTok{ sm.MNLogit(y\_full, W\_full)}
+\NormalTok{mn\_logit\_res }\OperatorTok{=}\NormalTok{ mn\_logit.fit()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Optimization terminated successfully.
+##          Current function value: 0.630391
+##          Iterations 7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mn\_logit\_res.summary()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <class 'statsmodels.iolib.summary.Summary'>
+## """
+##                           MNLogit Regression Results                          
+## ==============================================================================
+## Dep. Variable:                      y   No. Observations:                 2000
+## Model:                        MNLogit   Df Residuals:                     1994
+## Method:                           MLE   Df Model:                            4
+## Date:                Tue, 09 Mar 2021   Pseudo R-squ.:                  0.2924
+## Time:                        23:24:05   Log-Likelihood:                -1260.8
+## converged:                       True   LL-Null:                       -1781.9
+## Covariance Type:            nonrobust   LLR p-value:                2.587e-224
+## ==============================================================================
+##  y=class_1       coef    std err          z      P>|z|      [0.025      0.975]
+## ------------------------------------------------------------------------------
+## const         -2.6666      0.219    -12.201      0.000      -3.095      -2.238
+## x1            -4.7724      0.315    -15.143      0.000      -5.390      -4.155
+## x2             6.2800      0.360     17.461      0.000       5.575       6.985
+## ------------------------------------------------------------------------------
+##  y=class_2       coef    std err          z      P>|z|      [0.025      0.975]
+## ------------------------------------------------------------------------------
+## const         -2.7293      0.212    -12.865      0.000      -3.145      -2.313
+## x1            -4.4876      0.299    -15.004      0.000      -5.074      -3.901
+## x2             6.4438      0.348     18.497      0.000       5.761       7.127
+## ==============================================================================
+## """
+\end{verbatim}
+
+McFadden's analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer \(C\) to \(B\) and \(B\) to \(T\) then we ought to prefer \(C\) to \(T\) too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden's work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail.
+
+These modelling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, but there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool.
 
 \hypertarget{literature}{%
 \chapter{Literature}\label{literature}}

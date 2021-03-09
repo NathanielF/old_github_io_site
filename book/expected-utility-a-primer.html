@@ -24,7 +24,7 @@
 <meta name="author" content="Nathaniel Forde" />
 
 
-<meta name="date" content="2021-03-08" />
+<meta name="date" content="2021-03-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -821,7 +821,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-25"><a href="expected-utility-a-primer.html#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Assume the particular values for each plan, then the expected value of customer journey is just:</p>
-<p><span class="math display">\[\begin{equation} EV =  p_{1}\$(o_{1}) + p_{2}\$(o_{2}) + p_{3}\$(o_{3}) + p_{4}\$(o_{4}) \\ = .3*\$10 + .4*\$7 + .2*\$12 + .1*\$0 \\ = \$8.20 
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+EV(O) =  p_{1}\$(o_{1}) + p_{2}\$(o_{2}) + p_{3}\$(o_{3}) + p_{4}\$(o_{4})  = \\ .3*\$10 + .4*\$7 + .2*\$12 + .1*\$0  = \\ \$8.20 
+\end{split}
 \end{equation}\]</span></p>
 <p>Now imagine there was a change to the website and we observe the following pattern for the next 20 days. The change was made on the hypothesis (<span class="math inline">\(H+\)</span>) that it would bring a positive boost to revenue. How much more positive? A slight expected increase makes it harder to conclusively reject the <span class="math inline">\(H+\)</span> even in the fact of contrary indicators. If we observe the above pattern, then what is the new expected value? Have we decisively falisifed <span class="math inline">\(H+\)</span>? From the frequentist point of view the macro distributional properties haven’t significantly changed. But given what we know about the change to the website it would be foolish to accept such a static distributional assumption. Looking only at the small sample of new data, the variance will be large and the estimates of rates of sign-up for each plan will be unstable. Following the Bayesian paradigm we can condition our expectations on the new data, the old data or all the data.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="expected-utility-a-primer.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#### Calculate Expected Revenue</span></span>
@@ -996,10 +999,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="representation-theorems" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Representation Theorems</h2>
-<ul class="task-list">
-<li><input type="checkbox" disabled="" />
-General Introduction to the idea of Representation</li>
-</ul>
 <div id="rational-preference-from-indifference-to-utility" class="section level3" number="2.5.1">
 <h3><span class="header-section-number">2.5.1</span> Rational Preference: From Indifference to Utility</h3>
 <p>The core idea is that an agent’s utility metric ought to reflect their preferences, so if we can elicit preference statements from our consumer, we should be able to construct their utility curve! One method suggests itself; first canvas a customer for their preferences or observe their preference as expressed by purchases. Then map the maximal and least preferred options to convenient polarities. For instance:</p>
@@ -1138,21 +1137,27 @@ We can place a variety of conditions on the <span class="math inline">\(R\)</spa
 <p><span class="math display">\[ demand_A = utility_{A} &gt; 0 \]</span></p>
 <p>So we can use the observed facts of market demand to estimate <span class="math inline">\(\beta\)</span> coefficients which determine subjective utility ranking across the market.
 The revealed preference assumption says that we can predict the purchase if the utility of the good is positive.</p>
-<p><span class="math display">\[p(demand_A = 1) = utility &gt; 0 \]</span>
-<span class="math display">\[= p(\mathbf{X&#39;}\beta + v &gt; 0) \]</span>
-<span class="math display">\[ = p(v &gt; - \mathbf{X&#39;}\beta ) \]</span>
-<span class="math display">\[ = 1 - F(\mathbf{X&#39;}\beta ) \]</span></p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+  p(demand_A = 1) = utility &gt; 0 
+\\ = p(\mathbf{X&#39;}\beta + v &gt; 0) 
+\\ = p(v &gt; - \mathbf{X&#39;}\beta ) 
+\\ = 1 - F(\mathbf{X&#39;}\beta ) 
+\end{split}
+\end{equation}\]</span></p>
 <p>where <span class="math inline">\(F\)</span> is the distribution of the unobserved random variable <span class="math inline">\(v\)</span>. The challenge is using the correct distribution as this feeds the method of statistical estimation of the parameters <span class="math inline">\(\beta\)</span>. So in the case of a choice over two goods, we have two equations and the utility of the product A is estimated as its positive difference over the reference product B.</p>
-<p><span class="math display">\[U_{i,A} &gt; U_{i, B} \]</span></p>
-<p>just when</p>
-<p><span class="math display">\[ \mathbf{X&#39;}_{i, A}\beta + v_{i,A} &gt; \mathbf{X&#39;}_{i, B}\beta + v_{i,B}\]</span></p>
-<p>or</p>
+<p><span class="math display">\[U_{i,A} &gt; U_{i, B} \text{ just when } \mathbf{X&#39;}_{i, A}\beta + v_{i,A} &gt; \mathbf{X&#39;}_{i, B}\beta + v_{i,B}\]</span>
+or</p>
 <p><span class="math display">\[  v_{i,A} -  v_{i,B} &gt; - (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \]</span></p>
 <p>but then the probability of demand is just</p>
-<p><span class="math display">\[p(demand_A = 1 | \mathbf{X&#39;}\_{i, A}, \mathbf{X&#39;}\_{i, B}) \]</span>
-<span class="math display">\[ = p\Bigg( v_{i,A} -  v_{i,B} &gt; - (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) \]</span>
-<span class="math display">\[ = p\Bigg( -v_{i,A} -  v\_{i,B} &lt; (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) \]</span>
-<span class="math display">\[ = F\Bigg( (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) \]</span></p>
+<p><span class="math display">\[\begin{equation}
+\begin{split}
+p(demand_A = 1 | \mathbf{X&#39;}_{i, A}, \mathbf{X&#39;}_{i, B}) 
+\\ = p\Bigg( v_{i,A} -  v_{i,B} &gt; - (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) 
+\\ = p\Bigg( -v_{i,A} -  v\_{i,B} &lt; (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) 
+\\ = F\Bigg( (\mathbf{X&#39;}_{i, A}  - \mathbf{X&#39;}_{i, B})\beta \Bigg) 
+\end{split}
+\end{equation}\]</span></p>
 <div id="maximum-likelihood-estimation-and-multiple-choice" class="section level3" number="2.6.1">
 <h3><span class="header-section-number">2.6.1</span> Maximum Likelihood Estimation and Multiple Choice</h3>
 <p>These equations are typically estimated by means of a maximum likelihood technique over classification algorithms. The method of maximum likelihood involves taking the underlying probability distribution and finding the parameters <span class="math inline">\(\theta\)</span> which maximise the probability of the observed data. The basic set up for MLE is to take the likelihood question:</p>
@@ -1282,8 +1287,8 @@ These parameters can be estimated with logistic regression model in the binary c
 ## Dep. Variable:                      y   No. Observations:                 2000
 ## Model:                        MNLogit   Df Residuals:                     1994
 ## Method:                           MLE   Df Model:                            4
-## Date:                Mon, 08 Mar 2021   Pseudo R-squ.:                  0.2924
-## Time:                        21:04:03   Log-Likelihood:                -1260.8
+## Date:                Tue, 09 Mar 2021   Pseudo R-squ.:                  0.2924
+## Time:                        23:23:55   Log-Likelihood:                -1260.8
 ## converged:                       True   LL-Null:                       -1781.9
 ## Covariance Type:            nonrobust   LLR p-value:                2.587e-224
 ## ==============================================================================
@@ -1365,7 +1370,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.epub"],
+"download": ["bookdown-demo.epub", "bookdown-demo.pdf"],
 "toc": {
 "collapse": "subsection"
 }

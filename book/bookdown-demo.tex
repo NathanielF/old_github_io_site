@@ -106,7 +106,7 @@
 % title / author / date
 \title{Examining Algorithms}
 \author{Nathaniel Forde}
-\date{2021-03-10}
+\date{2021-03-11}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -267,9 +267,13 @@ where \(\epsilon\) is a random variable representing the error (or noise). A mod
 \begin{Highlighting}[]
 \CommentTok{\#\#\# Piecewise Linear Fits}
 
-\NormalTok{x }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{21}\NormalTok{],  dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{12}\NormalTok{, }
+\DecValTok{13}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{17}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{19}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{21}\NormalTok{],  dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+
 \NormalTok{y }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{5}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{13}\NormalTok{, }\DecValTok{10}\NormalTok{,}
-              \FloatTok{28.92}\NormalTok{, }\FloatTok{42.81}\NormalTok{, }\FloatTok{56.7}\NormalTok{, }\FloatTok{70.59}\NormalTok{, }\FloatTok{84.47}\NormalTok{, }\FloatTok{75.36}\NormalTok{, }\FloatTok{112.25}\NormalTok{, }\FloatTok{100.14}\NormalTok{, }\FloatTok{140.03}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{50}\NormalTok{], dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
+              \FloatTok{28.92}\NormalTok{, }\FloatTok{42.81}\NormalTok{, }\FloatTok{56.7}\NormalTok{, }\FloatTok{70.59}\NormalTok{, }\FloatTok{84.47}\NormalTok{, }
+              \FloatTok{75.36}\NormalTok{, }\FloatTok{112.25}\NormalTok{, }\FloatTok{100.14}\NormalTok{, }\FloatTok{140.03}\NormalTok{, }\DecValTok{3}\NormalTok{,}
+              \DecValTok{70}\NormalTok{, }\DecValTok{300}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{50}\NormalTok{], dtype}\OperatorTok{=}\BuiltInTok{float}\NormalTok{)}
 
 \KeywordTok{def}\NormalTok{ piecewise\_linear(x, b1, a1,  b2, a2, b3, a3):}
 \NormalTok{    funcs }\OperatorTok{=}\NormalTok{ [}\KeywordTok{lambda}\NormalTok{ x:b1}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ a1,}
@@ -284,11 +288,11 @@ where \(\epsilon\) is a random variable representing the error (or noise). A mod
 
 \NormalTok{plt.plot(x, y, }\StringTok{"o"}\NormalTok{)}
 \NormalTok{plt.plot(x, a }\OperatorTok{+}\NormalTok{ b }\OperatorTok{*}\NormalTok{ x, }\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Global fit: }\SpecialCharTok{\{b: .2f\}}\StringTok{x + }\SpecialCharTok{\{a: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(b}\OperatorTok{=}\NormalTok{b, a}\OperatorTok{=}\NormalTok{a))}
-\NormalTok{plt.plot(xd, piecewise\_linear(xd, }\OperatorTok{*}\NormalTok{p), label}\OperatorTok{=}\StringTok{"Linear fit 1: }\SpecialCharTok{\{b: .2f\}}\StringTok{x + }\SpecialCharTok{\{a: .2f\}}\StringTok{ }\CharTok{\textbackslash{}n}\StringTok{"}
-                                             \StringTok{"Linear fit 2: }\SpecialCharTok{\{b1: .2f\}}\StringTok{x + }\SpecialCharTok{\{a1: .2f\}}\StringTok{ }\CharTok{\textbackslash{}n}\StringTok{"}
-                                             \StringTok{"Linear fit 3: }\SpecialCharTok{\{b2: .2f\}}\StringTok{x + }\SpecialCharTok{\{a2: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(b}\OperatorTok{=}\NormalTok{p[}\DecValTok{0}\NormalTok{], a}\OperatorTok{=}\NormalTok{p[}\DecValTok{1}\NormalTok{],}
-\NormalTok{                                                                                          b1}\OperatorTok{=}\NormalTok{p[}\DecValTok{2}\NormalTok{], a1}\OperatorTok{=}\NormalTok{p[}\DecValTok{3}\NormalTok{],}
-\NormalTok{                                                                                          b2}\OperatorTok{=}\NormalTok{p[}\DecValTok{4}\NormalTok{], a2}\OperatorTok{=}\NormalTok{p[}\DecValTok{5}\NormalTok{]))}
+\NormalTok{plt.plot(xd, piecewise\_linear(xd, }\OperatorTok{*}\NormalTok{p), }
+\NormalTok{label}\OperatorTok{=}\StringTok{"Linear fit 1: }\SpecialCharTok{\{b: .2f\}}\StringTok{x + }\SpecialCharTok{\{a: .2f\}}\StringTok{ }\CharTok{\textbackslash{}n}\StringTok{"}
+\StringTok{"Linear fit 2: }\SpecialCharTok{\{b1: .2f\}}\StringTok{x + }\SpecialCharTok{\{a1: .2f\}}\StringTok{ }\CharTok{\textbackslash{}n}\StringTok{"}
+\StringTok{"Linear fit 3: }\SpecialCharTok{\{b2: .2f\}}\StringTok{x + }\SpecialCharTok{\{a2: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(b}\OperatorTok{=}\NormalTok{p[}\DecValTok{0}\NormalTok{], a}\OperatorTok{=}\NormalTok{p[}\DecValTok{1}\NormalTok{],}
+\NormalTok{b1}\OperatorTok{=}\NormalTok{p[}\DecValTok{2}\NormalTok{], a1}\OperatorTok{=}\NormalTok{p[}\DecValTok{3}\NormalTok{], b2}\OperatorTok{=}\NormalTok{p[}\DecValTok{4}\NormalTok{], a2}\OperatorTok{=}\NormalTok{p[}\DecValTok{5}\NormalTok{]))}
                                                                               
 \NormalTok{plt.axvline(x}\OperatorTok{=}\DecValTok{7}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.axvline(x}\OperatorTok{=}\DecValTok{15}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)}
@@ -320,15 +324,18 @@ Below we build two sampling distributions based on different models of an underl
 \NormalTok{N }\OperatorTok{=} \DecValTok{10000}
 \NormalTok{X }\OperatorTok{=}\NormalTok{ np.random.uniform(}\DecValTok{0}\NormalTok{, }\DecValTok{20}\NormalTok{, N)}
 \NormalTok{uncorrelated\_errors }\OperatorTok{=}\NormalTok{ np.random.normal(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, N)}
-\NormalTok{correlated\_errors }\OperatorTok{=}\NormalTok{ np.random.uniform (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) }\OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\OperatorTok{*}\NormalTok{np.pi, N)) }\OperatorTok{\textbackslash{}}
-          \OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\OperatorTok{*}\NormalTok{np.pi, N))}\OperatorTok{**}\DecValTok{2} \OperatorTok{\textbackslash{}}
-          \OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{6}\OperatorTok{*}\NormalTok{np.pi, N))}\OperatorTok{**}\DecValTok{2} \OperatorTok{+} \FloatTok{.6}\OperatorTok{*}\NormalTok{X}
+\NormalTok{corr\_errs }\OperatorTok{=}\NormalTok{ np.random.uniform (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) }
+\NormalTok{corr\_errs }\OperatorTok{=}\NormalTok{ corr\_errs }\OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\OperatorTok{*}\NormalTok{np.pi, N)) }
+\NormalTok{corr\_errs }\OperatorTok{=}\NormalTok{ corr\_errs }\OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\OperatorTok{*}\NormalTok{np.pi, N))}\OperatorTok{**}\DecValTok{2} 
+\NormalTok{corr\_errs }\OperatorTok{=}\NormalTok{ corr\_errs }\OperatorTok{+}\NormalTok{ np.sin(np.linspace(}\DecValTok{1}\NormalTok{, }\DecValTok{6}\OperatorTok{*}\NormalTok{np.pi, N))}\OperatorTok{**}\DecValTok{2}
+\NormalTok{corr\_errs }\OperatorTok{=}\NormalTok{ corr\_errs }\OperatorTok{+} \FloatTok{.6}\OperatorTok{*}\NormalTok{X}
 
-\NormalTok{Y\_corr }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{2} \OperatorTok{+} \FloatTok{3.5} \OperatorTok{*}\NormalTok{ X }\OperatorTok{+}\NormalTok{ correlated\_errors}
+\NormalTok{Y\_corr }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{2} \OperatorTok{+} \FloatTok{3.5} \OperatorTok{*}\NormalTok{ X }\OperatorTok{+}\NormalTok{ corr\_errs}
 \NormalTok{Y }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{2} \OperatorTok{+} \FloatTok{3.5} \OperatorTok{*}\NormalTok{ X }\OperatorTok{+}\NormalTok{ uncorrelated\_errors}
 \NormalTok{population }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{: X, }\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{: Y, }\StringTok{\textquotesingle{}Y\_corr\textquotesingle{}}\NormalTok{: Y\_corr\})}
 
-\NormalTok{fits }\OperatorTok{=}\NormalTok{ pd.DataFrame(columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}iid\_const\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}iid\_beta\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}corr\_const\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}corr\_beta\textquotesingle{}}\NormalTok{])}
+\NormalTok{fits }\OperatorTok{=}\NormalTok{ pd.DataFrame(columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}iid\_const\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}iid\_beta\textquotesingle{}}\NormalTok{, }
+\StringTok{\textquotesingle{}corr\_const\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}corr\_beta\textquotesingle{}}\NormalTok{])}
 \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1000}\NormalTok{):}
 \NormalTok{    sample }\OperatorTok{=}\NormalTok{ population.sample(n}\OperatorTok{=}\DecValTok{100}\NormalTok{, replace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 \NormalTok{    Y }\OperatorTok{=}\NormalTok{ sample[}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{]}\OperatorTok{;}\NormalTok{ X }\OperatorTok{=}\NormalTok{ sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{] }\OperatorTok{;}\NormalTok{ Y\_corr }\OperatorTok{=}\NormalTok{ sample[}\StringTok{\textquotesingle{}Y\_corr\textquotesingle{}}\NormalTok{]}
@@ -366,8 +373,8 @@ In the case with independent errors the expected value for our parameter estimat
 \NormalTok{    density }\OperatorTok{/=}\NormalTok{ density.}\BuiltInTok{max}\NormalTok{()}
 \NormalTok{    density }\OperatorTok{*=} \DecValTok{1}
 \NormalTok{    y\_axis }\OperatorTok{=}\NormalTok{ np.linspace(}\BuiltInTok{min}\NormalTok{, }\BuiltInTok{max}\NormalTok{, }\BuiltInTok{len}\NormalTok{(density))}
-\NormalTok{    label }\OperatorTok{=} \StringTok{"Expected error X = }\SpecialCharTok{\{x:\}}\StringTok{: }\SpecialCharTok{\{err: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(err }\OperatorTok{=}\NormalTok{ sample[filter\_var][}\StringTok{\textquotesingle{}predicted\_error\_\textquotesingle{}}\OperatorTok{+}\NormalTok{ model].mean(),}
-\NormalTok{                                                         x}\OperatorTok{=}\NormalTok{position)}
+\NormalTok{    err }\OperatorTok{=}\NormalTok{ sample[filter\_var][}\StringTok{\textquotesingle{}predicted\_error\_\textquotesingle{}}\OperatorTok{+}\NormalTok{ model].mean()}
+\NormalTok{    label }\OperatorTok{=} \StringTok{"Expected error X = }\SpecialCharTok{\{x:\}}\StringTok{: }\SpecialCharTok{\{err: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(err }\OperatorTok{=}\NormalTok{ err,x}\OperatorTok{=}\NormalTok{position)}
 \NormalTok{    ax\_main.plot((density }\OperatorTok{+}\NormalTok{ position), y\_axis, color}\OperatorTok{=}\NormalTok{color, label}\OperatorTok{=}\NormalTok{label)}
 
 \NormalTok{sample }\OperatorTok{=}\NormalTok{ population.sample(n}\OperatorTok{=}\DecValTok{1000}\NormalTok{, replace}\OperatorTok{=}\VariableTok{True}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{100}\NormalTok{)}
@@ -380,8 +387,10 @@ In the case with independent errors the expected value for our parameter estimat
 \NormalTok{fig, ax1 }\OperatorTok{=}\NormalTok{ plt.subplots()}
 \NormalTok{ax1.plot(sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{], sample[}\StringTok{\textquotesingle{}Y\textquotesingle{}}\NormalTok{],}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{)}
 \NormalTok{ax1.plot(sample[}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{], sample[}\StringTok{\textquotesingle{}predicted\_Y\_iid\textquotesingle{}}\NormalTok{])}
+
 \ControlFlowTok{for}\NormalTok{ each }\KeywordTok{in}\NormalTok{ [}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{,  }\DecValTok{15}\NormalTok{]:}
-\NormalTok{    d }\OperatorTok{=}\NormalTok{ draw\_gaussian\_at(position}\OperatorTok{=}\NormalTok{each, sample}\OperatorTok{=}\NormalTok{sample, ax\_main}\OperatorTok{=}\NormalTok{ax1, model}\OperatorTok{=}\StringTok{\textquotesingle{}iid\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
+\NormalTok{    d }\OperatorTok{=}\NormalTok{ draw\_gaussian\_at(position}\OperatorTok{=}\NormalTok{each, sample}\OperatorTok{=}\NormalTok{sample, }
+\NormalTok{    ax\_main}\OperatorTok{=}\NormalTok{ax1, model}\OperatorTok{=}\StringTok{\textquotesingle{}iid\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.title(}\StringTok{"Error Distributions around predicted Y values for the }\SpecialCharTok{\{model:\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(model}\OperatorTok{=}\StringTok{\textquotesingle{}iid model\textquotesingle{}}\NormalTok{))}
 \NormalTok{plt.legend()}
 \NormalTok{plt.show()}
@@ -420,9 +429,10 @@ Making inference from a model is delicate thing. Even simple cases come with con
 \NormalTok{z }\OperatorTok{=}\NormalTok{ points[}\DecValTok{0}\NormalTok{]}
 \NormalTok{y }\OperatorTok{=}\NormalTok{ points[}\DecValTok{1}\NormalTok{]}
 
-\NormalTok{plt.fill\_between(z,y, where }\OperatorTok{=}\NormalTok{ z }\OperatorTok{\textgreater{}=}\NormalTok{ successes, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Probability \textgreater{}= 3:}\SpecialCharTok{\{p: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(p}\OperatorTok{=}\NormalTok{prob))}
-\NormalTok{plt.fill\_between(z,y, where }\OperatorTok{=}\NormalTok{ z }\OperatorTok{\textless{}}\NormalTok{ successes , color}\OperatorTok{=}\StringTok{\textquotesingle{}g\textquotesingle{}}\NormalTok{,}
-\NormalTok{                 label}\OperatorTok{=}\StringTok{"Probability \textless{} 3: }\SpecialCharTok{\{mean: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mean}\OperatorTok{=}\DecValTok{1}\OperatorTok{{-}}\NormalTok{prob))}
+\NormalTok{plt.fill\_between(z,y, where }\OperatorTok{=}\NormalTok{ z }\OperatorTok{\textgreater{}=}\NormalTok{ successes, }
+\NormalTok{color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Probability \textgreater{}= 3:}\SpecialCharTok{\{p: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(p}\OperatorTok{=}\NormalTok{prob))}
+\NormalTok{plt.fill\_between(z,y, where }\OperatorTok{=}\NormalTok{ z }\OperatorTok{\textless{}}\NormalTok{ successes , }
+\NormalTok{color}\OperatorTok{=}\StringTok{\textquotesingle{}g\textquotesingle{}}\NormalTok{,label}\OperatorTok{=}\StringTok{"Probability \textless{} 3: }\SpecialCharTok{\{mean: .2f\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mean}\OperatorTok{=}\DecValTok{1}\OperatorTok{{-}}\NormalTok{prob))}
 \NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{\textquotesingle{}upper right\textquotesingle{}}\NormalTok{, title}\OperatorTok{=}\StringTok{\textquotesingle{}Legend\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.title(}\StringTok{"The P{-}Value for a sample of 5 with \textgreater{}=3 head }\CharTok{\textbackslash{}n}\StringTok{ given a biased coin with expected proportion 0.4"}\NormalTok{)}
 \NormalTok{xlim }\OperatorTok{=}\NormalTok{ plt.xlim((}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{))}
@@ -447,8 +457,8 @@ More fundamentally the notion of statistical significance usually cannot falsify
 ``{[}I{]}t did not get integrated into the total nomological network, nor did it get clearly liquidated as a nothing concept, it did not get killed or resurrected or transformed or solidified; it just kind of dried up and blew away\ldots{}'' pg807 in \citep{MeehlTheoretical}
 \end{quote}
 
-\hypertarget{bayesian-inference-inference-to-expected-value}{%
-\subsection{Bayesian Inference: Inference to Expected Value}\label{bayesian-inference-inference-to-expected-value}}
+\hypertarget{bayes-rule-inference-to-expected-value}{%
+\subsection{Bayes' Rule: Inference to Expected Value}\label{bayes-rule-inference-to-expected-value}}
 
 If instead we use probability to calibrate our beliefs, then we can be more explicit in our assessment of \((H0), (H1)\). Let's assume that our prior beliefs about whether the game is rigged is 50/50. Then we evaluate the two hypothesis using Bayes's rule for incorporating our prior belief and the data. The Bayesian asks whether our hypothesis is a good explanation of the data compared to alternatives. How, upon observing the data, should we view our hypothesis?
 
@@ -481,8 +491,11 @@ Websites and apps collect traffic and log interactions. Your details are capture
 \NormalTok{m\_var\_2\_sample }\OperatorTok{=}\NormalTok{ m\_var\_2.rvs(}\DecValTok{20}\NormalTok{)}
 \NormalTok{base }\OperatorTok{=}\NormalTok{ datetime.datetime.today() }\OperatorTok{{-}}\NormalTok{ datetime.timedelta(days}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
 
-\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(m\_var\_sample, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{])}
-\NormalTok{df }\OperatorTok{=}\NormalTok{ df.append(pd.DataFrame(m\_var\_2\_sample, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]),ignore\_index}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.DataFrame(m\_var\_sample, }
+\NormalTok{columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{])}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ df.append(pd.DataFrame(m\_var\_2\_sample, }
+\NormalTok{columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]),}
+\NormalTok{ignore\_index}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 
 \NormalTok{df[}\StringTok{\textquotesingle{}totals\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{] }\OperatorTok{+}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{] }\OperatorTok{+}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{] }\OperatorTok{+}\NormalTok{ df[}\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]}
 \NormalTok{df[}\StringTok{\textquotesingle{}plan\_1\_rate\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{] }\OperatorTok{/}\NormalTok{ df[}\StringTok{\textquotesingle{}totals\textquotesingle{}}\NormalTok{]}
@@ -526,14 +539,20 @@ Now imagine there was a change to the website and we observe the following patte
 \NormalTok{normal\_data }\OperatorTok{=}\NormalTok{ df[[}\StringTok{\textquotesingle{}plan\_1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plan\_3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}no\_plan\textquotesingle{}}\NormalTok{]].head(}\DecValTok{1000}\NormalTok{)}
 
 \CommentTok{\# Bayesian Posterior}
-\NormalTok{multinomial\_posterior\_new }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+\NormalTok{multinomial\_posterior\_new }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }
+\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
 
 \CommentTok{\# Empirical Bayes}
-\NormalTok{multinomial\_posterior\_full }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(full\_data.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+\NormalTok{multinomial\_posterior\_full }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }
+\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(full\_data.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
 \CommentTok{\# Bayesain Posterior Prior Data}
-\NormalTok{multinomial\_posterior\_old }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(normal\_data.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
-\NormalTok{multinomial\_posterior\_new\_empirical\_prior }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{300}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
-\NormalTok{multinomial\_posterior\_crazy\_prior }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{0}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+\NormalTok{multinomial\_posterior\_old }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }
+\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(normal\_data.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+\NormalTok{multinomial\_posterior\_new\_empirical\_prior }\OperatorTok{=}\NormalTok{ np.random.dirichlet(}
+\NormalTok{  np.array([}\DecValTok{300}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{200}\NormalTok{, }\DecValTok{100}\NormalTok{]) }\OperatorTok{+} 
+\NormalTok{  np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
+\NormalTok{multinomial\_posterior\_crazy\_prior }\OperatorTok{=}\NormalTok{ np.random.dirichlet(np.array([}\DecValTok{100}\NormalTok{, }
+\DecValTok{400}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{0}\NormalTok{]) }\OperatorTok{+}\NormalTok{ np.array(weird\_data2.}\BuiltInTok{sum}\NormalTok{()), size}\OperatorTok{=}\DecValTok{1000}\NormalTok{)}
 
 \NormalTok{expected\_value\_new }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_new)}
 \NormalTok{expected\_value\_old }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_old)}
@@ -541,11 +560,16 @@ Now imagine there was a change to the website and we observe the following patte
 \NormalTok{expected\_value\_new\_bias }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_new\_empirical\_prior)}
 \NormalTok{expected\_value\_crazy }\OperatorTok{=}\NormalTok{ expected\_revenue(multinomial\_posterior\_crazy\_prior)}
 
-\NormalTok{h1 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_new, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{)}
-\NormalTok{h2 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_old, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue Old Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
-\NormalTok{h3 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_full\_data, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue Full Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
-\NormalTok{h4 }\OperatorTok{=}\NormalTok{plt.hist(expected\_value\_new\_bias, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Empirical Prior "}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
-\NormalTok{h5 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_crazy, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Optimistic Prior "}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{h1 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_new, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, }
+\NormalTok{label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{)}
+\NormalTok{h2 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_old, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, }
+\NormalTok{label}\OperatorTok{=}\StringTok{"Expected Revenue Old Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{h3 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_full\_data, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, }
+\NormalTok{label}\OperatorTok{=}\StringTok{"Expected Revenue Full Obs Flat Prior"}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{h4 }\OperatorTok{=}\NormalTok{plt.hist(expected\_value\_new\_bias, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, }
+\NormalTok{label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Empirical Prior "}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{h5 }\OperatorTok{=}\NormalTok{ plt.hist(expected\_value\_crazy, histtype}\OperatorTok{=}\StringTok{\textquotesingle{}stepfilled\textquotesingle{}}\NormalTok{, }
+\NormalTok{label}\OperatorTok{=}\StringTok{"Expected Revenue New (20) Obs Optimistic Prior "}\NormalTok{, bins}\OperatorTok{=}\DecValTok{50}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
 \NormalTok{plt.title(}\StringTok{"Expected Revenue of Multinomial Posterior given Data"}\NormalTok{)}
 \NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{"upper left"}\NormalTok{)}
 \NormalTok{plt.show()}
@@ -814,7 +838,7 @@ The thought gives hope to the idea that you would be able to predict an individu
 \hypertarget{bolkers-representation-theorem}{%
 \subsection{Bolker's Representation Theorem}\label{bolkers-representation-theorem}}
 
-For this interpretation to work we need some extra structure to represent simple algorithmic rules for composition of belief. Taking simple cases and aggregating or combining them in a way which adheres to obviously sensible procedures in the base case, and generalises across a total range of arbitrary complexity.
+There is alternative representation theory alrogether more general. For this interpretation to work we need some extra structure to represent simple algorithmic rules for composition of belief. Taking simple cases and aggregating or combining them in a way which adheres to obviously sensible procedures in the base case, and generalises across a total range of arbitrary complexity.
 
 \begin{definition}[Boolean Algebra]
 \protect\hypertarget{def:unnamed-chunk-15}{}{\label{def:unnamed-chunk-15} \iffalse (Boolean Algebra) \fi{} } A Boolean Algebra is a relational structure \(\Omega = \langle S, \wedge, \vee, \neg, \top, \bot \rangle\) such that the following axioms hold:
@@ -940,7 +964,7 @@ and market share is an expression of that utility.
 So we can use the observed facts of market demand to estimate \(\beta\) coefficients which determine subjective utility ranking across the market.
 
 \begin{quote}
-``Observed data are assumed to be generated by the \emph{trial} of drawing an individual randomly from the population and recording his attributes, the set of alternatives available to him, and his actual choice\ldots{} The observed choice in a trial with attributes \(X\) and alternatives \(Alt = \{A.... j \}\) can be viewed as a drawing from a multinomial distribution with a selection probabilities \(p(demand_{j} = 1| X, Alt)\).'' - McFadden Quoted in \citep{McFaddenCondLogit}
+``Observed data are assumed to be generated by the \emph{trial} of drawing an individual randomly from the population and recording his attributes, the set of alternatives available to him, and his actual choice\ldots{} The observed choice in a trial with attributes \(X\) and alternatives \(Alt = \{A.... j \}\) can be viewed as a drawing from a multinomial distribution with a selection probabilities \(p(demand_{j} = 1| X, Alt)\).'' - Quoted in \citep{McFaddenCondLogit}
 \end{quote}
 
 The revealed preference assumption says that we can predict the purchase if the utility of the good is positive.
@@ -972,8 +996,7 @@ p(demand_A = 1 | \mathbf{X'}_{i, A}, \mathbf{X'}_{i, B})
 \end{split}
 \end{equation}
 
-\begin{quote}
-\end{quote}
+Examples of discrete choice distributions are the logistic, probit and tobit choice models. Each of these models have distinct assumptions and properties but all can be used to estimate the coefficient weights on the latent utility equation.
 
 \hypertarget{maximum-likelihood-estimation-and-multiple-choice}{%
 \subsection{Maximum Likelihood Estimation and Multiple Choice}\label{maximum-likelihood-estimation-and-multiple-choice}}
@@ -1014,10 +1037,14 @@ We'll first demonstrate the technique in the familiar case of the normal distrib
 
 \NormalTok{fig }\OperatorTok{=}\NormalTok{ plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{))}
 \NormalTok{ax }\OperatorTok{=}\NormalTok{ plt.axes(projection}\OperatorTok{=}\StringTok{\textquotesingle{}3d\textquotesingle{}}\NormalTok{)}
-\NormalTok{ax.plot\_surface(mu\_mesh, sig\_mesh, ll\_vals, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}coolwarm\_r\textquotesingle{}}\NormalTok{, rstride}\OperatorTok{=}\DecValTok{1}\NormalTok{, cstride}\OperatorTok{=}\DecValTok{1}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{1}\NormalTok{, antialiased}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{ax.plot\_surface(mu\_mesh, sig\_mesh, ll\_vals, }
+\NormalTok{cmap}\OperatorTok{=}\StringTok{\textquotesingle{}coolwarm\_r\textquotesingle{}}\NormalTok{, rstride}\OperatorTok{=}\DecValTok{1}\NormalTok{, cstride}\OperatorTok{=}\DecValTok{1}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{1}\NormalTok{, antialiased}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 \NormalTok{cset }\OperatorTok{=}\NormalTok{ ax.contourf(mu\_mesh, sig\_mesh, ll\_vals, zdir}\OperatorTok{=}\StringTok{\textquotesingle{}z\textquotesingle{}}\NormalTok{, offset}\OperatorTok{={-}}\DecValTok{150}\NormalTok{, cmap}\OperatorTok{=}\NormalTok{cm.coolwarm\_r)}
 \CommentTok{\#ax.view\_init(20, 25)}
-\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}MLE for values of mu = }\SpecialCharTok{\{mu\}}\StringTok{ and sigma = }\SpecialCharTok{\{sig\}}\StringTok{\textquotesingle{}}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mu}\OperatorTok{=}\BuiltInTok{round}\NormalTok{(max\_settings[}\DecValTok{1}\NormalTok{],}\DecValTok{2}\NormalTok{), sig}\OperatorTok{=}\BuiltInTok{round}\NormalTok{(max\_settings[}\DecValTok{2}\NormalTok{], }\DecValTok{2}\NormalTok{)))}
+
+\NormalTok{ax.set\_title(}\StringTok{\textquotesingle{}MLE for values of mu = }\SpecialCharTok{\{mu\}}\StringTok{ and sigma = }\SpecialCharTok{\{sig\}}\StringTok{\textquotesingle{}}\NormalTok{.}\BuiltInTok{format}\NormalTok{(mu}\OperatorTok{=}\BuiltInTok{round}\NormalTok{(max\_settings[}\DecValTok{1}\NormalTok{],}\DecValTok{2}\NormalTok{),}
+\NormalTok{sig}\OperatorTok{=}\BuiltInTok{round}\NormalTok{(max\_settings[}\DecValTok{2}\NormalTok{], }\DecValTok{2}\NormalTok{)))}
+
 \NormalTok{ax.set\_xlabel(}\VerbatimStringTok{r\textquotesingle{}$\textbackslash{}mu$\textquotesingle{}}\NormalTok{)}
 \NormalTok{ax.set\_ylabel(}\VerbatimStringTok{r\textquotesingle{}$\textbackslash{}sigma$\textquotesingle{}}\NormalTok{)}
 \NormalTok{ax.set\_zlabel(}\VerbatimStringTok{r\textquotesingle{}LL\textquotesingle{}}\NormalTok{)}
@@ -1095,7 +1122,8 @@ As in the representation theorems we need a scale on which to calibrate the pref
 \NormalTok{n\_params }\OperatorTok{=} \DecValTok{3} 
 \NormalTok{n\_classes }\OperatorTok{=} \DecValTok{3}
 \NormalTok{z }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{).flatten()}
-\NormalTok{res }\OperatorTok{=}\NormalTok{ optimize.minimize(ll\_mn\_logistic, x0 }\OperatorTok{=}\NormalTok{z, args }\OperatorTok{=}\NormalTok{(y\_full, W\_full, n\_params, n\_classes), options}\OperatorTok{=}\NormalTok{\{}\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{: }\VariableTok{True}\NormalTok{, }\StringTok{\textquotesingle{}maxiter\textquotesingle{}}\NormalTok{:}\DecValTok{1000}\NormalTok{\})}
+\NormalTok{res }\OperatorTok{=}\NormalTok{ optimize.minimize(ll\_mn\_logistic, x0 }\OperatorTok{=}\NormalTok{z,}
+\NormalTok{args }\OperatorTok{=}\NormalTok{(y\_full, W\_full, n\_params, n\_classes), options}\OperatorTok{=}\NormalTok{\{}\StringTok{\textquotesingle{}disp\textquotesingle{}}\NormalTok{: }\VariableTok{True}\NormalTok{, }\StringTok{\textquotesingle{}maxiter\textquotesingle{}}\NormalTok{:}\DecValTok{1000}\NormalTok{\})}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1147,8 +1175,8 @@ The estimates are correct in magnitude and direction for the actual parameters d
 ## Dep. Variable:                      y   No. Observations:                 2000
 ## Model:                        MNLogit   Df Residuals:                     1994
 ## Method:                           MLE   Df Model:                            4
-## Date:                Wed, 10 Mar 2021   Pseudo R-squ.:                  0.2924
-## Time:                        22:54:10   Log-Likelihood:                -1260.8
+## Date:                Thu, 11 Mar 2021   Pseudo R-squ.:                  0.2924
+## Time:                        21:43:04   Log-Likelihood:                -1260.8
 ## converged:                       True   LL-Null:                       -1781.9
 ## Covariance Type:            nonrobust   LLR p-value:                2.587e-224
 ## ==============================================================================

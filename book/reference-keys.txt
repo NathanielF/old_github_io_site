@@ -9,7 +9,7 @@ probability-dual-aspects
 small-worlds-and-statistical-inference
 modeling-improper-assumptions-and-skewed-expectations
 frequentism-inference-from-expected-frequency
-bayesian-inference-inference-to-expected-value
+bayes-rule-inference-to-expected-value
 example-website-traffic
 utility-curves
 the-stakes-from-utility-to-indifference

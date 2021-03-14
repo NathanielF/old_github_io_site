@@ -150,7 +150,7 @@ This book is written in the conviction that understanding the philosophical foun
 
 A data science project is simultaneously an effort at translation and persuasion. An expression of a problem that is a plausible mathematical approximation of the original problem and renders it amenable to some kind of optimisation. There is a trade-off between the goals of an interpretable model and maximising performance on some key metric. In the short term you may get away with a black-box, but when it breaks (and it will break), you had better be able to explain why. In a business context this often entails articulating a problem in a language familiar to your stakeholders laden with assumptions about the shape of the solution. It's not a trivial task to re-frame the problem if expectations skew in the opposite direction or received wisdom implies the contrary conclusion, but valid arguments help.
 
-But while there is a common thread of reasonable inference that weaves through both disciplines the subjects share more substantive commitments. Data science is driven by the need for decisions. The focus on decision motivates strong focus on evidence, knowledge and warranted belief weighed against the costs and subjective utility of each choice. These calculations are implicitly expressed by means of a loss-function over an optimisation problem. Underwriting our confidence in our beliefs is a focus on the reliability of the methods and assumptions underlying our models. For instance, the stationarity assumption underlying some timeseries models is a practical constraint on Hume's problem of induction with ramifications for how to think about Nelson's Goodman's notion of projectible predicates. Experiments shed light of the particulars of causal relationships enabling the validation or refutation of the hypothetical connections. These problems span the ranges of epistemology, metaphysics and value theory and measurement, before we even consider the ethics of deploying these algorithms at scale.
+While there is a common thread of reasonable inference that weaves through both disciplines the subjects share more substantive commitments too. Data science is driven by the need for decisions. The focus on decision motivates strong focus on evidence, knowledge and warranted belief weighed against the costs and subjective utility of each choice. These calculations are implicitly expressed by means of a loss-function over an optimisation problem. Underwriting our confidence in our beliefs is a focus on the reliability of the methods and assumptions underlying our models. For instance, the stationarity assumption underlying some timeseries models is a practical constraint on Hume's problem of induction with ramifications for how to think about Nelson's Goodman's notion of projectible predicates. Experiments shed light of the particulars of causal relationships enabling the validation or refutation of the hypothetical connections. These problems span the ranges of epistemology, metaphysics and value theory and measurement, before we even consider the ethics of deploying these algorithms at scale.
 
 But philosophy is too broad a subject, with too deep a history to hope for comprehensive coverage. The aim of this book is more modest; to introduce and expand on some areas where there is an interesting intersection of fertile ideas and illustrate the feedback loop between philosophical assumptions, tests against data and the revision or stagnation of those models.
 
@@ -263,7 +263,7 @@ The danger of shrinking your world comes when you mistake the map for the territ
 
 Small worlds are machines for figuring out expected values of a statistical process. We shrink the parameter set to better measure the variance and flux throughout the system. For any hypothetical system there can be multiple plausible approximations of the underlying process which need to be assessed comparatively on their ``goodness'' of fit. We iterate through new and improved versions, each an attempt to make a conjectural connection between \(X, Y\) mathematically precise. But once built, they embed the errors and assumptions made in their design. McElreath dubs them Golems, primed and then loosed on the world, insensitive to subtlety and context they perform only as instructed. Consider how a basic regression model tries to predict an outcome \(Y\) as linear function of some observed features \(X\):
 
-\[ Y = const + \beta X + \epsilon  \]
+\[ Y = const + X\beta + \epsilon  \]
 
 where \(\epsilon\) is a random variable representing the error (or noise). A modest notational device for disaster. While \(const, \beta\) are parameters estimated by an optimisation process to ensure the equation fits the data as neatly as possible. In the plot below we have a series characterised by change. After the first shock we can refit the model so that the line tracks well with the evolving data. After the second shock we try another refit, but the range the and variance of the data makes our basic model a poor fit, i.e.~the data no longer exhibits a linear relationship. This presents three examples of error in the modelling process: (i) it's difficult to identify (in the moment) those changepoints in the data which reflect structural change, (ii) the linearity assumptions that go into the model are sound but the parameters need be re-estimated based on the new data and (iii) the third linear model is simply a terrible match for the pattern in the data.
 
@@ -455,7 +455,7 @@ Take \((H0)\) as given then if we observe a sequence: \[ (3in5): H, H, H, T, T\]
 
 In this instance the shape of the binomial distribution defined by a 0.4 biased coin allows for significantly greater than 5\% chance for observing the above sequence. So we do not have enough reason to reject \((H0)\) at the traditional threshold. By design the assumed distribution builds in characteristics of long-run variance of the process, and the slim threshold for rejection is designed to minimise incorrect rejections of \((H0)\). We should remain suspicious that we're being conned. However, with a low number of observations the sample distribution is unlikely to be properly representative. This makes even small p-value thresholds unreliable. We cannot blindly take a sample poll to imply the spread or volatility of a population, and with low or un-representative samples it's hard to justify any kind of inference from expectation, since we are not in a position to justify the choice of the null model either! If your hypothesis is both derived and validated against small samples, you risk being swayed by recent observations.
 
-More fundamentally the notion of statistical significance usually cannot falsify the hypothesis under consideration. The sheer number of auxiliary variables that you might need to control for, makes the practical task of definitively rejecting the null almost impossible. There are too many imagined ways in which the auxiliary conditions, sufficiently modified, would have resulted in observations that corroborate the null model. This problem is especially acute in psychological science where the auxiliary contingencies of designing a measurement scale and checking diagnostic criteria are almost always questionable. So the null hypothesis is not confirmed, but not refuted either, it is just preserved in useless stasis.
+More fundamentally the notion of statistical significance usually cannot falsify the hypothesis under consideration. The apparent simplicity of a dichotomous line between reject/accept obscures many relevant questions of evidence and uncertainty. The sheer number of auxiliary, unobservable variables that you might need to control for makes the task of definitively rejecting the null almost impossible. There are too many imagined ways in which the auxiliary conditions, sufficiently modified, would have resulted in observations that corroborate the null model. This problem is especially acute in psychological science where the auxiliary contingencies of designing a measurement scale and checking diagnostic criteria are almost always questionable. In such circumstances the null hypothesis is not confirmed, but not refuted either, it is just preserved in useless stasis.
 
 \begin{quote}
 ``{[}I{]}t did not get integrated into the total nomological network, nor did it get clearly liquidated as a nothing concept, it did not get killed or resurrected or transformed or solidified; it just kind of dried up and blew away\ldots{}'' pg807 in \citep{MeehlTheoretical}
@@ -759,10 +759,18 @@ The same pattern holds for cases with more than two goods. We can express the va
 
 \[ 2g_{1} + 3(\frac{16}{25})g_{1} = 40 \Rightarrow 2g_{1} + 1.92g_{1} = 40 \Rightarrow 3.92g_{1} = 40\] Proving the optimial settings are \(g_{1}^{*} = 10.20 \text{ and } g_{2}^{*} = 6.52 \text{ and } \lambda^{*} = 0.20\)
 
-The above proof shows how we triangulate a consumer's view of any good as expressed through the medium of their utility function. But the method of Lagrangian multipliers is more than a mere algebraic trick. We can interpret the \(\lambda\) term as the rate of change of the consumer's utility as a function of the cost to our resources. How taxing is our treatment, how exhausted is your wallet? The proof is a little more involved, but the significance of this interpretation should be obvious. If we knew our consumers adhered to a particular style of utility function we could model how ``price-changes'' would impact their returns to utility and select strategies for maximum gain. The challenge lies in deriving a customer's utility profile.
+The above proof shows how we triangulate a consumer's view of any good as expressed through the medium of their utility function. But the method of Lagrangian multipliers is more than a mere algebraic trick. We can interpret the \(\lambda\) term as the rate of change of the consumer's utility as a function of the cost to our resources. How taxing is our treatment, how exhausted is your wallet? The proof is a little more involved, but the significance of this interpretation should be obvious. If we knew our consumers adhered to a particular style of utility function we could model how ``price-changes'' would impact their returns to utility and select strategies for maximum gain. Similarly a clear utility profile can help medical practitioners assign optimal treatments. The challenge lies in deriving the utility profiles.
 
 \hypertarget{representation-theorems}{%
 \section{Representation Theorems}\label{representation-theorems}}
+
+Your impressions when parsed out and catalogued, grouped and summarised are grist to the mill. They're fed through diagnostic reports and customer surveys to an algorithmic sieve that sorts you by severity. It relies on the notion that you're cogent enough to report your own condition and preferences, and optimises over the aggregate results to find the best option. In the case of schizophrenia the American Psychiatric Association recommends that:
+
+\begin{quote}
+``medication is only part of the ideal treatment\ldots{[}of a plan that {]} has three major components: 1) to reduce or eliminate symptoms, 2) to maximise quality of life and adaptive functioning. 3) to promote and maintain recovery from debilitating effects of illness to the maximum extent possible.''\footnote{quoted on pg 106 in \citep{WangSchizophrenia}}
+\end{quote}
+
+The following section introduces some of the methods required to show that utility is a linear function over discrete options can represent an individual's preferences.The task inherently constructive and highly contingent on the axioms of rationality to constrain the construction.
 
 \hypertarget{rational-preference-from-indifference-to-utility}{%
 \subsection{Rational Preference: From Indifference to Utility}\label{rational-preference-from-indifference-to-utility}}
@@ -842,7 +850,7 @@ The thought gives hope to the idea that you would be able to predict an individu
 \hypertarget{bolkers-representation-theorem}{%
 \subsection{Bolker's Representation Theorem}\label{bolkers-representation-theorem}}
 
-There is alternative representation theory alrogether more general. For this interpretation to work we need some extra structure to represent simple algorithmic rules for composition of belief. Taking simple cases and aggregating or combining them in a way which adheres to obviously sensible procedures in the base case, and generalises across a total range of arbitrary complexity.
+There is alternative representation theory altogether more general. For this interpretation to work we need some extra structure to represent simple algorithmic rules for composition of belief. Taking simple cases and aggregating or combining them in a way which adheres to obviously sensible procedures in the base case, and generalises across a total range of arbitrary complexity.
 
 \begin{definition}[Boolean Algebra]
 \protect\hypertarget{def:unnamed-chunk-15}{}{\label{def:unnamed-chunk-15} \iffalse (Boolean Algebra) \fi{} } A Boolean Algebra is a relational structure \(\Omega = \langle S, \wedge, \vee, \neg, \top, \bot \rangle\) such that the following axioms hold:
@@ -884,10 +892,9 @@ We can gauge desire by offers of repeatedly refined contracts based on an ethica
 
 \begin{equation}
 \begin{split}
-[ \alpha \text{ if } Neutral, \omega \text{ if } \neg Neutral ]_{contract_{1}} \\  \sim [ \omega  \text{ if } Neutral, \alpha \text{ if } \neg Neutral ]_{contract_{2}} \\   \Rightarrow u(contract_{1})  = u(contract_{2})   \\  \Rightarrow EU(contract_{1}) \\ = u(\alpha)p(Neutral) + u(\omega)(1-p(Neutral)) \\ 
+[ \alpha \text{ if } Neutral, \omega \text{ if } \neg Neutral ]_{contract_{1}} \\  \sim [ \omega  \text{ if } Neutral, \alpha \text{ if } \neg Neutral ]_{contract_{2}} \\   \Rightarrow u(contract_{1})  = u(contract_{2})   \\  \Rightarrow EU(contract_{1}) = u(\alpha)p(Neutral) + u(\omega)(1-p(Neutral)) \\ 
 = u(\omega)p(Neutral) + u(\alpha)(1-p(Neutral)) \\ 
-= EU(contract_{2})  
-\\ \Leftrightarrow p(Neutral) = 0.5
+= EU(contract_{2}) \Leftrightarrow p(Neutral) = 0.5
 \end{split}
 \end{equation}
 
@@ -1180,7 +1187,7 @@ The estimates are correct in magnitude and direction for the actual parameters d
 ## Model:                        MNLogit   Df Residuals:                     1994
 ## Method:                           MLE   Df Model:                            4
 ## Date:                Sun, 14 Mar 2021   Pseudo R-squ.:                  0.2924
-## Time:                        00:25:23   Log-Likelihood:                -1260.8
+## Time:                        21:50:51   Log-Likelihood:                -1260.8
 ## converged:                       True   LL-Null:                       -1781.9
 ## Covariance Type:            nonrobust   LLR p-value:                2.587e-224
 ## ==============================================================================
@@ -1201,7 +1208,7 @@ The estimates are correct in magnitude and direction for the actual parameters d
 
 McFadden's analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer \(C\) to \(B\) and \(B\) to \(T\) then we ought to prefer \(C\) to \(T\) too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden's work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail.
 
-These modelling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, but there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool.
+These modelling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, but there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters in a regression. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool.
 
 \hypertarget{tbd---stationarity-and-induction}{%
 \chapter{TBD - Stationarity and Induction}\label{tbd---stationarity-and-induction}}

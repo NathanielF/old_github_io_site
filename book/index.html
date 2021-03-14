@@ -24,7 +24,7 @@
 <meta name="author" content="Nathaniel Forde" />
 
 
-<meta name="date" content="2021-03-11" />
+<meta name="date" content="2021-03-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -524,14 +524,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6.1" data-path="expected-utility-a-primer.html"><a href="expected-utility-a-primer.html#maximum-likelihood-estimation-and-multiple-choice"><i class="fa fa-check"></i><b>2.6.1</b> Maximum Likelihood Estimation and Multiple Choice</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
-<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
-<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
-<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="3" data-path="tbd-stationarity-and-induction.html"><a href="tbd-stationarity-and-induction.html"><i class="fa fa-check"></i><b>3</b> TBD - Stationarity and Induction</a></li>
+<li class="chapter" data-level="4" data-path="tbd-causal-inference-and-counterfactuals.html"><a href="tbd-causal-inference-and-counterfactuals.html"><i class="fa fa-check"></i><b>4</b> TBD - Causal Inference and Counterfactuals</a></li>
+<li class="chapter" data-level="5" data-path="tbd-wisdom-of-the-crowds.html"><a href="tbd-wisdom-of-the-crowds.html"><i class="fa fa-check"></i><b>5</b> TBD - Wisdom of the Crowds</a></li>
+<li class="chapter" data-level="6" data-path="tbd-ethical-considerations.html"><a href="tbd-ethical-considerations.html"><i class="fa fa-check"></i><b>6</b> TBD - Ethical Considerations</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -560,12 +556,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Examining Algorithms</h1>
 <p class="author"><em>Nathaniel Forde</em></p>
-<p class="date"><em>2021-03-11</em></p>
+<p class="date"><em>2021-03-14</em></p>
 </div>
 <div id="preface" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Preface</h1>
 <p>This book is written in the conviction that understanding the philosophical foundations of data science can help the data scientist build better models and that the programming of these algorithms clarify the abstractions of philosophical theory. My own path into data science was indirect through philosophy, mathematical logic and, briefly, software engineering. During the lifetime of an engineering project technical debt accrues building complexity by abstraction. There is a direct parallel with accretions of philosophical assumptions that crust over predictive algorithms. The choices made in model design, feature selection and measurement, all embed the kinds of presuppositions about the data generating process that merit doubt and rethinking. More subtle than this though is the intellectual debts that shape even the available choices of models, methodologies and the manner in which we frame a problem and explain our solution others.</p>
 <p>A data science project is simultaneously an effort at translation and persuasion. An expression of a problem that is a plausible mathematical approximation of the original problem and renders it amenable to some kind of optimisation. There is a trade-off between the goals of an interpretable model and maximising performance on some key metric. In the short term you may get away with a black-box, but when it breaks (and it will break), you had better be able to explain why. In a business context this often entails articulating a problem in a language familiar to your stakeholders laden with assumptions about the shape of the solution. It’s not a trivial task to re-frame the problem if expectations skew in the opposite direction or received wisdom implies the contrary conclusion, but valid arguments help.</p>
+<p>But while there is a common thread of reasonable inference that weaves through both disciplines the subjects share more substantive commitments. Data science is driven by the need for decisions. The focus on decision motivates strong focus on evidence, knowledge and warranted belief weighed against the costs and subjective utility of each choice. These calculations are implicitly expressed by means of a loss-function over an optimisation problem. Underwriting our confidence in our beliefs is a focus on the reliability of the methods and assumptions underlying our models. For instance, the stationarity assumption underlying some timeseries models is a practical constraint on Hume’s problem of induction with ramifications for how to think about Nelson’s Goodman’s notion of projectible predicates. Experiments shed light of the particulars of causal relationships enabling the validation or refutation of the hypothetical connections. These problems span the ranges of epistemology, metaphysics and value theory and measurement, before we even consider the ethics of deploying these algorithms at scale.</p>
+<p>But philosophy is too broad a subject, with too deep a history to hope for comprehensive coverage. The aim of this book is more modest; to introduce and expand on some areas where there is an interesting intersection of fertile ideas and illustrate the feedback loop between philosophical assumptions, tests against data and the revision or stagnation of those models.</p>
 
 </div>
             </section>

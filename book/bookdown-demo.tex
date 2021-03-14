@@ -106,7 +106,7 @@
 % title / author / date
 \title{Examining Algorithms}
 \author{Nathaniel Forde}
-\date{2021-03-11}
+\date{2021-03-14}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -149,6 +149,10 @@
 This book is written in the conviction that understanding the philosophical foundations of data science can help the data scientist build better models and that the programming of these algorithms clarify the abstractions of philosophical theory. My own path into data science was indirect through philosophy, mathematical logic and, briefly, software engineering. During the lifetime of an engineering project technical debt accrues building complexity by abstraction. There is a direct parallel with accretions of philosophical assumptions that crust over predictive algorithms. The choices made in model design, feature selection and measurement, all embed the kinds of presuppositions about the data generating process that merit doubt and rethinking. More subtle than this though is the intellectual debts that shape even the available choices of models, methodologies and the manner in which we frame a problem and explain our solution others.
 
 A data science project is simultaneously an effort at translation and persuasion. An expression of a problem that is a plausible mathematical approximation of the original problem and renders it amenable to some kind of optimisation. There is a trade-off between the goals of an interpretable model and maximising performance on some key metric. In the short term you may get away with a black-box, but when it breaks (and it will break), you had better be able to explain why. In a business context this often entails articulating a problem in a language familiar to your stakeholders laden with assumptions about the shape of the solution. It's not a trivial task to re-frame the problem if expectations skew in the opposite direction or received wisdom implies the contrary conclusion, but valid arguments help.
+
+But while there is a common thread of reasonable inference that weaves through both disciplines the subjects share more substantive commitments. Data science is driven by the need for decisions. The focus on decision motivates strong focus on evidence, knowledge and warranted belief weighed against the costs and subjective utility of each choice. These calculations are implicitly expressed by means of a loss-function over an optimisation problem. Underwriting our confidence in our beliefs is a focus on the reliability of the methods and assumptions underlying our models. For instance, the stationarity assumption underlying some timeseries models is a practical constraint on Hume's problem of induction with ramifications for how to think about Nelson's Goodman's notion of projectible predicates. Experiments shed light of the particulars of causal relationships enabling the validation or refutation of the hypothetical connections. These problems span the ranges of epistemology, metaphysics and value theory and measurement, before we even consider the ethics of deploying these algorithms at scale.
+
+But philosophy is too broad a subject, with too deep a history to hope for comprehensive coverage. The aim of this book is more modest; to introduce and expand on some areas where there is an interesting intersection of fertile ideas and illustrate the feedback loop between philosophical assumptions, tests against data and the revision or stagnation of those models.
 
 \hypertarget{expected-utility-a-primer}{%
 \chapter{Expected Utility: A Primer}\label{expected-utility-a-primer}}
@@ -1175,8 +1179,8 @@ The estimates are correct in magnitude and direction for the actual parameters d
 ## Dep. Variable:                      y   No. Observations:                 2000
 ## Model:                        MNLogit   Df Residuals:                     1994
 ## Method:                           MLE   Df Model:                            4
-## Date:                Thu, 11 Mar 2021   Pseudo R-squ.:                  0.2924
-## Time:                        21:43:04   Log-Likelihood:                -1260.8
+## Date:                Sun, 14 Mar 2021   Pseudo R-squ.:                  0.2924
+## Time:                        00:25:23   Log-Likelihood:                -1260.8
 ## converged:                       True   LL-Null:                       -1781.9
 ## Covariance Type:            nonrobust   LLR p-value:                2.587e-224
 ## ==============================================================================
@@ -1199,31 +1203,25 @@ McFadden's analysis pursued these considerations in the choice of commuter trans
 
 These modelling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, but there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool.
 
-\hypertarget{literature}{%
-\chapter{Literature}\label{literature}}
+\hypertarget{tbd---stationarity-and-induction}{%
+\chapter{TBD - Stationarity and Induction}\label{tbd---stationarity-and-induction}}
 
-Here is a review of existing methods.
+To be done.
 
-\hypertarget{methods}{%
-\chapter{Methods}\label{methods}}
+\hypertarget{tbd---causal-inference-and-counterfactuals}{%
+\chapter{TBD - Causal Inference and Counterfactuals}\label{tbd---causal-inference-and-counterfactuals}}
 
 We describe our methods in this chapter.
 
-\hypertarget{applications}{%
-\chapter{Applications}\label{applications}}
+\hypertarget{tbd---wisdom-of-the-crowds}{%
+\chapter{TBD - Wisdom of the Crowds}\label{tbd---wisdom-of-the-crowds}}
 
-Some \emph{significant} applications are demonstrated in this chapter.
+To be done
 
-\hypertarget{example-one}{%
-\section{Example one}\label{example-one}}
+\hypertarget{tbd---ethical-considerations}{%
+\chapter{TBD - Ethical Considerations}\label{tbd---ethical-considerations}}
 
-\hypertarget{example-two}{%
-\section{Example two}\label{example-two}}
-
-\hypertarget{final-words}{%
-\chapter{Final Words}\label{final-words}}
-
-We have finished a nice book.
+To be done.
 
 \bibliography{book.bib,packages.bib,library.bib}
 

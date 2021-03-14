@@ -21,9 +21,7 @@ bolkers-representation-theorem
 from-neutrality-to-desire
 machine-learning-and-the-models-of-utility
 maximum-likelihood-estimation-and-multiple-choice
-literature
-methods
-applications
-example-one
-example-two
-final-words
+tbd---stationarity-and-induction
+tbd---causal-inference-and-counterfactuals
+tbd---wisdom-of-the-crowds
+tbd---ethical-considerations

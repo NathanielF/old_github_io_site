@@ -1187,7 +1187,7 @@ The estimates are correct in magnitude and direction for the actual parameters d
 ## Model:                        MNLogit   Df Residuals:                     1994
 ## Method:                           MLE   Df Model:                            4
 ## Date:                Tue, 16 Mar 2021   Pseudo R-squ.:                  0.2924
-## Time:                        01:29:35   Log-Likelihood:                -1260.8
+## Time:                        21:33:08   Log-Likelihood:                -1260.8
 ## converged:                       True   LL-Null:                       -1781.9
 ## Covariance Type:            nonrobust   LLR p-value:                2.587e-224
 ## ==============================================================================
@@ -1263,42 +1263,20 @@ Ideally we would parse out our data into the most relevant descriptive features,
 \NormalTok{        df\_purchases }\OperatorTok{=}\NormalTok{ pd.concat([prod\_features, cust\_features], axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
     \ControlFlowTok{else}\NormalTok{:}
 \NormalTok{        df\_purchases }\OperatorTok{=}\NormalTok{ df\_purchases.append(pd.concat([prod\_features, cust\_features], axis}\OperatorTok{=}\DecValTok{1}\NormalTok{))}
-\NormalTok{df\_purchases.reset\_index(inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{df\_purchases.reset\_index(inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{, drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-For any observed set of customer attributes, their covariance matrix can be factorized (or decomposed) into a matrix product of the eigenvectors and eigenvalues. These components can in turn be analysed to express the manner in which each of the original features contributes to the new construct. Each component captures a proportion of the total variance observed in the original covariance matrix:
+\begin{verbatim}
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+\end{verbatim}
+
+For any observed set of customer attributes, their covariance matrix can be factorized (or decomposed) into a matrix product of the eigenvectors and eigenvalues. These components can in turn be analysed to express the manner in which each of the original features contributes to the new construct. Each component captures a proportion of the total variance observed in the original covariance matrix. If we're lucky, a small number of the eigenvectors (principle components) can be shown to explain the variance in the data and thereby represent a complex customer problem in a reduced dimensional space.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{X }\OperatorTok{=}\NormalTok{ df\_customer[[x }\ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in}\NormalTok{ df\_purchases.columns }
 \ControlFlowTok{if} \StringTok{\textquotesingle{}customer\_desc\textquotesingle{}} \KeywordTok{in}\NormalTok{ x]]}
-\NormalTok{kmeans }\OperatorTok{=}\NormalTok{ KMeans(init}\OperatorTok{=}\StringTok{\textquotesingle{}k{-}means++\textquotesingle{}}\NormalTok{, n\_clusters}\OperatorTok{=}\DecValTok{3}\NormalTok{, n\_init}\OperatorTok{=}\DecValTok{30}\NormalTok{)}
-\NormalTok{kfit }\OperatorTok{=}\NormalTok{ kmeans.fit(X)}
-\NormalTok{clusters }\OperatorTok{=}\NormalTok{ kmeans.predict(X)}
-\NormalTok{X[}\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ clusters}
-\NormalTok{sklearn\_pca }\OperatorTok{=}\NormalTok{ sklearnPCA(n\_components}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
-\NormalTok{Y\_pca }\OperatorTok{=}\NormalTok{ pd.DataFrame(sklearn\_pca.fit\_transform(X[[col }\ControlFlowTok{for}\NormalTok{ col }\KeywordTok{in}\NormalTok{ X.columns }\ControlFlowTok{if}
-                                         \KeywordTok{not} \StringTok{\textquotesingle{}cluster\textquotesingle{}} \KeywordTok{in}\NormalTok{ col]]))}
-\NormalTok{X }\OperatorTok{=}\NormalTok{ pd.concat([X, Y\_pca], axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
-\NormalTok{X[[}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{]].plot.scatter(x}\OperatorTok{=}\DecValTok{0}\NormalTok{,}
-\NormalTok{                      y}\OperatorTok{=}\DecValTok{1}\NormalTok{,}
-\NormalTok{                      c}\OperatorTok{=}\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{,}
-\NormalTok{                      colormap}\OperatorTok{=}\StringTok{\textquotesingle{}viridis\textquotesingle{}}\NormalTok{)}
-\NormalTok{plt.title(}\StringTok{"Principle Components Representation {-} Coloured by inferred Clusters"}\NormalTok{)}
-\NormalTok{plt.ylabel(}\StringTok{"Principle Component 1"}\NormalTok{)}
-\NormalTok{plt.xlabel(}\StringTok{"Principle Component 2"}\NormalTok{)}
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-22-1}
-
-If we're lucky, a small number of the eigenvectors (principle components) can be shown to explain the variance in the data and thereby represent a complex customer problem in a reduced dimensional space. Each customer is visualised as a complex of observed characteristics along the axes of the principle components in, for example, a two dimensional plane. Furthermore, we can overlay an interpretation on the components by associating group identifiers to portions of the plane.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-
 \NormalTok{X\_std }\OperatorTok{=}\NormalTok{ StandardScaler().fit\_transform(X)}
 \CommentTok{\#\# Covariance Decomposition}
 \NormalTok{cov\_mat }\OperatorTok{=}\NormalTok{ np.cov(X\_std.T)}
@@ -1317,6 +1295,31 @@ If we're lucky, a small number of the eigenvectors (principle components) can be
 \NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Principal components\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.legend(loc}\OperatorTok{=}\StringTok{\textquotesingle{}best\textquotesingle{}}\NormalTok{)}
 \NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-22-1}
+
+Each customer can then be visualised as a complex of observed characteristics along the axes of the principle components in, for example, a two dimensional plane. Furthermore, we can overlay an interpretation on the components by associating group identifiers to portions of the plane.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmeans }\OperatorTok{=}\NormalTok{ KMeans(init}\OperatorTok{=}\StringTok{\textquotesingle{}k{-}means++\textquotesingle{}}\NormalTok{, n\_clusters}\OperatorTok{=}\DecValTok{3}\NormalTok{, n\_init}\OperatorTok{=}\DecValTok{30}\NormalTok{)}
+\NormalTok{kfit }\OperatorTok{=}\NormalTok{ kmeans.fit(X)}
+\NormalTok{clusters }\OperatorTok{=}\NormalTok{ kmeans.predict(X)}
+\NormalTok{X[}\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ clusters}
+\NormalTok{sklearn\_pca }\OperatorTok{=}\NormalTok{ sklearnPCA(n\_components}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{Y\_pca }\OperatorTok{=}\NormalTok{ pd.DataFrame(sklearn\_pca.fit\_transform(X[[col }\ControlFlowTok{for}\NormalTok{ col }\KeywordTok{in}\NormalTok{ X.columns }\ControlFlowTok{if}
+                                         \KeywordTok{not} \StringTok{\textquotesingle{}cluster\textquotesingle{}} \KeywordTok{in}\NormalTok{ col]]))}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ pd.concat([X, Y\_pca], axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{X[[}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{]].plot.scatter(x}\OperatorTok{=}\DecValTok{0}\NormalTok{,}
+\NormalTok{                      y}\OperatorTok{=}\DecValTok{1}\NormalTok{,}
+\NormalTok{                      c}\OperatorTok{=}\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{,}
+\NormalTok{                      colormap}\OperatorTok{=}\StringTok{\textquotesingle{}viridis\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{"Principle Components Representation {-} Coloured by inferred Clusters"}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{"Principle Component 1"}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{"Principle Component 2"}\NormalTok{)}
 \NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}

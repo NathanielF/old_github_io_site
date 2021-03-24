@@ -10,17 +10,17 @@
   <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@forde_nathaniel">
 <meta name="twitter:creator" content="@forde_nathaniel">
-<meta name="twitter:title" content="Replication and Generalisability">
-<meta name="twitter:description" content="Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication.">
-<meta name="twitter:image" content="img/flammiron_engraving.jpg">
+<meta name="twitter:title" content="Psi, Replication and Generalisability">
+<meta name="twitter:description" content="Feeling the Future: Lessons in Error Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication.">
+<meta name="twitter:image" content="https://nathanielf.github.io/img/2021-03-01-Replication-CrossValid/psi.jpeg">
 
 <meta property="og:url" content="/publication/replication_and_cross_validation/" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Replication and Generalisability" />
-<meta property="og:description" content="Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication." />
-<meta property="og:image" content="img/flammiron_engraving.jpg" />
+<meta property="og:title" content="Psi, Replication and Generalisability" />
+<meta property="og:description" content="Feeling the Future: Lessons in Error Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication." />
+<meta property="og:image" content="https://nathanielf.github.io/img/2021-03-01-Replication-CrossValid/psi.jpeg" />
 
-  <title>Replication and Generalisability</title>
+  <title>Psi, Replication and Generalisability</title>
 
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -117,13 +117,15 @@ ga('send', 'pageview');
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
-      <h2 class="publication-title">Replication and Generalisability</h1>
+      <h2 class="publication-title">Psi, Replication and Generalisability</h1>
         <p>
-          <em>A survey of the problems of replicability and cross-validation</em>
+          <em>A survey of some problems of replicability and generalisability</em>
         </p>
 
         <p>
           
+
+<h1 id="feeling-the-future-lessons-in-error">Feeling the Future: Lessons in Error</h1>
 
 <p>Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication. A tension between careful rigour and fantastical speculation characterised the work and provoked only anxiety in others that spurred an urgency for better explanations.</p>
 
@@ -217,7 +219,49 @@ az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="
 
 <p><img src="/img/2021-03-01-Replication-CrossValid/performance.png" alt="Consistent performance" /></p>
 
-<p>Since we want to evaluate the correlation of performance on both tests, where we would like to evaluate if the data suggests a positive correlation. Performance on the test is simply the count of correct answers for each participant on each experiment. We&rsquo;ll model this as a Binomial distribution As before we treat our observed guesses as driven by draws from a bivariate normal distribution which is &ldquo;filtered&rdquo; through a probit transform. A probit transform like the logistic transform converts a continuous variable into a bi-furcated distribution which mirrors our choices.</p>
+<p>Since we want to evaluate the correlation of performance on both tests, where we would like to evaluate if the data suggests a positive correlation. Performance on the test is simply the count of correct answers for each participant on each experiment. We&rsquo;ll model this as a Binomial distribution. As before we treat our observed guesses as driven by draws from a bivariate normal distribution which is &ldquo;filtered&rdquo; through a probit transform. A probit transform like the logistic transform converts a continuous variable into a symmetrical bi-furcated distribution which allows us to model our choices.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">phi</span>(x):
+    <span style="color: #0099FF; font-style: italic"># probit transform</span>
+    <span style="color: #006699; font-weight: bold">return</span> <span style="color: #FF6600">0.5</span> <span style="color: #555555">+</span> <span style="color: #FF6600">0.5</span> <span style="color: #555555">*</span> pm<span style="color: #555555">.</span>math<span style="color: #555555">.</span>erf(x <span style="color: #555555">/</span> pm<span style="color: #555555">.</span>math<span style="color: #555555">.</span>sqrt(<span style="color: #FF6600">2</span>))
+
+
+<span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> model2:
+    <span style="color: #0099FF; font-style: italic"># r∼Uniform(−1,1)</span>
+    r <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Uniform(<span style="color: #CC3300">&quot;r&quot;</span>, lower<span style="color: #555555">=</span><span style="color: #FF6600">0</span>, upper<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+
+    <span style="color: #0099FF; font-style: italic"># μ1,μ2∼Gaussian(0,.001)</span>
+    mu <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;mu&quot;</span>, mu<span style="color: #555555">=</span><span style="color: #FF6600">0</span>, tau<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>, shape<span style="color: #555555">=</span>n2)
+
+    <span style="color: #0099FF; font-style: italic"># σ1,σ2∼InvSqrtGamma(.001,.001)</span>
+    lambda1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Gamma(<span style="color: #CC3300">&quot;lambda1&quot;</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>, beta<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>, testval<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)
+    lambda2 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Gamma(<span style="color: #CC3300">&quot;lambda2&quot;</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>, beta<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>, testval<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)
+    sigma1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&quot;sigma1&quot;</span>, <span style="color: #FF6600">1</span> <span style="color: #555555">/</span> np<span style="color: #555555">.</span>sqrt(lambda1))
+    sigma2 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&quot;sigma2&quot;</span>, <span style="color: #FF6600">1</span> <span style="color: #555555">/</span> np<span style="color: #555555">.</span>sqrt(lambda2))
+
+    cov <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(
+        <span style="color: #CC3300">&quot;cov&quot;</span>,
+        tt<span style="color: #555555">.</span>stacklists(
+            [[lambda1 <span style="color: #555555">**</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span>, r <span style="color: #555555">*</span> sigma1 <span style="color: #555555">*</span> sigma2], [r <span style="color: #555555">*</span> sigma1 <span style="color: #555555">*</span> sigma2, lambda2 <span style="color: #555555">**</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span>]]
+        ),
+    )
+
+    tau1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&quot;tau1&quot;</span>, tt<span style="color: #555555">.</span>nlinalg<span style="color: #555555">.</span>matrix_inverse(cov))
+
+    thetai <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MvNormal(<span style="color: #CC3300">&quot;thetai&quot;</span>, mu<span style="color: #555555">=</span>mu, tau<span style="color: #555555">=</span>tau1, shape<span style="color: #555555">=</span>(n, n2))
+    theta <span style="color: #555555">=</span> phi(thetai)
+    <span style="color: #0099FF; font-style: italic">#likelihood</span>
+    kij <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Binomial(<span style="color: #CC3300">&quot;kij&quot;</span>, p<span style="color: #555555">=</span>theta, n<span style="color: #555555">=</span>Nt, observed<span style="color: #555555">=</span>xobs)
+
+    trace2 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample()
+</pre></div>
+
+<p>This looks like an analogous model and in some respects it is, but note what the multivariate gaussian is modelling. In this model it&rsquo;s an expression of the latent mental process that drives the performance each task. This flexibility is a virtue.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>az<span style="color: #555555">.</span>plot_trace(trace2, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;r&quot;</span>])
+</pre></div>
+
+<p><img src="/img/2021-03-01-Replication-CrossValid/ability_corr.png" alt="Posterior for relation between performance on both tests" /></p>
+
+<p>As expected the correlation between the performance on both tasks is very slight. Definitely not promising evidence of aptitude in the studied group.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 

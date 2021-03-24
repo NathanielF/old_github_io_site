@@ -112,6 +112,10 @@
   </url>
   
   <url>
+    <loc>https://nathanielf.github.io/publication/replication_and_cross_validation/</loc>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/publication/</loc>
     <priority>0</priority>
   </url>
@@ -120,10 +124,6 @@
     <loc>https://nathanielf.github.io/tags/replicability/</loc>
     <lastmod>2021-01-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nathanielf.github.io/publication/replication_and_cross_validation/</loc>
   </url>
   
   <url>
@@ -160,10 +160,6 @@
     <loc>https://nathanielf.github.io/tags/utility/</loc>
     <lastmod>2021-02-21T10:19:36+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nathanielf.github.io/publication/utility_and_representation/</loc>
   </url>
   
 </urlset>

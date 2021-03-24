@@ -11,13 +11,13 @@
 <meta name="twitter:site" content="@forde_nathaniel">
 <meta name="twitter:creator" content="@forde_nathaniel">
 <meta name="twitter:title" content="Replication and Generalisability">
-<meta name="twitter:description" content="Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition.">
+<meta name="twitter:description" content="Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication.">
 <meta name="twitter:image" content="img/flammiron_engraving.jpg">
 
 <meta property="og:url" content="/publication/replication_and_cross_validation/" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Replication and Generalisability" />
-<meta property="og:description" content="Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition." />
+<meta property="og:description" content="Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication." />
 <meta property="og:image" content="img/flammiron_engraving.jpg" />
 
   <title>Replication and Generalisability</title>
@@ -26,6 +26,24 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="/css/prism.css" rel="stylesheet" />
   <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
   
   
   
@@ -105,7 +123,105 @@ ga('send', 'pageview');
         </p>
 
         <p>
-          <p>Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition.</p>
+          
+
+<p>Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication. A tension between careful rigour and fantastical speculation characterised the work and provoked only anxiety in others that spurred an urgency for better explanations.</p>
+
+<h2 id="a-flavour-of-the-rigour">A Flavour of the Rigour</h2>
+
+<p>We won&rsquo;t delve into each of the experiments, but it&rsquo;s worth recalling something of the attention to detail and Bem&rsquo;s effort to avoid easy refutation. Fundamentally his methods mirror the best practice of the day. He chooses an experimental paradigm of accepted research and adapts or invert it to test for the presence of <em>psi</em>, the catch all term denoting foresight and pre-cognitive ability. The most evocative of these experiments asked 100 participants to pick amongst two curtains where a picture will appear behind one of the two. The choice of curtain and the content of the picture was assigned in a random fashion, although a proportion of the pictures were selected to match the particpant&rsquo;s sexual orientation. The theory was that some adaptive trait of the human organism would be primed to notice sexually stimulating possibilities in the near future. Success was measured against the benchmark of 50% accuracy.</p>
+
+<p>The randomisation algorithm relied on a combination of methods using both software and a physical ramdomisation device to mitigate the risk that participants could either (i) intuit some pattern in the order of selection or (ii) manipulate the selection by psychokinesis. The randomising devices were then also run through the experiment to ensure that each guess achieved no greater accuracy than the benchmark 50%. Finally, each individual was measured on a scale of extraversion (a suspected correlate of <em>psi</em>) and tested. The results were tabulated and evaluated using standard parametric and non-parametric measures of statistical significance. The results showed a (technically) significant divergence from the null-hypothesis (53% accuracy) on the erotic stimuli, suggesting some evidence of pre-cognitive ability. The effect was pronounced in the extraverted participants who achieved 57% accurate predictions of where the image would be displayed. This was one of nine experiments he ran, of which eight returned suggestive evidence for <em>psi</em></p>
+
+<h3 id="did-anything-go-wrong">Did anything go wrong?</h3>
+
+<p>What if anything was Bem&rsquo;s mistake? One diagnosis of the problem rests on the inherent weakness of hypothesis testing as a confirmatory device. The null-hypothesis mechanism aims to reject theories if the data is substantially incompatible with expectation. So phrased the burden of proof is massive. Even granting Bem his results, the nine experiments have to be weighed against the cumulative evidence of experience. With this constraint the evidence seems slight and is (at best) an invitation to replication. If we&rsquo;re less generous we can question fine-graining of the results. Notice how specific the nature of the effect in particular group of people for a particular variety of stimuli. We can fairly wonder if the results hold up to replication but also how the results were achieved. What part of the data was obtained in process of exploration versus experiement? This is commonly called the file-drawer problem - so named for the speculative number of unsuccessful analyses that were filed away instead of published.</p>
+
+<h2 id="bayesian-logic-of-evidence">Bayesian Logic of Evidence</h2>
+
+<p>Following the presentation of Lee &amp; Wagenmakers in their <em>Bayesian Cognitive Modeling</em> we can instad consider problems with Bem&rsquo;s methods.</p>
+
+<h3 id="early-stopping">Early Stopping</h3>
+
+<p>The first suggestion is that the results may be due to a somewhat haphazard approach to ending an experiment. They posit that there is suspicious relationship between the sample size and observed effect size. The evaluation of the hypothesis is Bayesian - they seek to assess the probability of a correlation given the evidence i.e. Bem&rsquo;s results:</p>
+
+<p>$$ p(C | O) = \dfrac{p( C )p(O | C)}{\int_{i}^{N} p(O |C_{i})} $$</p>
+
+<p>The observed values are as follows:</p>
+
+<p><img src="/img/2021-03-01-Replication-CrossValid/NegativeRelation.png" alt="Negative Relationship" /></p>
+
+<p>We want to assess our view of the likely correlation given Bem&rsquo;s results.</p>
+
+<p>On the hypothesis that there is some artifact of Bem&rsquo;s process either deliberate or unintentional that influences the data, we want to see what the data suggests is the most likely value for their correlation. A strong anti-correlation is suggestive that the sample sizes are picked when the results support Bem&rsquo;s conclusion.</p>
+
+<p>The Bayesian paradigm of reasoning is especially nice for this kind of problem as it forces you to express your prior credence in the question at hand. In this case we want to say what our beliefs about the correlation between effect size and sample size would be were we to condition on Bem&rsquo;s observations. We&rsquo;ll look at another case where we asses our prior belief in <em>psi</em> itself and weigh it against the evidence. To incorporate our prior beliefs can model our observed values as draws from a bivariate normal distribution with  inverse gamma distributions over the variance terms and the correlation term $r$ enters the model as:</p>
+
+<p>$$ MvNormal([\mu_1, \mu_2],  \begin{bmatrix} \sigma_1^{2} , &amp; r\sigma_1\sigma_2  \newline r\sigma_1\sigma_2 &amp; ,  \sigma_2^{2}  \end{bmatrix}^{-1}) = MvNormal( \overrightarrow{\mu}, \Sigma^{-1} ) $$</p>
+
+<p>First look at the code, then we&rsquo;ll unpack it a little.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> model1:
+    <span style="color: #0099FF; font-style: italic"># r∼Uniform(−1,1) flat prior for correlation value</span>
+    r <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Uniform(<span style="color: #CC3300">&quot;r&quot;</span>, lower<span style="color: #555555">=-</span><span style="color: #FF6600">1</span>, upper<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+
+    <span style="color: #0099FF; font-style: italic"># μ1,μ2∼Gaussian(0,.001)  priors for the bivaraite gaussian means</span>
+    mu <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;mu&quot;</span>, mu<span style="color: #555555">=</span><span style="color: #FF6600">0</span>, tau<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>, shape<span style="color: #555555">=</span>n2)
+
+    <span style="color: #0099FF; font-style: italic"># σ1,σ2∼InvSqrtGamma(.001,.001) prior for the bivariate sigma terms</span>
+    lambda1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Gamma(<span style="color: #CC3300">&quot;lambda1&quot;</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>, beta<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>)
+    lambda2 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Gamma(<span style="color: #CC3300">&quot;lambda2&quot;</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>, beta<span style="color: #555555">=</span><span style="color: #FF6600">0.001</span>)
+    sigma1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&quot;sigma1&quot;</span>, <span style="color: #FF6600">1</span> <span style="color: #555555">/</span> np<span style="color: #555555">.</span>sqrt(lambda1))
+    sigma2 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&quot;sigma2&quot;</span>, <span style="color: #FF6600">1</span> <span style="color: #555555">/</span> np<span style="color: #555555">.</span>sqrt(lambda2))
+
+    cov <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(
+        <span style="color: #CC3300">&quot;cov&quot;</span>,
+        tt<span style="color: #555555">.</span>stacklists(
+            [[lambda1 <span style="color: #555555">**</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span>, r <span style="color: #555555">*</span> sigma1 <span style="color: #555555">*</span> sigma2], [r <span style="color: #555555">*</span> sigma1 <span style="color: #555555">*</span> sigma2, lambda2 <span style="color: #555555">**</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span>]]
+        ),
+    )
+
+    tau1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&quot;tau1&quot;</span>, tt<span style="color: #555555">.</span>nlinalg<span style="color: #555555">.</span>matrix_inverse(cov))
+
+    <span style="color: #0099FF; font-style: italic"># The liklihood term - distribution of parameter conditional on the data</span>
+    yd <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MvNormal(<span style="color: #CC3300">&quot;yd&quot;</span>, mu<span style="color: #555555">=</span>mu, tau<span style="color: #555555">=</span>tau1, observed<span style="color: #555555">=</span>y)
+
+    trace1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample()
+</pre></div>
+
+<p>There is quite alot in that. The key points are to note that we are estimating the joint distribution of multiple parameters ($\overrightarrow{\mu}, \Sigma$) at once:</p>
+
+<p>$$ p(\overrightarrow{\mu}, \Sigma | y) = \underbrace{p(\overrightarrow{\mu}) | \Sigma, y)}_{\text{conditional mean}}\cdot p(\Sigma | y) = \overbrace{p(\Sigma |\overrightarrow{\mu}, y)}^{\text{conditional cov}} \cdot p(\overrightarrow{\mu} | y) $$</p>
+
+<p>In the case of estimating a normal distribution with unknown mean and unknown variance both conditional quantities need to be estimated, so it helps that the inverse Gamma distribution is conjugate prior distribution for $\Sigma$. The bounded gamma variable is technically  &ldquo;improper&rdquo; in that it can exceed 1, but taking the inverse squareroot is common practice to specify a conjugate prior for $\Sigma$ in the multivariate normal distribution. The conjugate prior for $\overrightarrow{\mu}$ is similarly a normally distributed variable. The defining characteristic of a conjugate prior is that the posterior distribution results from the same family as the prior after updating on with the likelihood based on the observed data.</p>
+
+<p>$$ \text{Conjugate Relation : } prior_{fam} \mapsto_{likelihood}  posterior_{fam} $$
+$$ p(\overrightarrow{\mu} | y, \Sigma) \sim MvNormal(\overrightarrow{\mu}_{0}, \Sigma_{0}) $$
+$$ p(\Sigma | y , \overrightarrow{\mu}) \sim InvSqrtGamma(\alpha, \beta) $$</p>
+
+<p>Using this fact we can iteratively sample from both the conditional distributions of both parameters based on the observations $y$ and feed the sample values through the likelihood for function for the overall multivariate normal expressed as:</p>
+
+<p>$$ p (y | \overrightarrow{\mu}, \Sigma) = (2 \pi)^{\frac{-2}{2}} \vert \Sigma \vert^{\frac{-1}{2}} exp\Big(-(y - \overrightarrow{\mu})^{&lsquo;} \Sigma^{-1}(y - \overrightarrow{\mu})/2 \Big) $$</p>
+
+<p>which in turn is used to calculate the posterior values of the joint parameters conditional on the data. This method is called Gibbs Sampling and constructs the posterior distribution from our data. The implementation of this process in Pymc3 allows us to recover the marginal distribution of the correlation coefficient from the range of samples.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot the marginal distribution of the correlation term</span>
+az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;r&quot;</span>])
+</pre></div>
+
+<p><img src="/img/2021-03-01-Replication-CrossValid/CorrelationCoef.png" alt="Correlation Plot" /></p>
+
+<p>The results decisively show that the data implies a strong relationship between effect size and sample size, that merits some suspicion.</p>
+
+<h3 id="evidence-for-psi">Evidence for Psi</h3>
+
+<p>It&rsquo;s one thing to question the methodological missteps of the paper, but it&rsquo;s quite another thing to try and evaluate the basic claim of Bem&rsquo;s paper. How does his evidence contribute to our belief in the occurence of psi. Even though he arrays a list of 9 experiments with suggestive evidence. It&rsquo;s possible that each represents a statistical fluke - a better test for the existence of <em>psi</em> would involve measuring consistent performance over a number of trials. This is exactly what Wagenmaker&rsquo;s research attempted when trying to replicate Bem&rsquo;s results. He repeated Bem&rsquo;s original experiments and another analogous task measuring performance on both both tasks.</p>
+
+<p><img src="/img/2021-03-01-Replication-CrossValid/performance.png" alt="Consistent performance" /></p>
+
+<p>Since we want to evaluate the correlation of performance on both tests, where we would like to evaluate if the data suggests a positive correlation. Performance on the test is simply the count of correct answers for each participant on each experiment. We&rsquo;ll model this as a Binomial distribution As before we treat our observed guesses as driven by draws from a bivariate normal distribution which is &ldquo;filtered&rdquo; through a probit transform. A probit transform like the logistic transform converts a continuous variable into a bi-furcated distribution which mirrors our choices.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Bem&rsquo;s paper is an unsettling reminder that rigour comes in many forms and even witha good faith effort exactitude is not always enough to prevent error. In this case the Bayesian perspective provides a solid critique and proves itself a valuable lens with which to evaluate reliability of performance. More generally the explicit nature of Bayesian modelling and the careful manner in which you specify your prior expectations is appealing. It makes each model cleanly and quickly explainable. In all Bayesian models we simply update our priors with evidence and in return we get a multivariate posterior probability distribution.</p>
 
         </p>
 

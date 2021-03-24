@@ -147,7 +147,7 @@ ga('send', 'pageview');
 
 <p>The first suggestion is that the results may be due to a somewhat haphazard approach to ending an experiment. They posit that there is suspicious relationship between the sample size and observed effect size. The evaluation of the hypothesis is Bayesian - they seek to assess the probability of a correlation given the evidence i.e. Bem&rsquo;s results:</p>
 
-<p>$$ p(C | O) = \dfrac{p( C )p(O | C)}{\int_{i}^{N} p(O |C_{i})} $$</p>
+<p>$$ \overbrace{p(C | O)}^{posterior} = \dfrac{\overbrace{p( C )}^{prior}\overbrace{p(O | C)}^{likelihood}}{\underbrace{\int_{i}^{N} p(O |C_{i})}_{evidence}} $$</p>
 
 <p>The observed values are as follows:</p>
 

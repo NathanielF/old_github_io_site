@@ -145,15 +145,15 @@ ga('send', 'pageview');
 
 <h3 id="early-stopping">Early Stopping</h3>
 
-<p>The first suggestion is that the results may be due to a somewhat haphazard approach to ending an experiment. They posit that there is suspicious relationship between the sample size and observed effect size. The evaluation of the hypothesis is Bayesian - they seek to assess the probability of a correlation given the evidence i.e. Bem&rsquo;s results:</p>
+<p>The first suggestion is that the results may be due to a somewhat haphazard approach to ending an experiment. They posit that there is suspicious relationship between the sample size and observed effect size. The evaluation of the hypothesis is Bayesian - they seek to assess the probability of a correlation given the observed values i.e. Bem&rsquo;s results:</p>
 
 <p>$$ \overbrace{p(C | O)}^{posterior} = \dfrac{\overbrace{p( C )}^{prior}\overbrace{p(O | C)}^{likelihood}}{\underbrace{\int_{i}^{N} p(O |C_{i})}_{evidence}} $$</p>
 
-<p>The observed values are as follows:</p>
+<p>The observed values are suggestive of a relationship:</p>
 
 <p><img src="/img/2021-03-01-Replication-CrossValid/NegativeRelation.png" alt="Negative Relationship" /></p>
 
-<p>We want to assess our view of the likely correlation given Bem&rsquo;s results. On the hypothesis that there is some artifact of Bem&rsquo;s process either deliberate or unintentional that influences the data, we want to see what the data suggests is the most likely value for their correlation. A strong anti-correlation is suggestive that the sample sizes are picked when the results support Bem&rsquo;s conclusion.</p>
+<p>On the hypothesis that there is some artifact of Bem&rsquo;s process either deliberate or unintentional that influences the data, we want to see what the data suggests is the most likely value for their correlation. A strong anti-correlation is suggestive that the sample sizes are picked when the results support Bem&rsquo;s conclusion.</p>
 
 <p>The Bayesian paradigm of reasoning is especially nice for this kind of problem as it forces you to express your prior credence in the question at hand. In this case we want to say what our beliefs about the correlation between effect size and sample size would be were we to condition on Bem&rsquo;s observations. To incorporate our prior beliefs we can model our observed values as draws from a bivariate normal distribution with  inverse gamma distributions over the variance terms and the correlation term $r$ enters the model as:</p>
 
@@ -192,17 +192,20 @@ ga('send', 'pageview');
 
 <p>$$ p(\overrightarrow{\mu}, \Sigma | y) = \underbrace{p(\overrightarrow{\mu}) | \Sigma, y)}_{\text{conditional mean}}\cdot p(\Sigma | y) = \overbrace{p(\Sigma |\overrightarrow{\mu}, y)}^{\text{conditional cov}} \cdot p(\overrightarrow{\mu} | y) $$</p>
 
-<p>In the case of estimating a normal distribution with unknown mean and unknown variance both conditional quantities need to be estimated, so it helps that the inverse Gamma distribution is conjugate prior distribution for $\Sigma$. The bounded gamma variable is technically  &ldquo;improper&rdquo; in that it can exceed 1, but taking the inverse squareroot is common practice to specify a conjugate prior for $\Sigma$ in the multivariate normal distribution. The conjugate prior for $\overrightarrow{\mu}$ is similarly a normally distributed variable. The defining characteristic of a conjugate prior is that the posterior distribution results from the same family as the prior after updating on with the likelihood based on the observed data.</p>
+<p>In the case of estimating a normal distribution with unknown mean and unknown variance both conditional quantities need to be estimated, so it helps that the inverse Gamma distribution is conjugate prior distribution for $\Sigma$. A conjugate prior relationship makes it easier to compute a posterior for particular families of probability distributions.</p>
 
-<p>$$ \text{Conjugate Relation : } prior_{fam} \mapsto_{likelihood}  posterior_{fam} $$
-$$ p(\overrightarrow{\mu} | y, \Sigma) \sim MvNormal(\overrightarrow{\mu}_{0}, \Sigma_{0}) $$
+<p>$$ \text{Conjugate Relation : } prior_{fam} \mapsto_{likelihood}  posterior_{fam} $$</p>
+
+<p>The bounded gamma variable is technically  &ldquo;improper&rdquo; in that it can exceed 1, but taking the inverse squareroot transform is common practice to specify a conjugate prior for $\Sigma$ in the multivariate normal distribution. The conjugate prior for $\overrightarrow{\mu}$ is similarly a normally distributed variable.</p>
+
+<p>$$ p(\overrightarrow{\mu} | y, \Sigma) \sim MvNormal(\overrightarrow{\mu}_{0}, \Sigma_{0}) $$
 $$ p(\Sigma | y , \overrightarrow{\mu}) \sim InvSqrtGamma(\alpha, \beta) $$</p>
 
 <p>Using this fact we can iteratively sample from both the conditional distributions of both parameters based on the observations $y$ and feed the sample values through the likelihood for function for the overall multivariate normal expressed as:</p>
 
 <p>$$ p (y | \overrightarrow{\mu}, \Sigma) = (2 \pi)^{\frac{-2}{2}} \vert \Sigma \vert^{\frac{-1}{2}} exp\Big(-(y - \overrightarrow{\mu})^{&lsquo;} \Sigma^{-1}(y - \overrightarrow{\mu})/2 \Big) $$</p>
 
-<p>which in turn is used to calculate the posterior values of the joint parameters conditional on the data. This method is called Gibbs Sampling and constructs the posterior distribution from our data. The implementation of this process in Pymc3 allows us to recover the marginal distribution of the correlation coefficient from the range of samples.</p>
+<p>which in turn is used to calculate the posterior values of the joint parameters conditional on the data. This method is called Gibbs Sampling and constructs the posterior distribution from our data. The implementation of this process in Pymc3 allows us to recover the marginal distribution of the correlation coefficient $r$ from the range of samples.</p>
 <div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot the marginal distribution of the correlation term</span>
 az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;r&quot;</span>])
 </pre></div>

@@ -11,13 +11,13 @@
 <meta name="twitter:site" content="@forde_nathaniel">
 <meta name="twitter:creator" content="@forde_nathaniel">
 <meta name="twitter:title" content="Psi, Replication and Generalisability">
-<meta name="twitter:description" content="Feeling the Future: Lessons in Error Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication.">
+<meta name="twitter:description" content="Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication.">
 <meta name="twitter:image" content="https://nathanielf.github.io/img/2021-03-01-Replication-CrossValid/psi.jpeg">
 
 <meta property="og:url" content="/publication/replication_and_cross_validation/" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Psi, Replication and Generalisability" />
-<meta property="og:description" content="Feeling the Future: Lessons in Error Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication." />
+<meta property="og:description" content="Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication." />
 <meta property="og:image" content="https://nathanielf.github.io/img/2021-03-01-Replication-CrossValid/psi.jpeg" />
 
   <title>Psi, Replication and Generalisability</title>
@@ -125,8 +125,6 @@ ga('send', 'pageview');
         <p>
           
 
-<h1 id="feeling-the-future-lessons-in-error">Feeling the Future: Lessons in Error</h1>
-
 <p>Daryl Bem did not literally explode peoples brains, but his proofs of the possibility shook psychology to the core. In a short and precise paper in 2011 Bem set out to show that there was good evidence for the existence of human pre-cognition. Paradoxical as it sounds he succeeded. His research coincided with the burgeoning realisation that there was a replication crisis in psychology, yet he presented his work as invitation to further replication. A tension between careful rigour and fantastical speculation characterised the work and provoked only anxiety in others that spurred an urgency for better explanations.</p>
 
 <h2 id="a-flavour-of-the-rigour">A Flavour of the Rigour</h2>
@@ -139,9 +137,11 @@ ga('send', 'pageview');
 
 <p>What if anything was Bem&rsquo;s mistake? One diagnosis of the problem rests on the inherent weakness of hypothesis testing as a confirmatory device. The null-hypothesis mechanism aims to reject theories if the data is substantially incompatible with expectation. So phrased the burden of proof is massive. Even granting Bem his results, the nine experiments have to be weighed against the cumulative evidence of experience. With this constraint the evidence seems slight and is (at best) an invitation to replication. If we&rsquo;re less generous we can question fine-graining of the results. Notice how specific the nature of the effect in particular group of people for a particular variety of stimuli. We can fairly wonder if the results hold up to replication but also how the results were achieved. What part of the data was obtained in process of exploration versus experiement? This is commonly called the file-drawer problem - so named for the speculative number of unsuccessful analyses that were filed away instead of published.</p>
 
+<p>The emphasis on hypothesis testing and significant results leads to problems clearly outlined by <a href="https://nathanielf.github.io/post/theoretical_risks_meehl/"> Meehl </a>, but there are more particular problems with Bem&rsquo;s analysis nicely brought out by a Bayesian perspective on the data.</p>
+
 <h2 id="bayesian-logic-of-evidence">Bayesian Logic of Evidence</h2>
 
-<p>Following the presentation of Lee &amp; Wagenmakers in their <em>Bayesian Cognitive Modeling</em> we can instad consider problems with Bem&rsquo;s methods.</p>
+<p>Following the presentation of Lee &amp; Wagenmakers in their <em>Bayesian Cognitive Modeling</em> we consider some problems with Bem&rsquo;s methods.</p>
 
 <h3 id="early-stopping">Early Stopping</h3>
 
@@ -255,7 +255,7 @@ az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="
     trace2 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample()
 </pre></div>
 
-<p>This looks like an analogous model and in some respects it is, but note what the multivariate gaussian is modelling. In this model it&rsquo;s an expression of the latent mental process that drives the performance each task. This flexibility is a virtue.</p>
+<p>This looks like an analogous model and in some respects it is, but note what the multivariate gaussian is modelling. In this model it&rsquo;s an expression of the latent mental process that drives the performance each task. This flexibility is a virtue which emphasises the versatility of thinking through the underlying probabilistic phenomena.</p>
 <div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>az<span style="color: #555555">.</span>plot_trace(trace2, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;r&quot;</span>])
 </pre></div>
 
@@ -265,7 +265,7 @@ az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>Bem&rsquo;s paper is an unsettling reminder that rigour comes in many forms and even witha good faith effort exactitude is not always enough to prevent error. In this case the Bayesian perspective provides a solid critique and proves itself a valuable lens with which to evaluate reliability of performance. More generally the explicit nature of Bayesian modelling and the careful manner in which you specify your prior expectations is appealing. It makes each model cleanly and quickly explainable. In all Bayesian models we simply update our priors with evidence and in return we get a multivariate posterior probability distribution.</p>
+<p>Bem&rsquo;s paper is an unsettling reminder that rigour comes in many forms and even witha good faith effort exactitude is not always enough to prevent error. In this case the Bayesian perspective provides a solid critique and proves itself a valuable lens with which to evaluate reliability of performance. More generally the explicit nature of Bayesian modelling and the careful manner in which you specify your prior expectations is appealing. Allowing for a more nuanced weighing of evidence than available through a simplistic binary of hypothesis testing.</p>
 
         </p>
 

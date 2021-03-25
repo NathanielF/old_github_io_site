@@ -194,7 +194,7 @@ ga('send', 'pageview');
 
 <p>In the case of estimating a normal distribution with unknown mean and unknown variance both conditional quantities need to be estimated, so it helps that the inverse Gamma distribution is conjugate prior distribution for $\Sigma$. A conjugate prior relationship makes it easier to compute a posterior for particular families of probability distributions.</p>
 
-<p>$$ \text{Conjugate Relation : } prior_{fam} \mapsto_{likelihood}  posterior_{fam} $$</p>
+<p>$$ \text{Conjugate Relation : } prior_{fam}^{f(x)} \mapsto_{likelihood}  posterior_{fam}^{f(x + n)} $$</p>
 
 <p>The bounded gamma variable is technically  &ldquo;improper&rdquo; in that it can exceed 1, but taking the inverse squareroot transform is common practice to specify a conjugate prior for $\Sigma$ in the multivariate normal distribution. The conjugate prior for $\overrightarrow{\mu}$ is similarly a normally distributed variable.</p>
 
@@ -256,13 +256,24 @@ az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="
     trace2 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample()
 </pre></div>
 
-<p>This looks like an analogous model and in some respects it is, but note what the multivariate gaussian is modelling. In this model it&rsquo;s an expression of the latent mental process that drives the performance each task. This flexibility is a virtue which emphasises the versatility of thinking through the underlying probabilistic phenomena.</p>
+<p>This looks like an analogous model, and in some respects it is, but note what the multivariate gaussian is modelling. In this model it&rsquo;s an expression of the latent mental process that drives the performance each task. This flexibility is a virtue which emphasises the versatility of thinking through the underlying probabilistic phenomena. We have a suite of models apt to model a range of processes if we&rsquo;re creative enough to use them. More, we&rsquo;ve been able to use these models to incorporate our information about the phenomena - the structure of the relationship and the admissable range of values.</p>
+
+<blockquote>
+<p>&ldquo;As soon as we look at the nature of inference at this many-moves-ahead level of perception, our attitude toward probability theory and the proper way to use it in science becomes almost diametrically opposite to that expounded in most current textbooks. We need have no fear of making shaky calculations on inadequate knowledge; for if our predictions are indeed wrong, then we shall have an opportunity to improve that knowledge, an opportunity that would have been lost had we been too timid to make the calculations. Instead of fearing wrong predictions, we look eagerly for them; it is only when predictions based on our present knowledge fail that probability theory leads us to fundamental new knowledge.” - E.T. Jaynes <em>Bayesian Methods</em></p>
+</blockquote>
+
+<p>Based on these results we should predict poor future performance since, as expected, the correlation between the performance on both tasks is very slight.</p>
 <div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>az<span style="color: #555555">.</span>plot_trace(trace2, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;r&quot;</span>])
 </pre></div>
 
 <p><img src="/img/2021-03-01-Replication-CrossValid/ability_corr.png" alt="Posterior for relation between performance on both tests" /></p>
 
-<p>As expected the correlation between the performance on both tasks is very slight. Definitely not promising evidence of aptitude in the studied group.</p>
+<p>Definitely not promising evidence of aptitude in the studied group.</p>
+
+<h3 id="updating-belief-always-a-choice-not-a-necessity">Updating Belief: Always a Choice not a Necessity</h3>
+
+<p>But notice the way we&rsquo;ve used the same updating mechanism in both cases but to different ends.
+In the first case we&rsquo;ve updated on a flat prior and reasoned to the conclusion as a kind of reductio ad absurdum. We intuitively reject the hypothesis that effect size should be anti-correlated with sample size and when Bem&rsquo;s results suggests the opposite, we take it as evidence against his theory. In the second case, more exploratory, we genuinely don&rsquo;t know how the performance over the two tests should be related but for Bem&rsquo;s results to stand they need to be positive. Conditioning on the experimental observations we learn what the expected correlation is to be. Will Bem update his beliefs in the same manner? As with any argument we can always question the premises, but the Bayesian methodology has a simple consistency going for it. It&rsquo;s an explicit and appealing form of analysis, which even if wrong is interesting for how it enables us to learn from the error.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 

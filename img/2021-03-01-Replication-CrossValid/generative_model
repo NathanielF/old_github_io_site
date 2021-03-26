@@ -1,0 +1,48 @@
+digraph {
+	sigma1 [label="sigma1
+~
+Deterministic" shape=box]
+	lambda1 [label="lambda1
+~
+Gamma"]
+	lambda2 [label="lambda2
+~
+Gamma"]
+	r [label="r
+~
+Uniform"]
+	sigma2 [label="sigma2
+~
+Deterministic" shape=box]
+	subgraph cluster2 {
+		mu [label="mu
+~
+Normal"]
+		label=2 labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster2 x 2" {
+		tau1 [label="tau1
+~
+Deterministic" shape=box]
+		cov [label="cov
+~
+Deterministic" shape=box]
+		label="2 x 2" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster9 x 2" {
+		yd [label="yd
+~
+MvNormal" style=filled]
+		label="9 x 2" labeljust=r labelloc=b style=rounded
+	}
+	lambda1 -> sigma1
+	lambda2 -> sigma2
+	sigma1 -> cov
+	lambda1 -> cov
+	lambda2 -> cov
+	r -> cov
+	sigma2 -> cov
+	cov -> tau1
+	tau1 -> yd
+	mu -> yd
+}

@@ -155,11 +155,15 @@ ga('send', 'pageview');
 
 <p>On the hypothesis that there is some artifact of Bem&rsquo;s process either deliberate or unintentional that influences the data, we want to see what the data suggests is the most likely value for their correlation. A strong anti-correlation is suggestive that the sample sizes are picked when the results support Bem&rsquo;s conclusion.</p>
 
-<p>The Bayesian paradigm of reasoning is especially nice for this kind of problem as it forces you to express your prior credence in the question at hand. In this case we want to say what our beliefs about the correlation between effect size and sample size would be were we to condition on Bem&rsquo;s observations. To incorporate our prior beliefs we can model our observed values as draws from a bivariate normal distribution with  inverse gamma distributions over the variance terms and the correlation term $r$ enters the model as:</p>
+<p>The Bayesian paradigm of reasoning is especially nice for this kind of problem as it forces you to express your prior credence in the question at hand. In this case we want to say what our beliefs about the correlation between effect size and sample size would be were we to condition on Bem&rsquo;s observations. To incorporate our prior beliefs we build a generative model of our observed values as draws from a bivariate normal distribution with inverse gamma distributions over the variance terms and the correlation term $r$ enters the model as:</p>
 
 <p>$$ MvNormal([\mu_1, \mu_2],  \begin{bmatrix} \sigma_1^{2} , &amp; r\sigma_1\sigma_2  \newline r\sigma_1\sigma_2 &amp; ,  \sigma_2^{2}  \end{bmatrix}^{-1}) = MvNormal( \overrightarrow{\mu}, \Sigma^{-1} ) $$</p>
 
 <p>We&rsquo;ll set a fairly open ended flat prior allowing any possible value for correlation. Updating on the observed results will generate a view of the likely value. First look at the code, then we&rsquo;ll unpack it a little.</p>
+
+<p><img src="/img/2021-03-01-Replication-CrossValid/generative_model.png" alt="Generative Model" /></p>
+
+<p>This can be implemented efficiently using the PYMC3 package in python. The posterior distribution is constructed by looping over samples from the joint distribution of this system.</p>
 <div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> model1:
     <span style="color: #0099FF; font-style: italic"># r∼Uniform(−1,1) flat prior for correlation value</span>
     r <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Uniform(<span style="color: #CC3300">&quot;r&quot;</span>, lower<span style="color: #555555">=-</span><span style="color: #FF6600">1</span>, upper<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)

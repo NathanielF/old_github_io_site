@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathaniel Forde's Homepage">
+  <meta name="author" content="Nathaniel Forde">
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@forde_nathaniel">
+<meta name="twitter:creator" content="@forde_nathaniel">
+<meta name="twitter:title" content="Wheat from Chaff: Maximum Entropy and Information">
+<meta name="twitter:description" content="There is a rumour of ignorant fish; so involved in the ocean they fail to notice the water around them, what it is and what it could be. There is another cliche about the internet and its denizens drowning in information. There is something to both these images, but the second is too charitable. It suggests a light consistency to the viscous texture of the flow, instead of the congealed sludge that drips down our throat choking off the air.">
+<meta name="twitter:image" content="img/flammiron_engraving.jpg">
+
+<meta property="og:url" content="/post/wheat_from_chaff/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Wheat from Chaff: Maximum Entropy and Information" />
+<meta property="og:description" content="There is a rumour of ignorant fish; so involved in the ocean they fail to notice the water around them, what it is and what it could be. There is another cliche about the internet and its denizens drowning in information. There is something to both these images, but the second is too charitable. It suggests a light consistency to the viscous texture of the flow, instead of the congealed sludge that drips down our throat choking off the air." />
+<meta property="og:image" content="img/flammiron_engraving.jpg" />
+
+  <title>Wheat from Chaff: Maximum Entropy and Information</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+  
+  
+  
+  
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-188850615-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188850615-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-188850615-1');
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://nathanielf.github.io/">Examined Algorithms</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/pdf/Nathaniel%20Forde%20Current.pdf">
+            <i class="fa fa-briefcase"></i>&nbsp;
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="/post/">
+            <i class="fa fa-code"></i>&nbsp;
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/publication/">
+            <i class="fa fa-files-o"></i>&nbsp;
+            Research
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container blog-post">
+
+  
+  <div class="row">
+    <div class="col-md-3 hidden-sm hidden-xs text-right">
+      <h1 class="post-title">&nbsp;</h1>
+      <em>Mar 22, 2021</em><br />
+      
+      
+      
+      <span class="post-tags">
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/probability">probability</a>
+         &bull;   
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/information">information</a>
+         &bull;  
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/max-ent">max-ent</a>
+        
+        
+      </span>
+      
+      
+      </p>
+    </div>
+
+    <div class="col-md-7">
+      <h1 class="post-title">Wheat from Chaff: Maximum Entropy and Information</h1>
+      <div class="hidden-md hidden-lg post-metadata">
+        <div>
+          <em>Mar 22, 2021</em>
+        </div>
+        
+        
+        
+        <p class="post-tags">
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/probability">probability</a>
+           &bull;   
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/information">information</a>
+           &bull;  
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/max-ent">max-ent</a>
+          
+          
+        </p>
+        
+        
+      </div>
+
+      <div class="post-body">
+        
+
+<p>There is a rumour of ignorant fish; so involved in the ocean they fail to notice the water around them, what it is and what it could be. There is another cliche about the internet and its denizens drowning in information. There is something to both these images, but the second is too charitable. It suggests a light consistency to the viscous texture of the flow, instead of the congealed sludge that drips down our throat choking off the air. The oozing density of the swamp presents a range of difficulties for even reasonably self aware fish. Each has to struggle to intepret the evolving environment.</p>
+
+<p>The problem, familiar now, is one of information retrieval, filtering and ranking. For much of these tasks we delegate and trust others to siphon the sludge and recommend items of value, but we each face unique challenges. Sinkholes tailored to our interests obscure facts in favour of maximising our propensity to purchase. How then do we clamber out of this rats nest?</p>
+
+<h2 id="simple-models-are-false-complex-ones-too">Simple Models are False. Complex ones too.</h2>
+
+<p>We each start from different bases and face different difficulties acquiring new knowledge. One way to conceive of the range of barriers is to think of reasoning from different probabilistic priors. This language is ubiquitous today, but stems from a historic dispute in probability theory. Traditional expositions of probability focused on a host of well understood parametric models abstracted from observations of frequency. Watch enough card games and you come to appreciate the regularity of the hands, their odds and value. The thought is that some underlying process drives what we see and this process is well approximated by our expectations. Or if we can&rsquo;t yet tease out the pattern, further observations will help us converge on the reality. This view of learning is apt (indeed, reliable) in certain special cases where the observable phenomena adheres to consistent patterns over frequent observation. But probability theory, properly construed, is a much more general study.</p>
+
+<p>So too is learning properly done. There is no uniform or inevitable convergence of opinion to fact. Instead we progress in fits and starts, become diverted, digress and procrastinate. We may be held back or belabor certain points obvious to others. Only in rare cases is knowledge amenable to easy summary rules. These rules, cited often to the point of cliche, are celebrated for their simplicity and generality, but the tendency is misleading. Like the host of simple parametric probability models these rules have wide applicability but they are the exception. Most knowledge is messier, complex and cobbled together from scraps of metaphor and analogy. The cumulative accretion of these clues allow us to grapple the world with specific hooks. Simple rules, too simple, are mostly just ignorance uplifted.</p>
+
+<p>Peter Godfrey Smith explains how both the drive to simplicity and need for complexity oscillates in explanations of evolutionary mechanisms.</p>
+
+<blockquote>
+<p>&ldquo;Standard recipes for change by natural selection are products of trade-offs, often unacknowledged, between the desire to capture all genuine cases of natural selection in a summary description and the desire for describe a simple and causally transparent machine. The two motives corresspond to two different kinds of understanding that we can seek in any theoretical investigation&hellip;Understanding is achieved via similarity relations between the simple cases we have picked apart in detail and the cloud of more complicated ones.&rdquo; - pg4 <em>Darwinian Populations and Natural Selection</em> by Peter Godfey-Smith</p>
+</blockquote>
+
+<p>A similar tension is nicely brought out in the &ldquo;dispute&rdquo; between objective Bayesians and their subjecitivist cousins. Both propose approaches to learning as methods for updating our view of the relevant probabilities. Starting with the following rule:</p>
+
+<p>$$ \underbrace{p(T | D)}_{posterior} = \frac{\overbrace{p(T)}^{prior}\overbrace{p(D | T)}^{likelihood}}{\sum_{i}^{N} p(D | T_{i})} $$</p>
+
+<p>We update our theory $T$ based on data $D$ by computing the posterior in light of our prior specification for the probability of $T$. The aforementioned dispute revolves around how we ought to specify $p(T)$. How much structure is implicit in the specification. If our problem is allocating attention, our theory comes to something like which voice should I listen to, given their record against the data, broad reputation and reliability. But how much detail is too much? We&rsquo;d become lost with exhaustive precision, but it&rsquo;s unclear how simple is simple enough.</p>
+
+<h2 id="maximise-entropy-choice-under-minimal-information">Maximise Entropy: Choice under minimal information</h2>
+
+<p>How then do we choose what to learn, where to spend our time or resources? One school of thought emphasises an agnostic attitude. Treat all options equally unless you know better. In the limiting case we array all possible choices before you and if they&rsquo;re equally appealing, you&rsquo;re indifferent and ought to pick one indiscriminately. This ties very neatly to a characterisation of how you should frame your beliefs under ignorance and seek their improvement. Simultaneously the method gives rise to a natural measure of information content as deviations from a state of no information.</p>
+
+<p>Spread out $m$ options very thinly and we weigh their probability with a multinomial distribution where the probabilities $p_{1} =&hellip; = p_{m}$ are flat.</p>
+
+<p>$$ \frac{N!}{n_{1}!n_{2}!&hellip; n_{m}!}p_{1}^{n_{1}}p_{2}^{n_{2}}&hellip; p_{m}^{n_{m}} \text{ where } \sum_{1}^{m} n = N $$</p>
+
+<p>which is maximised when $W = \frac{N!}{n_{1}!n_{2}!&hellip; n_{m}!}$ or when a monotonic transformation reaches its peak. Choosing the following form we get:</p>
+
+<p>$$ \frac{1}{N}log W = \frac{1}{N}log\frac{N!}{n_{1}!n_{2}!&hellip; n_{m}!}$$
+$$ \sim \frac{1}{N}log\frac{N!}{Np_{1}!Np_{2}!&hellip; Np_{m}!}  \text{ by assumption} $$
+$$ =  \frac{1}{N}\Big(log(N!) - \sum_{1}^{m}log(Np_{i}!) \Big) $$</p>
+
+<p>Then taking the limit as $N$ goes to infinity, we get by Stirling&rsquo;s approximation:</p>
+
+<p>$$ \lim_{0 \rightarrow \infty}  \frac{1}{N}log W = \frac{1}{N} \Big(Nlog(N) - \sum_{1}^{m}Np_{i}log(Np_{i}) \Big) $$</p>
+
+<p>$$ = \Big(log(N) - \sum_{1}^{m}p_{i}log(Np_{i}) \Big) $$
+$$ = \Big(log(N) - \sum_{1}^{m}p_{i}(log(N) + log(p_{i})) \Big) $$
+$$ = log(N) - (\sum_{1}^{m}p_{i}log(N) + \sum_{1}^{m}p_{i}log(p_{i})) $$
+$$ = \Big(1 - \sum_{1}^{m}p_{i}\Big)log(N) - \sum_{1}^{m}p_{i}log(p_{i}) $$
+$$ = - \sum_{1}^{m}p_{i}log(p_{i}) $$</p>
+
+<p>This last quantity is the entropy of the distribution also known as the expected value of the information content of the random variable $(X=x)$ with respect to a probabiliy distribution $p$. Since we have:</p>
+
+<p>$$ -log(p_{i})  =_{def} I(x_{i})_{p} $$</p>
+
+<p>ensuring that the information in perfectly probable events is measured as -log(1) = -0 and impossible events convey the maximum amount of information. Everything in between finds its place on the spectrum of more or less surprising. Entropy, then, is a measure of information content over a random variable.</p>
+
+<blockquote>
+<p>In making inferences on the basis of partial information we must use that probability distribution which has maximum entropy subject to what is known. This is the only unbiased assignment we can make; to use any other would amount to arbitrary assumption of information which by hypothesis we do not have&hellip;The maximum entropy distribution may be asserted for the positive reason that is uniquely determined as the one that is maximally non-commital with regard to the missing information. - pg 623, Information Theory and Statistical Mechanics, Jaynes (1957)</p>
+</blockquote>
+
+<p>Claude&rsquo;s Shannon&rsquo;s work on information theory and and E.T. Jaynes synthesis of it with probability theory shows that information is not incidental to probability, but arises as naturally as other measures: mean, median and variance of probability distributions.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">entropy</span>(x):
+    y <span style="color: #555555">=</span> []
+    <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> x:
+        <span style="color: #006699; font-weight: bold">if</span> i <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
+            y<span style="color: #555555">.</span>append(<span style="color: #FF6600">0</span>)
+        <span style="color: #006699; font-weight: bold">else</span>: 
+            y<span style="color: #555555">.</span>append(i<span style="color: #555555">*</span>np<span style="color: #555555">.</span>log(i))
+    h <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #336666">sum</span>(y)
+    <span style="color: #006699; font-weight: bold">return</span> h
+
+
+N <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+d <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;A&#39;</span>:np<span style="color: #555555">.</span>concatenate([np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, N, <span style="color: #FF6600">50</span>),np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">4</span>, <span style="color: #FF6600">50</span>)]),
+     <span style="color: #CC3300">&#39;B&#39;</span>:np<span style="color: #555555">.</span>concatenate([np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>power(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">50</span>),np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>poisson(<span style="color: #FF6600">30</span>, <span style="color: #FF6600">50</span>)]), 
+     <span style="color: #CC3300">&#39;C&#39;</span>:np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(<span style="color: #FF6600">100</span>, <span style="color: #FF6600">5</span>, N), 
+     <span style="color: #CC3300">&#39;D&#39;</span>:np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>poisson(N, N), 
+     <span style="color: #CC3300">&#39;E&#39;</span>:np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>uniform(<span style="color: #FF6600">0</span>, N, N), 
+     <span style="color: #CC3300">&#39;F&#39;</span>:np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>poisson(<span style="color: #FF6600">100</span>, N)}
+p <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(data<span style="color: #555555">=</span>d)
+p_norm <span style="color: #555555">=</span> p<span style="color: #555555">/</span>p<span style="color: #555555">.</span>sum(<span style="color: #FF6600">0</span>)
+H <span style="color: #555555">=</span> p_norm<span style="color: #555555">.</span>apply(entropy, axis<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+p<span style="color: #555555">.</span>columns <span style="color: #555555">=</span> [<span style="color: #CC3300">&#39;Entropy:&#39;</span> <span style="color: #555555">+</span> <span style="color: #336666">str</span>(np<span style="color: #555555">.</span>round(h, <span style="color: #FF6600">3</span>)) <span style="color: #006699; font-weight: bold">for</span> h <span style="color: #000000; font-weight: bold">in</span> H]
+p<span style="color: #555555">.</span>hist(figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>, <span style="color: #FF6600">10</span>))
+plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&quot;Entropy: Histograms across various Distributions&quot;</span>)
+</pre></div>
+
+<p><img src="/img/2021-03-10-Wheat-Chaff/entropy.png" alt="Various Measures of Entropy" /></p>
+
+<p>From the Bayesian perspective on learning, this characterisation suggests an approach to selecting <em>appropriately</em> informative priors. When we&rsquo;re unsure or ignorant then we can choose prior distributions that maximise the entropy and thereby reflect our ignorance, since our credences should not exceed our evidence. This is not the same as treating all options equally. Maximal Entropy distributions are a much wider class of distribution e.g. if you&rsquo;re confident of the mean and variance of a distribution but nothing else, then the Gaussian distribution is the maximum entropy distribution characterising your knowledge. The maximum entropy rule asks us to choose our priors based on the minimal information which describes the situtation. It can be justified as an abundance of caution where we commit to the least risky description of the data. But the paradigm goes wrong when choice requires discernment over informative options and outright misinformaiton. Against a flood of misinformation, of which we have little or no information to identify the bad actors the agnostic choice seems uncomfortably generous.</p>
+
+<h2 id="informative-or-weakly-informative-priors-unabsashed-opinion">Informative or Weakly Informative Priors: Unabsashed Opinion</h2>
+
+<p>One famous characterisation of bullshit due to G.A. Cohen is describes it as &ldquo;unclarifiable unclarity&rdquo;. Bad actors online flood the space with this kind of unverifiable garbage. That&rsquo;s undoubtedly contributes to the noise, but the more fundamental issue is just the volume of actual information we need to filter. With this in mind the agnostic approach is too risk-averse, creating needless work.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>N <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
+true_a, true_b, predictor <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">3.0</span>, np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(loc<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, scale<span style="color: #555555">=</span><span style="color: #FF6600">6</span>, size<span style="color: #555555">=</span>N)
+true_mu <span style="color: #555555">=</span> true_a <span style="color: #555555">+</span> true_b <span style="color: #555555">*</span> predictor
+true_sd <span style="color: #555555">=</span> <span style="color: #FF6600">2.0</span>
+
+outcome <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(loc<span style="color: #555555">=</span>true_mu, scale<span style="color: #555555">=</span>true_sd, size<span style="color: #555555">=</span>N)
+
+predictor_scaled <span style="color: #555555">=</span> standardize(predictor)
+outcome_scaled <span style="color: #555555">=</span> standardize(outcome)
+prior_spec <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;a&#39;</span>:[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">10</span>], <span style="color: #CC3300">&#39;b&#39;</span>[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">10</span>]}
+
+<span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> model_1:
+    <span style="color: #0099FF; font-style: italic"># flat priors on constant and beta coeffs</span>
+    a <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;a&quot;</span>, prior_spec[<span style="color: #CC3300">&#39;a&#39;</span>][<span style="color: #FF6600">0</span>], prior_spec[<span style="color: #CC3300">&#39;a&#39;</span>][<span style="color: #FF6600">1</span>])
+    b <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;b&quot;</span>, prior_spec[<span style="color: #CC3300">&#39;b&#39;</span>][<span style="color: #FF6600">0</span>], prior_spec[<span style="color: #CC3300">&#39;a&#39;</span>][<span style="color: #FF6600">1</span>])
+
+    mu <span style="color: #555555">=</span> a <span style="color: #555555">+</span> b <span style="color: #555555">*</span> predictor_scaled
+    <span style="color: #0099FF; font-style: italic"># priors sd</span>
+    sd <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Exponential(<span style="color: #CC3300">&quot;sd&quot;</span>, <span style="color: #FF6600">1.0</span>)
+
+    <span style="color: #0099FF; font-style: italic"># likelihood </span>
+    obs <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;obs&quot;</span>, mu<span style="color: #555555">=</span>mu, sigma<span style="color: #555555">=</span>sd, observed<span style="color: #555555">=</span>outcome_scaled)
+
+    <span style="color: #0099FF; font-style: italic"># diagnostic and posterior data to sample from</span>
+    prior_checks <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_prior_predictive(samples<span style="color: #555555">=</span><span style="color: #FF6600">50</span>, random_seed<span style="color: #555555">=</span>RANDOM_SEED)
+    trace_1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample(<span style="color: #FF6600">1000</span>, tune<span style="color: #555555">=</span><span style="color: #FF6600">2000</span>, random_seed<span style="color: #555555">=</span>RANDOM_SEED)
+    ppc <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_posterior_predictive(trace_1, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;a&quot;</span>, <span style="color: #CC3300">&quot;b&quot;</span>, <span style="color: #CC3300">&quot;obs&quot;</span>], 
+        random_seed<span style="color: #555555">=</span>RANDOM_SEED)
+</pre></div>
+
+<p>With the range of flat priors the possible space of linear models is wide and implausible. We build 50 linear models, one from each of the sampled values across the prior_checks and plot these against the real values.</p>
+
+<p><img src="/img/2021-03-10-Wheat-Chaff/flat_priors.png" alt="Flat Priors Sample Range of Possible Models" /></p>
+
+<p>By constraining our priors for the parameters of the linear model we significantly reduce the possible space of models. The choice here is a little artificial, but in a real problem the informative choices can be made based on knowledge of the problem at hand.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>prior_spec <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;a&#39;</span>:[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.5</span>], <span style="color: #CC3300">&#39;b&#39;</span>[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">3</span>]}
+</pre></div>
+
+<p><img src="/img/2021-03-10-Wheat-Chaff/weak_priors.png" alt="Weakly Informative Priors Sample Range of Possible Models" /></p>
+
+<p>The parameter estimates drawn from the posterior distributions show that the data is sufficient to swamp the priors and give good estimates of the true coefficients, even with flat priors.</p>
+
+<p><img src="/img/2021-03-10-Wheat-Chaff/flat_priors_post.png" alt="drawing" height="200"/></p>
+
+<p>This suggests that the process of Bayesian updating makes a good compromise between our priors and the likelihood. In fact we can show that the transformation between the prior into the posterior is precisely the transformation that maximises the entropy of the resulting distribution.</p>
+
+
+        &nbsp;
+      </div>
+
+      <div>
+        <div class="post-back-link">
+    <a href="javascript: history.back()">
+        <i class="fa fa-arrow-left"></i> 
+        Back
+    </a>
+</div>
+      </div>
+      <script src="https://utteranc.es/client.js" repo="NathanielF/NathanielF.github.io" issue-term="title" label="comments 💬" theme="github-light" crossorigin="anonymous" async>
+      </script>
+    </div>
+  </div>
+  
+
+  <footer style="padding-top: 1em;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/prism.js"></script>
+
+</body>
+
+</html>

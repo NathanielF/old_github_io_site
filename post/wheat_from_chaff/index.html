@@ -233,7 +233,6 @@ $$ = - \sum_{1}^{m}p_{i}log(p_{i}) $$</p>
     h <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #336666">sum</span>(y)
     <span style="color: #006699; font-weight: bold">return</span> h
 
-
 N <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
 d <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;A&#39;</span>:np<span style="color: #555555">.</span>concatenate([np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, N, <span style="color: #FF6600">50</span>),np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>randint(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">4</span>, <span style="color: #FF6600">50</span>)]),
      <span style="color: #CC3300">&#39;B&#39;</span>:np<span style="color: #555555">.</span>concatenate([np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>power(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">50</span>),np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>poisson(<span style="color: #FF6600">30</span>, <span style="color: #FF6600">50</span>)]), 
@@ -255,7 +254,7 @@ plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&q
 
 <h2 id="informative-or-weakly-informative-priors-unabsashed-opinion">Informative or Weakly Informative Priors: Unabsashed Opinion</h2>
 
-<p>One famous characterisation of bullshit due to G.A. Cohen is describes it as &ldquo;unclarifiable unclarity&rdquo;. Bad actors online flood the space with this kind of unverifiable garbage. That&rsquo;s undoubtedly contributes to the noise, but the more fundamental issue is just the volume of actual information we need to filter. With this in mind the agnostic approach is too risk-averse, creating needless work.</p>
+<p>One famous characterisation of bullshit due to G.A. Cohen is describes it as &ldquo;unclarifiable unclarity&rdquo;. Bad actors online flood the space with this kind of unverifiable garbage. That undoubtedly contributes to the noise, but the more fundamental issue is just the volume of actual information we need to filter. With this in mind the agnostic approach is too risk-averse, creating needless work.</p>
 <div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>N <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
 true_a, true_b, predictor <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">3.0</span>, np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(loc<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, scale<span style="color: #555555">=</span><span style="color: #FF6600">6</span>, size<span style="color: #555555">=</span>N)
 true_mu <span style="color: #555555">=</span> true_a <span style="color: #555555">+</span> true_b <span style="color: #555555">*</span> predictor
@@ -300,7 +299,11 @@ prior_spec <span style="color: #555555">=</span> {<span style="color: #CC3300">&
 
 <p><img src="/img/2021-03-10-Wheat-Chaff/flat_priors_post.png" alt="drawing" height="200"/></p>
 
-<p>This suggests that the process of Bayesian updating makes a good compromise between our priors and the likelihood. In fact we can show that the transformation between the prior into the posterior is precisely the transformation that maximises the entropy of the resulting distribution.</p>
+<p>This suggests that the process of Bayesian updating makes a good compromise between our priors and the likelihood. The principle of maximum entropy can be extended to the process of Bayesian updating where we view the problem as one of minimising the divergence between our prior and posterior. This measure of relative entropy is also known as KL Divergence.</p>
+
+<p>$$ D_{KL}(p, q) = \sum_{i}p_{i}log(\dfrac{p_{i}}{q_{i}}) $$</p>
+
+<p>The better specified our prior the less we have to learn from the data, the simpler our theory. This optimisation problem is a way of automating the principle of Occam&rsquo;s razor.</p>
 
 
         &nbsp;

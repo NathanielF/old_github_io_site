@@ -106,7 +106,7 @@
 % title / author / date
 \title{Examining Algorithms}
 \author{Nathaniel Forde}
-\date{2021-03-25}
+\date{2021-04-16}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -1159,7 +1159,74 @@ As in the representation theorems we need a scale on which to calibrate the pref
 
 The estimates are correct in magnitude and direction for the actual parameters driving the latent utility equation, but a little bit wide of the true values. This is in part due to the indirect nature of the estimation but also the wide tails of the logistic distribution
 
-McFadden's analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer \(C\) to \(B\) and \(B\) to \(T\) then we ought to prefer \(C\) to \(T\) too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden's work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail.
+McFadden's analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer \(C\) to \(B\) and \(B\) to \(T\) then we ought to prefer \(C\) to \(T\) too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden's work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail. The below table shows the average demographic rates grouped by the presence of rail.
+
+\begin{tabular}{l|r|r}
+\hline
+  & No Rail & Rail\\
+\hline
+car1 & 0.97 & 0.88\\
+\hline
+train1 & 0.01 & 0.10\\
+\hline
+home & 0.75 & 0.73\\
+\hline
+HHSIZE & 2.46 & 2.49\\
+\hline
+income & 7.05 & 7.52\\
+\hline
+urban1 & 0.87 & 0.91\\
+\hline
+density & 4.66 & 7.56\\
+\hline
+\end{tabular}
+
+McFadden's estimation strategy is a two step, which aims to assess the ``counterfactual'' effects of what rail uptake would be like were rail to be introduced in the areas where it is not now. We assume that the other factors remain relatively constant i.e.~we (i) analyse the impact of those factors as the coefficient weights determined by a regression in the areas with rail. Then (ii) we predict the values for uptake on rail on those assumptions for the cases observed in the districts with no rail.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bart\_data\_nr }\OperatorTok{=}\NormalTok{ bart\_data[bart\_data[}\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{0}\NormalTok{]}
+\NormalTok{bart\_data\_r }\OperatorTok{=}\NormalTok{ bart\_data[bart\_data[}\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{1}\NormalTok{]}
+
+\CommentTok{\#\# Build McFadden\textquotesingle{}s model}
+\NormalTok{MN\_logit\_mod\_r }\OperatorTok{=}\NormalTok{ sm.MNLogit(np.array(bart\_data\_r[}\StringTok{\textquotesingle{}CHOICE\textquotesingle{}}\NormalTok{]), }
+\NormalTok{                       bart\_data\_r[[}\StringTok{"home"}\NormalTok{,}\StringTok{"HHSIZE"}\NormalTok{,}\StringTok{"income"}\NormalTok{,}\StringTok{"urban1"}\NormalTok{,}\StringTok{"density"}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{))}
+\NormalTok{MN\_logit\_res\_r }\OperatorTok{=}\NormalTok{ MN\_logit\_mod\_r.fit()}
+
+
+\CommentTok{\#\# No Rail}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Optimization terminated successfully.
+##          Current function value: 0.387108
+##          Iterations 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nr }\OperatorTok{=}\NormalTok{ bart\_data\_nr[[}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HHSIZE\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}urban1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{)}
+
+\CommentTok{\#\# Rail}
+\NormalTok{r }\OperatorTok{=}\NormalTok{ bart\_data\_r[[}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HHSIZE\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}urban1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{)}
+
+\CommentTok{\#\# Full City on Rail Assumption}
+\NormalTok{full }\OperatorTok{=}\NormalTok{ bart\_data[[}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HHSIZE\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}urban1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{)}
+
+\CommentTok{\#\# Predict Uptake}
+\NormalTok{res }\OperatorTok{=}\NormalTok{ MN\_logit\_res\_r.predict(full.drop(}\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)).mean()}
+
+\NormalTok{res }\OperatorTok{=}\NormalTok{ pd.DataFrame(res).T}
+\NormalTok{res.columns }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Bus\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Car\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Train\textquotesingle{}}\NormalTok{]}
+\NormalTok{res.}\BuiltInTok{round}\NormalTok{(}\DecValTok{3}\NormalTok{) }\OperatorTok{*} \DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Bus   Car  Train
+## 0  2.7  88.5    8.8
+\end{verbatim}
 
 These modelling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, but there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters in a regression. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool. Even allowing that utility might be a linear function, it's no easy question which attributes are the best predictors of utility or how to summarise their influence.
 
@@ -1205,7 +1272,7 @@ For any observed set of customer attributes, their covariance matrix can be fact
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-23-1}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-26-1}
 
 Each customer can then be visualised as a complex of observed characteristics along the axes of the principle components in, for example, a two dimensional plane. In our case we saw that the two components account for around 60\% of the total variance. Furthermore, we can overlay an interpretation on the components by associating group identifiers to portions of the plane.
 
@@ -1230,7 +1297,7 @@ Each customer can then be visualised as a complex of observed characteristics al
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-24-1}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-27-1}
 
 In the dataset pictured in we've tried to represent the data in three groups inferred by a k-means clustering algorithm over the original observed features. This is not the most appropriate categorisation as can be seen by the manner in which 9 clear cohorts are speckled across the space. In other words there is more diversity in our customer base than the clustering is capable of expressing. That's not to say all diversity needs to be captured. If our purpose is make the broadly correct action (e.g.~sell, promote, no-action), the niceties can often be ignored. The principle components can be interpreted as linear weightings of the original customer descriptions, and some understanding of those observable features is required to assess if the principle component representation is sensble.
 
@@ -1251,7 +1318,7 @@ In the dataset pictured in we've tried to represent the data in three groups inf
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-25-1}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-28-1}
 
 Couple this with a Silhouette score analysis of the clustering and we can see that our classes is too crude, collecting dissimilar customers together. A high silhouette score (closer to 1) would indicate that our clustering has captured the similar customers well. As it stands, we should probably go back to the drawing board.
 
@@ -1300,7 +1367,7 @@ Couple this with a Silhouette score analysis of the clustering and we can see th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-26-1}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-29-1}
 
 The expected value of the customer is then something like the probability of purchase (however approximated) for the given customer multiplied the the net revenue of the average purchase in the same group. It's these kind of idealisations and conceptual economies, which seemingly reasonable at the time, lead to systematic algorithmic skew. Unrefined constructs encourage brutish bulk actions across the arrayed field of customers
 

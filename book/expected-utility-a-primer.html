@@ -24,7 +24,7 @@
 <meta name="author" content="Nathaniel Forde" />
 
 
-<meta name="date" content="2021-03-25" />
+<meta name="date" content="2021-04-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1336,10 +1336,10 @@ These parameters can be estimated with logistic regression model in the binary c
   <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>   <td>     4</td>  
 </tr>
 <tr>
-  <th>Date:</th>            <td>Thu, 25 Mar 2021</td> <th>  Pseudo R-squ.:     </th>   <td>0.2924</td>  
+  <th>Date:</th>            <td>Fri, 16 Apr 2021</td> <th>  Pseudo R-squ.:     </th>   <td>0.2924</td>  
 </tr>
 <tr>
-  <th>Time:</th>                <td>19:41:03</td>     <th>  Log-Likelihood:    </th>  <td> -1260.8</td> 
+  <th>Time:</th>                <td>23:00:24</td>     <th>  Log-Likelihood:    </th>  <td> -1260.8</td> 
 </tr>
 <tr>
   <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th>  <td> -1781.9</td> 
@@ -1374,8 +1374,83 @@ These parameters can be estimated with logistic regression model in the binary c
   <th>x2</th>        <td>    6.4438</td> <td>    0.348</td> <td>   18.497</td> <td> 0.000</td> <td>    5.761</td> <td>    7.127</td>
 </tr>
 </table>
-<p>McFadden’s analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer <span class="math inline">\(C\)</span> to <span class="math inline">\(B\)</span> and <span class="math inline">\(B\)</span> to <span class="math inline">\(T\)</span> then we ought to prefer <span class="math inline">\(C\)</span> to <span class="math inline">\(T\)</span> too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden’s work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail.</p>
-<p><img src="assets/images/multinomial_regression.png" alt="drawing"/ height=500px></p>
+<p>McFadden’s analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer <span class="math inline">\(C\)</span> to <span class="math inline">\(B\)</span> and <span class="math inline">\(B\)</span> to <span class="math inline">\(T\)</span> then we ought to prefer <span class="math inline">\(C\)</span> to <span class="math inline">\(T\)</span> too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden’s work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail. The below table shows the average demographic rates grouped by the presence of rail.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">No Rail</th>
+<th align="right">Rail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">car1</td>
+<td align="right">0.97</td>
+<td align="right">0.88</td>
+</tr>
+<tr class="even">
+<td align="left">train1</td>
+<td align="right">0.01</td>
+<td align="right">0.10</td>
+</tr>
+<tr class="odd">
+<td align="left">home</td>
+<td align="right">0.75</td>
+<td align="right">0.73</td>
+</tr>
+<tr class="even">
+<td align="left">HHSIZE</td>
+<td align="right">2.46</td>
+<td align="right">2.49</td>
+</tr>
+<tr class="odd">
+<td align="left">income</td>
+<td align="right">7.05</td>
+<td align="right">7.52</td>
+</tr>
+<tr class="even">
+<td align="left">urban1</td>
+<td align="right">0.87</td>
+<td align="right">0.91</td>
+</tr>
+<tr class="odd">
+<td align="left">density</td>
+<td align="right">4.66</td>
+<td align="right">7.56</td>
+</tr>
+</tbody>
+</table>
+<p>McFadden’s estimation strategy is a two step, which aims to assess the “counterfactual” effects of what rail uptake would be like were rail to be introduced in the areas where it is not now. We assume that the other factors remain relatively constant i.e. we (i) analyse the impact of those factors as the coefficient weights determined by a regression in the areas with rail. Then (ii) we predict the values for uptake on rail on those assumptions for the cases observed in the districts with no rail.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="expected-utility-a-primer.html#cb17-1" aria-hidden="true" tabindex="-1"></a>bart_data_nr <span class="op">=</span> bart_data[bart_data[<span class="st">&#39;rail&#39;</span>] <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb17-2"><a href="expected-utility-a-primer.html#cb17-2" aria-hidden="true" tabindex="-1"></a>bart_data_r <span class="op">=</span> bart_data[bart_data[<span class="st">&#39;rail&#39;</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb17-3"><a href="expected-utility-a-primer.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="expected-utility-a-primer.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Build McFadden&#39;s model</span></span>
+<span id="cb17-5"><a href="expected-utility-a-primer.html#cb17-5" aria-hidden="true" tabindex="-1"></a>MN_logit_mod_r <span class="op">=</span> sm.MNLogit(np.array(bart_data_r[<span class="st">&#39;CHOICE&#39;</span>]), </span>
+<span id="cb17-6"><a href="expected-utility-a-primer.html#cb17-6" aria-hidden="true" tabindex="-1"></a>                       bart_data_r[[<span class="st">&quot;home&quot;</span>,<span class="st">&quot;HHSIZE&quot;</span>,<span class="st">&quot;income&quot;</span>,<span class="st">&quot;urban1&quot;</span>,<span class="st">&quot;density&quot;</span>]].astype(<span class="bu">float</span>))</span>
+<span id="cb17-7"><a href="expected-utility-a-primer.html#cb17-7" aria-hidden="true" tabindex="-1"></a>MN_logit_res_r <span class="op">=</span> MN_logit_mod_r.fit()</span>
+<span id="cb17-8"><a href="expected-utility-a-primer.html#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="expected-utility-a-primer.html#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="expected-utility-a-primer.html#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">## No Rail</span></span></code></pre></div>
+<pre><code>## Optimization terminated successfully.
+##          Current function value: 0.387108
+##          Iterations 8</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="expected-utility-a-primer.html#cb19-1" aria-hidden="true" tabindex="-1"></a>nr <span class="op">=</span> bart_data_nr[[<span class="st">&#39;home&#39;</span>, <span class="st">&#39;HHSIZE&#39;</span>, <span class="st">&#39;income&#39;</span>, <span class="st">&#39;urban1&#39;</span>, <span class="st">&#39;density&#39;</span>, <span class="st">&#39;rail&#39;</span>]].astype(<span class="bu">float</span>)</span>
+<span id="cb19-2"><a href="expected-utility-a-primer.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="expected-utility-a-primer.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Rail</span></span>
+<span id="cb19-4"><a href="expected-utility-a-primer.html#cb19-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> bart_data_r[[<span class="st">&#39;home&#39;</span>, <span class="st">&#39;HHSIZE&#39;</span>, <span class="st">&#39;income&#39;</span>, <span class="st">&#39;urban1&#39;</span>, <span class="st">&#39;density&#39;</span>, <span class="st">&#39;rail&#39;</span>]].astype(<span class="bu">float</span>)</span>
+<span id="cb19-5"><a href="expected-utility-a-primer.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="expected-utility-a-primer.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">## Full City on Rail Assumption</span></span>
+<span id="cb19-7"><a href="expected-utility-a-primer.html#cb19-7" aria-hidden="true" tabindex="-1"></a>full <span class="op">=</span> bart_data[[<span class="st">&#39;home&#39;</span>, <span class="st">&#39;HHSIZE&#39;</span>, <span class="st">&#39;income&#39;</span>, <span class="st">&#39;urban1&#39;</span>, <span class="st">&#39;density&#39;</span>, <span class="st">&#39;rail&#39;</span>]].astype(<span class="bu">float</span>)</span>
+<span id="cb19-8"><a href="expected-utility-a-primer.html#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="expected-utility-a-primer.html#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">## Predict Uptake</span></span>
+<span id="cb19-10"><a href="expected-utility-a-primer.html#cb19-10" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> MN_logit_res_r.predict(full.drop(<span class="st">&#39;rail&#39;</span>, axis<span class="op">=</span><span class="dv">1</span>)).mean()</span>
+<span id="cb19-11"><a href="expected-utility-a-primer.html#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="expected-utility-a-primer.html#cb19-12" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> pd.DataFrame(res).T</span>
+<span id="cb19-13"><a href="expected-utility-a-primer.html#cb19-13" aria-hidden="true" tabindex="-1"></a>res.columns <span class="op">=</span> [<span class="st">&#39;Bus&#39;</span>, <span class="st">&#39;Car&#39;</span>, <span class="st">&#39;Train&#39;</span>]</span>
+<span id="cb19-14"><a href="expected-utility-a-primer.html#cb19-14" aria-hidden="true" tabindex="-1"></a>res.<span class="bu">round</span>(<span class="dv">3</span>) <span class="op">*</span> <span class="dv">100</span></span></code></pre></div>
+<pre><code>##    Bus   Car  Train
+## 0  2.7  88.5    8.8</code></pre>
 <p>These modelling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, but there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters in a regression. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool. Even allowing that utility might be a linear function, it’s no easy question which attributes are the best predictors of utility or how to summarise their influence.</p>
 </div>
 </div>
@@ -1388,102 +1463,102 @@ These parameters can be estimated with logistic regression model in the binary c
 <p>Starting from the covariance matrix of the scaled customer data :</p>
 <p><span class="math display">\[ Cov(\mathbf{X}) = \operatorname{cov}[X_i, X_j] = \operatorname{E}[(X_i - \operatorname{E}[X_i])(X_j - \operatorname{E}[X_j])] \]</span>
 For any observed set of customer attributes, their covariance matrix can be factorized (or decomposed) into a matrix product of the eigenvectors and eigenvalues, allowing for the original dataset to represented in lower dimensions in terms of the principle components. These components can in turn be analysed to express the manner in which each of the original features contributes to the new construct. Each component captures a proportion of the total variance observed in the original covariance matrix. If we’re lucky, a small number of the eigenvectors (principle components) can be shown to explain the variance in the data and thereby represent a complex customer problem in a reduced dimensional space.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="expected-utility-a-primer.html#cb17-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_customer[[x <span class="cf">for</span> x <span class="kw">in</span> df_purchases.columns </span>
-<span id="cb17-2"><a href="expected-utility-a-primer.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;customer_desc&#39;</span> <span class="kw">in</span> x]]</span>
-<span id="cb17-3"><a href="expected-utility-a-primer.html#cb17-3" aria-hidden="true" tabindex="-1"></a>X_std <span class="op">=</span> StandardScaler().fit_transform(X)</span>
-<span id="cb17-4"><a href="expected-utility-a-primer.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Covariance Decomposition</span></span>
-<span id="cb17-5"><a href="expected-utility-a-primer.html#cb17-5" aria-hidden="true" tabindex="-1"></a>cov_mat <span class="op">=</span> np.cov(X_std.T)</span>
-<span id="cb17-6"><a href="expected-utility-a-primer.html#cb17-6" aria-hidden="true" tabindex="-1"></a>eig_vals, eig_vecs <span class="op">=</span> np.linalg.eig(cov_mat)</span>
-<span id="cb17-7"><a href="expected-utility-a-primer.html#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="expected-utility-a-primer.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">## Explained Variance</span></span>
-<span id="cb17-9"><a href="expected-utility-a-primer.html#cb17-9" aria-hidden="true" tabindex="-1"></a>tot <span class="op">=</span> <span class="bu">sum</span>(eig_vals)</span>
-<span id="cb17-10"><a href="expected-utility-a-primer.html#cb17-10" aria-hidden="true" tabindex="-1"></a>var_exp <span class="op">=</span> [(i <span class="op">/</span> tot)<span class="op">*</span><span class="dv">100</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">sorted</span>(eig_vals, reverse<span class="op">=</span><span class="va">True</span>)]</span>
-<span id="cb17-11"><a href="expected-utility-a-primer.html#cb17-11" aria-hidden="true" tabindex="-1"></a>cum_var_exp <span class="op">=</span> np.cumsum(var_exp)</span>
-<span id="cb17-12"><a href="expected-utility-a-primer.html#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="expected-utility-a-primer.html#cb17-13" aria-hidden="true" tabindex="-1"></a>barh <span class="op">=</span> plt.bar(<span class="bu">range</span>(<span class="bu">len</span>(var_exp)), var_exp, alpha<span class="op">=</span><span class="fl">0.5</span>, align<span class="op">=</span><span class="st">&#39;center&#39;</span>,</span>
-<span id="cb17-14"><a href="expected-utility-a-primer.html#cb17-14" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">&#39;individual explained variance&#39;</span>)</span>
-<span id="cb17-15"><a href="expected-utility-a-primer.html#cb17-15" aria-hidden="true" tabindex="-1"></a>plt.step(<span class="bu">range</span>(<span class="bu">len</span>(cum_var_exp)), cum_var_exp, where<span class="op">=</span><span class="st">&#39;mid&#39;</span>,</span>
-<span id="cb17-16"><a href="expected-utility-a-primer.html#cb17-16" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="st">&#39;cumulative explained variance&#39;</span>)</span>
-<span id="cb17-17"><a href="expected-utility-a-primer.html#cb17-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Explained variance ratio&#39;</span>)</span>
-<span id="cb17-18"><a href="expected-utility-a-primer.html#cb17-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Principal components&#39;</span>)</span>
-<span id="cb17-19"><a href="expected-utility-a-primer.html#cb17-19" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&#39;best&#39;</span>)</span>
-<span id="cb17-20"><a href="expected-utility-a-primer.html#cb17-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb17-21"><a href="expected-utility-a-primer.html#cb17-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-23-1.png" width="1152" /></p>
-<p>Each customer can then be visualised as a complex of observed characteristics along the axes of the principle components in, for example, a two dimensional plane. In our case we saw that the two components account for around 60% of the total variance. Furthermore, we can overlay an interpretation on the components by associating group identifiers to portions of the plane.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="expected-utility-a-primer.html#cb18-1" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(init<span class="op">=</span><span class="st">&#39;k-means++&#39;</span>, n_clusters<span class="op">=</span><span class="dv">3</span>, n_init<span class="op">=</span><span class="dv">30</span>)</span>
-<span id="cb18-2"><a href="expected-utility-a-primer.html#cb18-2" aria-hidden="true" tabindex="-1"></a>kfit <span class="op">=</span> kmeans.fit(X)</span>
-<span id="cb18-3"><a href="expected-utility-a-primer.html#cb18-3" aria-hidden="true" tabindex="-1"></a>clusters <span class="op">=</span> kmeans.predict(X)</span>
-<span id="cb18-4"><a href="expected-utility-a-primer.html#cb18-4" aria-hidden="true" tabindex="-1"></a>X[<span class="st">&#39;cluster&#39;</span>] <span class="op">=</span> clusters</span>
-<span id="cb18-5"><a href="expected-utility-a-primer.html#cb18-5" aria-hidden="true" tabindex="-1"></a>sklearn_pca <span class="op">=</span> sklearnPCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb18-6"><a href="expected-utility-a-primer.html#cb18-6" aria-hidden="true" tabindex="-1"></a>Y_pca <span class="op">=</span> pd.DataFrame(sklearn_pca.fit_transform(X[[col <span class="cf">for</span> col <span class="kw">in</span> X.columns <span class="cf">if</span></span>
-<span id="cb18-7"><a href="expected-utility-a-primer.html#cb18-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="kw">not</span> <span class="st">&#39;cluster&#39;</span> <span class="kw">in</span> col]]))</span>
-<span id="cb18-8"><a href="expected-utility-a-primer.html#cb18-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.concat([X, Y_pca], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb18-9"><a href="expected-utility-a-primer.html#cb18-9" aria-hidden="true" tabindex="-1"></a>X[[<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">&#39;cluster&#39;</span>]].plot.scatter(x<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb18-10"><a href="expected-utility-a-primer.html#cb18-10" aria-hidden="true" tabindex="-1"></a>                      y<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb18-11"><a href="expected-utility-a-primer.html#cb18-11" aria-hidden="true" tabindex="-1"></a>                      c<span class="op">=</span><span class="st">&#39;cluster&#39;</span>,</span>
-<span id="cb18-12"><a href="expected-utility-a-primer.html#cb18-12" aria-hidden="true" tabindex="-1"></a>                      colormap<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
-<span id="cb18-13"><a href="expected-utility-a-primer.html#cb18-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Principle Components Representation - Coloured by inferred Clusters&quot;</span>)</span>
-<span id="cb18-14"><a href="expected-utility-a-primer.html#cb18-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Principle Component 1&quot;</span>)</span>
-<span id="cb18-15"><a href="expected-utility-a-primer.html#cb18-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;Principle Component 2&quot;</span>)</span>
-<span id="cb18-16"><a href="expected-utility-a-primer.html#cb18-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="1152" /></p>
-<p>In the dataset pictured in we’ve tried to represent the data in three groups inferred by a k-means clustering algorithm over the original observed features. This is not the most appropriate categorisation as can be seen by the manner in which 9 clear cohorts are speckled across the space. In other words there is more diversity in our customer base than the clustering is capable of expressing. That’s not to say all diversity needs to be captured. If our purpose is make the broadly correct action (e.g. sell, promote, no-action), the niceties can often be ignored. The principle components can be interpreted as linear weightings of the original customer descriptions, and some understanding of those observable features is required to assess if the principle component representation is sensble.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="expected-utility-a-primer.html#cb19-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb19-2"><a href="expected-utility-a-primer.html#cb19-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.heatmap(sklearn_pca.components_,</span>
-<span id="cb19-3"><a href="expected-utility-a-primer.html#cb19-3" aria-hidden="true" tabindex="-1"></a>                 cmap<span class="op">=</span><span class="st">&#39;YlGnBu&#39;</span>,</span>
-<span id="cb19-4"><a href="expected-utility-a-primer.html#cb19-4" aria-hidden="true" tabindex="-1"></a>                 yticklabels<span class="op">=</span>[ <span class="st">&quot;PCA&quot;</span><span class="op">+</span><span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,sklearn_pca.n_components_<span class="op">+</span><span class="dv">1</span>)],</span>
-<span id="cb19-5"><a href="expected-utility-a-primer.html#cb19-5" aria-hidden="true" tabindex="-1"></a>  xticklabels<span class="op">=</span>[<span class="st">&#39;customer_desc_0&#39;</span>, <span class="st">&#39;customer_desc_1&#39;</span>, <span class="st">&#39;customer_desc_2&#39;</span>,</span>
-<span id="cb19-6"><a href="expected-utility-a-primer.html#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;customer_desc_3&#39;</span>, <span class="st">&#39;customer_desc_4&#39;</span>, <span class="st">&#39;customer_desc_5&#39;</span>,</span>
-<span id="cb19-7"><a href="expected-utility-a-primer.html#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;customer_desc_6&#39;</span>, <span class="st">&#39;customer_desc_7&#39;</span>],</span>
-<span id="cb19-8"><a href="expected-utility-a-primer.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#cbar_kws={&quot;orientation&quot;: &quot;horizontal&quot;}</span></span>
-<span id="cb19-9"><a href="expected-utility-a-primer.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  ax<span class="op">=</span>ax)</span>
-<span id="cb19-10"><a href="expected-utility-a-primer.html#cb19-10" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">&quot;equal&quot;</span>)</span>
-<span id="cb19-11"><a href="expected-utility-a-primer.html#cb19-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Component Weightings of the original observable variables&quot;</span>)</span>
-<span id="cb19-12"><a href="expected-utility-a-primer.html#cb19-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-25-1.png" width="960" /></p>
-<p>Couple this with a Silhouette score analysis of the clustering and we can see that our classes is too crude, collecting dissimilar customers together. A high silhouette score (closer to 1) would indicate that our clustering has captured the similar customers well. As it stands, we should probably go back to the drawing board.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="expected-utility-a-primer.html#cb20-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> df_purchases[[x <span class="cf">for</span> x <span class="kw">in</span> df_purchases.columns </span>
-<span id="cb20-2"><a href="expected-utility-a-primer.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;customer_desc&#39;</span> <span class="kw">in</span> x]]</span>
-<span id="cb20-3"><a href="expected-utility-a-primer.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> graph_component_silhouette(n_clusters, lim_x, mat_size, sample_silhouette_values, clusters):</span>
-<span id="cb20-4"><a href="expected-utility-a-primer.html#cb20-4" aria-hidden="true" tabindex="-1"></a>    plt.rcParams[<span class="st">&quot;patch.force_edgecolor&quot;</span>] <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb20-5"><a href="expected-utility-a-primer.html#cb20-5" aria-hidden="true" tabindex="-1"></a>    matplotlib.rc(<span class="st">&#39;patch&#39;</span>, edgecolor <span class="op">=</span> <span class="st">&#39;dimgray&#39;</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb20-6"><a href="expected-utility-a-primer.html#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#____________________________</span></span>
-<span id="cb20-7"><a href="expected-utility-a-primer.html#cb20-7" aria-hidden="true" tabindex="-1"></a>    fig, ax1 <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
-<span id="cb20-8"><a href="expected-utility-a-primer.html#cb20-8" aria-hidden="true" tabindex="-1"></a>    ax1.set_xlim([lim_x[<span class="dv">0</span>], lim_x[<span class="dv">1</span>]])</span>
-<span id="cb20-9"><a href="expected-utility-a-primer.html#cb20-9" aria-hidden="true" tabindex="-1"></a>    ax1.set_ylim([<span class="dv">0</span>, mat_size <span class="op">+</span> (n_clusters <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">10</span>])</span>
-<span id="cb20-10"><a href="expected-utility-a-primer.html#cb20-10" aria-hidden="true" tabindex="-1"></a>    y_lower <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb20-11"><a href="expected-utility-a-primer.html#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_clusters):</span>
-<span id="cb20-12"><a href="expected-utility-a-primer.html#cb20-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">#_________________________________________________________</span></span>
-<span id="cb20-13"><a href="expected-utility-a-primer.html#cb20-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aggregate the silhouette scores for samples belonging to cluster i, and sort them</span></span>
-<span id="cb20-14"><a href="expected-utility-a-primer.html#cb20-14" aria-hidden="true" tabindex="-1"></a>        ith_cluster_silhouette_values <span class="op">=</span> sample_silhouette_values[clusters <span class="op">==</span> i]</span>
-<span id="cb20-15"><a href="expected-utility-a-primer.html#cb20-15" aria-hidden="true" tabindex="-1"></a>        ith_cluster_silhouette_values.sort()</span>
-<span id="cb20-16"><a href="expected-utility-a-primer.html#cb20-16" aria-hidden="true" tabindex="-1"></a>        size_cluster_i <span class="op">=</span> ith_cluster_silhouette_values.shape[<span class="dv">0</span>]</span>
-<span id="cb20-17"><a href="expected-utility-a-primer.html#cb20-17" aria-hidden="true" tabindex="-1"></a>        y_upper <span class="op">=</span> y_lower <span class="op">+</span> size_cluster_i</span>
-<span id="cb20-18"><a href="expected-utility-a-primer.html#cb20-18" aria-hidden="true" tabindex="-1"></a>        cmap <span class="op">=</span> cm.get_cmap(<span class="st">&quot;Spectral&quot;</span>)</span>
-<span id="cb20-19"><a href="expected-utility-a-primer.html#cb20-19" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> cmap(<span class="bu">float</span>(i) <span class="op">/</span> n_clusters)</span>
-<span id="cb20-20"><a href="expected-utility-a-primer.html#cb20-20" aria-hidden="true" tabindex="-1"></a>        ax1.fill_betweenx(np.arange(y_lower, y_upper), <span class="dv">0</span>,    ith_cluster_silhouette_values,</span>
-<span id="cb20-21"><a href="expected-utility-a-primer.html#cb20-21" aria-hidden="true" tabindex="-1"></a>         facecolor<span class="op">=</span>color, edgecolor<span class="op">=</span>color, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb20-22"><a href="expected-utility-a-primer.html#cb20-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">#____________________________________________________________________</span></span>
-<span id="cb20-23"><a href="expected-utility-a-primer.html#cb20-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Label the silhouette plots with their cluster numbers at the middle</span></span>
-<span id="cb20-24"><a href="expected-utility-a-primer.html#cb20-24" aria-hidden="true" tabindex="-1"></a>        ax1.text(<span class="op">-</span><span class="fl">0.03</span>, y_lower <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> size_cluster_i, <span class="bu">str</span>(i), color <span class="op">=</span> <span class="st">&#39;red&#39;</span>, fontweight <span class="op">=</span> <span class="st">&#39;bold&#39;</span>,</span>
-<span id="cb20-25"><a href="expected-utility-a-primer.html#cb20-25" aria-hidden="true" tabindex="-1"></a>                bbox<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, boxstyle<span class="op">=</span><span class="st">&#39;round, pad=0.3&#39;</span>))</span>
-<span id="cb20-26"><a href="expected-utility-a-primer.html#cb20-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">#______________________________________</span></span>
-<span id="cb20-27"><a href="expected-utility-a-primer.html#cb20-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute the new y_lower for next plot</span></span>
-<span id="cb20-28"><a href="expected-utility-a-primer.html#cb20-28" aria-hidden="true" tabindex="-1"></a>        y_lower <span class="op">=</span> y_upper <span class="op">+</span> <span class="dv">10</span></span>
-<span id="cb20-29"><a href="expected-utility-a-primer.html#cb20-29" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Silhouette Scores per Cluster&#39;</span>)</span>
-<span id="cb20-30"><a href="expected-utility-a-primer.html#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-31"><a href="expected-utility-a-primer.html#cb20-31" aria-hidden="true" tabindex="-1"></a>best_kmeans <span class="op">=</span> KMeans(init<span class="op">=</span><span class="st">&#39;k-means++&#39;</span>, n_clusters<span class="op">=</span><span class="dv">3</span>, n_init<span class="op">=</span><span class="dv">30</span>)</span>
-<span id="cb20-32"><a href="expected-utility-a-primer.html#cb20-32" aria-hidden="true" tabindex="-1"></a>kfit <span class="op">=</span> best_kmeans.fit(matrix)</span>
-<span id="cb20-33"><a href="expected-utility-a-primer.html#cb20-33" aria-hidden="true" tabindex="-1"></a>best_clusters <span class="op">=</span> best_kmeans.predict(matrix)</span>
-<span id="cb20-34"><a href="expected-utility-a-primer.html#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-35"><a href="expected-utility-a-primer.html#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co"># define individual silouhette scores</span></span>
-<span id="cb20-36"><a href="expected-utility-a-primer.html#cb20-36" aria-hidden="true" tabindex="-1"></a>sample_silhouette_values <span class="op">=</span> silhouette_samples(matrix, best_clusters)</span>
-<span id="cb20-37"><a href="expected-utility-a-primer.html#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-38"><a href="expected-utility-a-primer.html#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co"># and do the graph</span></span>
-<span id="cb20-39"><a href="expected-utility-a-primer.html#cb20-39" aria-hidden="true" tabindex="-1"></a>graph_component_silhouette(<span class="dv">3</span>, [<span class="op">-</span><span class="fl">0.07</span>, <span class="dv">1</span>], <span class="bu">len</span>(X), sample_silhouette_values, best_clusters)</span>
-<span id="cb20-40"><a href="expected-utility-a-primer.html#cb20-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="expected-utility-a-primer.html#cb21-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_customer[[x <span class="cf">for</span> x <span class="kw">in</span> df_purchases.columns </span>
+<span id="cb21-2"><a href="expected-utility-a-primer.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;customer_desc&#39;</span> <span class="kw">in</span> x]]</span>
+<span id="cb21-3"><a href="expected-utility-a-primer.html#cb21-3" aria-hidden="true" tabindex="-1"></a>X_std <span class="op">=</span> StandardScaler().fit_transform(X)</span>
+<span id="cb21-4"><a href="expected-utility-a-primer.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">## Covariance Decomposition</span></span>
+<span id="cb21-5"><a href="expected-utility-a-primer.html#cb21-5" aria-hidden="true" tabindex="-1"></a>cov_mat <span class="op">=</span> np.cov(X_std.T)</span>
+<span id="cb21-6"><a href="expected-utility-a-primer.html#cb21-6" aria-hidden="true" tabindex="-1"></a>eig_vals, eig_vecs <span class="op">=</span> np.linalg.eig(cov_mat)</span>
+<span id="cb21-7"><a href="expected-utility-a-primer.html#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="expected-utility-a-primer.html#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">## Explained Variance</span></span>
+<span id="cb21-9"><a href="expected-utility-a-primer.html#cb21-9" aria-hidden="true" tabindex="-1"></a>tot <span class="op">=</span> <span class="bu">sum</span>(eig_vals)</span>
+<span id="cb21-10"><a href="expected-utility-a-primer.html#cb21-10" aria-hidden="true" tabindex="-1"></a>var_exp <span class="op">=</span> [(i <span class="op">/</span> tot)<span class="op">*</span><span class="dv">100</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">sorted</span>(eig_vals, reverse<span class="op">=</span><span class="va">True</span>)]</span>
+<span id="cb21-11"><a href="expected-utility-a-primer.html#cb21-11" aria-hidden="true" tabindex="-1"></a>cum_var_exp <span class="op">=</span> np.cumsum(var_exp)</span>
+<span id="cb21-12"><a href="expected-utility-a-primer.html#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="expected-utility-a-primer.html#cb21-13" aria-hidden="true" tabindex="-1"></a>barh <span class="op">=</span> plt.bar(<span class="bu">range</span>(<span class="bu">len</span>(var_exp)), var_exp, alpha<span class="op">=</span><span class="fl">0.5</span>, align<span class="op">=</span><span class="st">&#39;center&#39;</span>,</span>
+<span id="cb21-14"><a href="expected-utility-a-primer.html#cb21-14" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">&#39;individual explained variance&#39;</span>)</span>
+<span id="cb21-15"><a href="expected-utility-a-primer.html#cb21-15" aria-hidden="true" tabindex="-1"></a>plt.step(<span class="bu">range</span>(<span class="bu">len</span>(cum_var_exp)), cum_var_exp, where<span class="op">=</span><span class="st">&#39;mid&#39;</span>,</span>
+<span id="cb21-16"><a href="expected-utility-a-primer.html#cb21-16" aria-hidden="true" tabindex="-1"></a>         label<span class="op">=</span><span class="st">&#39;cumulative explained variance&#39;</span>)</span>
+<span id="cb21-17"><a href="expected-utility-a-primer.html#cb21-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Explained variance ratio&#39;</span>)</span>
+<span id="cb21-18"><a href="expected-utility-a-primer.html#cb21-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Principal components&#39;</span>)</span>
+<span id="cb21-19"><a href="expected-utility-a-primer.html#cb21-19" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">&#39;best&#39;</span>)</span>
+<span id="cb21-20"><a href="expected-utility-a-primer.html#cb21-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb21-21"><a href="expected-utility-a-primer.html#cb21-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-26-1.png" width="1152" /></p>
+<p>Each customer can then be visualised as a complex of observed characteristics along the axes of the principle components in, for example, a two dimensional plane. In our case we saw that the two components account for around 60% of the total variance. Furthermore, we can overlay an interpretation on the components by associating group identifiers to portions of the plane.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="expected-utility-a-primer.html#cb22-1" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(init<span class="op">=</span><span class="st">&#39;k-means++&#39;</span>, n_clusters<span class="op">=</span><span class="dv">3</span>, n_init<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb22-2"><a href="expected-utility-a-primer.html#cb22-2" aria-hidden="true" tabindex="-1"></a>kfit <span class="op">=</span> kmeans.fit(X)</span>
+<span id="cb22-3"><a href="expected-utility-a-primer.html#cb22-3" aria-hidden="true" tabindex="-1"></a>clusters <span class="op">=</span> kmeans.predict(X)</span>
+<span id="cb22-4"><a href="expected-utility-a-primer.html#cb22-4" aria-hidden="true" tabindex="-1"></a>X[<span class="st">&#39;cluster&#39;</span>] <span class="op">=</span> clusters</span>
+<span id="cb22-5"><a href="expected-utility-a-primer.html#cb22-5" aria-hidden="true" tabindex="-1"></a>sklearn_pca <span class="op">=</span> sklearnPCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb22-6"><a href="expected-utility-a-primer.html#cb22-6" aria-hidden="true" tabindex="-1"></a>Y_pca <span class="op">=</span> pd.DataFrame(sklearn_pca.fit_transform(X[[col <span class="cf">for</span> col <span class="kw">in</span> X.columns <span class="cf">if</span></span>
+<span id="cb22-7"><a href="expected-utility-a-primer.html#cb22-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="kw">not</span> <span class="st">&#39;cluster&#39;</span> <span class="kw">in</span> col]]))</span>
+<span id="cb22-8"><a href="expected-utility-a-primer.html#cb22-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.concat([X, Y_pca], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-9"><a href="expected-utility-a-primer.html#cb22-9" aria-hidden="true" tabindex="-1"></a>X[[<span class="dv">0</span>, <span class="dv">1</span>, <span class="st">&#39;cluster&#39;</span>]].plot.scatter(x<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb22-10"><a href="expected-utility-a-primer.html#cb22-10" aria-hidden="true" tabindex="-1"></a>                      y<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb22-11"><a href="expected-utility-a-primer.html#cb22-11" aria-hidden="true" tabindex="-1"></a>                      c<span class="op">=</span><span class="st">&#39;cluster&#39;</span>,</span>
+<span id="cb22-12"><a href="expected-utility-a-primer.html#cb22-12" aria-hidden="true" tabindex="-1"></a>                      colormap<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</span>
+<span id="cb22-13"><a href="expected-utility-a-primer.html#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Principle Components Representation - Coloured by inferred Clusters&quot;</span>)</span>
+<span id="cb22-14"><a href="expected-utility-a-primer.html#cb22-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Principle Component 1&quot;</span>)</span>
+<span id="cb22-15"><a href="expected-utility-a-primer.html#cb22-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&quot;Principle Component 2&quot;</span>)</span>
+<span id="cb22-16"><a href="expected-utility-a-primer.html#cb22-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-27-1.png" width="1152" /></p>
+<p>In the dataset pictured in we’ve tried to represent the data in three groups inferred by a k-means clustering algorithm over the original observed features. This is not the most appropriate categorisation as can be seen by the manner in which 9 clear cohorts are speckled across the space. In other words there is more diversity in our customer base than the clustering is capable of expressing. That’s not to say all diversity needs to be captured. If our purpose is make the broadly correct action (e.g. sell, promote, no-action), the niceties can often be ignored. The principle components can be interpreted as linear weightings of the original customer descriptions, and some understanding of those observable features is required to assess if the principle component representation is sensble.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="expected-utility-a-primer.html#cb23-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb23-2"><a href="expected-utility-a-primer.html#cb23-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.heatmap(sklearn_pca.components_,</span>
+<span id="cb23-3"><a href="expected-utility-a-primer.html#cb23-3" aria-hidden="true" tabindex="-1"></a>                 cmap<span class="op">=</span><span class="st">&#39;YlGnBu&#39;</span>,</span>
+<span id="cb23-4"><a href="expected-utility-a-primer.html#cb23-4" aria-hidden="true" tabindex="-1"></a>                 yticklabels<span class="op">=</span>[ <span class="st">&quot;PCA&quot;</span><span class="op">+</span><span class="bu">str</span>(x) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,sklearn_pca.n_components_<span class="op">+</span><span class="dv">1</span>)],</span>
+<span id="cb23-5"><a href="expected-utility-a-primer.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  xticklabels<span class="op">=</span>[<span class="st">&#39;customer_desc_0&#39;</span>, <span class="st">&#39;customer_desc_1&#39;</span>, <span class="st">&#39;customer_desc_2&#39;</span>,</span>
+<span id="cb23-6"><a href="expected-utility-a-primer.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;customer_desc_3&#39;</span>, <span class="st">&#39;customer_desc_4&#39;</span>, <span class="st">&#39;customer_desc_5&#39;</span>,</span>
+<span id="cb23-7"><a href="expected-utility-a-primer.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;customer_desc_6&#39;</span>, <span class="st">&#39;customer_desc_7&#39;</span>],</span>
+<span id="cb23-8"><a href="expected-utility-a-primer.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#cbar_kws={&quot;orientation&quot;: &quot;horizontal&quot;}</span></span>
+<span id="cb23-9"><a href="expected-utility-a-primer.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  ax<span class="op">=</span>ax)</span>
+<span id="cb23-10"><a href="expected-utility-a-primer.html#cb23-10" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">&quot;equal&quot;</span>)</span>
+<span id="cb23-11"><a href="expected-utility-a-primer.html#cb23-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&quot;Component Weightings of the original observable variables&quot;</span>)</span>
+<span id="cb23-12"><a href="expected-utility-a-primer.html#cb23-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-28-1.png" width="960" /></p>
+<p>Couple this with a Silhouette score analysis of the clustering and we can see that our classes is too crude, collecting dissimilar customers together. A high silhouette score (closer to 1) would indicate that our clustering has captured the similar customers well. As it stands, we should probably go back to the drawing board.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="expected-utility-a-primer.html#cb24-1" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> df_purchases[[x <span class="cf">for</span> x <span class="kw">in</span> df_purchases.columns </span>
+<span id="cb24-2"><a href="expected-utility-a-primer.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;customer_desc&#39;</span> <span class="kw">in</span> x]]</span>
+<span id="cb24-3"><a href="expected-utility-a-primer.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> graph_component_silhouette(n_clusters, lim_x, mat_size, sample_silhouette_values, clusters):</span>
+<span id="cb24-4"><a href="expected-utility-a-primer.html#cb24-4" aria-hidden="true" tabindex="-1"></a>    plt.rcParams[<span class="st">&quot;patch.force_edgecolor&quot;</span>] <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb24-5"><a href="expected-utility-a-primer.html#cb24-5" aria-hidden="true" tabindex="-1"></a>    matplotlib.rc(<span class="st">&#39;patch&#39;</span>, edgecolor <span class="op">=</span> <span class="st">&#39;dimgray&#39;</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb24-6"><a href="expected-utility-a-primer.html#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#____________________________</span></span>
+<span id="cb24-7"><a href="expected-utility-a-primer.html#cb24-7" aria-hidden="true" tabindex="-1"></a>    fig, ax1 <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb24-8"><a href="expected-utility-a-primer.html#cb24-8" aria-hidden="true" tabindex="-1"></a>    ax1.set_xlim([lim_x[<span class="dv">0</span>], lim_x[<span class="dv">1</span>]])</span>
+<span id="cb24-9"><a href="expected-utility-a-primer.html#cb24-9" aria-hidden="true" tabindex="-1"></a>    ax1.set_ylim([<span class="dv">0</span>, mat_size <span class="op">+</span> (n_clusters <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">10</span>])</span>
+<span id="cb24-10"><a href="expected-utility-a-primer.html#cb24-10" aria-hidden="true" tabindex="-1"></a>    y_lower <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb24-11"><a href="expected-utility-a-primer.html#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_clusters):</span>
+<span id="cb24-12"><a href="expected-utility-a-primer.html#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">#_________________________________________________________</span></span>
+<span id="cb24-13"><a href="expected-utility-a-primer.html#cb24-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aggregate the silhouette scores for samples belonging to cluster i, and sort them</span></span>
+<span id="cb24-14"><a href="expected-utility-a-primer.html#cb24-14" aria-hidden="true" tabindex="-1"></a>        ith_cluster_silhouette_values <span class="op">=</span> sample_silhouette_values[clusters <span class="op">==</span> i]</span>
+<span id="cb24-15"><a href="expected-utility-a-primer.html#cb24-15" aria-hidden="true" tabindex="-1"></a>        ith_cluster_silhouette_values.sort()</span>
+<span id="cb24-16"><a href="expected-utility-a-primer.html#cb24-16" aria-hidden="true" tabindex="-1"></a>        size_cluster_i <span class="op">=</span> ith_cluster_silhouette_values.shape[<span class="dv">0</span>]</span>
+<span id="cb24-17"><a href="expected-utility-a-primer.html#cb24-17" aria-hidden="true" tabindex="-1"></a>        y_upper <span class="op">=</span> y_lower <span class="op">+</span> size_cluster_i</span>
+<span id="cb24-18"><a href="expected-utility-a-primer.html#cb24-18" aria-hidden="true" tabindex="-1"></a>        cmap <span class="op">=</span> cm.get_cmap(<span class="st">&quot;Spectral&quot;</span>)</span>
+<span id="cb24-19"><a href="expected-utility-a-primer.html#cb24-19" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> cmap(<span class="bu">float</span>(i) <span class="op">/</span> n_clusters)</span>
+<span id="cb24-20"><a href="expected-utility-a-primer.html#cb24-20" aria-hidden="true" tabindex="-1"></a>        ax1.fill_betweenx(np.arange(y_lower, y_upper), <span class="dv">0</span>,    ith_cluster_silhouette_values,</span>
+<span id="cb24-21"><a href="expected-utility-a-primer.html#cb24-21" aria-hidden="true" tabindex="-1"></a>         facecolor<span class="op">=</span>color, edgecolor<span class="op">=</span>color, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb24-22"><a href="expected-utility-a-primer.html#cb24-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">#____________________________________________________________________</span></span>
+<span id="cb24-23"><a href="expected-utility-a-primer.html#cb24-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Label the silhouette plots with their cluster numbers at the middle</span></span>
+<span id="cb24-24"><a href="expected-utility-a-primer.html#cb24-24" aria-hidden="true" tabindex="-1"></a>        ax1.text(<span class="op">-</span><span class="fl">0.03</span>, y_lower <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> size_cluster_i, <span class="bu">str</span>(i), color <span class="op">=</span> <span class="st">&#39;red&#39;</span>, fontweight <span class="op">=</span> <span class="st">&#39;bold&#39;</span>,</span>
+<span id="cb24-25"><a href="expected-utility-a-primer.html#cb24-25" aria-hidden="true" tabindex="-1"></a>                bbox<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">&#39;white&#39;</span>, edgecolor<span class="op">=</span><span class="st">&#39;black&#39;</span>, boxstyle<span class="op">=</span><span class="st">&#39;round, pad=0.3&#39;</span>))</span>
+<span id="cb24-26"><a href="expected-utility-a-primer.html#cb24-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">#______________________________________</span></span>
+<span id="cb24-27"><a href="expected-utility-a-primer.html#cb24-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute the new y_lower for next plot</span></span>
+<span id="cb24-28"><a href="expected-utility-a-primer.html#cb24-28" aria-hidden="true" tabindex="-1"></a>        y_lower <span class="op">=</span> y_upper <span class="op">+</span> <span class="dv">10</span></span>
+<span id="cb24-29"><a href="expected-utility-a-primer.html#cb24-29" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Silhouette Scores per Cluster&#39;</span>)</span>
+<span id="cb24-30"><a href="expected-utility-a-primer.html#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="expected-utility-a-primer.html#cb24-31" aria-hidden="true" tabindex="-1"></a>best_kmeans <span class="op">=</span> KMeans(init<span class="op">=</span><span class="st">&#39;k-means++&#39;</span>, n_clusters<span class="op">=</span><span class="dv">3</span>, n_init<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb24-32"><a href="expected-utility-a-primer.html#cb24-32" aria-hidden="true" tabindex="-1"></a>kfit <span class="op">=</span> best_kmeans.fit(matrix)</span>
+<span id="cb24-33"><a href="expected-utility-a-primer.html#cb24-33" aria-hidden="true" tabindex="-1"></a>best_clusters <span class="op">=</span> best_kmeans.predict(matrix)</span>
+<span id="cb24-34"><a href="expected-utility-a-primer.html#cb24-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-35"><a href="expected-utility-a-primer.html#cb24-35" aria-hidden="true" tabindex="-1"></a><span class="co"># define individual silouhette scores</span></span>
+<span id="cb24-36"><a href="expected-utility-a-primer.html#cb24-36" aria-hidden="true" tabindex="-1"></a>sample_silhouette_values <span class="op">=</span> silhouette_samples(matrix, best_clusters)</span>
+<span id="cb24-37"><a href="expected-utility-a-primer.html#cb24-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-38"><a href="expected-utility-a-primer.html#cb24-38" aria-hidden="true" tabindex="-1"></a><span class="co"># and do the graph</span></span>
+<span id="cb24-39"><a href="expected-utility-a-primer.html#cb24-39" aria-hidden="true" tabindex="-1"></a>graph_component_silhouette(<span class="dv">3</span>, [<span class="op">-</span><span class="fl">0.07</span>, <span class="dv">1</span>], <span class="bu">len</span>(X), sample_silhouette_values, best_clusters)</span>
+<span id="cb24-40"><a href="expected-utility-a-primer.html#cb24-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-29-1.png" width="1152" /></p>
 <p>The expected value of the customer is then something like the probability of purchase (however approximated) for the given customer multiplied the the net revenue of the average purchase in the same group. It’s these kind of idealisations and conceptual economies, which seemingly reasonable at the time, lead to systematic algorithmic skew. Unrefined constructs encourage brutish bulk actions across the arrayed field of customers</p>
 
 </div>

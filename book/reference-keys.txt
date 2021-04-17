@@ -19,9 +19,9 @@ rational-preference-from-indifference-to-utility
 von-neumann-and-morgernsterns-representation-theorem
 bolkers-representation-theorem
 from-neutrality-to-desire
-machine-learning-and-the-models-of-utility
+measures-of-latent-subjective-utility
 maximum-likelihood-estimation-and-multiple-choice
-segmentation-and-expected-value
+profiling-segmentation-and-expected-value
 tbd---stationarity-and-induction
 tbd---causal-inference-and-counterfactuals
 tbd---wisdom-of-the-crowds

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Information on Examined Algorithms</title>
-    <link>https://nathanielf.github.io/tags/information/</link>
-    <description>Recent content in Information on Examined Algorithms</description>
+    <title>Optimisation on Examined Algorithms</title>
+    <link>https://nathanielf.github.io/tags/optimisation/</link>
+    <description>Recent content in Optimisation on Examined Algorithms</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
     <lastBuildDate>Mon, 22 Mar 2021 10:19:36 +0000</lastBuildDate>
     
-	<atom:link href="https://nathanielf.github.io/tags/information/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanielf.github.io/tags/optimisation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://nathanielf.github.io/publication/bayes_decision/</guid>
       <description>Without being overwhelmed we face an infinite horizon of future decisions. Most are made under uncertainty. A sequence of such decisions can compound or reduce that certainty, but we focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us or collapse into a cul de sac.</description>
-    </item>
-    
-    <item>
-      <title>Wheat from Chaff: Maximum Entropy and Information</title>
-      <link>https://nathanielf.github.io/publication/wheat_from_chaff/</link>
-      <pubDate>Mon, 22 Mar 2021 10:19:36 +0000</pubDate>
-      
-      <guid>https://nathanielf.github.io/publication/wheat_from_chaff/</guid>
-      <description>There is a rumour of ignorant fish; so involved in the ocean they fail to notice the water around them, what it is and what it could be. There is another cliche about the internet and its denizens drowning in information. There is something to both these images, but the second is too charitable. It suggests a light consistency to the viscous texture of the flow, instead of the congealed sludge that drips down our throat choking off the air.</description>
     </item>
     
   </channel>

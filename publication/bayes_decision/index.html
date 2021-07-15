@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathaniel Forde's Homepage">
+  <meta name="author" content="Nathaniel Forde">
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@forde_nathaniel">
+<meta name="twitter:creator" content="@forde_nathaniel">
+<meta name="twitter:title" content="Bayesian Decisions &amp; Model Comparison ">
+<meta name="twitter:description" content="Without being overwhelmed we face an infinite horizon of future decisions. Most are made under uncertainty. A sequence of such decisions can compound or reduce that certainty, but we focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us or collapse into a cul de sac.">
+<meta name="twitter:image" content="https://nathanielf.github.io/img/2021-06-01-Bayesian-Decisions/model_structure.png">
+
+<meta property="og:url" content="/publication/bayes_decision/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Bayesian Decisions &amp; Model Comparison " />
+<meta property="og:description" content="Without being overwhelmed we face an infinite horizon of future decisions. Most are made under uncertainty. A sequence of such decisions can compound or reduce that certainty, but we focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us or collapse into a cul de sac." />
+<meta property="og:image" content="https://nathanielf.github.io/img/2021-06-01-Bayesian-Decisions/model_structure.png" />
+
+  <title>Bayesian Decisions &amp; Model Comparison </title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+  
+  
+  
+  
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-188850615-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188850615-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-188850615-1');
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://nathanielf.github.io/">Examined Algorithms</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/pdf/Nathaniel%20Forde%20Current.pdf">
+            <i class="fa fa-briefcase"></i>&nbsp;
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="/post/">
+            <i class="fa fa-code"></i>&nbsp;
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/publication/">
+            <i class="fa fa-files-o"></i>&nbsp;
+            Research
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+
+  
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+      <h2 class="publication-title">Bayesian Decisions &amp; Model Comparison </h1>
+        <p>
+          <em>Loss under Uncertainty</em>
+        </p>
+
+        <p>
+          
+
+<p>Without being overwhelmed we face an infinite horizon of future decisions. Most are made under uncertainty. A sequence of such decisions can compound or reduce that certainty, but we focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us or collapse into a <em>cul de sac</em>. We weigh the options differently according to our needs and desires. Leonard J. Savage showed that the optimal weights on each choice are proportional to their probabilities if we seek to maximise our expected gains. In particular, he showed that if we reason with probabilities our outcomes will the dominate all other methods for mitigating uncertainty. This alone should serve to motivate probabilisitic modelling, but we want to show concretely how this translates to making decisions under uncertainty.</p>
+
+<h3 id="probability-choice-given-data">Probability &amp; Choice given Data</h3>
+
+<p>Not all problems can be expressed with a generative probability model. More pertinently, even if the problem is expressable, it is a fine art to aptly approximate the real process in the lexicon of familiar probability distributions. But there are benefits to the effort. A probability model allows direct comparisons of theories about the data. If we postulate some explanatory theory which is parameterised with the vector $\mathbf{T_{\beta}}$, where $\beta$ is governed by an explicit probability model then we are able to state the ratio of likelihoods for any observed data comparing theories $\mathbf{T_{\beta}}, \mathbf{T_{\beta^{1}}}$.</p>
+
+<p>$$ \frac{p( D | \mathbf{T}_{\beta^{1}})}{p(D | \mathbf{T}_{\beta})} $$</p>
+
+<p>This style of comparison underwrites most decision rules as we set bounds on acceptable divergences. In particular, we see how the special case of the Neyman Pearson lemma (which underwrites most simple hypothesis testing) is an instance of a just such a liklihood ratio comparison. We follow the presentation of Moritz Hardt and Benjamin Recht in their <em>Patterns, Prediction and Actions</em>.</p>
+
+<h2 id="loss-functions-dominance-arguments-and-ratio-tests">Loss functions, Dominance Arguments and Ratio Tests</h2>
+
+<p>Imagine we frame the cost or loss of incorrectly choosing amongst our theories under uncertainty.Then the question becomes one of expected loss. Define $l(T, T_1)$ as the loss incurred when choosing $T$ when $T_1$ is true. Then the expected loss in light of the data is calculated as:</p>
+
+<p>$$ (1):  E(l(T_{\beta} , T) | D) =
+l(T_{\beta} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta} , T_{\beta^{1}})p(T_{\beta^{1}} | D) $$</p>
+
+<p>$$ (2):  E(l(T_{\beta^{1}} , T) | D) =
+l(T_{\beta^{1}} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta^{1}} , T_{\beta^{1}})p(T_{\beta^{1}} | D) $$</p>
+
+<p>We want to choose the theory with least expected loss. Assume (1) $\geq$ (2), then</p>
+
+<p>$$ l(T_{\beta} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta} , T_{\beta^{1}})p(T_{\beta^{1}} | D) \geq l(T_{\beta^{1}} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta^{1}} , T_{\beta^{1}})p(T_{\beta^{1}} | D) $$</p>
+
+<p>manipulating:</p>
+
+<p>$$ l(T_{\beta} , T_{\beta^{1}})p(T_{\beta^{1}} | D) \geq l(T_{\beta^{1}} , T_{\beta})p(T_{\beta} | D) -  l(T_{\beta} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta^{1}} , T_{\beta^{1}})p(T_{\beta^{1}} | D) $$</p>
+
+<p>grouping:</p>
+
+<p>$$ l(T_{\beta} , T_{\beta^{1}})p(T_{\beta^{1}} | D) \geq p(T_{\beta} | D)(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta})) + l(T_{\beta^{1}} , T_{\beta^{1}})p(T_{\beta^{1}} | D) $$</p>
+
+<p>rearraging:</p>
+
+<p>$$ (l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))p(T_{\beta^{1}} | D)  \geq p(T_{\beta} | D)(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta})) $$</p>
+
+<p>$$ p(T_{\beta^{1}} | D)  \geq p(T_{\beta} | D)\frac{(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} $$</p>
+
+<p>$$ \frac{p(T_{\beta^{1}} | D)}{p(T_{\beta} | D)}  \geq \frac{(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} $$</p>
+
+<p>which by Bayes Rule:</p>
+
+<p>$$ \frac{\frac{p(D | T_{\beta^{1}})p(T_{\beta^{1}})}{p(D)}}{\frac{p(D | T_{\beta})p(T_{\beta})}{p(D)}} \geq \frac{(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} $$</p>
+
+<p>which cancels to become:</p>
+
+<p>$$ \frac{p(D | T_{\beta^{1}})p(T_{\beta^{1}})}{p(D | T_{\beta})p(T_{\beta})} \geq \frac{(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} \Rightarrow \frac{p(D | T_{\beta^{1}})}{p(D | T_{\beta})} \geq \frac{p(T_{\beta})(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{p(T_{\beta^{1}})(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} $$</p>
+
+<p>which shows how each expected loss calculation between two theories reduces to a likelihood ratio test, where we have a specific threshold for accepted preference. The preferred theory dominates the other just when the ratio of their likelihood exceeds that threshold. Therefore our estimate of the correct theory $\hat{\mathbf{T}}$ is characterised by this comparison.</p>
+
+<p>$$ \hat{\mathbf{T}} = \mathbb{1} \Bigg[  \frac{p( D | \mathbf{T}_{\beta^{1}})}{p(D | \mathbf{T}_{\beta})} \geq \eta \Bigg] $$</p>
+
+<p>Hardt and Recht show a number of the very familiar procedures reduce to likelihood ratio tests with more or less constraints on threshold priors or loss functions. For instance, the maximum a posteriori decision rule emerges naturally as a likelihood ratio test when we set the $l(T, T) = l(\neg T, \neg T) = 0$ and $l(T, \neg T) = l(\neg T, T) = 1$ This results in the following decision rule:</p>
+
+<p>$$ \hat{\mathbf{T}} = \mathbb{1} \Bigg[  \frac{p( D | \mathbf{T}_{\beta^{1}})}{p(D | \mathbf{T}_{\beta})} \geq \frac{p(\mathbf{T_{\beta}})}{p(\mathbf{T_{\beta^{1}}})} \Bigg] $$</p>
+
+<h3 id="optimising-between-true-positive-and-false-postive-rates">Optimising between True Positive and False Postive Rates</h3>
+
+<p>In the binary case we can compare two hypotheses directly while aiming to maximise some measure of accuracy with a high probability. This requires that we express our decision rule as some selective mapping over our theories in light of the data.</p>
+
+<p>$$ \hat{\mathbf{T}}: { \mathbf{T_{\beta}}, \mathbf{T_{\beta^{1}}} } \times D  \mapsto { 0, 1 } $$</p>
+
+<p>With this set up the Neyman Pearson lemma states that any attempt to optimise our rule so that we maximise the True positive rate (TPR) while we minimise our False positive rate (FPR) subject to a constraint is equivalent to a likelihood ratio test.</p>
+
+<p>$$ \text{ maximise TPR: } p(\hat{\mathbf{T}} \text{ is True} | \mathbf{T_\beta}) $$
+$$ \text{ subject to FPR: } p(\hat{\mathbf{T}} \text{ is True} | \mathbf{T_\beta^{1}}) \leq \alpha $$</p>
+
+<p>This follows because the optimisation task does not require specific information about the prior probabilities. So we can construct a loss function such that the decision rule is equivalent to a simple likelihood ratio test i.e. that the product of ratio of the priors and our constructed loss function collapses.</p>
+
+<p>Lemma 1. <strong>Neyman-Pearson Lemma</strong> <em>The optimal probabilistic decision rule that maximizes TPR with an upper bound on FPR is a deterministic likelihood ratio test.</em></p>
+
+<p>The proof is short and elaborated in <em>Patterns, Predictions and Actions</em>, but the key point is that a likelihood ratio test can be constructed to mirror this optimisation constraint with appropriate modifications to our priors over both theories. In practice these priors act as hyper-parameters we tune achieve optimal classification performance and generalisability.</p>
+
+<h2 id="example-expected-loss-curves">Example: Expected Loss Curves</h2>
+
+<p>Imagine an insurer seeks to reserve enough of their premium to cover their expected losses. Then month on month we need to estimate the approriate loss ratio and project those losses over the ensuing months. This problem has a natural expression in the Bayesian setting. As can be seen in Stan language case study <a href="https://mc-stan.org/users/documentation/case-studies/losscurves_casestudy.html">here</a></p>
+
+<p>We&rsquo;ll write up the model in python&rsquo;s pymc3 framework and walk through the code. The main point to see here is that we are trying to estimate the losses accruing the a given cohort of insurance policies. So we are estimating in turn both the loss ratio and growth curves. We&rsquo;ll canvas two options for the growth curves, one based on the logistic curve and another based on the Weibull function. The empirical loss curves show a particular growth curve which rises and plateaus as we step through time.</p>
+
+<p><img src="/img/2021-06-01-Bayesian-Decisions/loss_ratios.png" alt="Loss Ratios" /></p>
+
+<p>The modelling challenge is to determine both the probable loss ratios for a given year&rsquo;s premium and the manner in which the most probable curvature for the accruing losses. The range of probable realisations are, in the Bayesian setting, constrained by the distributions used for the prior probabilities. In our model we need specifications for the priors governing the loss ratios for each year, and the growth factors for each subsequent year. These are combined to calculate the ultimate losses as a growing proportion of the annual premium. We use lognormal priors for to loosely constrain our prior distributions above zero without a fixed upper bound. The growth factors are modeled using either a logistic function over theta and omega at each subsequent year $t$.</p>
+
+<p>$$ (t^{\omega} /  (t^{\omega} + \theta^{\omega}) $$</p>
+
+<p>or</p>
+
+<p>$$ 1 - e^{-(t/ \theta)^{\omega}} $$</p>
+
+<p>We set priors for these time-based parameters too, so that by conditioning on the observed data we may learn and update our beliefs about the likely curvature of the growth as we step through time.</p>
+
+<p><img src="/img/2021-06-01-Bayesian-Decisions/model_structure.png" alt="Model Structure" /></p>
+
+<p>As we can see here the model has a hierarchical structure, where we have specified a series of priors for each of the features we wish to model. The main call outs are that we model observed cumulative losses &lsquo;loss&rsquo; as the likelihood based on the prior parameters of an expected loss ratio &lsquo;LR&rsquo;, against an input dollar premium, and a latent growth factor &lsquo;gf&rsquo; which increases over time. The benefits of using a hierarchical structure is that we can capture the variance of the loss ratios across the years, and this uncertainty propagates through our and our estimates of the growth parameters. The code to put this altogether is below.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>params <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;mu_LR&#39;</span>: [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.5</span>], <span style="color: #CC3300">&#39;sd_LR&#39;</span>: [<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.5</span>], <span style="color: #CC3300">&#39;loss_sd&#39;</span>: [<span style="color: #FF6600">0</span>, <span style="color: #555555">.</span><span style="color: #FF6600">7</span>], <span style="color: #CC3300">&#39;omega&#39;</span>: [<span style="color: #FF6600">0</span>, <span style="color: #555555">.</span><span style="color: #FF6600">5</span>], <span style="color: #CC3300">&#39;theta&#39;</span>: [<span style="color: #FF6600">0</span>, <span style="color: #555555">.</span><span style="color: #FF6600">5</span>], 
+         <span style="color: #CC3300">&#39;tune&#39;</span>: <span style="color: #FF6600">2000</span>, <span style="color: #CC3300">&#39;target_accept&#39;</span>:<span style="color: #555555">.</span><span style="color: #FF6600">9</span>}
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">make_model</span>(model_data, params,  growth_function <span style="color: #555555">=</span><span style="color: #CC3300">&#39;logistic&#39;</span>):   
+    <span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model(coords<span style="color: #555555">=</span>coords) <span style="color: #006699; font-weight: bold">as</span> basic_model:
+
+        <span style="color: #0099FF; font-style: italic"># Priors for unknown model parameters</span>
+        mu_LR <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;mu_LR&#39;</span>, params[<span style="color: #CC3300">&#39;mu_LR&#39;</span>][<span style="color: #FF6600">0</span>],  params[<span style="color: #CC3300">&#39;mu_LR&#39;</span>][<span style="color: #FF6600">1</span>]);
+        sd_LR <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Lognormal(<span style="color: #CC3300">&#39;sd_LR&#39;</span>, params[<span style="color: #CC3300">&#39;sd_LR&#39;</span>][<span style="color: #FF6600">0</span>], params[<span style="color: #CC3300">&#39;sd_LR&#39;</span>][<span style="color: #FF6600">1</span>]);
+
+        LR <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Lognormal(<span style="color: #CC3300">&#39;LR&#39;</span>, mu_LR, sd_LR, dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;cohort&#39;</span>)
+
+        loss_sd <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Lognormal(<span style="color: #CC3300">&#39;loss_sd&#39;</span>, params[<span style="color: #CC3300">&#39;loss_sd&#39;</span>][<span style="color: #FF6600">0</span>], params[<span style="color: #CC3300">&#39;loss_sd&#39;</span>][<span style="color: #FF6600">1</span>]);
+
+        <span style="color: #0099FF; font-style: italic">## Parameters for the growth factor</span>
+        omega <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Lognormal(<span style="color: #CC3300">&#39;omega&#39;</span>, params[<span style="color: #CC3300">&#39;omega&#39;</span>][<span style="color: #FF6600">0</span>], params[<span style="color: #CC3300">&#39;omega&#39;</span>][<span style="color: #FF6600">1</span>]);
+        theta <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Lognormal(<span style="color: #CC3300">&#39;theta&#39;</span>, params[<span style="color: #CC3300">&#39;theta&#39;</span>][<span style="color: #FF6600">0</span>], params[<span style="color: #CC3300">&#39;theta&#39;</span>][<span style="color: #FF6600">1</span>]);
+        t <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Data(<span style="color: #CC3300">&quot;t&quot;</span>, t_values, dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;t_values&#39;</span>)
+        <span style="color: #006699; font-weight: bold">if</span> growth_function <span style="color: #555555">==</span> <span style="color: #CC3300">&#39;logistic&#39;</span>:
+            gf <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&#39;gf&#39;</span>, (t<span style="color: #555555">**</span>omega <span style="color: #555555">/</span>  (t<span style="color: #555555">**</span>omega <span style="color: #555555">+</span> theta<span style="color: #555555">**</span>omega)), dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;t_values&#39;</span>)
+        <span style="color: #006699; font-weight: bold">else</span>:
+            gf <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&#39;gf&#39;</span>, <span style="color: #FF6600">1</span><span style="color: #555555">-</span>(pm<span style="color: #555555">.</span>math<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>(t<span style="color: #555555">/</span>theta)<span style="color: #555555">**</span>omega)), dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;t_values&#39;</span>)
+        <span style="color: #0099FF; font-style: italic">## Premium</span>
+        prem <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Data(<span style="color: #CC3300">&quot;premium&quot;</span>, premium, dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;cohort&#39;</span>)
+
+        t_indx <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Data(<span style="color: #CC3300">&quot;t_idx&quot;</span>, t_idx, dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;obs&#39;</span>)
+        cohort_idx <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Data(<span style="color: #CC3300">&#39;c_idx&#39;</span>, cohort_id, dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;obs&#39;</span>)
+        lm <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&#39;lm&#39;</span>, LR[cohort_idx] <span style="color: #555555">*</span> prem[cohort_idx] <span style="color: #555555">*</span>gf[t_indx], dims<span style="color: #555555">=</span>(<span style="color: #CC3300">&#39;obs&#39;</span>))
+
+        <span style="color: #0099FF; font-style: italic"># Likelihood (sampling distribution) of observations</span>
+        loss <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;loss&#39;</span>, lm, (loss_sd <span style="color: #555555">*</span> prem[cohort_idx]), observed<span style="color: #555555">=</span>loss_real, dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;obs&#39;</span>)
+
+        prior_checks <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_prior_predictive(samples<span style="color: #555555">=</span><span style="color: #FF6600">100</span>, random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)
+        idata <span style="color: #555555">=</span> az<span style="color: #555555">.</span>from_pymc3(prior<span style="color: #555555">=</span>prior_checks)
+
+        trace <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample(return_inferencedata<span style="color: #555555">=</span><span style="color: #336666">True</span>, tune<span style="color: #555555">=</span>params[<span style="color: #CC3300">&#39;tune&#39;</span>], init<span style="color: #555555">=</span><span style="color: #CC3300">&quot;adapt_diag&quot;</span>, 
+                          target_accept<span style="color: #555555">=</span>params[<span style="color: #CC3300">&#39;target_accept&#39;</span>])
+        idata<span style="color: #555555">.</span>extend(trace)
+        ppc <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_posterior_predictive(
+            trace, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;loss&quot;</span>, <span style="color: #CC3300">&quot;LR&quot;</span>, <span style="color: #CC3300">&quot;lm&quot;</span>], random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)
+        ppc <span style="color: #555555">=</span> az<span style="color: #555555">.</span>from_pymc3(posterior_predictive<span style="color: #555555">=</span>ppc)
+        idata<span style="color: #555555">.</span>extend(ppc)
+        
+    <span style="color: #006699; font-weight: bold">return</span> basic_model, idata
+</pre></div>
+
+<p>Running these models generates enough sample data to plot some posterior predictive checks and test that our model fits well with the observed data. But crucially we also see a range of plausible  curves. These are the probable range of alternatives which can be used to hedge against a range of losses rather than merely expected losses.</p>
+
+<p><img src="/img/2021-06-01-Bayesian-Decisions/ppc_plot.png" alt="Posterior Predictive Checks" /></p>
+
+<p>Fundamentally we want to model the shape of the curve and our question remains which candidate model is better? Which should we choose to reserve enough premium against future costs?</p>
+
+<h3 id="model-comparison">Model Comparison</h3>
+
+<p>We&rsquo;ve seen above how likelihood ratio tests may be used to assess how each model fits the observed data. But it is quite another to determine how the model generalises outside of sample. There are a number complexities to computing model comparisons for Bayesian models, but the state of the art relies on information theoretic measures such as AIC, BIC and WAIC or Leave one out cross-validation methods. Information Criteria mostly rely on some comparison of likelihood as described above, but with some additional controls for the complexity of each model. The cross validation methods asseses predictive fit by successively partitioning the data into training and test sets where the accuracy of the fit is assessed by predicting on the test set.</p>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rank</th>
+      <th>loo</th>
+      <th>p_loo</th>
+      <th>d_loo</th>
+      <th>weight</th>
+      <th>se</th>
+      <th>dse</th>
+      <th>warning</th>
+      <th>loo_scale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Weibull Growth Model</th>
+      <td>0</td>
+      <td>-387.915</td>
+      <td>10.6734</td>
+      <td>0</td>
+      <td>0.811983</td>
+      <td>11.1849</td>
+      <td>0</td>
+      <td>True</td>
+      <td>log</td>
+    </tr>
+    <tr>
+      <th>Logistic Growth Model</th>
+      <td>1</td>
+      <td>-391.599</td>
+      <td>10.2344</td>
+      <td>3.68346</td>
+      <td>0.188017</td>
+      <td>11.874</td>
+      <td>3.81681</td>
+      <td>True</td>
+      <td>log</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/img/2021-06-01-Bayesian-Decisions/model_compare_plot.png" alt="Model Comparison" /></p>
+
+<p>In our case we can see that the Weibull growth model is deemed slightly more accurate than the logistic model. Allowing us to lean on criteria of predictive accuracy in choosing our model specification.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This discussion serves to show the wide applicability of Bayesian decision theory and its implicit role in many of the typical frequentist decision rules and model comparison tests. The role and flexibility of the priors in those decision rules suggests that it&rsquo;s better to be aware of the specification of the prior rather than assume their use is innocent. More positively the Bayesian approach to decision making benefits from our ability to sample directly from the posterior and evaluate probable loss across an entire range of the probability distribution. The gains of this perspective are a clarity and confidence, that cannot come from decisions made on the comparison of simple point estimates.</p>
+
+        </p>
+
+        <p>
+          
+        
+        </p>
+
+        <div>
+          <div class="post-back-link">
+    <a href="javascript: history.back()">
+        <i class="fa fa-arrow-left"></i> 
+        Back
+    </a>
+</div>
+        </div>
+    </div>
+  </div>
+  
+
+  <footer style="padding-top: 1em;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/prism.js"></script>
+
+</body>
+
+</html>

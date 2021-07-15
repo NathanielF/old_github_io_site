@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nathanielf.github.io/publication/bayes_decision/</loc>
+    <lastmod>2021-03-22T10:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/publication/wheat_from_chaff/</loc>
     <lastmod>2021-03-22T10:19:36+00:00</lastmod>
   </url>
@@ -107,6 +112,12 @@
   <url>
     <loc>https://nathanielf.github.io/tags/mle/</loc>
     <lastmod>2021-02-21T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/tags/optimisation/</loc>
+    <lastmod>2021-03-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   

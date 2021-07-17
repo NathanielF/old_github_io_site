@@ -183,6 +183,8 @@ l(T_{\beta^{1}} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta^{1}} , T_{\beta^{1}})p
 
 <p>$$ \hat{\mathbf{T}} = \mathbb{1} \Bigg[  \frac{p( D | \mathbf{T}_{\beta^{1}})}{p(D | \mathbf{T}_{\beta})} \geq \frac{p(\mathbf{T_{\beta}})}{p(\mathbf{T_{\beta^{1}}})} \Bigg] $$</p>
 
+<p>This is a particularly natural decision rule since it relies in how much we have learned about the likely theories (after conditioning on the data) relative to our prior commitments.</p>
+
 <h3 id="optimising-between-true-positive-and-false-postive-rates">Optimising between True Positive and False Postive Rates</h3>
 
 <p>In the binary case we can compare two hypotheses directly while aiming to maximise some measure of accuracy with a high probability. This requires that we express our decision rule as some selective mapping over our theories in light of the data.</p>
@@ -198,7 +200,7 @@ $$ \text{ subject to FPR: } p(\hat{\mathbf{T}} \text{ is True} | \mathbf{T_\beta
 
 <p>Lemma 1. <strong>Neyman-Pearson Lemma</strong> <em>The optimal probabilistic decision rule that maximizes TPR with an upper bound on FPR is a deterministic likelihood ratio test.</em></p>
 
-<p>The proof is short and elaborated in <em>Patterns, Predictions and Actions</em>, but the key point is that a likelihood ratio test can be constructed to mirror this optimisation constraint with appropriate modifications to our priors over both theories. So, in practice, these priors act as hyper-parameters we tune achieve optimal classification performance and generalisability.</p>
+<p>The proof is short and elaborated in <em>Patterns, Predictions and Actions</em>, but the key point is that a likelihood ratio test can be constructed to mirror this optimisation constraint with appropriate modifications to our priors over both theories. So, in practice, optimisation amounts to the modification of these priors. Our priors are adjusted as hyper-parameters as we tune them to achieve optimal classification performance and generalisability.</p>
 
 <h2 id="example-expected-loss-curves">Example: Expected Loss Curves</h2>
 

@@ -125,9 +125,7 @@ ga('send', 'pageview');
         <p>
           
 
-<p>Most days we face an infinite horizon of future decisions without being overwhelmed. They are all layered under levels uncertainty. A sequence of such decisions can compound, or reduce that certainty. But we tend to focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us, or gets collapsed into a <em>cul de sac</em>. We weigh the options differently according to our needs and desires. Famously, Leonard J. Savage showed that the optimal weights on each choice are proportional to their probabilities if we seek to maximise our expected gains. In particular, he showed that if we reason with probabilities our outcomes will the dominate all other methods for mitigating uncertainty.</p>
-
-<p>This alone should serve to motivate probabilisitic modelling, but we want to show concretely how this translates to making decisions under uncertainty. We&rsquo;ll first show how such considerations underwrite a slew of familiar decision rules, and how these methods can be applied to problem of reserving enough premium to cover costs accruing against insurance contracts.</p>
+<p>Most days we face an infinite horizon of future decisions without being overwhelmed. They are all layered under levels uncertainty. A sequence of such decisions can compound, or reduce that certainty. But we tend to focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us, or gets collapsed into a <em>cul de sac</em>. We weigh the options differently according to our needs and desires and pursue strategies to maximise our goals. Famously, Leonard J. Savage showed that the optimal weights on each desire are proportional to their probabilities if we seek to maximise our expected gains. In particular, he showed that if we reason with probabilities our outcomes will the dominate all other methods for mitigating uncertainty. This alone should serve to motivate probabilisitic modelling, but we want to show concretely how this translates to making decisions under uncertainty. We&rsquo;ll first show how such considerations underwrite a slew of familiar decision rules, and how these methods can be applied to problem of reserving enough premium to cover costs accruing against insurance contracts. In both cases a concern for accuracy is implict.</p>
 
 <h3 id="choice-comparison-and-probability">Choice, Comparison and Probability</h3>
 
@@ -179,7 +177,7 @@ l(T_{\beta^{1}} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta^{1}} , T_{\beta^{1}})p
 
 <p>$$ \hat{\mathbf{T}} = \mathbb{1} \Bigg[  \frac{p( D | \mathbf{T}_{\beta^{1}})}{p(D | \mathbf{T}_{\beta})} \geq \eta \Bigg] $$</p>
 
-<p>Hardt and Recht show a number of the very familiar procedures reduce to likelihood ratio tests with more or less constraints on threshold priors or loss functions. For instance, the maximum a posteriori decision rule emerges naturally as a likelihood ratio test when we set the $l(T, T) = l(\neg T, \neg T) = 0$ and $l(T, \neg T) = l(\neg T, T) = 1$ This results in the following decision rule:</p>
+<p>Hardt and Recht show a number of the very familiar procedures reduce to likelihood ratio tests with more or less constraints on threshold priors or loss functions. For instance, the (MAP) maximum a posteriori decision rule emerges naturally as a likelihood ratio test when we set the $l(T, T) = l(\neg T, \neg T) = 0$ and $l(T, \neg T) = l(\neg T, T) = 1$ This results in the following decision rule:</p>
 
 <p>$$ \hat{\mathbf{T}} = \mathbb{1} \Bigg[  \frac{p( D | \mathbf{T}_{\beta^{1}})}{p(D | \mathbf{T}_{\beta})} \geq \frac{p(\mathbf{T_{\beta}})}{p(\mathbf{T_{\beta^{1}}})} \Bigg] $$</p>
 
@@ -187,20 +185,48 @@ l(T_{\beta^{1}} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta^{1}} , T_{\beta^{1}})p
 
 <h3 id="optimising-success-and-and-failure-rates">Optimising Success and and Failure Rates</h3>
 
-<p>In the binary case we can compare two hypotheses directly while aiming to maximise some measure of accuracy with a high probability. This requires that we express our decision rule as some selective mapping over our theories in light of the data.</p>
+<p>In the binary classification case we can compare two hypotheses directly while aiming to maximise some measure of accuracy with a high probability. This requires that we express our decision rule as some selective mapping over our data points in light of the theories.</p>
 
-<p>$$ \hat{\mathbf{T}}: { \mathbf{T_{\beta}}, \mathbf{T_{\beta^{1}}} } \times D  \mapsto { 0, 1 } $$</p>
+<p>$$ \hat{\mathbf{d}}: { \mathbf{T_{\beta}}, \mathbf{T_{\beta^{1}}} } \times D  \mapsto { False, True } $$</p>
 
 <p>With this set up the Neyman Pearson lemma states that any attempt to optimise our rule so that we maximise the True positive rate (TPR) while we minimise our False positive rate (FPR) subject to a constraint is equivalent to a likelihood ratio test.</p>
 
-<p>$$ \text{ maximise TPR: } p(\hat{\mathbf{T}} \text{ is True} | \mathbf{T_\beta}) $$
-$$ \text{ subject to FPR: } p(\hat{\mathbf{T}} \text{ is True} | \mathbf{T_\beta^{1}}) \leq \alpha $$</p>
+<p>$$ \text{ maximise TPR: } p(\hat{\mathbf{d}} \text{ is True} | \mathbf{T_\beta}) $$
+$$ \text{ subject to FPR: } p(\hat{\mathbf{d}} \text{ is True} | \mathbf{T_\beta^{1}}) \leq \alpha $$</p>
 
-<p>This follows because the optimisation task does not require specific information about the prior probabilities. So we can construct a loss function such that the decision rule is equivalent to a simple likelihood ratio test i.e. that the product of ratio of the priors and our constructed loss function collapses.</p>
+<p>This follows because the optimisation task does not require specific information about the prior probabilities. The TPR and FPR terms likelihood terms, so we can construct a loss function such that the decision rule is equivalent to a simple likelihood ratio test.</p>
 
 <p>Lemma 1. <strong>Neyman-Pearson Lemma</strong> <em>The optimal probabilistic decision rule that maximizes TPR with an upper bound on FPR is a deterministic likelihood ratio test.</em></p>
 
-<p>The proof is short and elaborated in <em>Patterns, Predictions and Actions</em>, but the key point is that a likelihood ratio test can be constructed to mirror this optimisation constraint with appropriate modifications to our priors over both theories. So, in practice, optimisation amounts to the modification of these priors. Our priors are adjusted as hyper-parameters as we tune them to achieve optimal classification performance and generalisability.</p>
+<p>The proof is short and elaborated in <em>Patterns, Predictions and Actions</em>, but the key point is that a likelihood ratio test can be constructed to mirror this optimisation constraint with appropriate modifications to our priors over both theories.</p>
+
+<div class="proof" text='Neyman-Pearson'>
+Let $R$ be a decision rule such that 
+
+$$ \Bigg[  \frac{p( \hat{\mathbf{d}} | \mathbf{T}_{\beta^{1}})}{p(\hat{\mathbf{d}} | \mathbf{T}_{\beta})} \geq \eta \Bigg] \text{ where FPR = } \alpha $$ Then let $\tau$ be the TPR of R. Keeping the likelihood terms untouched we're free to manipulate the priors so that 
+
+$$ \frac{p(\mathbf{T_{\beta}})}{p(\mathbf{T_{\beta^{1}}})} = \frac{1}{1 + \eta} / \frac{\eta}{1 + \eta} = \frac{1+\eta}{(1+\eta)\eta} = \eta$$ 
+
+which is just the likelihood ratio test MAP rule above. Then let $tpr$ and $fpr$ be the true postive rate and false postive rate of an alternative rule $R^{1}$ with $fpr \leq \alpha$ implying  $ p(\mathbf{T}_{\beta}) fpr \leq  p(\mathbf{T}_{\beta}) \alpha$. Adding to both sides:
+
+$$ (1) \text{    } p(\mathbf{T}_{\beta}) fpr + p(\mathbf{T}_{\beta^{1}})(1- tpr) \leq p(\mathbf{T}_{\beta}) \alpha  +  p(\mathbf{T}_{\beta^{1}})(1- tpr)  $$
+
+Assume $fpr < \alpha$ then unpacking a bit we see by complementarity that:
+
+$$ \frac{fp}{neg}  <  \frac{FP}{neg} \text{ and since } (1-tpr) = \frac{fn}{pos} , (1-\tau) = \frac{FN}{pos} \text{ implies } (1-\tau) < (1 - tpr) $$
+
+$$ \Rightarrow  (2) \text{   } p(\mathbf{T}_{\beta}) \alpha  +  p(\mathbf{T}_{\beta^{1}})(1- \tau) \leq p(\mathbf{T}_{\beta})fpr + p(\mathbf{T}_{\beta^{1}})(1- tpr) $$
+
+Alternatively $fpr = \alpha$ and (2) folllows quickly. In either case (1) & (2) imply: 
+
+$$ (3) p(\mathbf{T}_{\beta}) \alpha  +  p(\mathbf{T}_{\beta^{1}})(1- \tau) \leq \text{    } p(\mathbf{T}_{\beta}) fpr + p(\mathbf{T}_{\beta^{1}})(1- tpr) \leq p(\mathbf{T}_{\beta}) \alpha  +  p(\mathbf{T}_{\beta^{1}})(1- tpr)  $$
+
+which implies that $tpr \leq \tau$ in all cases.
+
+Which is enough to complete the proof since $R^{1}$ was arbitrary, we have shown that $R$ maximises TPR  with a fixed FPR.
+</div>
+
+<p>So, in practice, optimisation amounts to the modification of these priors. Our priors are adjusted as hyper-parameters as we tune them to achieve optimal classification performance and generalisability.</p>
 
 <h2 id="example-expected-loss-curves">Example: Expected Loss Curves</h2>
 

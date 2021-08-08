@@ -11,13 +11,13 @@
 <meta name="twitter:site" content="@forde_nathaniel">
 <meta name="twitter:creator" content="@forde_nathaniel">
 <meta name="twitter:title" content="Bayesian Decisions &amp; Model Comparison ">
-<meta name="twitter:description" content="Most days we face an infinite horizon of future decisions without being overwhelmed. They are all layered under levels uncertainty. A sequence of such decisions can compound, or reduce that certainty. But we tend to focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one.">
+<meta name="twitter:description" content="Most days we face an infinite horizon of future decisions without being overwhelmed. A sequence of such decisions can compound, or reduce that certainty. But we tend to focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us, or gets collapsed into a cul de sac.">
 <meta name="twitter:image" content="https://nathanielf.github.io/img/2021-06-01-Bayesian-Decisions/duel.jpeg">
 
 <meta property="og:url" content="/publication/bayes_decision/" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Bayesian Decisions &amp; Model Comparison " />
-<meta property="og:description" content="Most days we face an infinite horizon of future decisions without being overwhelmed. They are all layered under levels uncertainty. A sequence of such decisions can compound, or reduce that certainty. But we tend to focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one." />
+<meta property="og:description" content="Most days we face an infinite horizon of future decisions without being overwhelmed. A sequence of such decisions can compound, or reduce that certainty. But we tend to focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us, or gets collapsed into a cul de sac." />
 <meta property="og:image" content="https://nathanielf.github.io/img/2021-06-01-Bayesian-Decisions/duel.jpeg" />
 
   <title>Bayesian Decisions &amp; Model Comparison </title>
@@ -125,7 +125,9 @@ ga('send', 'pageview');
         <p>
           
 
-<p>Most days we face an infinite horizon of future decisions without being overwhelmed. They are all layered under levels uncertainty. A sequence of such decisions can compound, or reduce that certainty. But we tend to focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us, or gets collapsed into a <em>cul de sac</em>. We weigh the options differently according to our needs and desires and pursue strategies to maximise our goals. Famously, Leonard J. Savage showed that the optimal weights on each desire are proportional to their probabilities if we seek to maximise our expected gains. In particular, he showed that if we reason with probabilities our outcomes will the dominate all other methods for mitigating uncertainty. This alone should serve to motivate probabilisitic modelling, but we want to show concretely how this translates to making decisions under uncertainty. We&rsquo;ll first show how such considerations underwrite a slew of familiar decision rules, and how these methods can be applied to problem of reserving enough premium to cover costs accruing against insurance contracts. In both cases a concern for accuracy is implict.</p>
+<p>Most days we face an infinite horizon of future decisions without being overwhelmed. A sequence of such decisions can compound, or reduce that certainty. But we tend to focus on the exaggerated drama of the momentous choice. Even when change is gradual and cumulative, history tells of a tale of pivot points, epic junctures and transformative events. Two paths diverge in a woods and we choose one. An array of possibilities suddenly open before us, or gets collapsed into a <em>cul de sac</em>. We weigh the options differently according to our needs and desires and pursue strategies to maximise our goals.</p>
+
+<p>Incorporating uncertainty Leonard J. Savage famously showed that the optimal weights on each desire are proportional to their probabilities if we seek to maximise our expected gains. In particular, he showed that if we reason with probabilities our outcomes will the dominate all other methods for mitigating uncertainty. This alone should serve to motivate probabilisitic modelling, but we want to show concretely how this translates to making decisions under uncertainty. We&rsquo;ll first show how such considerations underwrite a slew of familiar decision rules, and then how these methods can be applied to problem of reserving enough premium to cover costs accruing against insurance contracts. In both cases a concern for accuracy is implict.</p>
 
 <h3 id="choice-comparison-and-probability">Choice, Comparison and Probability</h3>
 
@@ -171,7 +173,9 @@ l(T_{\beta^{1}} , T_{\beta})p(T_{\beta} | D) + l(T_{\beta^{1}} , T_{\beta^{1}})p
 
 <p>which cancels to become:</p>
 
-<p>$$ \frac{p(D | T_{\beta^{1}})p(T_{\beta^{1}})}{p(D | T_{\beta})p(T_{\beta})} \geq \frac{(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} \Rightarrow \frac{p(D | T_{\beta^{1}})}{p(D | T_{\beta})} \geq \frac{p(T_{\beta})(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{p(T_{\beta^{1}})(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} $$</p>
+<p>$$ \frac{p(D | T_{\beta^{1}})p(T_{\beta^{1}})}{p(D | T_{\beta})p(T_{\beta})} \geq \frac{(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} $$</p>
+
+<p>$$ \Rightarrow \frac{p(D | T_{\beta^{1}})}{p(D | T_{\beta})} \geq \frac{p(T_{\beta})(l(T_{\beta^{1}} , T_{\beta}) -  l(T_{\beta} , T_{\beta}))}{p(T_{\beta^{1}})(l(T_{\beta} , T_{\beta^{1}}) - l(T_{\beta^{1}} , T_{\beta^{1}}))} $$</p>
 
 <p>which shows how each expected loss calculation between two theories reduces to a likelihood ratio test, where we have a specific threshold for accepted preference. The preferred theory dominates the other just when the ratio of their likelihood exceeds that threshold. Therefore our estimate of the correct theory $\hat{\mathbf{T}}$ is characterised by this comparison.</p>
 

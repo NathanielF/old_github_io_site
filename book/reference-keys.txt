@@ -4,7 +4,7 @@ thm:unnamed-chunk-16
 preface
 expected-utility-a-primer
 average-man
-and-expected-value
+and-rational-man
 probability-dual-aspects
 small-worlds-and-statistical-inference
 modeling-improper-assumptions-and-skewed-expectations

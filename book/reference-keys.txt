@@ -2,7 +2,7 @@ thm:unnamed-chunk-14
 def:unnamed-chunk-15
 thm:unnamed-chunk-16
 preface
-expected-utility-a-primer
+decisions-and-expected-utility
 average-man-and-rational-action
 probability-dual-aspects
 small-worlds-and-statistical-inference

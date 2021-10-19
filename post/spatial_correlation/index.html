@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathaniel Forde's Homepage">
+  <meta name="author" content="Nathaniel Forde">
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@forde_nathaniel">
+<meta name="twitter:creator" content="@forde_nathaniel">
+<meta name="twitter:title" content="Gaussian Processes and Inferred Networks">
+<meta name="twitter:description" content="Of the varied ways in which you add to the world, you might imagine a modest influence over your social network. Of all those connections their cumulative impact is likely less than imagined even when crudely measured. Maybe you&rsquo;re a new parent hopeful to leave a positive impression on your children, but conscious of friends ignored. The central nodes our social networks change, the periphery may suffer neglect or fall out of the network altogether - some individuals are sacrificed, others deliberately culled.">
+<meta name="twitter:image" content="https://nathanielf.github.io/img/2021-09-01-Spatial-Correlation/islands.jpeg">
+
+<meta property="og:url" content="/post/spatial_correlation/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Gaussian Processes and Inferred Networks" />
+<meta property="og:description" content="Of the varied ways in which you add to the world, you might imagine a modest influence over your social network. Of all those connections their cumulative impact is likely less than imagined even when crudely measured. Maybe you&rsquo;re a new parent hopeful to leave a positive impression on your children, but conscious of friends ignored. The central nodes our social networks change, the periphery may suffer neglect or fall out of the network altogether - some individuals are sacrificed, others deliberately culled." />
+<meta property="og:image" content="https://nathanielf.github.io/img/2021-09-01-Spatial-Correlation/islands.jpeg" />
+
+  <title>Gaussian Processes and Inferred Networks</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+  
+  
+  
+  
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-188850615-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188850615-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-188850615-1');
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://nathanielf.github.io/">Examined Algorithms</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/pdf/Nathaniel%20Forde%20Current.pdf">
+            <i class="fa fa-briefcase"></i>&nbsp;
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="/post/">
+            <i class="fa fa-code"></i>&nbsp;
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/publication/">
+            <i class="fa fa-files-o"></i>&nbsp;
+            Research
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container blog-post">
+
+  
+  <div class="row">
+    <div class="col-md-3 hidden-sm hidden-xs text-right">
+      <h1 class="post-title">&nbsp;</h1>
+      <em>Jun 22, 2021</em><br />
+      
+      
+      
+      <span class="post-tags">
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/probability">probability</a>
+         &bull;   
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/information">information</a>
+         &bull;  
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/optimisation">optimisation</a>
+         &bull;  
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/spatial-correlation">spatial correlation</a>
+        
+        
+      </span>
+      
+      
+      </p>
+    </div>
+
+    <div class="col-md-7">
+      <h1 class="post-title">Gaussian Processes and Inferred Networks</h1>
+      <div class="hidden-md hidden-lg post-metadata">
+        <div>
+          <em>Jun 22, 2021</em>
+        </div>
+        
+        
+        
+        <p class="post-tags">
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/probability">probability</a>
+           &bull;   
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/information">information</a>
+           &bull;  
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/optimisation">optimisation</a>
+           &bull;  
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/spatial-correlation">spatial correlation</a>
+          
+          
+        </p>
+        
+        
+      </div>
+
+      <div class="post-body">
+        
+
+<p>Of the varied ways in which you add to the world, you might imagine a modest influence over your social network. Of all those connections their cumulative impact is likely less than imagined even when crudely measured. Maybe you&rsquo;re a new parent hopeful to leave a positive impression on your children, but conscious of friends ignored. The central nodes our social networks change, the periphery may suffer neglect or fall out of the network altogether - some individuals are sacrificed, others deliberately culled. Your influence may wax and wane, but you aspire to a level of appropriate influence on family and friends. Your aspirations change over time and this has to corressponding effect of shrinking or shifting your sphere of influence.</p>
+
+<p>These dynamics are so familiar that they&rsquo;ve become cliche tradition. But despite the tired anecdotes of age and degradation, there is an interesting question as to how you might truly measure the evolution of friendships over time. This question can be extended more to broadly to how measure correlations of any measure across a cluster of related individuals. We&rsquo;ll take up a nicely concrete example of the general phenomena modelling spatial correlation and the transmission of technology across an archipelago. This model has some general characteristics which translate well to discussion of changing social dynamics under the pressures of aspiration. And the process will highlight some of features we need to account for when predicting the transmission of information or influence in the production of tools.</p>
+
+<h1 id="tool-usage-and-population-size">Tool usage and Population Size</h1>
+
+<p>The example looks at the discovery of historic tools across a number of islands in the pacific and tries to draw out the impact of population on the proliferation of those tools. At first glance there seems to be a straightforward relationship between the number of tools discovered and the relative size of the populations. But we&rsquo;re also interested in how the discovery rates between cultures can be measured.</p>
+
+<p><img src="../../img/2021-09-01-Spatial-Correlation/logpop_tools.png" alt="Logpop Tools" /></p>
+
+<p>Before coming to these details we first want to crudely validate the hypothesis that population size and contact with others does influence tool creation. We can see here how there seems to be a direct linear relationship between the tool counts and the log of the population suggesting innovation is achieved at a point of critical mass. Similarly there is a clear distinction between the tool counts achieved based on contact rates.</p>
+
+<p><img src="../../img/2021-09-01-Spatial-Correlation/tool_count_contact.png" alt="drawing" height="300"/></p>
+
+<p>With this in mind, we could choose to model this relationship as a simple poisson regression, but even if this solved a prediction problem it doesn&rsquo;t help us answer the inference question. Plotting the residuals from the model estimated with statsmodels we find a better fit to the data when we include the contact rate information. But this is a kind of crude observation. Yes, contact rates matter but what can we say about the strength of these relationships.</p>
+
+<h1 id="spatial-correlation-and-covariance">Spatial Correlation and Covariance</h1>
+
+<p>So we have a reasonable theory that greater population and increased interaction between neighbouring populations is likely to increase tool creation. We want to know how the individual islands directly influenced the tool prediction on their neighbouring islands. To measure this influence we&rsquo;ll look at geographic distance to determine if and how the proximity of islands shapes the relative proliferation of tools in the historic record. This is the crucial set of measurements. It is our proxy for a series of less quantifiable cross-cultural influences. We know Tonga has the largest population but we don&rsquo;t know how their influence extends across the network. We don&rsquo;t know, for example, if technological innovation stems from the population centres such as Tonga or was just most pronounced there in the historic record?</p>
+
+<p><img src="../../img/2021-09-01-Spatial-Correlation/distance_plot.png" alt="Distance Plot" /></p>
+
+<p>As before we want to predict tool use, but now we wish to allow that the tool use on the neighbouring islands is informed by their relative distance from one another. Put another way we might say that the covariance structure is a function of distance. This suggests a model like the following:</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> poisson_GP_model:
+    <span style="color: #0099FF; font-style: italic">## Priors for the covariance matrix</span>
+    etasq <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfCauchy(<span style="color: #CC3300">&#39;etasq&#39;</span>, <span style="color: #FF6600">1</span>)
+    rhosq <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfCauchy(<span style="color: #CC3300">&#39;rhosq&#39;</span>, <span style="color: #FF6600">1</span>)
+    
+    <span style="color: #0099FF; font-style: italic">## Gaussian Process to extract a varying intercept model for each society</span>
+    <span style="color: #0099FF; font-style: italic">## We fit a covariance matrix against the squared distance between islands</span>
+    <span style="color: #0099FF; font-style: italic">## for (a) mathematical convenience and (b) the quickly decreasing influence</span>
+    <span style="color: #0099FF; font-style: italic">## represented by the parabola like shape of the square distance. </span>
+    Kij <span style="color: #555555">=</span> etasq<span style="color: #555555">*</span>(tt<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>rhosq<span style="color: #555555">*</span>Dmatsq)<span style="color: #555555">+</span>np<span style="color: #555555">.</span>diag([<span style="color: #555555">.</span><span style="color: #FF6600">01</span>]<span style="color: #555555">*</span>Nsociety))
+
+    <span style="color: #0099FF; font-style: italic">## The covariance matrix is used to model a multivariate normal distribution distribution</span>
+    <span style="color: #0099FF; font-style: italic">## resulting in an estimate for each society</span>
+    g <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MvNormal(<span style="color: #CC3300">&#39;g&#39;</span>, mu<span style="color: #555555">=</span>np<span style="color: #555555">.</span>zeros(Nsociety), cov<span style="color: #555555">=</span>Kij, shape<span style="color: #555555">=</span>Nsociety)
+    
+    <span style="color: #0099FF; font-style: italic">## The global priors for prediction model</span>
+    a <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;a&#39;</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">10</span>)
+    bp <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;bp&#39;</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>)
+    <span style="color: #0099FF; font-style: italic">## prediction model with a varying intercept derived from MvNormal</span>
+    eq<span style="color: #555555">=</span> pm<span style="color: #555555">.</span>math<span style="color: #555555">.</span>exp(a <span style="color: #555555">+</span> g[df[<span style="color: #CC3300">&#39;society_idx&#39;</span>]<span style="color: #555555">.</span>values] <span style="color: #555555">+</span> bp<span style="color: #555555">*</span>df[<span style="color: #CC3300">&#39;logpop&#39;</span>])
+
+    <span style="color: #0099FF; font-style: italic">## The Poisson likelihood</span>
+    obs <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Poisson(<span style="color: #CC3300">&#39;totalTools&#39;</span>, eq, observed<span style="color: #555555">=</span>df[<span style="color: #CC3300">&#39;total_tools&#39;</span>])
+
+    idata <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample(<span style="color: #FF6600">1000</span>, tune<span style="color: #555555">=</span><span style="color: #FF6600">1000</span>, return_inferencedata<span style="color: #555555">=</span><span style="color: #336666">True</span>)
+</pre></div>
+
+<p>Which sees is a hierarchical model of this format which embeds uncertainty in the estimation of the covariance matrix by using the hierarchical priors etasq and rhosq.</p>
+
+<p><img src="../../img/2021-09-01-Spatial-Correlation/model_structure.svg" alt="Distance Plot" /></p>
+
+<p>The prediction of tools count is based on a poisson distribution with a mean expressed as a kind of fixed effects model with varying intercepts for each island.</p>
+
+<p>$$ totalTools \sim \mathbf{Poisson}(exp((a + g_{i}) + bp*Logpop)) $$</p>
+
+<p>where $g_{i}$ is an island specific estimate of tool production informed the distance to between neighbouring islands. So when we fit this model it returns estimated posterior probability distributions for all the priors in the model, including the hierarchical parameters for the covariance matrix K. We can therefore &ldquo;reconstruct&rdquo; the covariance matrix that is suggested by the observed data.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>_, ax <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplots(<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">8</span>, <span style="color: #FF6600">5</span>))
+<span style="color: #336666">xrange</span> <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">10</span>, <span style="color: #FF6600">200</span>)
+post_etasq <span style="color: #555555">=</span> idata<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;etasq&#39;</span>]<span style="color: #555555">.</span>to_dataframe()
+post_rhosq <span style="color: #555555">=</span> idata<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;rhosq&#39;</span>]<span style="color: #555555">.</span>to_dataframe()
+
+<span style="color: #0099FF; font-style: italic">## compute posterior median covariance among societies</span>
+<span style="color: #0099FF; font-style: italic">## we compute the median rather than the mean because of the skew in the distribution</span>
+<span style="color: #0099FF; font-style: italic">## makes the median a better measure of central tendency.</span>
+Kij_post <span style="color: #555555">=</span> np<span style="color: #555555">.</span>median(post_etasq) <span style="color: #555555">*</span> (np<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>np<span style="color: #555555">.</span>median(post_rhosq) <span style="color: #555555">*</span> Dmatsq) <span style="color: #555555">+</span> np<span style="color: #555555">.</span>diag([<span style="color: #555555">.</span><span style="color: #FF6600">01</span>] <span style="color: #555555">*</span> Nsociety))
+sigma_post <span style="color: #555555">=</span> np<span style="color: #555555">.</span>sqrt(np<span style="color: #555555">.</span>diag(Kij_post))
+Rho <span style="color: #555555">=</span> np<span style="color: #555555">.</span>diag(sigma_post<span style="color: #555555">**-</span><span style="color: #FF6600">1</span>)<span style="color: #555555">.</span>dot(Kij_post<span style="color: #555555">.</span>dot(np<span style="color: #555555">.</span>diag(sigma_post<span style="color: #555555">**-</span><span style="color: #FF6600">1</span>)))
+Rho <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(Rho, df[<span style="color: #CC3300">&#39;culture&#39;</span>], columns<span style="color: #555555">=</span>df[<span style="color: #CC3300">&#39;culture&#39;</span>])
+
+<span style="color: #0099FF; font-style: italic">## Plot Point Estimates</span>
+ax<span style="color: #555555">.</span>plot(<span style="color: #336666">xrange</span>, np<span style="color: #555555">.</span>median(post_etasq) <span style="color: #555555">*</span> np<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>np<span style="color: #555555">.</span>median(post_rhosq) <span style="color: #555555">*</span> <span style="color: #336666">xrange</span><span style="color: #555555">**</span><span style="color: #FF6600">2</span>), <span style="color: #CC3300">&#39;k&#39;</span>, legend<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Median&#39;</span>)
+<span style="color: #0099FF; font-style: italic">## Plot Draws from Posterior</span>
+ax<span style="color: #555555">.</span>plot(<span style="color: #336666">xrange</span>, (post_etasq<span style="color: #555555">.</span>sample(<span style="color: #336666">len</span>(<span style="color: #336666">xrange</span>))<span style="color: #555555">.</span>values <span style="color: #555555">*</span> np<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>post_rhosq<span style="color: #555555">.</span>sample(<span style="color: #336666">len</span>(<span style="color: #336666">xrange</span>))<span style="color: #555555">.</span>values <span style="color: #555555">*</span> <span style="color: #336666">xrange</span><span style="color: #555555">**</span><span style="color: #FF6600">2</span>))<span style="color: #555555">.</span>T,
+        <span style="color: #CC3300">&#39;k&#39;</span>, alpha<span style="color: #555555">=.</span><span style="color: #FF6600">1</span>)
+
+ax<span style="color: #555555">.</span>set_ylim(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>)
+ax<span style="color: #555555">.</span>set_xlabel(<span style="color: #CC3300">&#39;distance&#39;</span>)
+ax<span style="color: #555555">.</span>set_ylabel(<span style="color: #CC3300">&#39;covariance&#39;</span>)
+ax<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">r&#39; $\eta^2 exp(\rho^2Distance^2)$&#39;</span>)
+plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&quot;Draws from Posterior Distribution&quot;</span>, y<span style="color: #555555">=</span><span style="color: #FF6600">1.05</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">10</span>)
+</pre></div>
+
+<p>Which allows us to recover the steeply degrading slope of influence.</p>
+
+<p><img src="../../img/2021-09-01-Spatial-Correlation/draws_from_posterior.png" alt="Distance Plot" /></p>
+
+<p>and establish the probable correlation structure between the islands.</p>
+
+<p><img src="../../img/2021-09-01-Spatial-Correlation/inferred_corr.png" alt="Distance Plot" /></p>
+
+<p>These estimates are plausible as they track well with the geographic details. In particular we can
+see how the distance of Hawaii proves a fairly insurmountable barrier preventing strong correlation. Conversely, we see a strong relationship between the small cluster of islands: Malekula,Tikopia and Santa Cruz. We can further extract the expected growth models for each island.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>a <span style="color: #555555">=</span> idata<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;a&#39;</span>]<span style="color: #555555">.</span>to_dataframe()
+g <span style="color: #555555">=</span> idata<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;g&#39;</span>]<span style="color: #555555">.</span>to_dataframe()
+g <span style="color: #555555">=</span> g<span style="color: #555555">.</span>reset_index()<span style="color: #555555">.</span>pivot([<span style="color: #CC3300">&#39;chain&#39;</span>, <span style="color: #CC3300">&#39;draw&#39;</span>], <span style="color: #CC3300">&#39;g_dim_0&#39;</span>, <span style="color: #CC3300">&#39;g&#39;</span>)
+b <span style="color: #555555">=</span> idata<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;bp&#39;</span>]<span style="color: #555555">.</span>to_dataframe()
+<span style="color: #336666">xrange</span> <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">15</span>, <span style="color: #FF6600">100</span>)
+expected <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(g<span style="color: #555555">.</span>mean(), columns<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;island_intercept&#39;</span>])<span style="color: #555555">.</span>reset_index(drop<span style="color: #555555">=</span><span style="color: #336666">True</span>) 
+expected[<span style="color: #CC3300">&#39;global_intercept&#39;</span>] <span style="color: #555555">=</span> a<span style="color: #555555">.</span>mean()[<span style="color: #FF6600">0</span>]
+expected[<span style="color: #CC3300">&#39;global_beta&#39;</span>] <span style="color: #555555">=</span> b<span style="color: #555555">.</span>mean()[<span style="color: #FF6600">0</span>]
+expected[<span style="color: #CC3300">&#39;island&#39;</span>] <span style="color: #555555">=</span> df[<span style="color: #CC3300">&#39;culture&#39;</span>]
+<span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #336666">len</span>(expected)):
+    y  <span style="color: #555555">=</span> (expected<span style="color: #555555">.</span>iloc[i][<span style="color: #CC3300">&#39;global_intercept&#39;</span>] <span style="color: #555555">+</span> expected<span style="color: #555555">.</span>iloc[i][<span style="color: #CC3300">&#39;island_intercept&#39;</span>]) <span style="color: #555555">+</span> expected<span style="color: #555555">.</span>iloc[i][<span style="color: #CC3300">&#39;global_beta&#39;</span>]<span style="color: #555555">*</span><span style="color: #336666">xrange</span>
+    plt<span style="color: #555555">.</span>plot(<span style="color: #336666">xrange</span>, np<span style="color: #555555">.</span>exp(y), label<span style="color: #555555">=</span>expected<span style="color: #555555">.</span>iloc[i][<span style="color: #CC3300">&#39;island&#39;</span>]) 
+plt<span style="color: #555555">.</span>title(<span style="color: #CC3300">&quot;Expected Tool Counts against LogPopulation&quot;</span>)
+plt<span style="color: #555555">.</span>xlabel(<span style="color: #CC3300">&quot;Log-population&quot;</span>)
+plt<span style="color: #555555">.</span>ylabel(<span style="color: #CC3300">r&#39;$exp(\alpha + g_{i} + \beta LogPop)$&#39;</span>)
+plt<span style="color: #555555">.</span>legend()
+</pre></div>
+
+<p><img src="../../img/2021-09-01-Spatial-Correlation/expected_tool_count.png" alt="Expected" /></p>
+
+<p>Which suggests that even though Hawaii has the largest population it suffers from lesser exposures to foreign influence and slower rate of tool innovation than Yap which is positively influenced by the existence of its neigbours.</p>
+
+<h1 id="projects-aspiration-and-inferred-influence">Projects, Aspiration and inferred Influence</h1>
+
+<p>Your role in a network can change gradually or dramatically. In either case it may be hard to know how you will feel about those changes. There is a school of thought that argues certain varieties of event are so transformative (e.g. parenthood, near-death events) that they are impossible to predict how you feel after the event occurs. The notion rests on the idea that individual decisions are weighed against the probability of the outcome and the attendant rewards for each decision, but in the scenario of transformative events we can&rsquo;t even begin to estimate our subjective utility in the future. An expectant parent will not be able to predict how they will feel as a new parent. Averages from other parents will not capture how you will feel or how your priorities and goals will change. The example above shows how we can infer the latent structure of a social network from observable facts about the output of the group. The hypothesis of a transformative event could be profitably investigated by tracking the evolution of these inferred social network over a number of distinct epochs. Whether these events generate gradual or dramatic change would be quickly reflected in the influence and interaction with their peers. Deliberate cultivation of particular peer groups for a work project or personal goal will be captured just so long as we can measure the output. The focus of a new parent or the introduction of a new child into the peer network may alter the relations throughout the network. These kind of models offer a plausible way to express the inferred network effects.</p>
+
+
+        &nbsp;
+      </div>
+
+      <div>
+        <div class="post-back-link">
+    <a href="javascript: history.back()">
+        <i class="fa fa-arrow-left"></i> 
+        Back
+    </a>
+</div>
+      </div>
+      <script src="https://utteranc.es/client.js" repo="NathanielF/NathanielF.github.io" issue-term="title" label="comments 💬" theme="github-light" crossorigin="anonymous" async>
+      </script>
+    </div>
+  </div>
+  
+
+  <footer style="padding-top: 1em;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/prism.js"></script>
+
+</body>
+
+</html>

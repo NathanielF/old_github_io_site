@@ -20,8 +20,9 @@ bolkers-representation-theorem
 from-neutrality-to-desire
 measures-of-latent-subjective-utility
 maximum-likelihood-estimation-and-multiple-choice
-profiling-segmentation-and-expected-value
 tbd---stationarity-and-induction
+profiling-segmentation-and-expected-value
 tbd---causal-inference-and-counterfactuals
 tbd---wisdom-of-the-crowds
 tbd---ethical-considerations
+tbd---similarity-stationarity-and-induction

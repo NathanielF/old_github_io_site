@@ -106,7 +106,7 @@
 % title / author / date
 \title{Examining Algorithms}
 \author{Nathaniel Forde}
-\date{2021-08-26}
+\date{2021-11-16}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -146,13 +146,13 @@
 \hypertarget{preface}{%
 \chapter{Preface}\label{preface}}
 
-A data science project is simultaneously an effort at translation and persuasion. A mathematical expression of a problem that is a plausible approximation of the original and renders it amenable to some kind of optimisation. Invariably trade-offs emerge between the goals of having (i) an interpretable model of the problem and (ii) the objective to maximising performance on some key metric. More subtle though is the issue of managing expectations. If the received wisdom implies the contrary conclusion to the one recommended by your model then each project becomes an argument. Marshalling your premises is not a mere exercise of mathematical proof. Each step to be justified and explained, parsed out and summarised. This book is written in the conviction that understanding the philosophical foundations of data science can help the data scientist build better models and that the programming of these algorithms clarify the abstractions of philosophical theory. But more importantly each of the algorithms require specific strategies of justification and limited range of contexts where they are warranted. Algorithms should not be applied blindly without consideration, but deployed in full knowledge that the model is apt to describe the data-generating process and sufficient to accound for the variation in the data. Compelling data science implies a narrative burden and explanatory debt that must be paid.
+A data science project is simultaneously an effort at translation and persuasion. A problem that is a plausibly expressed in mathematics amenable to some kind of optimization. Trade-offs emerge between the goals of having a transparent and tractable model of the problem and the objective of maximizing performance on some key metric. Subtle issues of sales pitch, statistical translation and the management of expectations come with each project. Whether you're predicting customer churn or estimating the impact of policy changes, if the received wisdom implies the contrary conclusion to the one recommended by your model then each project becomes an argument. Marshaling your premises is not a mere exercise of mathematical proof. Each step to be justified and explained, parsed out and summarised. This book is written in the conviction that understanding the philosophical foundations of data science can help the data scientist build better models and that the programming of these algorithms clarify the abstractions of philosophical theory. But more importantly each of the algorithms require specific strategies of justification and limited range of contexts where they are warranted. Algorithms should not be applied blindly without consideration, but deployed in full knowledge that the model is apt to describe the data-generating process and sufficient to accound for the variation in the data. Compelling data science implies a narrative burden and explanatory debt that must be paid.
 
-My own path into data science was indirect through philosophy, logic and, briefly, software engineering. Buoyed by various online courses and resources, learning from blogs and tweet-threads along the way I thought to write this book in the same spirit of sharing. During life and engineering technical debt accrues. Abstractions layer over one another building complexity. Similarly the accretions of philosophical assumptions crust over predictive algorithms and other patterns of reasoning. The choices made in model design, feature selection and measurement all embed the kinds of presuppositions about the data-generating process that merit doubt and rethinking. More subtle than this though is the intellectual debts that shape even the available choices of models, methodologies and the manner in which we frame a problem and explain our solution others. I believe that a philosophical scepticism is one of the best solutions to dissolve these assumption and layers of presupposition and bring clarity to complexity.
+My own path into data science was indirect through philosophy, logic and, briefly, software engineering. Buoyed by various online courses and resources, learning from blogs and tweet-threads along the way, I thought to write this book in the same spirit of sharing. During life and engineering debt (technical and otherwise) endlessly accrue. This book as an attempt a recompense, in the hope that it might help others unpick some of the thorny philosophical issues underlying common algorithms. Just as software abstractions layer over one another building complexity. The accretions of philosophical assumptions crust over predictive algorithms and other patterns of reasoning. The choices made in model design, feature selection and measurement all embed the kinds of presuppositions about the data-generating process that merit doubt and rethinking. More subtle than this though is the intellectual debts that shape even the available choices of models, methodologies and the manner in which we frame a problem and explain our solution others. I believe that a kind philosophical scepticism is one of the best solutions to dissolve these layers of presupposition and bring clarity to complexity.
 
-Broadly speaking there is a common thread of reasonable-inference that weaves through both disciplines. The subjects share more substantive commitments too. Data science is driven by the need for decisions. The focus on decision motivates attention to evidence, knowledge and warranted belief weighed against the costs and subjective utility of each choice. These calculations are often implicitly expressed by means of a loss-function over an optimisation problem. But more rareified measures of model fit such as AIC, BIC and cross-validation feedback into our understanding of evidence. Underwriting our confidence in our beliefs is the reliability of the methods and assumptions in our models. For instance, the stationarity assumption underlying some timeseries models is a practical constraint on Hume's problem of induction with ramifications for how to think about Nelson's Goodman's notion of projectible predicates. Experiments shed light of the particulars of causal relationships enabling the validation or refutation of the hypothetical connections just when the estimators of causal effect are unconfounded. These problems span the ranges of epistemology, metaphysics and value theory and measurement, before we even consider the ethics of deploying these algorithms at scale.
+Broadly speaking there is a common thread of reasonable-inference that weaves through both disciplines. The two subjects share this pretension to generality and more substantive commitments too. Data science is driven by the need for decisions. The focus on decision motivates attention to evidence, knowledge and warranted belief weighed against the costs and subjective utility of each choice. These calculations are often implicitly expressed by means of a loss-function over an optimization problem. But more rarefied measures of model fit such as AIC, BIC and cross-validation feedback into our understanding of evidence. Underwriting our confidence in our beliefs is the reliability of the methods and assumptions in our models. For instance, the stationarity assumption underlying some time-series models is a practical constraint on Hume's problem of induction with ramifications for how to think about Nelson's Goodman's notion of projectible predicates. Experiments shed light of the particulars of causal relationships enabling the validation or refutation of the hypothetical connections just when the estimators of causal effect are un-confounded. These problems span the ranges of epistemology, metaphysics and value theory and measurement, before we even consider the ethics of deploying these algorithms at scale.
 
-But philosophy is too broad a subject, with too deep a history to hope for comprehensive coverage. The aim of this book is more modest; to introduce and expand on some areas where there is an interesting intersection of fertile ideas and illustrate the feedback loop between philosophical assumptions, tests against data and the revision or stagnation of those models. It is then necessarily an opinionated coverage of these topics, slanted towards the techniques and technicalities important to applied work. Details I wish I had known about the uses and abuses of data science. Throughout I'll make the case that the examination of these algorithms merit your attention.
+But philosophy is too broad a subject, with too deep a history to hope for comprehensive coverage. The aim of this book is more modest; to introduce and expand on some areas where there is an interesting intersection of fertile ideas and illustrate the feedback loop between philosophical assumptions, tests against data and the revision or stagnation of those models. It is then necessarily an opinionated coverage of these topics, slanted towards the techniques and technicalities important to applied work. Details I wish I had known about the uses and abuses of statistics and data science. Throughout I'll make the case that the examination of these algorithms merit your attention.
 
 \hypertarget{decisions-and-expected-utility}{%
 \chapter{Decisions and Expected Utility}\label{decisions-and-expected-utility}}
@@ -197,7 +197,7 @@ Schizophrenics are involuntarily detained if a medical professional deems them t
 \hypertarget{probability-dual-aspects}{%
 \section{Probability: Dual Aspects}\label{probability-dual-aspects}}
 
-Probability emerged slowly and with dual aspects. On one tradition probability refers to the long run tendency of a random process, on another probability is construed as the degree of belief in an outcome. On the first (frequentist) interpretation a probability distribution has certain fixed theoretical characteristics: as in a uniform probability distribution of a fair coin where all outcomes are equally likely, or as with the normal distribution where most outcomes cluster symmetrically about a central average. On the second (Bayesian) reading the characteristics of the probability distribution are learned from the data. The controversy centers around the fact that it's unclear how a frequentist could ascribe probabilities to unique events. Without appeal to a large set of observations (or known theoretical distribution) the claim that an event appears frequently or infrequently is not well defined. Consequently, tabulations of probability appear inappropriate for claims of unique or rare events. In contrast the Bayesian is content to ascribe probabilities to any all partial beliefs no matter how specific. For the Bayesian, the probability calculus is a set of edicts about how to rationally manage and modulate your beliefs. So it's acceptable to have a probabilistic belief in rare cases so long as you update those probabilities with new data when available.
+Probability emerged slowly and with dual aspects. Two different approaches for dealing with uncertainty. On one tradition probability refers to the long run tendency of a random process can be read off the observed frequencies in large samples, on another probability is construed as the degree of belief in the range of available outcomes. The frequentist interpretation assumes a probability distribution has certain fixed theoretical characteristics: as in a binomial probability distribution of a fair coin where both outcomes are equally likely, or as with the normal distribution where most outcomes cluster symmetrically about a central average by assumption. On the Bayesian reading the characteristics of the probability distribution are learned from the data. The controversy centers around the fact that it's unclear how a frequentist could ascribe probabilities to unique events. Without appeal to a large set of observations (or known theoretical distribution) the claim that an event appears frequently or infrequently is not well defined. Consequently, tabulations of probability appear inappropriate for claims of unique or rare events. In contrast the Bayesian is content to ascribe probabilities to any all partial beliefs no matter how specific. For the Bayesian, the probability calculus is a set of edicts about how to rationally manage and modulate your beliefs. So it's acceptable to have a probabilistic belief in rare cases so long as you update those probabilities with new data when available.The tension comes from a quesiness about which attitude is appropriate when applied to real problems. The frequentist instinct is essentially conservative, reliant on large samples and assumed long-run stability to vouch-safe inference. The Bayesian perspective is more adventurous enabling inference when required even with limited empirical evidence.
 
 These two approaches are united by the Law of Large numbers which states that as the size of our sample increases our sample average will converge to the expected realization of the theoretical process.
 
@@ -215,7 +215,7 @@ In this graph we have fixed a exponential distribution with a mean of 4.5 and ca
 \NormalTok{N\_samples }\OperatorTok{=} \BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, sample\_size, }\DecValTok{100}\NormalTok{)}
 
 \ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{4}\NormalTok{):}
-\NormalTok{    samples }\OperatorTok{=}\NormalTok{ np.random.exponential(lambda\_, sample\_size)}
+\NormalTok{    samples }\OperatorTok{=}\NormalTok{ np.random.poisson(lambda\_, sample\_size)}
 \NormalTok{    partial\_average }\OperatorTok{=}\NormalTok{ [samples[:i].mean() }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ N\_samples]}
 \NormalTok{    plt.plot(N\_samples, partial\_average, lw}\OperatorTok{=}\FloatTok{1.5}\NormalTok{, label}\OperatorTok{=}\StringTok{"average \textbackslash{}}
 \StringTok{    of  $n$ samples; seq. }\SpecialCharTok{\%d}\StringTok{"} \OperatorTok{\%}\NormalTok{ k)}
@@ -275,7 +275,7 @@ A {[}small world{]} is\ldots{} completely satisfactory, only if it is actually a
 
 The danger of shrinking your world comes when you mistake the map for the territory and act on that delusion.
 
-Small worlds are machines for figuring out expected values of a statistical process. We shrink the parameter set to better measure the variance and flux throughout the system. For any hypothetical system there can be multiple plausible approximations of the underlying process which need to be assessed comparatively on their ``goodness'' of fit. We iterate through new and improved versions, each an attempt to make a conjectural connection between \(X, Y\) mathematically precise. But once built, they embed the errors and assumptions made in their design. McElreath dubs them Golems, primed and then loosed on the world, insensitive to subtlety and context they perform only as instructed. Consider how a basic regression model tries to predict an outcome \(Y\) as linear function of some observed features \(X\):
+Small worlds are machines for figuring out expected values of a statistical process. We shrink the parameter set to better measure the variance and flux throughout the system. For any hypothetical system there can be multiple plausible approximations of the underlying process which need to be assessed comparatively on their ``goodness'' of fit. We iterate through new and improved versions, each an attempt to make a conjectural connection between \(X, Y\) mathematically precise. But once built, they embed the errors and assumptions made in their design. Richard McElreath dubs them Golems, primed and then loosed on the world, insensitive to subtlety and context they perform only as instructed. Consider how a basic regression model tries to predict an outcome \(Y\) as linear function of some observed features \(X\):
 
 \[ Y = const + X\beta + \epsilon  \]
 
@@ -969,7 +969,7 @@ So we can use the observed facts of market demand to estimate \(\beta\) coeffici
 ``Observed data are assumed to be generated by the \emph{trial} of drawing an individual randomly from the population and recording his attributes, the set of alternatives available to him, and his actual choice\ldots{} The observed choice in a trial with attributes \(X\) and alternatives \(Alt = \{A.... j \}\) can be viewed as a drawing from a multinomial distribution with a selection probabilities \(p(demand_{j} = 1| X, Alt)\).'' - Quoted in \citep{McFaddenCondLogit}
 \end{quote}
 
-The revealed preference assumption says that we can predict the purchase if the utility of the good is positive.
+This is a pregnant statement, rich with potential implications. The revealed preference assumption says that we can predict the purchase if the utility of the good is positive. But this approach argues that we can treat market choices as indicative of draws from a multinomial distribution across the available products.
 
 \begin{equation} \begin{split} p(demand_A = 1) = utility > 0 \\ = p(\mathbf{X'}\beta + v > 0) \\ = p(v > - \mathbf{X'}\beta ) \\ = 1 - F(\mathbf{X'}\beta ) \end{split} \end{equation}
 
@@ -1133,7 +1133,7 @@ As in the representation theorems we need a scale on which to calibrate the pref
 
 The estimates are correct in magnitude and direction for the actual parameters driving the latent utility equation, but a little bit wide of the true values. This is in part due to the indirect nature of the estimation but also the wide tails of the logistic distribution
 
-McFadden's analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer \(C\) to \(B\) and \(B\) to \(T\) then we ought to prefer \(C\) to \(T\) too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The mulinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden's work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail. The below table shows the average demographic rates grouped by the presence of rail.
+McFadden's analysis pursued these considerations in the choice of commuter transport choices over car, bus and the potential rail system. If we prefer \(C\) to \(B\) and \(B\) to \(T\) then we ought to prefer \(C\) to \(T\) too. The benefit of the assumption is that it allows us to infer a utility ranking metric by computing all the pairwise alternatives to a given product. The multinomial logit distribution is a convenient measure for discrete choice problems because it allows us to express our preference for each product on a 0-1 scale. McFadden's work used this technique to predict accurately the uptake in rail travel on the BART system in San Francisco, by first fitting a multinomial model on locations with a rail system to derive the coefficient weights of influence for a range of demographic factors around house size, home-ownership, income and location on demand for rail. The below table shows the average demographic rates grouped by the presence of rail.
 
 \begin{tabular}{l|r|r}
 \hline
@@ -1155,20 +1155,22 @@ density & 4.66 & 7.56\\
 \hline
 \end{tabular}
 
-McFadden's estimation strategy\footnote{Discussed in \citet{MicroeconR}} is a two step, which aims to assess the ``counterfactual'' effects of what rail uptake would be like were rail to be introduced in the areas where it is not now. We assume that the other factors remain relatively constant i.e.~we (i) analyse the impact of those factors as the coefficient weights determined by a regression in the areas with rail. Then (ii) we predict the values for uptake on rail on those assumptions for the cases observed in the districts with no rail.
+McFadden's estimation strategy\footnote{Discussed in \citet{MicroeconR}} is a two step, which aims to assess the ``counterfactual'' effects of what rail uptake would be like were rail to be introduced in the areas where it is not now. We assume that the other factors remain relatively constant i.e.~we (i) analyse the impact of those factors as the coefficient weights determined by a regression in the areas with rail. Then (ii) we predict the values for uptake on rail on those assumptions for the cases observed in the districts with no rail. For each individual prediction is a draw from a multinomial distribution. Averaging these draws gives us an estimate for the expected value for share of this product in the wider (unmeasured) market.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{bart\_data\_nr }\OperatorTok{=}\NormalTok{ bart\_data[bart\_data[}\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{0}\NormalTok{]}
 \NormalTok{bart\_data\_r }\OperatorTok{=}\NormalTok{ bart\_data[bart\_data[}\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \DecValTok{1}\NormalTok{]}
 
+\CommentTok{\#\# Rail}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ np.array(bart\_data\_r[}\StringTok{\textquotesingle{}CHOICE\textquotesingle{}}\NormalTok{])}
+\NormalTok{r\_features }\OperatorTok{=}\NormalTok{ bart\_data\_r[[}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HHSIZE\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}urban1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{)}
+
 \CommentTok{\#\# Build McFadden\textquotesingle{}s model}
-\NormalTok{MN\_logit\_mod\_r }\OperatorTok{=}\NormalTok{ sm.MNLogit(np.array(bart\_data\_r[}\StringTok{\textquotesingle{}CHOICE\textquotesingle{}}\NormalTok{]), }
-\NormalTok{                       bart\_data\_r[[}\StringTok{"home"}\NormalTok{,}\StringTok{"HHSIZE"}\NormalTok{,}\StringTok{"income"}\NormalTok{,}\StringTok{"urban1"}\NormalTok{,}\StringTok{"density"}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{))}
+\NormalTok{MN\_logit\_mod\_r }\OperatorTok{=}\NormalTok{ sm.MNLogit(y, r\_features)}
 \NormalTok{MN\_logit\_res\_r }\OperatorTok{=}\NormalTok{ MN\_logit\_mod\_r.fit()}
 
-
-\CommentTok{\#\# No Rail}
+\CommentTok{\#\# Full City on Rail Assumption}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1180,29 +1182,26 @@ McFadden's estimation strategy\footnote{Discussed in \citet{MicroeconR}} is a tw
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{nr }\OperatorTok{=}\NormalTok{ bart\_data\_nr[[}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HHSIZE\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}urban1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{)}
+\NormalTok{full }\OperatorTok{=}\NormalTok{ bart\_data[[}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HHSIZE\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}urban1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{)}
 
-\CommentTok{\#\# Rail}
-\NormalTok{r }\OperatorTok{=}\NormalTok{ bart\_data\_r[[}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HHSIZE\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}urban1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{)}
-
-\CommentTok{\#\# Full City on Rail Assumption}
-\NormalTok{full }\OperatorTok{=}\NormalTok{ bart\_data[[}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HHSIZE\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}income\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}urban1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}density\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{]].astype(}\BuiltInTok{float}\NormalTok{)}
-
-\CommentTok{\#\# Predict Uptake}
-\NormalTok{res }\OperatorTok{=}\NormalTok{ MN\_logit\_res\_r.predict(full.drop(}\StringTok{\textquotesingle{}rail\textquotesingle{}}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)).mean()}
-
-\NormalTok{res }\OperatorTok{=}\NormalTok{ pd.DataFrame(res).T}
+\CommentTok{\#\# Predict Uptake on Full Data Using Estimated Coefficients}
+\CommentTok{\#\# Take the mean values as expected values of the multinomial product share}
+\CommentTok{\#}
+\NormalTok{res }\OperatorTok{=}\NormalTok{ MN\_logit\_res\_r.predict(full)}
 \NormalTok{res.columns }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Bus\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Car\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Train\textquotesingle{}}\NormalTok{]}
-\NormalTok{res.}\BuiltInTok{round}\NormalTok{(}\DecValTok{3}\NormalTok{) }\OperatorTok{*} \DecValTok{100}
+\NormalTok{axs }\OperatorTok{=}\NormalTok{ res.hist(bins}\OperatorTok{=}\DecValTok{50}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ ax, m }\KeywordTok{in} \BuiltInTok{zip}\NormalTok{(axs.flatten(), res.mean()):}
+\NormalTok{  ax.axvline(x}\OperatorTok{=}\NormalTok{m, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{,ls}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, lw}\OperatorTok{=}\FloatTok{2.5}\NormalTok{)}
+\NormalTok{  text }\OperatorTok{=} \StringTok{"E(share) }\CharTok{\textbackslash{}n}\StringTok{ = }\SpecialCharTok{\{s\}}\StringTok{"}\NormalTok{.}\BuiltInTok{format}\NormalTok{(s}\OperatorTok{=}\BuiltInTok{round}\NormalTok{(m,}\DecValTok{3}\NormalTok{))}
+\NormalTok{  ax.annotate(text, xy}\OperatorTok{=}\NormalTok{(}\FloatTok{.22}\NormalTok{, }\DecValTok{4500}\NormalTok{))}
+\NormalTok{plt.suptitle(}\StringTok{"Multinomial Distribution of predicted BART shares"}\NormalTok{)}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##    Bus   Car  Train
-## 0  2.7  88.5    8.8
-\end{verbatim}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-23-1}
 
-These modelling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, and how this information can be predictive of their actions. But there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters in a regression due to typical assumptions of regression models. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool. Even allowing that utility might be a linear function, it's no easy question which attributes are the best predictors of utility or how to summarise their influence.
+These modeling efforts give us a sense of how the relative utility of a given good is seen across the market by a range of consumers, and how this information can be predictive of their actions. But there are complications. In particular, most products come with a price which is correlated with the error term in linear equation driving the utility model. This confounds the clean estimation of the parameters in a regression due to typical assumptions of regression models. Combined with the questionable notion that the linear preference order represents an actual consumer preference, makes the modelling effort somewhat unreliable as a predictive tool. Even allowing that utility might be a linear function, it's no easy question which attributes are the best predictors of utility or how to summarise their influence.
 
 These issues are further exacerbated in the cases where the preferences are hard if not impossible to extract. It's one thing to gauge utility based on observed choice, but it's even less reliable when relying only on stated preferences. Esme Wange outlines the heartbreaking considerations that go into answering difficult questions, and why the expressed choice often understates the degree of sorrow which underwrites the sentiment.
 
@@ -1211,6 +1210,9 @@ Though those close to me know exactly why I am not having children, and exactly 
 \end{quote}
 
 The depth of the feeling is unfathomable. No model of maximum likelihood will properly map this sentiment. At best the framework is reasonably predictive of patient's choices, but the limitations are of sharp, necessarily constrained by the requirement for generalisable medical recommendations.
+
+\hypertarget{tbd---stationarity-and-induction}{%
+\chapter{TBD - Stationarity and Induction}\label{tbd---stationarity-and-induction}}
 
 \hypertarget{profiling-segmentation-and-expected-value}{%
 \section{Profiling: Segmentation and Expected Value}\label{profiling-segmentation-and-expected-value}}
@@ -1314,11 +1316,6 @@ The expected value of the customer is then something like the probability of pur
 \end{quote}
 
 This drive to categorisation serves a dual role. It's diagnostically relevant but also useful as it allows us to measure the impact of broad classes of people on the financial bottom line. But it shouldn't be forgotten that these profiles are often complex constructs abstracted from contingent or limited data.
-
-\hypertarget{tbd---stationarity-and-induction}{%
-\chapter{TBD - Stationarity and Induction}\label{tbd---stationarity-and-induction}}
-
-To be done.
 
 \hypertarget{tbd---causal-inference-and-counterfactuals}{%
 \chapter{TBD - Causal Inference and Counterfactuals}\label{tbd---causal-inference-and-counterfactuals}}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathaniel Forde's Homepage">
+  <meta name="author" content="Nathaniel Forde">
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@forde_nathaniel">
+<meta name="twitter:creator" content="@forde_nathaniel">
+<meta name="twitter:title" content="Hierarchical Model">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://nathanielf.github.io/img/flammiron_engraving.jpg">
+
+<meta property="og:url" content="/tags/hierarchical-model/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Hierarchical Model" />
+<meta property="og:description" content="" />
+<meta property="og:image" content="https://nathanielf.github.io/img/flammiron_engraving.jpg" />
+
+  <title>Hierarchical Model</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/scarab.css" rel="stylesheet">
+  <link href="https://nathanielf.github.io/tags/hierarchical-model/index.xml" rel="alternate" type="application/rss+xml" title="Examined Algorithms" />
+  <link href="https://nathanielf.github.io/tags/hierarchical-model/index.xml" rel="feed" type="application/rss+xml" title="Examined Algorithms" />
+  
+  
+  
+  
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-188850615-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188850615-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-188850615-1');
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://nathanielf.github.io/">Examined Algorithms</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/pdf/Nathaniel%20Forde%20Current1.pdf">
+            <i class="fa fa-briefcase"></i>&nbsp;
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="/post/">
+            <i class="fa fa-code"></i>&nbsp;
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/publication/">
+            <i class="fa fa-files-o"></i>&nbsp;
+            Research
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-4">
+        <p class="epigraph">
+          It's no use going back to yesterday, because I was a different person then
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-10 col-md-offset-1">
+      </div>
+
+      <div class="col-md-10 col-md-offset-1">
+        <div class="section-item">
+          <a href="https://nathanielf.github.io/post/pooling_experiments/"><div class="row">
+
+  <div class="col-md-4">
+
+    <div class="hidden-sm hidden-xs">
+      <div class="text-right">
+        <a href="/post/pooling_experiments/"><strong>Pooling Information in PYMC</strong></a>
+      </div>
+      <div class="text-right">
+        <div class="post-metadata">
+  <div class="post-date">
+    <em>
+      <time datetime="2022-09-22 10:19:36 &#43;0000 UTC" itemprop="datePublished">22 September 2022</time>
+    </em>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div class="hidden-md hidden-lg">
+      <div>
+        <a href="/post/pooling_experiments/"><strong>Pooling Information in PYMC</strong></a>
+      </div>
+      <div>
+        <em><div class="post-metadata">
+  <div class="post-date">
+    <em>
+      <time datetime="2022-09-22 10:19:36 &#43;0000 UTC" itemprop="datePublished">22 September 2022</time>
+    </em>
+  </div>
+</div></em>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-7" >
+    
+    <p>
+      Two heads are better than one and fools rarely differ. It&rsquo;s an old trope. A tension to be navigated everytime we combine information across different sources. Can we trust the aggregate opinion? If we poll the masses do the summary statistics measure a common source of variation or represent an crass abstraction over individual particulars? But if we do trust the sources, how far can we generalise from the historic record?...
+      <span style="white-space: nowrap;"><a href="/post/pooling_experiments/">Read more <i class="fa fa-arrow-right"></i></a></span>
+    </p>
+    
+  </div>
+
+</div>
+</a>
+        </div>
+        <div>
+          <div class="post-back-link">
+    <a href="javascript: history.back()">
+        <i class="fa fa-arrow-left"></i> 
+        Back
+    </a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+<footer style="padding-top: 1em;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/prism.js"></script>
+
+</body>
+
+</html>

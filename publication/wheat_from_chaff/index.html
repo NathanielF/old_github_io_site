@@ -182,7 +182,7 @@ $$ = - \sum_{1}^{m}p_{i}log(p_{i}) $$</p>
 </blockquote>
 
 <p>Claude&rsquo;s Shannon&rsquo;s work on information theory and and E.T. Jaynes synthesis of it with probability theory shows that information is not incidental to probability, but arises as naturally as other measures: mean, median and variance of probability distributions.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">entropy</span>(x):
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">entropy</span>(x):
     y <span style="color: #555555">=</span> []
     <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> x:
         <span style="color: #006699; font-weight: bold">if</span> i <span style="color: #555555">==</span> <span style="color: #FF6600">0</span>:
@@ -214,7 +214,7 @@ plt<span style="color: #555555">.</span>suptitle(<span style="color: #CC3300">&q
 <h2 id="informative-or-weakly-informative-priors">Informative or Weakly Informative Priors</h2>
 
 <p>One famous characterisation of bullshit due to G.A. Cohen is describes it as &ldquo;unclarifiable unclarity&rdquo;. Bad actors online flood the space with this kind of unverifiable garbage. That undoubtedly contributes to the noise, but the more fundamental issue is just the volume of actual information we need to filter. With this in mind the agnostic approach is too risk-averse, creating needless work.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>N <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>N <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
 true_a, true_b, predictor <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>, <span style="color: #FF6600">3.0</span>, np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(loc<span style="color: #555555">=</span><span style="color: #FF6600">2</span>, scale<span style="color: #555555">=</span><span style="color: #FF6600">6</span>, size<span style="color: #555555">=</span>N)
 true_mu <span style="color: #555555">=</span> true_a <span style="color: #555555">+</span> true_b <span style="color: #555555">*</span> predictor
 true_sd <span style="color: #555555">=</span> <span style="color: #FF6600">2.0</span>
@@ -249,7 +249,7 @@ prior_spec <span style="color: #555555">=</span> {<span style="color: #CC3300">&
 <p><img src="/img/2021-03-10-Wheat-Chaff/flat_priors.png" alt="Flat Priors Sample Range of Possible Models" /></p>
 
 <p>By constraining our priors for the parameters of the linear model we significantly reduce the possible space of models. The choice here is a little artificial, but in a real problem the informative choices can be made based on knowledge of the problem at hand.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>prior_spec <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;a&#39;</span>:[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.5</span>], <span style="color: #CC3300">&#39;b&#39;</span>[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">3</span>]}
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>prior_spec <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;a&#39;</span>:[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0.5</span>], <span style="color: #CC3300">&#39;b&#39;</span>[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">3</span>]}
 </pre></div>
 
 <p><img src="/img/2021-03-10-Wheat-Chaff/weak_priors.png" alt="Weakly Informative Priors Sample Range of Possible Models" /></p>

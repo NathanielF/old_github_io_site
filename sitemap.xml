@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nathanielf.github.io/post/pooling_experiments/</loc>
+    <lastmod>2022-09-22T10:19:36+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/post/spatial_correlation/</loc>
     <lastmod>2021-06-22T10:19:36+00:00</lastmod>
   </url>
@@ -45,6 +50,12 @@
   </url>
   
   <url>
+    <loc>https://nathanielf.github.io/tags/bayesian-abc-tests/</loc>
+    <lastmod>2022-09-22T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nathanielf.github.io/categories/</loc>
     <priority>0</priority>
   </url>
@@ -69,7 +80,13 @@
   
   <url>
     <loc>https://nathanielf.github.io/</loc>
-    <lastmod>2021-06-22T10:19:36+00:00</lastmod>
+    <lastmod>2022-09-22T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/tags/experiments/</loc>
+    <lastmod>2022-09-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -87,6 +104,12 @@
   <url>
     <loc>https://nathanielf.github.io/tags/forecasting/</loc>
     <lastmod>2021-01-31T10:19:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nathanielf.github.io/tags/hierarchical-model/</loc>
+    <lastmod>2022-09-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -128,7 +151,7 @@
   
   <url>
     <loc>https://nathanielf.github.io/post/</loc>
-    <lastmod>2021-06-22T10:19:36+00:00</lastmod>
+    <lastmod>2022-09-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -140,7 +163,7 @@
   
   <url>
     <loc>https://nathanielf.github.io/tags/probability/</loc>
-    <lastmod>2021-06-22T10:19:36+00:00</lastmod>
+    <lastmod>2022-09-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -186,7 +209,7 @@
   
   <url>
     <loc>https://nathanielf.github.io/tags/</loc>
-    <lastmod>2021-01-22T10:19:36+00:00</lastmod>
+    <lastmod>2022-09-22T10:19:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   

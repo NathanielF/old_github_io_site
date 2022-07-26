@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Experiments on Examined Algorithms</title>
+    <link>https://nathanielf.github.io/tags/experiments/</link>
+    <description>Recent content in Experiments on Examined Algorithms</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
+    <lastBuildDate>Thu, 22 Sep 2022 10:19:36 +0000</lastBuildDate>
+    
+	<atom:link href="https://nathanielf.github.io/tags/experiments/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pooling Information in PYMC</title>
+      <link>https://nathanielf.github.io/post/pooling_experiments/</link>
+      <pubDate>Thu, 22 Sep 2022 10:19:36 +0000</pubDate>
+      
+      <guid>https://nathanielf.github.io/post/pooling_experiments/</guid>
+      <description>Two heads are better than one and fools rarely differ. It&amp;rsquo;s an old trope. A tension to be navigated everytime we combine information across different sources. Can we trust the aggregate opinion? If we poll the masses do the summary statistics measure a common source of variation or represent an crass abstraction over individual particulars? But if we do trust the sources, how far can we generalise from the historic record?</description>
+    </item>
+    
+  </channel>
+</rss>

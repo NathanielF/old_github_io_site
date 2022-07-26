@@ -164,7 +164,7 @@ ga('send', 'pageview');
 <p><img src="/img/2021-03-01-Replication-CrossValid/generative_model.png" alt="Generative Model" /></p>
 
 <p>This can be implemented efficiently using the PYMC3 package in python. The posterior distribution is constructed by looping over samples from the joint distribution of this system.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> model1:
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> model1:
     <span style="color: #0099FF; font-style: italic"># r∼Uniform(−1,1) flat prior for correlation value</span>
     r <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Uniform(<span style="color: #CC3300">&quot;r&quot;</span>, lower<span style="color: #555555">=-</span><span style="color: #FF6600">1</span>, upper<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
 
@@ -210,7 +210,7 @@ $$ p(\Sigma | y , \overrightarrow{\mu}) \sim InvSqrtGamma(\alpha, \beta) $$</p>
 <p>$$ p (y | \overrightarrow{\mu}, \Sigma) = (2 \pi)^{\frac{-2}{2}} \vert \Sigma \vert^{\frac{-1}{2}} exp\Big(-(y - \overrightarrow{\mu})^{&lsquo;} \Sigma^{-1}(y - \overrightarrow{\mu})/2 \Big) $$</p>
 
 <p>which in turn is used to calculate the posterior values of the joint parameters conditional on the data. This method is called Gibbs Sampling and constructs the posterior distribution from our data. The implementation of this process in Pymc3 allows us to recover the marginal distribution of the correlation coefficient $r$ from the range of samples.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #0099FF; font-style: italic"># Plot the marginal distribution of the correlation term</span>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #0099FF; font-style: italic"># Plot the marginal distribution of the correlation term</span>
 az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;r&quot;</span>])
 </pre></div>
 
@@ -225,7 +225,7 @@ az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="
 <p><img src="/img/2021-03-01-Replication-CrossValid/performance.png" alt="Consistent performance" /></p>
 
 <p>This plot does not suggest any strong relation between performance over the tests. Since we want to evaluate the correlation of performance on both tests, we would like to evaluate if the data suggests a positive correlation in the posterior distribution. Performance on the test is simply the count of correct answers for each participant on each experiment. We&rsquo;ll model this as a Binomial distribution. As before we treat our observed guesses as driven by draws from a bivariate normal distribution which is &ldquo;filtered&rdquo; through a probit transform. A probit transform like the logistic transform converts a continuous variable into a symmetrical bi-furcated distribution which allows us to model our choices.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">phi</span>(x):
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">phi</span>(x):
     <span style="color: #0099FF; font-style: italic"># probit transform</span>
     <span style="color: #006699; font-weight: bold">return</span> <span style="color: #FF6600">0.5</span> <span style="color: #555555">+</span> <span style="color: #FF6600">0.5</span> <span style="color: #555555">*</span> pm<span style="color: #555555">.</span>math<span style="color: #555555">.</span>erf(x <span style="color: #555555">/</span> pm<span style="color: #555555">.</span>math<span style="color: #555555">.</span>sqrt(<span style="color: #FF6600">2</span>))
 
@@ -267,7 +267,7 @@ az<span style="color: #555555">.</span>plot_trace(trace1, var_names<span style="
 </blockquote>
 
 <p>Based on these results we should predict poor future performance since, as expected, the correlation between the performance on both tasks is very slight.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>az<span style="color: #555555">.</span>plot_trace(trace2, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;r&quot;</span>])
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>az<span style="color: #555555">.</span>plot_trace(trace2, var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;r&quot;</span>])
 </pre></div>
 
 <p><img src="/img/2021-03-01-Replication-CrossValid/ability_corr.png" alt="Posterior for relation between performance on both tests" /></p>

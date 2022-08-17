@@ -12,13 +12,13 @@
 <meta name="twitter:creator" content="@forde_nathaniel">
 <meta name="twitter:title" content="Bayesian Estimation and Histogram Approximation">
 <meta name="twitter:description" content="Imagine you&rsquo;re pretty confident of your recent bet. All the other gamblers at the table have taken the other side of the bet. Just for fun, assume all other gamblers in the casino have bet against you. The game is in the first quarter and things are looking good, but how do you evaluate now whether you should hedge your bets before final quarter is called? This kind of scenario is typical in an imbalanced A/B test where we haven&rsquo;t randomised the samples, and we&rsquo;re letting it ride based entirely on vibes.">
-<meta name="twitter:image" content="https://nathanielf.github.io/img/2022-08-15-AB_Mixtures/mixture.png">
+<meta name="twitter:image" content="https://nathanielf.github.io/img/2022-08-15-AB-Mixtures/mixture.png">
 
 <meta property="og:url" content="/post/bayesian_ab_tests/" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Bayesian Estimation and Histogram Approximation" />
 <meta property="og:description" content="Imagine you&rsquo;re pretty confident of your recent bet. All the other gamblers at the table have taken the other side of the bet. Just for fun, assume all other gamblers in the casino have bet against you. The game is in the first quarter and things are looking good, but how do you evaluate now whether you should hedge your bets before final quarter is called? This kind of scenario is typical in an imbalanced A/B test where we haven&rsquo;t randomised the samples, and we&rsquo;re letting it ride based entirely on vibes." />
-<meta property="og:image" content="https://nathanielf.github.io/img/2022-08-15-AB_Mixtures/mixture.png" />
+<meta property="og:image" content="https://nathanielf.github.io/img/2022-08-15-AB-Mixtures/mixture.png" />
 
   <title>Bayesian Estimation and Histogram Approximation</title>
 
@@ -335,7 +335,7 @@ axs[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>l
 
 <h2 id="do-we-push-to-production">Do we Push to Production?</h2>
 
-<p>Having established that the method works well, we can apply a similar model (not shown) to our load times data and recover results for our A/B test. We can see here that the mixture model recovers a nice fit to the observed mixture distribution. Better it ran <strong>really fast</strong>, even with over 7,000,000 records.</p>
+<p>Having established that the method works well, we can apply a similar model (not shown) to our load times data and recover results for our A/B test. We can see here that the mixture model recovers a nice fit to the observed mixture distribution. Better it ran <strong>really, really fast</strong>, even with over 7,000,000 records.</p>
 
 <p><img src="/img/2022-08-15-AB-Mixtures/components.png" alt="fake" /></p>
 

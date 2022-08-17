@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Examined Algorithms</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
-    <lastBuildDate>Thu, 22 Sep 2022 10:19:36 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Aug 2022 10:19:36 +0000</lastBuildDate>
     
 	<atom:link href="https://nathanielf.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Bayesian Abc Tests</title>
       <link>https://nathanielf.github.io/tags/bayesian-abc-tests/</link>
-      <pubDate>Thu, 22 Sep 2022 10:19:36 +0000</pubDate>
+      <pubDate>Mon, 15 Aug 2022 10:19:36 +0000</pubDate>
       
       <guid>https://nathanielf.github.io/tags/bayesian-abc-tests/</guid>
       <description></description>
@@ -50,7 +50,7 @@
     <item>
       <title>Experiments</title>
       <link>https://nathanielf.github.io/tags/experiments/</link>
-      <pubDate>Thu, 22 Sep 2022 10:19:36 +0000</pubDate>
+      <pubDate>Mon, 15 Aug 2022 10:19:36 +0000</pubDate>
       
       <guid>https://nathanielf.github.io/tags/experiments/</guid>
       <description></description>
@@ -77,9 +77,18 @@
     <item>
       <title>Hierarchical Model</title>
       <link>https://nathanielf.github.io/tags/hierarchical-model/</link>
-      <pubDate>Thu, 22 Sep 2022 10:19:36 +0000</pubDate>
+      <pubDate>Fri, 22 Jul 2022 10:19:36 +0000</pubDate>
       
       <guid>https://nathanielf.github.io/tags/hierarchical-model/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Histogram Trick</title>
+      <link>https://nathanielf.github.io/tags/histogram-trick/</link>
+      <pubDate>Mon, 15 Aug 2022 10:19:36 +0000</pubDate>
+      
+      <guid>https://nathanielf.github.io/tags/histogram-trick/</guid>
       <description></description>
     </item>
     
@@ -149,7 +158,7 @@
     <item>
       <title>Probability</title>
       <link>https://nathanielf.github.io/tags/probability/</link>
-      <pubDate>Thu, 22 Sep 2022 10:19:36 +0000</pubDate>
+      <pubDate>Mon, 15 Aug 2022 10:19:36 +0000</pubDate>
       
       <guid>https://nathanielf.github.io/tags/probability/</guid>
       <description></description>

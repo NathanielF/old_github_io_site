@@ -6,15 +6,24 @@
     <description>Recent content in Posts on Examined Algorithms</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
-    <lastBuildDate>Thu, 22 Sep 2022 10:19:36 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Aug 2022 10:19:36 +0000</lastBuildDate>
     
 	<atom:link href="https://nathanielf.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Bayesian Estimation and Histogram Approximation</title>
+      <link>https://nathanielf.github.io/post/bayesian_ab_tests/</link>
+      <pubDate>Mon, 15 Aug 2022 10:19:36 +0000</pubDate>
+      
+      <guid>https://nathanielf.github.io/post/bayesian_ab_tests/</guid>
+      <description>Imagine you&amp;rsquo;re pretty confident of your recent bet. All the other gamblers at the table have taken the other side of the bet. Just for fun, assume all other gamblers in the casino have bet against you. The game is in the first quarter and things are looking good, but how do you evaluate now whether you should hedge your bets before final quarter is called? This kind of scenario is typical in an imbalanced A/B test where we haven&amp;rsquo;t randomised the samples, and we&amp;rsquo;re letting it ride based entirely on vibes.</description>
+    </item>
+    
+    <item>
       <title>Pooling Information in PYMC</title>
       <link>https://nathanielf.github.io/post/pooling_experiments/</link>
-      <pubDate>Thu, 22 Sep 2022 10:19:36 +0000</pubDate>
+      <pubDate>Fri, 22 Jul 2022 10:19:36 +0000</pubDate>
       
       <guid>https://nathanielf.github.io/post/pooling_experiments/</guid>
       <description>Two heads are better than one and fools rarely differ. It&amp;rsquo;s an old trope. A tension to be navigated everytime we combine information across different sources. Can we trust the aggregate opinion? If we poll the masses do the summary statistics measure a common source of variation or represent an crass abstraction over individual particulars? But if we do trust the sources, how far can we generalise from the historic record?</description>

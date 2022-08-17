@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathaniel Forde's Homepage">
+  <meta name="author" content="Nathaniel Forde">
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@forde_nathaniel">
+<meta name="twitter:creator" content="@forde_nathaniel">
+<meta name="twitter:title" content="Bayesian Estimation and Histogram Approximation">
+<meta name="twitter:description" content="Imagine you&rsquo;re pretty confident of your recent bet. All the other gamblers at the table have taken the other side of the bet. Just for fun, assume all other gamblers in the casino have bet against you. The game is in the first quarter and things are looking good, but how do you evaluate now whether you should hedge your bets before final quarter is called? This kind of scenario is typical in an imbalanced A/B test where we haven&rsquo;t randomised the samples, and we&rsquo;re letting it ride based entirely on vibes.">
+<meta name="twitter:image" content="https://nathanielf.github.io/img/2022-08-15-AB_Mixtures/mixture.png">
+
+<meta property="og:url" content="/post/bayesian_ab_tests/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Bayesian Estimation and Histogram Approximation" />
+<meta property="og:description" content="Imagine you&rsquo;re pretty confident of your recent bet. All the other gamblers at the table have taken the other side of the bet. Just for fun, assume all other gamblers in the casino have bet against you. The game is in the first quarter and things are looking good, but how do you evaluate now whether you should hedge your bets before final quarter is called? This kind of scenario is typical in an imbalanced A/B test where we haven&rsquo;t randomised the samples, and we&rsquo;re letting it ride based entirely on vibes." />
+<meta property="og:image" content="https://nathanielf.github.io/img/2022-08-15-AB_Mixtures/mixture.png" />
+
+  <title>Bayesian Estimation and Histogram Approximation</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+  
+  
+  
+  
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-188850615-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188850615-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-188850615-1');
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://nathanielf.github.io/">Examined Algorithms</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/pdf/Nathaniel%20Forde%20Current1.pdf">
+            <i class="fa fa-briefcase"></i>&nbsp;
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="/post/">
+            <i class="fa fa-code"></i>&nbsp;
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/publication/">
+            <i class="fa fa-files-o"></i>&nbsp;
+            Research
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container blog-post">
+
+  
+  <div class="row">
+    <div class="col-md-3 hidden-sm hidden-xs text-right">
+      <h1 class="post-title">&nbsp;</h1>
+      <em>Aug 15, 2022</em><br />
+      
+      
+      
+      <span class="post-tags">
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/probability">probability</a>
+         &bull;   
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/experiments">Experiments</a>
+         &bull;  
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/bayesian-abc-tests">Bayesian ABC tests</a>
+         &bull;  
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/histogram-trick">Histogram Trick</a>
+        
+        
+      </span>
+      
+      
+      </p>
+    </div>
+
+    <div class="col-md-7">
+      <h1 class="post-title">Bayesian Estimation and Histogram Approximation</h1>
+      <div class="hidden-md hidden-lg post-metadata">
+        <div>
+          <em>Aug 15, 2022</em>
+        </div>
+        
+        
+        
+        <p class="post-tags">
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/probability">probability</a>
+           &bull;   
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/experiments">Experiments</a>
+           &bull;  
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/bayesian-abc-tests">Bayesian ABC tests</a>
+           &bull;  
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/histogram-trick">Histogram Trick</a>
+          
+          
+        </p>
+        
+        
+      </div>
+
+      <div class="post-body">
+        
+
+<p>Imagine you&rsquo;re pretty confident of your recent bet. All the other gamblers at the table have taken the other side of the bet. Just for fun, assume all other gamblers in the casino have bet against you. The game is in the first quarter and things are looking good, but how do you evaluate now whether you should hedge your bets before final quarter is called? This kind of scenario is typical in an imbalanced A/B test where we haven&rsquo;t randomised the samples, and we&rsquo;re letting it ride based entirely on vibes. Maybe you&rsquo;ve released a change to production but only exposed two clients to the new changes. How do you evaluate the impact of your change?</p>
+
+<h1 id="bayesian-a-b-testing-in-an-imperfect-world">Bayesian A/B testing in an imperfect World</h1>
+
+<p>You have at least 2 problems here. On the one hand you&rsquo;re trusting your prior belief and small data on the other side a huge mass of data. Moving past the fear, the second problem is more one of implementation than one of principle, since Bayesian inference tends to scale poorly with massive amounts of data. The first problem, is one of principle. How do we make sound inference without trying to control for confounders through randomisation? But assume your hands are tied, you can&rsquo;t guarantee perfect randomness in selection criteria. You still have to make a call with limited information. Perhaps you&rsquo;d like to apply simple Bootstrapping estimation of the uncertainty in the parameters but can&rsquo;t because of the low volumes of data on one branch.</p>
+
+<p>There are now two benefits to going with a Bayesian methodology here, one is the flexibility of the modelling paradigm it offers and the second primary feature is the ability to inject our prior information to weigh against the data on the undersampled arm of our experiment. This is a form of principled inference based on knowledge of situation. No form of inference guarantees perfectly correct results. How to do we address the second problem? Bayesianism doesn&rsquo;t scale, right!?</p>
+
+<h2 id="mixture-models-and-histogram-trick">Mixture Models and Histogram Trick</h2>
+
+<p>Lets make the issues a little more concrete. Imagine you&rsquo;re trying to evaluate a bi-modal distribution of loading times on a website after a new feature is turned on. This distribution has two peaks: (1) represents healthy load times and the other (2) represents unhealthy load times during periods of high activity. Here we can see the distributions of load times on each arm of the experiment. On the treatment arm we have 2000 records and on the control arm we have 7,000,000.</p>
+
+<p><img src="/img/2022-08-15-AB-Mixtures/bi_modal.png" alt="bi_modal" /></p>
+
+<p>We have a very imbalanced data on each arm. However because we have a large stock of historic data regarding the loading times at peak and off peak, we&rsquo;re prepared to ascribe a set of priors to estimate the impact of our new feature on the treamtment arm, can we do the same for the control arm?</p>
+
+<h3 id="what-kind-of-model">What kind of Model?</h3>
+
+<p>Often we observe a data generating process which is likely the combination of a number of distinct processes. The overall distribution is known as a mixture distribution and there are some tools in the Bayesian workflow to help identify the manner in which these distinct processes are combined and the relative weight we should ascribe to each.</p>
+
+<p>Bayesian modelling in general requires extensive MCMC simulation and as the data scales up there is a proportional impact on the fitting time of the model. This becomes infeasible with large data such as website performance data measured in the nanosecond. However there is a neat treat to approximate learning the Bayesian posterior from massive data - as discussed here:</p>
+
+<p><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Want to run Bayesian A/B tests at serious scale? Check out how <a href="https://twitter.com/ferrine96?ref_src=twsrc%5Etfw">@ferrine96</a> and I did this for one of <a href="https://twitter.com/pymc_labs?ref_src=twsrc%5Etfw">@pymc_labs</a>&#39; clients.<a href="https://t.co/cJJPH7X0UZ">https://t.co/cJJPH7X0UZ</a> <a href="https://t.co/BnLNtENzam">pic.twitter.com/BnLNtENzam</a></p>&mdash; Dr Benjamin Vincent (@inferencelab) <a href="https://twitter.com/inferencelab/status/1558046236451774466?ref_src=twsrc%5Etfw">August 12, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p>Instead of learning from the raw data, we learn from a histogram approximation which buckets our data into n-quantiles (however many required) and weights the observations to be drawn from that quantile in proportion to the number of observations seen in the raw data within that range.</p>
+
+<h3 id="testing-the-histogram-trick-on-a-mixture-model">Testing the Histogram Trick on a Mixture Model</h3>
+
+<p>Drum up some fake data</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>sample <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>Series(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">.8</span>, <span style="color: #FF6600">6000</span>))
+sample <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>concat([sample, pd<span style="color: #555555">.</span>Series(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>gumbel(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">1.2</span>, <span style="color: #FF6600">4000</span>))])
+
+sample1 <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>Series(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(<span style="color: #FF6600">0.3</span>, <span style="color: #FF6600">.8</span>, <span style="color: #FF6600">6000</span>))
+sample1 <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>concat([sample, pd<span style="color: #555555">.</span>Series(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>gumbel(<span style="color: #FF6600">1.8</span>, <span style="color: #FF6600">1.2</span>, <span style="color: #FF6600">4000</span>))])
+
+fig, ax <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplots()
+ax<span style="color: #555555">.</span>hist(sample, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.9</span>, edgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;slateblue&#39;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Treatment&#39;</span>)
+ax<span style="color: #555555">.</span>hist(sample1, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.25</span>, edgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;skyblue&#39;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Control&#39;</span>)
+ax<span style="color: #555555">.</span>legend()
+</pre></div>
+
+<p><img src="/img/2022-08-15-AB-Mixtures/fake.png" alt="fake" /></p>
+
+<p>First we&rsquo;ll estimate the model using the standard PYMC mcmc sampling method and then we&rsquo;ll show how to do the same using the histogram trick. After seeing that the histogram trick preserves sound inference we&rsquo;ll apply it to our big data problem and estimate our bi-modal loading time distribution.</p>
+
+<h3 id="the-standard-bayesian-approach">The Standard Bayesian Approach</h3>
+
+<p>We fit a Normal and Gumbel mixture distribution for our fake data using the standard method</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> model_mix:
+    <span style="color: #0099FF; font-style: italic"># First set of priors for our treatment group</span>
+    w <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Dirichlet(<span style="color: #CC3300">&#39;w&#39;</span>, a<span style="color: #555555">=</span>np<span style="color: #555555">.</span>array([<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>]))  <span style="color: #0099FF; font-style: italic"># 2 mixture weights</span>
+    mu <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;mu&quot;</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>)
+    mu1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;mu1&quot;</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">1</span>)
+    sd <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;sd&#39;</span>, <span style="color: #FF6600">1</span>)
+    sd1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;sd1&#39;</span>, <span style="color: #FF6600">1</span>)
+
+    components <span style="color: #555555">=</span> [
+        pm<span style="color: #555555">.</span>Normal<span style="color: #555555">.</span>dist(mu<span style="color: #555555">=</span>mu, sigma<span style="color: #555555">=</span>sd),
+        pm<span style="color: #555555">.</span>Gumbel<span style="color: #555555">.</span>dist(mu<span style="color: #555555">=</span>mu1, beta<span style="color: #555555">=</span>sd1),
+    ]
+
+    <span style="color: #0099FF; font-style: italic"># Second set of priors for our Control group</span>
+    w1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Dirichlet(<span style="color: #CC3300">&#39;w1&#39;</span>, a<span style="color: #555555">=</span>np<span style="color: #555555">.</span>array([<span style="color: #FF6600">1</span>, <span style="color: #FF6600">1</span>]))  <span style="color: #0099FF; font-style: italic"># 2 mixture weights</span>
+    m <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;m&quot;</span>, <span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>)
+    m1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;m1&quot;</span>, <span style="color: #FF6600">2</span>, <span style="color: #FF6600">1</span>)
+    s <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;s&#39;</span>, <span style="color: #FF6600">1</span>)
+    s1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;s1&#39;</span>, <span style="color: #FF6600">1</span>)
+
+    components1 <span style="color: #555555">=</span> [
+        pm<span style="color: #555555">.</span>Normal<span style="color: #555555">.</span>dist(mu<span style="color: #555555">=</span>m, sigma<span style="color: #555555">=</span>s),
+        pm<span style="color: #555555">.</span>Gumbel<span style="color: #555555">.</span>dist(mu<span style="color: #555555">=</span>m1, beta<span style="color: #555555">=</span>s1),
+    ]
+
+    <span style="color: #0099FF; font-style: italic"># Likelihood for our Treatment group</span>
+    mix <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Mixture(<span style="color: #CC3300">&#39;mix&#39;</span>, w<span style="color: #555555">=</span>w, comp_dists<span style="color: #555555">=</span>components,
+        observed<span style="color: #555555">=</span>np<span style="color: #555555">.</span>array(sample))
+
+    <span style="color: #0099FF; font-style: italic"># Likelihood for our Control group</span>
+    mix1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Mixture(<span style="color: #CC3300">&#39;mix1&#39;</span>, w<span style="color: #555555">=</span>w1, comp_dists<span style="color: #555555">=</span>components1,
+        observed<span style="color: #555555">=</span>np<span style="color: #555555">.</span>array(sample1))
+
+    idata_mix <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample(draws<span style="color: #555555">=</span><span style="color: #FF6600">1000</span>, cores<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+    idata_mix<span style="color: #555555">.</span>extend(pm<span style="color: #555555">.</span>sample_posterior_predictive(idata_mix))
+</pre></div>
+
+<h3 id="the-histogram-trick">The Histogram Trick</h3>
+
+<p>Now when we wish to fit the same model using the Histogram trick, the code is similar but we change the likelihoods:</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>    pot <span style="color: #555555">=</span> pmx<span style="color: #555555">.</span>distributions<span style="color: #555555">.</span>histogram_approximation(
+        <span style="color: #CC3300">&quot;pot&quot;</span>, pm<span style="color: #555555">.</span>Mixture<span style="color: #555555">.</span>dist(w<span style="color: #555555">=</span>w, comp_dists<span style="color: #555555">=</span>components),
+        observed<span style="color: #555555">=</span>np<span style="color: #555555">.</span>array(sample), n_quantiles<span style="color: #555555">=</span><span style="color: #FF6600">1000</span>)
+
+    pot <span style="color: #555555">=</span> pmx<span style="color: #555555">.</span>distributions<span style="color: #555555">.</span>histogram_approximation(
+        <span style="color: #CC3300">&quot;pot1&quot;</span>, pm<span style="color: #555555">.</span>Mixture<span style="color: #555555">.</span>dist(w<span style="color: #555555">=</span>w1, comp_dists<span style="color: #555555">=</span>components1),
+        observed<span style="color: #555555">=</span>np<span style="color: #555555">.</span>array(sample1), n_quantiles<span style="color: #555555">=</span><span style="color: #FF6600">1000</span>)
+
+    idata_mix_approx <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample(draws<span style="color: #555555">=</span><span style="color: #FF6600">5000</span>, cores<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+</pre></div>
+
+<p>Under the hood the histogram trick is a pm.Potential, and as such the implementation cannot make use of the standard posterior predictive sampling. But we can do a manual work-around to achieve the same results, by sampling from the posterior draws on the parameters which determine the shape of our model. Even better it fits <em>very</em> fast!!</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #0099FF; font-style: italic">## Extract uncertainty in parameters from our posterior</span>
+gen_df <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame({<span style="color: #CC3300">&#39;mu&#39;</span>: idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;chain&quot;</span>, <span style="color: #CC3300">&quot;draw&quot;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;mu&#39;</span>], 
+                <span style="color: #CC3300">&#39;sd&#39;</span>: idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;chain&quot;</span>, <span style="color: #CC3300">&quot;draw&quot;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;sd&#39;</span>], 
+                 <span style="color: #CC3300">&#39;mu1&#39;</span>: idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;chain&quot;</span>, <span style="color: #CC3300">&quot;draw&quot;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;mu1&#39;</span>], 
+                  <span style="color: #CC3300">&#39;sd1&#39;</span>: idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;chain&quot;</span>, <span style="color: #CC3300">&quot;draw&quot;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;sd1&#39;</span>],
+                  <span style="color: #CC3300">&#39;m&#39;</span>: idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;chain&quot;</span>, <span style="color: #CC3300">&quot;draw&quot;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;m&#39;</span>], 
+                <span style="color: #CC3300">&#39;s&#39;</span>: idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;chain&quot;</span>, <span style="color: #CC3300">&quot;draw&quot;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;s&#39;</span>], 
+                 <span style="color: #CC3300">&#39;m1&#39;</span>: idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;chain&quot;</span>, <span style="color: #CC3300">&quot;draw&quot;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;m1&#39;</span>], 
+                  <span style="color: #CC3300">&#39;s1&#39;</span>: idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;chain&quot;</span>, <span style="color: #CC3300">&quot;draw&quot;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;s1&#39;</span>]
+                  })
+
+<span style="color: #0099FF; font-style: italic">## Generate samples from each mixture component for treatment and control groups</span>
+gen_df[<span style="color: #CC3300">&#39;y_T&#39;</span>] <span style="color: #555555">=</span> gen_df<span style="color: #555555">.</span>apply(<span style="color: #006699; font-weight: bold">lambda</span> x: np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(x[<span style="color: #CC3300">&#39;mu&#39;</span>], x[<span style="color: #CC3300">&#39;sd&#39;</span>], <span style="color: #FF6600">1</span>)[<span style="color: #FF6600">0</span>], axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+gen_df[<span style="color: #CC3300">&#39;y1_T&#39;</span>] <span style="color: #555555">=</span> gen_df<span style="color: #555555">.</span>apply(<span style="color: #006699; font-weight: bold">lambda</span> x: np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>gumbel(x[<span style="color: #CC3300">&#39;mu1&#39;</span>], x[<span style="color: #CC3300">&#39;sd1&#39;</span>], <span style="color: #FF6600">1</span>)[<span style="color: #FF6600">0</span>], axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+gen_df[<span style="color: #CC3300">&#39;y_C&#39;</span>] <span style="color: #555555">=</span> gen_df<span style="color: #555555">.</span>apply(<span style="color: #006699; font-weight: bold">lambda</span> x: np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(x[<span style="color: #CC3300">&#39;m&#39;</span>], x[<span style="color: #CC3300">&#39;s&#39;</span>], <span style="color: #FF6600">1</span>)[<span style="color: #FF6600">0</span>], axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+gen_df[<span style="color: #CC3300">&#39;y1_C&#39;</span>] <span style="color: #555555">=</span> gen_df<span style="color: #555555">.</span>apply(<span style="color: #006699; font-weight: bold">lambda</span> x: np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>gumbel(x[<span style="color: #CC3300">&#39;m1&#39;</span>], x[<span style="color: #CC3300">&#39;s1&#39;</span>], <span style="color: #FF6600">1</span>)[<span style="color: #FF6600">0</span>], axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)
+
+<span style="color: #0099FF; font-style: italic">## Extract expected weights from each component</span>
+weights_T <span style="color: #555555">=</span> idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;chain&#39;</span>, <span style="color: #CC3300">&#39;draw&#39;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;w&#39;</span>]<span style="color: #555555">.</span>mean(axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)<span style="color: #555555">.</span>to_dataframe()
+weights_C <span style="color: #555555">=</span> idata_mix_approx<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;chain&#39;</span>, <span style="color: #CC3300">&#39;draw&#39;</span>])<span style="color: #555555">.</span>posterior[<span style="color: #CC3300">&#39;w1&#39;</span>]<span style="color: #555555">.</span>mean(axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>)<span style="color: #555555">.</span>to_dataframe()
+
+<span style="color: #0099FF; font-style: italic">## Combine to recover a predictive distribution for our data</span>
+mix_posterior_y_T <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>concat([gen_df[<span style="color: #CC3300">&#39;y_T&#39;</span>]<span style="color: #555555">.</span>sample(frac<span style="color: #555555">=</span>weights_T[<span style="color: #CC3300">&#39;w&#39;</span>][<span style="color: #FF6600">0</span>]), 
+                           gen_df[<span style="color: #CC3300">&#39;y1_T&#39;</span>]<span style="color: #555555">.</span>sample(frac<span style="color: #555555">=</span>weights_T[<span style="color: #CC3300">&#39;w&#39;</span>][<span style="color: #FF6600">1</span>])])
+
+mix_posterior_y_C <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>concat([gen_df[<span style="color: #CC3300">&#39;y_C&#39;</span>]<span style="color: #555555">.</span>sample(frac<span style="color: #555555">=</span>weights_C[<span style="color: #CC3300">&#39;w1&#39;</span>][<span style="color: #FF6600">0</span>]), 
+                           gen_df[<span style="color: #CC3300">&#39;y1_C&#39;</span>]<span style="color: #555555">.</span>sample(frac<span style="color: #555555">=</span>weights_C[<span style="color: #CC3300">&#39;w1&#39;</span>][<span style="color: #FF6600">1</span>])])
+</pre></div>
+
+<h3 id="plotting-the-fits">Plotting the Fits</h3>
+
+<p>With these quantities in place we can plot the predictions of both models against the distribution of the raw data.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>fig, axs <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplots(<span style="color: #FF6600">3</span>, <span style="color: #FF6600">1</span>, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>, <span style="color: #FF6600">18</span>))
+axs <span style="color: #555555">=</span> axs<span style="color: #555555">.</span>flatten()
+axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>hist(sample, density<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.4</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Treatment Data&#39;</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;slateblue&#39;</span>, bins<span style="color: #555555">=</span><span style="color: #FF6600">50</span>, edgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>)
+axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>hist(mix_posterior_y_T, density<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Predicted Approx&#39;</span>, histtype<span style="color: #555555">=</span><span style="color: #CC3300">&#39;step&#39;</span>, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">4</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;cyan&#39;</span>, bins<span style="color: #555555">=</span><span style="color: #FF6600">50</span>)
+axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>hist(idata_mix<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;chain&#39;</span>, <span style="color: #CC3300">&#39;draw&#39;</span>])<span style="color: #555555">.</span>posterior_predictive[<span style="color: #CC3300">&#39;mix&#39;</span>]<span style="color: #555555">.</span>to_dataframe()[<span style="color: #CC3300">&#39;mix&#39;</span>], density<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Predicted Mixture&#39;</span>, histtype<span style="color: #555555">=</span><span style="color: #CC3300">&#39;step&#39;</span>, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">4</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>, bins<span style="color: #555555">=</span><span style="color: #FF6600">50</span>)
+axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>legend()
+axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;Mixture Model Posterior Predictive Fit:  </span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300"> Approx and Full Bayesian for Treatment&quot;</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">15</span>)
+axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>hist(sample1, density<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.4</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Control Data&#39;</span>,edgecolor<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>, 
+color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;skyblue&#39;</span>, bins<span style="color: #555555">=</span><span style="color: #FF6600">50</span>)
+axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>hist(mix_posterior_y_C, density<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Predicted Approx&#39;</span>, histtype<span style="color: #555555">=</span><span style="color: #CC3300">&#39;step&#39;</span>, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">4</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;cyan&#39;</span>, bins<span style="color: #555555">=</span><span style="color: #FF6600">50</span>)
+axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>hist(idata_mix<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;chain&#39;</span>, <span style="color: #CC3300">&#39;draw&#39;</span>])<span style="color: #555555">.</span>posterior_predictive[<span style="color: #CC3300">&#39;mix1&#39;</span>]<span style="color: #555555">.</span>to_dataframe()[<span style="color: #CC3300">&#39;mix1&#39;</span>], density<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Predicted Mixture&#39;</span>, histtype<span style="color: #555555">=</span><span style="color: #CC3300">&#39;step&#39;</span>, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">4</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>, bins<span style="color: #555555">=</span><span style="color: #FF6600">50</span>)
+axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>legend()
+axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;Mixture Model Posterior Predictive Fit:  </span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300"> Approx and Full Bayesian for Control&quot;</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">15</span>)
+
+xs, ys, patches <span style="color: #555555">=</span> axs[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>hist(idata_mix<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;chain&#39;</span>, <span style="color: #CC3300">&#39;draw&#39;</span>])<span style="color: #555555">.</span>posterior_predictive[<span style="color: #CC3300">&#39;mix&#39;</span>]<span style="color: #555555">.</span>to_dataframe()[<span style="color: #CC3300">&#39;mix&#39;</span>], density<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Predicted Treatment Mixture&#39;</span>, histtype<span style="color: #555555">=</span><span style="color: #CC3300">&#39;step&#39;</span>, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">4</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;black&#39;</span>, bins<span style="color: #555555">=</span><span style="color: #FF6600">50</span>)
+axs[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>axvspan(<span style="color: #FF6600">2.5</span>, <span style="color: #FF6600">10</span>, clip_path<span style="color: #555555">=</span>patches[<span style="color: #FF6600">0</span>], color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;slateblue&#39;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Proportion &gt; 2.5 Treatment&#39;</span>)
+
+xs1, ys1, patches1 <span style="color: #555555">=</span>axs[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>hist(idata_mix<span style="color: #555555">.</span>stack(sample<span style="color: #555555">=</span>[<span style="color: #CC3300">&#39;chain&#39;</span>, <span style="color: #CC3300">&#39;draw&#39;</span>])<span style="color: #555555">.</span>posterior_predictive[<span style="color: #CC3300">&#39;mix1&#39;</span>]<span style="color: #555555">.</span>to_dataframe()[<span style="color: #CC3300">&#39;mix1&#39;</span>], density<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Predicted Control Mixture&#39;</span>, histtype<span style="color: #555555">=</span><span style="color: #CC3300">&#39;step&#39;</span>, linewidth<span style="color: #555555">=</span><span style="color: #FF6600">4</span>, color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;grey&#39;</span>, bins<span style="color: #555555">=</span><span style="color: #FF6600">50</span>)
+axs[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>axvspan(<span style="color: #FF6600">2.5</span>, <span style="color: #FF6600">10</span>, clip_path<span style="color: #555555">=</span>patches1[<span style="color: #FF6600">0</span>], color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;red&#39;</span>, alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.25</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Proportion &gt; 2.5 Control&#39;</span>)
+axs[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;Posterior Predictive Distribution </span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300"> Treatment V Control&quot;</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">15</span>)
+axs[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>legend();
+</pre></div>
+
+<p><img src="/img/2022-08-15-AB-Mixtures/histogram_fit.png" alt="fake" /></p>
+
+<p>Here we can see how the histogram trick properly captures the shape of the distribution as well as the model estimated using the standard likelihood.</p>
+
+<h2 id="do-we-push-to-production">Do we Push to Production?</h2>
+
+<p>Having established that the method works well we can apply a similar model (not shown) it to our load times data to recover results for our A/B test. We can see here that the mixture model recovers a nice fit to the observed mixture distribution.</p>
+
+<p><img src="/img/2022-08-15-AB-Mixtures/components.png" alt="fake" /></p>
+
+<p>And we can also quantify what proportion of the mixture distribution has shifted from the Gumbel component to the Lognormal component of the distribution, and hence how healthy our loading time distribution is predicted to be if we apply the treatment.</p>
+
+<p><img src="/img/2022-08-15-AB-Mixtures/ppc.png" alt="fake" /></p>
+
+<p>It looks like we should make our change and hold our nerve! If we need to make a call now the data we have suggests we should!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We&rsquo;ve seen here a concrete example of some innovative tooling that the PYMC team is developing to help scale Bayesian inference in industry. I hope i&rsquo;ve given a clean example of you might use this form of inference to interrogate questions of improvemnt in imbalanced A/B style experiemnts. Feedback or pushback welcome!?</p>
+
+
+        &nbsp;
+      </div>
+
+      <div>
+        <div class="post-back-link">
+    <a href="javascript: history.back()">
+        <i class="fa fa-arrow-left"></i> 
+        Back
+    </a>
+</div>
+      </div>
+      <script src="https://utteranc.es/client.js" repo="NathanielF/NathanielF.github.io" issue-term="title" label="comments 💬" theme="github-light" crossorigin="anonymous" async>
+      </script>
+    </div>
+  </div>
+  
+
+  <footer style="padding-top: 1em;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/prism.js"></script>
+
+</body>
+
+</html>

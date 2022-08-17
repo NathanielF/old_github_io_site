@@ -335,11 +335,11 @@ axs[<span style="color: #FF6600">2</span>]<span style="color: #555555">.</span>l
 
 <h2 id="do-we-push-to-production">Do we Push to Production?</h2>
 
-<p>Having established that the method works well we can apply a similar model (not shown) it to our load times data to recover results for our A/B test. We can see here that the mixture model recovers a nice fit to the observed mixture distribution.</p>
+<p>Having established that the method works well, we can apply a similar model (not shown) to our load times data and recover results for our A/B test. We can see here that the mixture model recovers a nice fit to the observed mixture distribution. Better it ran <strong>really fast</strong>, even with over 7,000,000 records.</p>
 
 <p><img src="/img/2022-08-15-AB-Mixtures/components.png" alt="fake" /></p>
 
-<p>And we can also quantify what proportion of the mixture distribution has shifted from the Gumbel component to the Lognormal component of the distribution, and hence how healthy our loading time distribution is predicted to be if we apply the treatment.</p>
+<p>We can also now quantify what proportion of the mixture distribution has shifted from the Gumbel component to the Lognormal component of the distribution, and hence how healthy our loading time distribution is predicted to be if we apply the treatment.</p>
 
 <p><img src="/img/2022-08-15-AB-Mixtures/ppc.png" alt="fake" /></p>
 

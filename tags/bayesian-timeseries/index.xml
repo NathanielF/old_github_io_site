@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Forecasting on Examined Algorithms</title>
-    <link>https://nathanielf.github.io/tags/forecasting/</link>
-    <description>Recent content in Forecasting on Examined Algorithms</description>
+    <title>Bayesian Timeseries on Examined Algorithms</title>
+    <link>https://nathanielf.github.io/tags/bayesian-timeseries/</link>
+    <description>Recent content in Bayesian Timeseries on Examined Algorithms</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright (c) 2020 Nathaniel Forde</copyright>
     <lastBuildDate>Mon, 15 Aug 2022 10:19:36 +0000</lastBuildDate>
     
-	<atom:link href="https://nathanielf.github.io/tags/forecasting/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanielf.github.io/tags/bayesian-timeseries/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://nathanielf.github.io/post/bayesian_structural_timeseries/</guid>
       <description>Wordsworth once spoke forlornly of the hope that &amp;ldquo;child [could be] the father of the man&amp;rdquo;. This desire for predictable continuity exists where disruption is rife. Continuous trajectories can be smooth everywhere or staggered and staccato suddenly. No matter how apparently inevitable; each and every timeseries is vulnerable to such structural break. Childhood, or the past more generally, was likely more tumultuous than you can recall in retrospect. The question is always whether the past predicts the present?</description>
-    </item>
-    
-    <item>
-      <title>Haavelmo&#39;s Autonomous laws in Econometrics</title>
-      <link>https://nathanielf.github.io/post/forecasting_grue_timeseries/</link>
-      <pubDate>Sun, 31 Jan 2021 10:19:36 +0000</pubDate>
-      
-      <guid>https://nathanielf.github.io/post/forecasting_grue_timeseries/</guid>
-      <description>In 1944 Trygve Haavelmo could argue sincerely that the hostility to mathematical statistics in economics was a mistake. He could argue that, in fact, economic questions could be phrased in the language of probability. Today that observation is palpably anachronistic, owing to the current trend of equating economists with soothsayers while expecting similar arcana and spell craft. The reality falls short of magic and is more interesting than the fantasy.</description>
     </item>
     
   </channel>

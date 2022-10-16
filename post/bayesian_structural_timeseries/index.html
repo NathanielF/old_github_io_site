@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathaniel Forde's Homepage">
+  <meta name="author" content="Nathaniel Forde">
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@forde_nathaniel">
+<meta name="twitter:creator" content="@forde_nathaniel">
+<meta name="twitter:title" content="Bayesian Structural Timeseries - Forecasting">
+<meta name="twitter:description" content="Wordsworth once spoke forlornly of the hope that &ldquo;child [could be] the father of the man&rdquo;. This desire for predictable continuity exists where disruption is rife. Continuous trajectories can be smooth everywhere or staggered and staccato suddenly. No matter how apparently inevitable; each and every timeseries is vulnerable to such structural break. Childhood, or the past more generally, was likely more tumultuous than you can recall in retrospect. The question is always whether the past predicts the present?">
+<meta name="twitter:image" content="https://nathanielf.github.io/img/2022-10-01-BSTS/growth.jpeg">
+
+<meta property="og:url" content="/post/bayesian_structural_timeseries/" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Bayesian Structural Timeseries - Forecasting" />
+<meta property="og:description" content="Wordsworth once spoke forlornly of the hope that &ldquo;child [could be] the father of the man&rdquo;. This desire for predictable continuity exists where disruption is rife. Continuous trajectories can be smooth everywhere or staggered and staccato suddenly. No matter how apparently inevitable; each and every timeseries is vulnerable to such structural break. Childhood, or the past more generally, was likely more tumultuous than you can recall in retrospect. The question is always whether the past predicts the present?" />
+<meta property="og:image" content="https://nathanielf.github.io/img/2022-10-01-BSTS/growth.jpeg" />
+
+  <title>Bayesian Structural Timeseries - Forecasting</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/scarab.css" rel="stylesheet">
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        "HTML-CSS": {
+          availableFonts: ["Neo-Euler"],
+          preferredFont: "Neo-Euler",
+          webFont: "Neo-Euler",
+          imageFont: "Neo-Euler",
+        }
+      });
+    </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+  
+  
+  
+  
+  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-188850615-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188850615-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-188850615-1');
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://nathanielf.github.io/">Examined Algorithms</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="/pdf/Nathaniel%20Forde%20Current1.pdf">
+            <i class="fa fa-briefcase"></i>&nbsp;
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="/post/">
+            <i class="fa fa-code"></i>&nbsp;
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/publication/">
+            <i class="fa fa-files-o"></i>&nbsp;
+            Research
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container blog-post">
+
+  
+  <div class="row">
+    <div class="col-md-3 hidden-sm hidden-xs text-right">
+      <h1 class="post-title">&nbsp;</h1>
+      <em>Aug 15, 2022</em><br />
+      
+      
+      
+      <span class="post-tags">
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/probability">probability</a>
+         &bull;   
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/forecasting">forecasting</a>
+         &bull;  
+        
+        <a class="post-tag" href="https://nathanielf.github.io/tags/bayesian-timeseries">Bayesian Timeseries</a>
+        
+        
+      </span>
+      
+      
+      </p>
+    </div>
+
+    <div class="col-md-7">
+      <h1 class="post-title">Bayesian Structural Timeseries - Forecasting</h1>
+      <div class="hidden-md hidden-lg post-metadata">
+        <div>
+          <em>Aug 15, 2022</em>
+        </div>
+        
+        
+        
+        <p class="post-tags">
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/probability">probability</a>
+           &bull;   
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/forecasting">forecasting</a>
+           &bull;  
+          
+          <a class="post-tag" href="https://nathanielf.github.io/tags/bayesian-timeseries">Bayesian Timeseries</a>
+          
+          
+        </p>
+        
+        
+      </div>
+
+      <div class="post-body">
+        
+
+<p>Wordsworth once spoke forlornly of the hope that &ldquo;child [could be] the father of the man&rdquo;. This desire for predictable continuity exists where disruption is rife. Continuous trajectories can be smooth everywhere or staggered and staccato suddenly. No matter how apparently inevitable; each and every timeseries is vulnerable to such structural break. Childhood, or the past more generally, was likely more tumultuous than you can recall in retrospect. The question is always whether the past predicts the present?</p>
+
+<h1 id="characterising-the-past-to-predict-the-future">Characterising the Past to Predict the Future</h1>
+
+<p>We want to show how we can model bayesian structural time series with <strong>autoregressive processes</strong> can be modeled in pymc and used to predict future unobserved data. How these kinds of models can flexibly incorporate structural assumptions and project future outcomes is only sparsely covered in the PYMC <a href="https://www.pymc.io/projects/docs/en/stable/learn.html">documentation</a>. Hopefully recording the full modeling and prediction loop here is useful for you. The broad idea of technique is captured in the Wordsworth quote above. Bayesian structural timeseries assumes that the past is a guide to the future, and that if we can characterise the processes which govern the data-generating process of past, they should serve as a guide to the future.</p>
+
+<p>We&rsquo;ll show how to fit and predict auto-regressive models in pymc and then how to adjust them to capture details of trend and seasonality for when they complicate the picture.</p>
+
+<h2 id="generate-autoregresive-data">Generate Autoregresive Data</h2>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">simulate_ar</span>(intercept, coef1, coef2, noise<span style="color: #555555">=</span><span style="color: #FF6600">0.3</span>, <span style="color: #555555">*</span>, warmup<span style="color: #555555">=</span><span style="color: #FF6600">10</span>, steps<span style="color: #555555">=</span><span style="color: #FF6600">200</span>):   
+    <span style="color: #0099FF; font-style: italic"># We sample some extra warmup steps, to let the AR process stabilize</span>
+    draws <span style="color: #555555">=</span> np<span style="color: #555555">.</span>zeros(warmup<span style="color: #555555">+</span>steps)
+    <span style="color: #0099FF; font-style: italic"># Initialize first draws at intercept</span>
+    draws[:<span style="color: #FF6600">2</span>] <span style="color: #555555">=</span> intercept
+    <span style="color: #006699; font-weight: bold">for</span> step <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">2</span>, warmup<span style="color: #555555">+</span>steps):
+        draws[step] <span style="color: #555555">=</span> (
+            intercept 
+            <span style="color: #555555">+</span> coef1 <span style="color: #555555">*</span> draws[step<span style="color: #555555">-</span><span style="color: #FF6600">1</span>]
+            <span style="color: #555555">+</span> coef2 <span style="color: #555555">*</span> draws[step<span style="color: #555555">-</span><span style="color: #FF6600">2</span>]
+            <span style="color: #555555">+</span> rng<span style="color: #555555">.</span>normal(<span style="color: #FF6600">0</span>, noise)
+        )
+    <span style="color: #0099FF; font-style: italic"># Discard the warmup draws</span>
+    <span style="color: #006699; font-weight: bold">return</span> draws[warmup:]
+
+
+ar1_data <span style="color: #555555">=</span> simulate_ar(<span style="color: #FF6600">10</span>, <span style="color: #555555">-</span><span style="color: #FF6600">0.9</span>, <span style="color: #FF6600">0</span>)
+</pre></div>
+
+<p><img src="/img/2022-10-01-BSTS/ar_data.png" alt="Autoregressive data" /></p>
+
+<h3 id="specifying-the-simple-autoregressive-model">Specifying the simple Autoregressive Model</h3>
+
+<p>We define the function to be able to take a set of priors over the parameters in the model. Crucially we also set the data inputs t and y to be mutable data objects. This latter step is required to facilitate prediction in the next step. The AR class implementation in PYMC is a deterministic function on data, which requires the specification of the number of steps to project forward. Here we define the class as a latent process feeding a Gaussian likelihood. We have made this latent process dependent on the mutable data objects and the number of observations in the data. In this way, when we seek to predict on new data the AR process steps are projected forward appropriately.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>priors <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;coefs&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;size&#39;</span>: <span style="color: #FF6600">2</span>},
+          <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">1</span>, 
+          <span style="color: #CC3300">&#39;init&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">8</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">1</span>, <span style="color: #CC3300">&#39;size&#39;</span>: <span style="color: #FF6600">1</span>}
+          }
+
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">make_latent_AR_model</span>(ar_data, priors, prediction_steps<span style="color: #555555">=</span><span style="color: #FF6600">250</span>, full_sample<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, samples<span style="color: #555555">=</span><span style="color: #FF6600">2000</span>):
+    <span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> AR:
+        <span style="color: #006699; font-weight: bold">pass</span>
+
+    t_data <span style="color: #555555">=</span> <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(<span style="color: #336666">len</span>(ar_data)))
+    AR<span style="color: #555555">.</span>add_coord(<span style="color: #CC3300">&#39;obs_id&#39;</span>, t_data, mutable<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+
+    <span style="color: #006699; font-weight: bold">with</span> AR:
+        <span style="color: #0099FF; font-style: italic">## Data containers to enable prediction</span>
+        t <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MutableData(<span style="color: #CC3300">&quot;t&quot;</span>, t_data, dims<span style="color: #555555">=</span><span style="color: #CC3300">&quot;obs_id&quot;</span>)
+        y <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MutableData(<span style="color: #CC3300">&quot;y&quot;</span>, ar_data, dims<span style="color: #555555">=</span><span style="color: #CC3300">&quot;obs_id&quot;</span>)
+        <span style="color: #0099FF; font-style: italic"># The first coefficient will be the constant term</span>
+        coefs <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;coefs&quot;</span>, priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], size<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>])
+        sigma <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;sigma&#39;</span>, priors[<span style="color: #CC3300">&#39;sigma&#39;</span>])
+        <span style="color: #0099FF; font-style: italic"># We need one init variable for each lag, hence size is variable too</span>
+        init <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal<span style="color: #555555">.</span>dist(priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>], size<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>])
+        <span style="color: #0099FF; font-style: italic"># Steps of the AR model minus the lags required</span>
+        ar1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>AR(<span style="color: #CC3300">&quot;ar&quot;</span>, coefs, sigma<span style="color: #555555">=</span>sigma, init_dist<span style="color: #555555">=</span>init, 
+        constant<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, steps<span style="color: #555555">=</span>t<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]<span style="color: #555555">-</span>(priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>]<span style="color: #555555">-</span><span style="color: #FF6600">1</span>))
+        
+        <span style="color: #0099FF; font-style: italic"># The Likelihood</span>
+        outcome <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;likelihood&#39;</span>, mu<span style="color: #555555">=</span>ar1, sigma<span style="color: #555555">=</span>sigma, observed<span style="color: #555555">=</span>y)
+        <span style="color: #0099FF; font-style: italic">## Sampling</span>
+        idata_ar <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_prior_predictive()
+        <span style="color: #006699; font-weight: bold">if</span> full_sample:
+            idata_ar<span style="color: #555555">.</span>extend(pm<span style="color: #555555">.</span>sampling_jax<span style="color: #555555">.</span>sample_blackjax_nuts(samples, random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>, target_accept<span style="color: #555555">=</span><span style="color: #FF6600">0.95</span>))
+            idata_ar<span style="color: #555555">.</span>extend(pm<span style="color: #555555">.</span>sample_posterior_predictive(idata_ar))
+        <span style="color: #006699; font-weight: bold">else</span>:
+            <span style="color: #006699; font-weight: bold">return</span> idata_ar
+
+    n <span style="color: #555555">=</span> prediction_steps <span style="color: #555555">-</span> ar_data<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]
+
+    <span style="color: #006699; font-weight: bold">with</span> AR:
+        <span style="color: #0099FF; font-style: italic"># update values of predictors pass in nans for number of predicted steps</span>
+        pm<span style="color: #555555">.</span>set_data(new_data<span style="color: #555555">=</span>{<span style="color: #CC3300">&quot;t&quot;</span>: <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(prediction_steps)), 
+                            <span style="color: #CC3300">&quot;y&quot;</span>: np<span style="color: #555555">.</span>concatenate([ar_data, np<span style="color: #555555">.</span>array([np<span style="color: #555555">.</span>nan <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n)])])}, 
+                            coords<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;obs_id&#39;</span>: <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(prediction_steps))})
+        <span style="color: #0099FF; font-style: italic"># use the updated values and predict outcomes and probabilities:</span>
+        idata_preds <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_posterior_predictive(idata_ar,
+        var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;likelihood&quot;</span>],predictions<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>,random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>
+        )
+
+    <span style="color: #006699; font-weight: bold">return</span> idata_ar, idata_preds, AR
+</pre></div>
+
+<p>We can see the model structure more clearly in the plate notation. One thing to note about the autoregressive implementation in pymc is that it can any number of lagged terms into the deterministic function so long as the data contains enough data points to accomodate them. Here we&rsquo;ve only set an AR1 model with an intercept term, but in principle we can be more flexible.</p>
+
+<p><img src="/img/2022-10-01-BSTS/ar_model_graph.png" alt="model_graph" /></p>
+
+<p>Fitting the model recovers the parameters as defined:</p>
+
+<p><img src="/img/2022-10-01-BSTS/params.png" alt="params" /></p>
+
+<p>Once this model has been fitted to the data we must inspect how the model generates a posterior predictive distribution and further, how it imputes the values for the future states of the process. Credit to <a href="https://juanitorduz.github.io/bikes_pymc/">Juan Camilo Orduz</a> for the plotting trick i&rsquo;m using below to illustrate the highest density intervals of the predicted distributions.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">plot_model_fits</span>(idata, idata_preds):
+    palette <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;viridis_r&quot;</span>
+    cmap <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>get_cmap(palette)
+    percs <span style="color: #555555">=</span> np<span style="color: #555555">.</span>linspace(<span style="color: #FF6600">51</span>, <span style="color: #FF6600">99</span>, <span style="color: #FF6600">100</span>)
+    colors <span style="color: #555555">=</span> (percs <span style="color: #555555">-</span> np<span style="color: #555555">.</span>min(percs)) <span style="color: #555555">/</span> (np<span style="color: #555555">.</span>max(percs) <span style="color: #555555">-</span> np<span style="color: #555555">.</span>min(percs))
+
+    fig, axs <span style="color: #555555">=</span> plt<span style="color: #555555">.</span>subplots(<span style="color: #FF6600">2</span>, <span style="color: #FF6600">1</span>, sharex<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">False</span>, figsize<span style="color: #555555">=</span>(<span style="color: #FF6600">10</span>, <span style="color: #FF6600">15</span>))
+    axs <span style="color: #555555">=</span> axs<span style="color: #555555">.</span>flatten()
+    <span style="color: #006699; font-weight: bold">for</span> i, p <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(percs[::<span style="color: #555555">-</span><span style="color: #FF6600">1</span>]):
+        upper <span style="color: #555555">=</span> np<span style="color: #555555">.</span>percentile(
+            az<span style="color: #555555">.</span>extract_dataset(idata, group<span style="color: #555555">=</span><span style="color: #CC3300">&quot;posterior_predictive&quot;</span>, num_samples<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)[
+                <span style="color: #CC3300">&quot;likelihood&quot;</span>
+            ], p, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>
+        )
+        lower <span style="color: #555555">=</span> np<span style="color: #555555">.</span>percentile(
+            az<span style="color: #555555">.</span>extract_dataset(idata, group<span style="color: #555555">=</span><span style="color: #CC3300">&quot;posterior_predictive&quot;</span>, num_samples<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)[
+                <span style="color: #CC3300">&quot;likelihood&quot;</span>
+            ], <span style="color: #FF6600">100</span> <span style="color: #555555">-</span> p, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>
+        )
+        color_val <span style="color: #555555">=</span> colors[i]
+        axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>fill_between(
+            x<span style="color: #555555">=</span>idata[<span style="color: #CC3300">&#39;constant_data&#39;</span>][<span style="color: #CC3300">&#39;t&#39;</span>],
+            y1<span style="color: #555555">=</span>upper<span style="color: #555555">.</span>flatten(),
+            y2<span style="color: #555555">=</span>lower<span style="color: #555555">.</span>flatten(),
+            color<span style="color: #555555">=</span>cmap(color_val),
+            alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.1</span>,
+        )
+
+    axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>plot(az<span style="color: #555555">.</span>extract_dataset(idata, group<span style="color: #555555">=</span><span style="color: #CC3300">&quot;posterior_predictive&quot;</span>, num_samples<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)[<span style="color: #CC3300">&quot;likelihood&quot;</span>]<span style="color: #555555">.</span>median(axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>), color<span style="color: #555555">=</span><span style="color: #CC3300">&#39;cyan&#39;</span>, label<span style="color: #555555">=</span><span style="color: #CC3300">&#39;Median Prediction&#39;</span>)
+
+    axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>scatter(x<span style="color: #555555">=</span>idata[<span style="color: #CC3300">&#39;constant_data&#39;</span>][<span style="color: #CC3300">&#39;t&#39;</span>], y<span style="color: #555555">=</span>idata[<span style="color: #CC3300">&#39;constant_data&#39;</span>][<span style="color: #CC3300">&#39;y&#39;</span>], color<span style="color: #555555">=</span><span style="color: #CC3300">&quot;k&quot;</span>)
+    axs[<span style="color: #FF6600">0</span>]<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;AutoRegressive Posterior Predictive Fit </span><span style="color: #CC3300; font-weight: bold">\n</span><span style="color: #CC3300"> Shaded by Probability Percentiles&quot;</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">20</span>)
+
+    <span style="color: #006699; font-weight: bold">for</span> i, p <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">enumerate</span>(percs[::<span style="color: #555555">-</span><span style="color: #FF6600">1</span>]):
+        upper <span style="color: #555555">=</span> np<span style="color: #555555">.</span>percentile(
+            az<span style="color: #555555">.</span>extract_dataset(idata_preds, group<span style="color: #555555">=</span><span style="color: #CC3300">&quot;predictions&quot;</span>, num_samples<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)[
+                <span style="color: #CC3300">&quot;likelihood&quot;</span>
+            ], p, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>
+        )
+        lower <span style="color: #555555">=</span> np<span style="color: #555555">.</span>percentile(
+            az<span style="color: #555555">.</span>extract_dataset(idata_preds, group<span style="color: #555555">=</span><span style="color: #CC3300">&quot;predictions&quot;</span>, num_samples<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)[
+                <span style="color: #CC3300">&quot;likelihood&quot;</span>
+            ], <span style="color: #FF6600">100</span> <span style="color: #555555">-</span> p, axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>
+        )
+        color_val <span style="color: #555555">=</span> colors[i]
+        axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>fill_between(
+            x<span style="color: #555555">=</span>idata_preds[<span style="color: #CC3300">&#39;predictions_constant_data&#39;</span>][<span style="color: #CC3300">&#39;t&#39;</span>],
+            y1<span style="color: #555555">=</span>upper<span style="color: #555555">.</span>flatten(),
+            y2<span style="color: #555555">=</span>lower<span style="color: #555555">.</span>flatten(),
+            color<span style="color: #555555">=</span>cmap(color_val),
+            alpha<span style="color: #555555">=</span><span style="color: #FF6600">0.1</span>,
+        )
+
+    axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>plot(
+            az<span style="color: #555555">.</span>extract_dataset(idata_preds, group<span style="color: #555555">=</span><span style="color: #CC3300">&quot;predictions&quot;</span>, num_samples<span style="color: #555555">=</span><span style="color: #FF6600">100</span>)[
+                <span style="color: #CC3300">&quot;likelihood&quot;</span>
+            ]<span style="color: #555555">.</span>median(axis<span style="color: #555555">=</span><span style="color: #FF6600">1</span>),
+            color<span style="color: #555555">=</span><span style="color: #CC3300">&quot;cyan&quot;</span>
+        )
+    axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>scatter(x<span style="color: #555555">=</span>idata[<span style="color: #CC3300">&#39;constant_data&#39;</span>][<span style="color: #CC3300">&#39;t&#39;</span>], y<span style="color: #555555">=</span>idata[<span style="color: #CC3300">&#39;constant_data&#39;</span>][<span style="color: #CC3300">&#39;y&#39;</span>], color<span style="color: #555555">=</span><span style="color: #CC3300">&quot;k&quot;</span>)
+    axs[<span style="color: #FF6600">1</span>]<span style="color: #555555">.</span>set_title(<span style="color: #CC3300">&quot;Predictions Plotted&quot;</span>, fontsize<span style="color: #555555">=</span><span style="color: #FF6600">20</span>)
+</pre></div>
+
+<p>and the posterior_predictive distribution seems to fit well to the observed data. We plot the posterior predictive distribution with the historic data overlayed. We further plot the same distribution with imputed future steps.</p>
+
+<p><img src="/img/2022-10-01-BSTS/ar_predictions.png" alt="predictions" /></p>
+
+<h2 id="adding-a-trend-to-the-data">Adding a Trend to the Data</h2>
+
+<p>Next we want to see how these changes if we add a trend to the data.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>y_t <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #FF6600">0.3</span> <span style="color: #555555">+</span> np<span style="color: #555555">.</span>arange(<span style="color: #FF6600">200</span>)<span style="color: #555555">*-</span><span style="color: #FF6600">0.2</span> <span style="color: #555555">+</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>normal(<span style="color: #FF6600">0</span>, <span style="color: #FF6600">10</span>, <span style="color: #FF6600">200</span>)
+y_t <span style="color: #555555">=</span> y_t  <span style="color: #555555">+</span> ar1_data
+</pre></div>
+
+<p><img src="/img/2022-10-01-BSTS/trend_ar.png" alt="trend" /></p>
+
+<p>If we naively try to fit the model above to our data now, we see that it struggles to capture the structure of the data. This can be accomodated if we add a structural trend component to our model. One word of caution is that the the combination of the autoregressive terms and the trend component needs to be managed carefully since without carefully chosen priors, their combination can result in explosive results beyond plausible limits. Fortunately this can be checked using prior and posterior predictive checks.</p>
+
+<p><img src="/img/2022-10-01-BSTS/misspecified_fit.png" alt="misspecified" /></p>
+
+<h3 id="specifying-the-trend-model">Specifying the Trend model</h3>
+
+<p>We&rsquo;ll allow here for the addition of a trend and saturated trend in addition to the autoregressive component. This necessitates more prior distributions of the $\alpha$ and $\beta$ parameters in the linear trend.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>priors <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;coefs&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">.1</span>, <span style="color: #CC3300">&#39;size&#39;</span>: <span style="color: #FF6600">2</span>},
+          <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">1</span>, 
+          <span style="color: #CC3300">&#39;init&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">.1</span>, <span style="color: #CC3300">&#39;size&#39;</span>: <span style="color: #FF6600">1</span>},
+          <span style="color: #CC3300">&#39;alpha&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>:<span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">.1</span>}, 
+          <span style="color: #CC3300">&#39;beta&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #555555">-</span><span style="color: #FF6600">0.5</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">.1</span>},
+          <span style="color: #CC3300">&#39;ar_sigma&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">.1</span>}
+          }
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">logistic_saturation</span>(x, lam: <span style="color: #336666">float</span> <span style="color: #555555">=</span> <span style="color: #FF6600">0.5</span>):
+    <span style="color: #CC3300; font-style: italic">&quot;&quot;&quot;Logistic saturation transformation.&quot;&quot;&quot;</span>
+    <span style="color: #006699; font-weight: bold">return</span> (<span style="color: #FF6600">1</span> <span style="color: #555555">-</span> at<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>lam <span style="color: #555555">*</span> x)) <span style="color: #555555">/</span> (<span style="color: #FF6600">1</span> <span style="color: #555555">+</span> at<span style="color: #555555">.</span>exp(<span style="color: #555555">-</span>lam <span style="color: #555555">*</span> x))
+        
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">make_trend_AR_model</span>(ar_data, priors, prediction_steps<span style="color: #555555">=</span><span style="color: #FF6600">250</span>, full_sample<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, samples<span style="color: #555555">=</span><span style="color: #FF6600">2000</span>):
+    <span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> AR:
+        <span style="color: #006699; font-weight: bold">pass</span>
+
+    t_data <span style="color: #555555">=</span> <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(<span style="color: #336666">len</span>(ar_data)))
+    AR<span style="color: #555555">.</span>add_coord(<span style="color: #CC3300">&#39;obs_id&#39;</span>, t_data, mutable<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+
+    <span style="color: #006699; font-weight: bold">with</span> AR:
+        <span style="color: #0099FF; font-style: italic">## Data containers to enable prediction</span>
+        t <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MutableData(<span style="color: #CC3300">&quot;t&quot;</span>, t_data, dims<span style="color: #555555">=</span><span style="color: #CC3300">&quot;obs_id&quot;</span>)
+        y <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MutableData(<span style="color: #CC3300">&quot;y&quot;</span>, ar_data, dims<span style="color: #555555">=</span><span style="color: #CC3300">&quot;obs_id&quot;</span>)
+        <span style="color: #0099FF; font-style: italic"># The first coefficient will be the constant term</span>
+        coefs <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;coefs&quot;</span>, priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>], size<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>])
+        ar_sigma <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;ar_sigma&#39;</span>, priors[<span style="color: #CC3300">&#39;ar_sigma&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>])
+        sigma <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;sigma&#39;</span>, priors[<span style="color: #CC3300">&#39;sigma&#39;</span>])
+        <span style="color: #0099FF; font-style: italic"># We need one init variable for each lag, hence size is variable too</span>
+        init <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal<span style="color: #555555">.</span>dist(priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>], size<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>])
+        <span style="color: #0099FF; font-style: italic"># Steps of the AR model minus the lags required</span>
+        ar1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>AR(<span style="color: #CC3300">&quot;ar&quot;</span>, coefs, sigma<span style="color: #555555">=</span>ar_sigma, init_dist<span style="color: #555555">=</span>init, 
+        constant<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, steps<span style="color: #555555">=</span>t<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]<span style="color: #555555">-</span>(priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>]<span style="color: #555555">-</span><span style="color: #FF6600">1</span>))
+
+        <span style="color: #0099FF; font-style: italic">## Priors for the linear trend component</span>
+        alpha <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;alpha&#39;</span>, priors[<span style="color: #CC3300">&#39;alpha&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;alpha&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>])
+        beta <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;beta&#39;</span>, priors[<span style="color: #CC3300">&#39;beta&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;beta&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>])
+        trend <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&#39;trend&#39;</span>, alpha <span style="color: #555555">+</span> beta<span style="color: #555555">*</span>t, dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;obs_id&#39;</span>)
+
+        <span style="color: #0099FF; font-style: italic"># Saturation</span>
+        lam <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;lam&#39;</span>, mu<span style="color: #555555">=-</span><span style="color: #FF6600">0.4</span>, sigma<span style="color: #555555">=</span><span style="color: #FF6600">.1</span>)
+        saturation <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&#39;saturation&#39;</span>, logistic_saturation(trend, lam), dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;obs_id&#39;</span>)
+        mu <span style="color: #555555">=</span> ar1 <span style="color: #555555">+</span> saturation<span style="color: #555555">*</span>trend
+
+        outcome <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;likelihood&#39;</span>, mu<span style="color: #555555">=</span>mu, sigma<span style="color: #555555">=</span>sigma, observed<span style="color: #555555">=</span>y)
+        
+        <span style="color: #0099FF; font-style: italic">## Sampling</span>
+        idata_ar <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_prior_predictive()
+        <span style="color: #006699; font-weight: bold">if</span> full_sample:
+            idata_ar<span style="color: #555555">.</span>extend(pm<span style="color: #555555">.</span>sampling_jax<span style="color: #555555">.</span>sample_blackjax_nuts(samples, random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>, target_accept<span style="color: #555555">=</span><span style="color: #FF6600">0.95</span>))
+            idata_ar<span style="color: #555555">.</span>extend(pm<span style="color: #555555">.</span>sample_posterior_predictive(idata_ar))
+        <span style="color: #006699; font-weight: bold">else</span>:
+            <span style="color: #006699; font-weight: bold">return</span> idata_ar, <span style="color: #006699; font-weight: bold">None</span>, <span style="color: #006699; font-weight: bold">None</span>
+
+    n <span style="color: #555555">=</span> prediction_steps <span style="color: #555555">-</span> ar_data<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]
+
+    <span style="color: #006699; font-weight: bold">with</span> AR:
+        <span style="color: #0099FF; font-style: italic"># update values of predictors</span>
+        <span style="color: #0099FF; font-style: italic"># pass in nans for the predicted steps</span>
+        pm<span style="color: #555555">.</span>set_data(new_data<span style="color: #555555">=</span>{<span style="color: #CC3300">&quot;t&quot;</span>: <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(prediction_steps)), 
+                            <span style="color: #CC3300">&quot;y&quot;</span>: np<span style="color: #555555">.</span>concatenate([ar_data, np<span style="color: #555555">.</span>array([np<span style="color: #555555">.</span>nan <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n)])])}, 
+                            coords<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;obs_id&#39;</span>: <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(prediction_steps))})
+        <span style="color: #0099FF; font-style: italic"># use the updated values and predict outcomes and probabilities:</span>
+        idata_preds <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_posterior_predictive(idata_ar,
+        var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;likelihood&quot;</span>],predictions<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>,random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>
+        )
+
+    <span style="color: #006699; font-weight: bold">return</span> idata_ar, idata_preds, AR
+</pre></div>
+
+<p>The structure above can again be seeen more clearly with the plate notation:</p>
+
+<p><img src="/img/2022-10-01-BSTS/ar_trend_modelgraph.png" alt="ar_trend_model" /></p>
+
+<p>The predictions of this model are far superior to the misspecifed model above. We correctly recover the directionality of the series.</p>
+
+<p><img src="/img/2022-10-01-BSTS/ar_trend_predictions.png" alt="ar_trend_predictions" /></p>
+
+<p>and we can again validate the performance by testing it with a leave-one-out cross validation comparison methodology</p>
+
+<p><img src="/img/2022-10-01-BSTS/model_compare_trend.png" alt="compare_trend" /></p>
+
+<h2 id="adding-seasonlity-to-the-data">Adding Seasonlity to the Data</h2>
+
+<p>If we allow that the data exhibits a seasonal component we can further augment our model by defininig a linear combination of sine and cosine functions in the manner of fourier terms. The linear combination of these should help recover the shape of any regular kind of oscillation we expect in our timeseries.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>t_data <span style="color: #555555">=</span> <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(<span style="color: #FF6600">200</span>))
+n_order <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
+periods <span style="color: #555555">=</span> (np<span style="color: #555555">.</span>array(t_data) <span style="color: #555555">/</span> <span style="color: #FF6600">7</span>)
+
+fourier_features <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(
+    {
+        <span style="color: #CC3300">f&quot;</span><span style="color: #AA0000">{</span>func<span style="color: #AA0000">}</span><span style="color: #CC3300">_order_</span><span style="color: #AA0000">{</span>order<span style="color: #AA0000">}</span><span style="color: #CC3300">&quot;</span>: <span style="color: #336666">getattr</span>(np, func)(<span style="color: #FF6600">2</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>pi <span style="color: #555555">*</span> periods <span style="color: #555555">*</span> order)
+        <span style="color: #006699; font-weight: bold">for</span> order <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">1</span>, n_order <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+        <span style="color: #006699; font-weight: bold">for</span> func <span style="color: #000000; font-weight: bold">in</span> (<span style="color: #CC3300">&quot;sin&quot;</span>, <span style="color: #CC3300">&quot;cos&quot;</span>)
+    }
+)
+
+
+y_t_s <span style="color: #555555">=</span> y_t <span style="color: #555555">+</span> <span style="color: #FF6600">20</span><span style="color: #555555">*</span>fourier_features[<span style="color: #CC3300">&#39;sin_order_1&#39;</span>]
+</pre></div>
+
+<p><img src="/img/2022-10-01-BSTS/trend_seasonal.png" alt="ar_t_s" /></p>
+
+<h3 id="specifying-the-trend-and-seasonal-model">Specifying the Trend and Seasonal Model</h3>
+
+<p>The major adjustment for this model is the manner in which we need to feed in additional data for the fourier terms in the prediction step. Similar adjustments need to be pushed forward for any additional features we might specify in the future. For example, if we added a one-hot encoded feature for days of the week we&rsquo;d have to add appropriate flags for each day of the week represented any of the n-prediction steps.</p>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>priors <span style="color: #555555">=</span> {<span style="color: #CC3300">&#39;coefs&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">.1</span>, <span style="color: #CC3300">&#39;size&#39;</span>: <span style="color: #FF6600">2</span>},
+          <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">1</span>, 
+          <span style="color: #CC3300">&#39;init&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">.1</span>, <span style="color: #CC3300">&#39;size&#39;</span>: <span style="color: #FF6600">1</span>},
+          <span style="color: #CC3300">&#39;alpha&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>:<span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">.1</span>}, 
+          <span style="color: #CC3300">&#39;beta&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #555555">-</span><span style="color: #FF6600">0.5</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">.1</span>},
+          <span style="color: #CC3300">&#39;ar_sigma&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">.1</span>}, 
+          <span style="color: #CC3300">&#39;beta_fourier&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>:<span style="color: #FF6600">0.05</span>},
+          <span style="color: #CC3300">&#39;lam&#39;</span>: {<span style="color: #CC3300">&#39;mu&#39;</span>: <span style="color: #FF6600">0</span>, <span style="color: #CC3300">&#39;sigma&#39;</span>: <span style="color: #FF6600">0.1</span>}
+          }
+        
+
+<span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">make_trend_seasonal_AR_model</span>(ar_data, ff, priors, prediction_steps<span style="color: #555555">=</span><span style="color: #FF6600">250</span>, full_sample<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, samples<span style="color: #555555">=</span><span style="color: #FF6600">2000</span>, jax<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>):
+    <span style="color: #006699; font-weight: bold">with</span> pm<span style="color: #555555">.</span>Model() <span style="color: #006699; font-weight: bold">as</span> AR:
+        <span style="color: #006699; font-weight: bold">pass</span>
+    
+    ff <span style="color: #555555">=</span> ff<span style="color: #555555">.</span>to_numpy()<span style="color: #555555">.</span>T
+    t_data <span style="color: #555555">=</span> <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(<span style="color: #336666">len</span>(ar_data)))
+    AR<span style="color: #555555">.</span>add_coord(<span style="color: #CC3300">&#39;obs_id&#39;</span>, t_data, mutable<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+    AR<span style="color: #555555">.</span>add_coord(<span style="color: #CC3300">&#39;fourier_features&#39;</span>, np<span style="color: #555555">.</span>arange(<span style="color: #336666">len</span>(ff)), mutable<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+
+    <span style="color: #006699; font-weight: bold">with</span> AR:
+        <span style="color: #0099FF; font-style: italic">## Data containers to enable prediction</span>
+        t <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MutableData(<span style="color: #CC3300">&quot;t&quot;</span>, t_data, dims<span style="color: #555555">=</span><span style="color: #CC3300">&quot;obs_id&quot;</span>)
+        y <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MutableData(<span style="color: #CC3300">&quot;y&quot;</span>, ar_data, dims<span style="color: #555555">=</span><span style="color: #CC3300">&quot;obs_id&quot;</span>)
+        <span style="color: #0099FF; font-style: italic"># The first coefficient will be the constant term</span>
+        sigma <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;sigma&#39;</span>, priors[<span style="color: #CC3300">&#39;sigma&#39;</span>])
+        coefs <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;coefs&quot;</span>, priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>], size<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>])
+        ar_sigma <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>HalfNormal(<span style="color: #CC3300">&#39;ar_sigma&#39;</span>, priors[<span style="color: #CC3300">&#39;ar_sigma&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>])
+        <span style="color: #0099FF; font-style: italic"># We need one init variable for each lag, hence size is variable too</span>
+        init <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal<span style="color: #555555">.</span>dist(priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>], size<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;init&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>])
+        <span style="color: #0099FF; font-style: italic"># Steps of the AR model minus the lags required</span>
+        ar1 <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>AR(<span style="color: #CC3300">&quot;ar&quot;</span>, coefs, sigma<span style="color: #555555">=</span>ar_sigma, init_dist<span style="color: #555555">=</span>init, 
+        constant<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>, steps<span style="color: #555555">=</span>t<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]<span style="color: #555555">-</span>(priors[<span style="color: #CC3300">&#39;coefs&#39;</span>][<span style="color: #CC3300">&#39;size&#39;</span>]<span style="color: #555555">-</span><span style="color: #FF6600">1</span>))
+
+        <span style="color: #0099FF; font-style: italic">## Priors for the linear trend component</span>
+        alpha <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;alpha&#39;</span>, priors[<span style="color: #CC3300">&#39;alpha&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;alpha&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>])
+        beta <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;beta&#39;</span>, priors[<span style="color: #CC3300">&#39;beta&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], priors[<span style="color: #CC3300">&#39;beta&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>])
+        trend <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&#39;trend&#39;</span>, alpha <span style="color: #555555">+</span> beta<span style="color: #555555">*</span>t, dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;obs_id&#39;</span>)
+
+        <span style="color: #0099FF; font-style: italic"># Saturation</span>
+        lam <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&#39;lam&#39;</span>, mu<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;lam&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], sigma<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;lam&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>])
+        saturation <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(<span style="color: #CC3300">&#39;saturation&#39;</span>, logistic_saturation(trend, lam), dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;obs_id&#39;</span>)
+
+        <span style="color: #0099FF; font-style: italic"># Seasonality</span>
+        β_fourier <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Normal(<span style="color: #CC3300">&quot;β_fourier&quot;</span>, mu<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;beta_fourier&#39;</span>][<span style="color: #CC3300">&#39;mu&#39;</span>], sigma<span style="color: #555555">=</span>priors[<span style="color: #CC3300">&#39;beta_fourier&#39;</span>][<span style="color: #CC3300">&#39;sigma&#39;</span>], dims<span style="color: #555555">=</span><span style="color: #CC3300">&quot;fourier_features&quot;</span>)
+        fourier_terms <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>MutableData(<span style="color: #CC3300">&#39;fourier_terms&#39;</span>, ff)
+        seasonality <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>Deterministic(
+            <span style="color: #CC3300">&quot;seasonality&quot;</span>, pm<span style="color: #555555">.</span>math<span style="color: #555555">.</span>dot(β_fourier, fourier_terms), dims<span style="color: #555555">=</span><span style="color: #CC3300">&#39;obs_id&#39;</span>
+        )
+
+        mu <span style="color: #555555">=</span>  saturation<span style="color: #555555">*</span>trend <span style="color: #555555">+</span> seasonality  <span style="color: #555555">+</span> ar1
+
+        outcome <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>TruncatedNormal(<span style="color: #CC3300">&#39;likelihood&#39;</span>, mu<span style="color: #555555">=</span>mu, sigma<span style="color: #555555">=</span>sigma, observed<span style="color: #555555">=</span>y, lower<span style="color: #555555">=</span><span style="color: #FF6600">0</span>)
+        
+        <span style="color: #0099FF; font-style: italic">## Sampling</span>
+        idata_ar <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_prior_predictive()
+        <span style="color: #006699; font-weight: bold">if</span> full_sample:
+            <span style="color: #006699; font-weight: bold">if</span> jax: 
+                idata_ar<span style="color: #555555">.</span>extend(pm<span style="color: #555555">.</span>sampling_jax<span style="color: #555555">.</span>sample_blackjax_nuts(samples, random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>, target_accept<span style="color: #555555">=</span><span style="color: #FF6600">0.99</span>))
+            <span style="color: #006699; font-weight: bold">else</span>:
+                idata_ar<span style="color: #555555">.</span>extend(pm<span style="color: #555555">.</span>sample(samples, random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>, target_accept<span style="color: #555555">=</span><span style="color: #FF6600">0.99</span>, cores<span style="color: #555555">=</span><span style="color: #FF6600">1</span>))
+            idata_ar<span style="color: #555555">.</span>extend(pm<span style="color: #555555">.</span>sample_posterior_predictive(idata_ar))
+        <span style="color: #006699; font-weight: bold">else</span>:
+            <span style="color: #006699; font-weight: bold">return</span> idata_ar, <span style="color: #006699; font-weight: bold">None</span>, <span style="color: #006699; font-weight: bold">None</span>
+
+    n <span style="color: #555555">=</span> prediction_steps <span style="color: #555555">-</span> ar_data<span style="color: #555555">.</span>shape[<span style="color: #FF6600">0</span>]
+    n_order <span style="color: #555555">=</span> <span style="color: #FF6600">10</span>
+    periods <span style="color: #555555">=</span> (np<span style="color: #555555">.</span>arange(prediction_steps) <span style="color: #555555">/</span> <span style="color: #FF6600">7</span>)
+
+    fourier_features_new <span style="color: #555555">=</span> pd<span style="color: #555555">.</span>DataFrame(
+        {
+            <span style="color: #CC3300">f&quot;</span><span style="color: #AA0000">{</span>func<span style="color: #AA0000">}</span><span style="color: #CC3300">_order_</span><span style="color: #AA0000">{</span>order<span style="color: #AA0000">}</span><span style="color: #CC3300">&quot;</span>: <span style="color: #336666">getattr</span>(np, func)(<span style="color: #FF6600">2</span> <span style="color: #555555">*</span> np<span style="color: #555555">.</span>pi <span style="color: #555555">*</span> periods <span style="color: #555555">*</span> order)
+            <span style="color: #006699; font-weight: bold">for</span> order <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(<span style="color: #FF6600">1</span>, n_order <span style="color: #555555">+</span> <span style="color: #FF6600">1</span>)
+            <span style="color: #006699; font-weight: bold">for</span> func <span style="color: #000000; font-weight: bold">in</span> (<span style="color: #CC3300">&quot;sin&quot;</span>, <span style="color: #CC3300">&quot;cos&quot;</span>)
+        }
+    )
+
+    <span style="color: #006699; font-weight: bold">with</span> AR:
+        <span style="color: #0099FF; font-style: italic"># update values of predictors</span>
+        <span style="color: #0099FF; font-style: italic"># pass in nans for the predicted steps</span>
+        pm<span style="color: #555555">.</span>set_data(new_data<span style="color: #555555">=</span>{<span style="color: #CC3300">&quot;t&quot;</span>: <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(prediction_steps)), 
+                             <span style="color: #CC3300">&quot;fourier_terms&quot;</span>: fourier_features_new<span style="color: #555555">.</span>to_numpy()<span style="color: #555555">.</span>T,
+                             <span style="color: #CC3300">&quot;y&quot;</span>: np<span style="color: #555555">.</span>concatenate([ar_data, np<span style="color: #555555">.</span>array([np<span style="color: #555555">.</span>nan <span style="color: #006699; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #336666">range</span>(n)])])}, 
+                    coords<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;obs_id&#39;</span>: <span style="color: #336666">list</span>(<span style="color: #336666">range</span>(prediction_steps))})
+        <span style="color: #0099FF; font-style: italic"># use the updated values and predict outcomes and probabilities:</span>
+        idata_preds <span style="color: #555555">=</span> pm<span style="color: #555555">.</span>sample_posterior_predictive(idata_ar,
+        var_names<span style="color: #555555">=</span>[<span style="color: #CC3300">&quot;likelihood&quot;</span>],predictions<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>,random_seed<span style="color: #555555">=</span><span style="color: #FF6600">100</span>
+        )
+
+    <span style="color: #006699; font-weight: bold">return</span> idata_ar, idata_preds, AR
+</pre></div>
+
+<p>Again, the model plate representation is a cleaner view of the structure.</p>
+
+<p><img src="/img/2022-10-01-BSTS/ar_trend_seasonal_modelgraph.png" alt="ar_trend_seasonal" /></p>
+
+<p>Comparing the predictions against the model with just the ar and trend component we see an improvement based on the leave-one-out cross validation criteria.</p>
+
+<p><img src="/img/2022-10-01-BSTS/model_compare.png" alt="compare" /></p>
+
+<p>although the broad pattern of the projection is not too disimilar to the forecast of the trend model due to the already highly volatile nature of our autoregressive process:</p>
+
+<p><img src="/img/2022-10-01-BSTS/ar_t_s_predictions.png" alt="ar_trend_seasonal_preds" /></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>We&rsquo;ve shown here how to use PYMC to specify bayesian structural timeseries models and how that incorporating different structural components can result in improved model fit. We&rsquo;ve seen how to fit and predict new observations for complicated combinations of structural components available in the PYMC distributions.</p>
+
+<p>However, we&rsquo;ve not delved into the notion of how structural breaks can disrupt any of these components of the model or how modelling a changepoint or changepoints explicitly can help identify these step changes in the series. We might have also discussed including a gaussian random walk term if we wanted to allow for changing variances in the distribution over time. We can be more or less opinionated about which components we include in these models since we&rsquo;re working with the basic distributional building blocks. There are benefits to using smart default packages like <a href="https://facebook.github.io/prophet/">prophet</a> but it&rsquo;s harder to adapt those defaults to your specific problem. I hope i&rsquo;ve encouraged you to look into using PYMC, it&rsquo;s a great tool which ties model building to narrative decisions about the data generating process. This transparency and flexibility makes for more compelling data science.</p>
+
+
+        &nbsp;
+      </div>
+
+      <div>
+        <div class="post-back-link">
+    <a href="javascript: history.back()">
+        <i class="fa fa-arrow-left"></i> 
+        Back
+    </a>
+</div>
+      </div>
+      <script src="https://utteranc.es/client.js" repo="NathanielF/NathanielF.github.io" issue-term="title" label="comments 💬" theme="github-light" crossorigin="anonymous" async>
+      </script>
+    </div>
+  </div>
+  
+
+  <footer style="padding-top: 1em;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <p>
+          &nbsp;
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/prism.js"></script>
+
+</body>
+
+</html>

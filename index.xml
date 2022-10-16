@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Bayesian Structural Timeseries - Forecasting</title>
+      <link>https://nathanielf.github.io/post/bayesian_structural_timeseries/</link>
+      <pubDate>Mon, 15 Aug 2022 10:19:36 +0000</pubDate>
+      
+      <guid>https://nathanielf.github.io/post/bayesian_structural_timeseries/</guid>
+      <description>Wordsworth once spoke forlornly of the hope that &amp;ldquo;child [could be] the father of the man&amp;rdquo;. This desire for predictable continuity exists where disruption is rife. Continuous trajectories can be smooth everywhere or staggered and staccato suddenly. No matter how apparently inevitable; each and every timeseries is vulnerable to such structural break. Childhood, or the past more generally, was likely more tumultuous than you can recall in retrospect. The question is always whether the past predicts the present?</description>
+    </item>
+    
+    <item>
       <title>Pooling Information in PYMC</title>
       <link>https://nathanielf.github.io/post/pooling_experiments/</link>
       <pubDate>Fri, 22 Jul 2022 10:19:36 +0000</pubDate>

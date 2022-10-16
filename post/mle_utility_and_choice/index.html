@@ -229,7 +229,7 @@ $$ = F\Bigg( (\mathbf{X&rsquo;}_{i, A}  - \mathbf{X&rsquo;}_{i, B})\beta \Bigg) 
 <h2 id="probit-and-logit-regressions-for-binary-choice">Probit and Logit Regressions for Binary Choice</h2>
 
 <p>The probit and logit models are convenient distributions for modeling discrete choice. We&rsquo;ll initialise some fake data and build two models over the $X, y$ to infer the parameterisations that determined the utility driving of our choices. Note that we specify the distributions of the rror term differently for both models. In the probit case we say that the error term is normally distributed and in the logit case our error term is given a Weibull distribution.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>N <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>N <span style="color: #555555">=</span> <span style="color: #FF6600">100</span>
 X_A <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>add_constant(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(N,<span style="color: #FF6600">2</span>))
 X_B <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>add_constant(np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(N, <span style="color: #FF6600">2</span>))
 beta <span style="color: #555555">=</span> np<span style="color: #555555">.</span>array([<span style="color: #FF6600">1</span>, <span style="color: #555555">-</span><span style="color: #FF6600">2</span>, <span style="color: #FF6600">3</span>])
@@ -269,7 +269,7 @@ logit_res <span style="color: #555555">=</span> logit_mod<span style="color: #55
 <h2 id="maximum-likelihood-estimation-and-multiple-choice">Maximum Likelihood Estimation and Multiple Choice</h2>
 
 <p>Under the hood these models are fit using the technique of maximum likelihood estimation, which searches the parameter space over each distribution to find a setting so that the observed data is most probable. For computational convenience this often means that we minimise the value of negative log likelihood over a variety of parameter settings.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">log_probit_dist</span>(params, <span style="color: #555555">*</span>args):
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span><span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">log_probit_dist</span>(params, <span style="color: #555555">*</span>args):
     X, y <span style="color: #555555">=</span> args[<span style="color: #FF6600">0</span>], args[<span style="color: #FF6600">1</span>]
     beta <span style="color: #555555">=</span> [params[<span style="color: #FF6600">0</span>], params[<span style="color: #FF6600">1</span>], params[<span style="color: #FF6600">2</span>]]
     mu, sd, <span style="color: #555555">=</span> params[<span style="color: #FF6600">3</span>], params[<span style="color: #FF6600">4</span>]
@@ -282,7 +282,7 @@ logit_res <span style="color: #555555">=</span> logit_mod<span style="color: #55
 <span style="color: #0099FF; font-style: italic">### estimate the underlying utility</span>
 <span style="color: #0099FF; font-style: italic">### True values of the parameters 2, 3, -4</span>
 res <span style="color: #555555">=</span> minimize(log_probit_dist, x0 <span style="color: #555555">=</span>[<span style="color: #FF6600">0</span>, <span style="color: #FF6600">0</span> ,<span style="color: #FF6600">0</span> , <span style="color: #FF6600">0</span>, <span style="color: #FF6600">1</span>], 
-args <span style="color: #555555">=</span>(X, demand_A), options<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;disp&#39;</span>: <span style="color: #006699; font-weight: bold">True</span>})
+args <span style="color: #555555">=</span>(X, demand_A), options<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;disp&#39;</span>: <span style="color: #336666">True</span>})
 </pre></div>
 
 <p>But the situation is slightly more complex when we&rsquo;re trying to optimise over multiple possible choices. Even with three choices, we have to both measure each latent utility metric as a structural equation and compare the demand for each product $T, B, C$ against a specific reference product. In this case we&rsquo;ll choose $C$ if the utility exceeds that of $B$ and $C$.</p>
@@ -299,7 +299,7 @@ args <span style="color: #555555">=</span>(X, demand_A), options<span style="col
 <p>$$ Pr(y_C = 1 | \mathbf{X}_{i, C}, &hellip; \mathbf{X}_{i, j}) = \frac{ exp(\mathbf{X&rsquo;}\beta)_{i, C}}{1 + \sum_{i, j}^{j=N} exp(\mathbf{X&rsquo;}\beta)_{i, j} } \text{ where N = #products} $$</p>
 
 <p>which can be optimised for the best parameter fits through an maximum likelihood procedure as follows:</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">100</span>)
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>seed(<span style="color: #FF6600">100</span>)
 N <span style="color: #555555">=</span> <span style="color: #FF6600">1000</span>
 mu <span style="color: #555555">=</span> [<span style="color: #FF6600">0</span>,<span style="color: #FF6600">0</span>]
 rho <span style="color: #555555">=</span> <span style="color: #FF6600">0.1</span>
@@ -322,13 +322,13 @@ y_full <span style="color: #555555">=</span> np<span style="color: #555555">.</s
 class_1 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>where(((U[:,<span style="color: #FF6600">0</span>] <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span>) <span style="color: #555555">&amp;</span> (U[:,<span style="color: #FF6600">0</span>] <span style="color: #555555">&gt;</span> U[:,<span style="color: #FF6600">1</span>])), <span style="color: #CC3300">&#39;class_1&#39;</span>, <span style="color: #CC3300">&#39;class_0&#39;</span>)
 class_2 <span style="color: #555555">=</span> np<span style="color: #555555">.</span>where((U[:,<span style="color: #FF6600">1</span>] <span style="color: #555555">&gt;</span> <span style="color: #FF6600">0</span> <span style="color: #555555">&amp;</span> (U[:,<span style="color: #FF6600">1</span>] <span style="color: #555555">&gt;</span> U[:,<span style="color: #FF6600">0</span>])), <span style="color: #CC3300">&#39;class_2&#39;</span>, <span style="color: #CC3300">&#39;class_0&#39;</span>)
 y_full <span style="color: #555555">=</span> np<span style="color: #555555">.</span>append(class_1, class_2)
-W_full <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>add_constant(W1<span style="color: #555555">.</span>append(W2))<span style="color: #555555">.</span>reset_index(drop<span style="color: #555555">=</span><span style="color: #006699; font-weight: bold">True</span>)
+W_full <span style="color: #555555">=</span> sm<span style="color: #555555">.</span>add_constant(W1<span style="color: #555555">.</span>append(W2))<span style="color: #555555">.</span>reset_index(drop<span style="color: #555555">=</span><span style="color: #336666">True</span>)
 
 
 <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">cdf</span>(W, beta):
     Wb <span style="color: #555555">=</span> np<span style="color: #555555">.</span>dot(W, beta)
     eXB <span style="color: #555555">=</span> np<span style="color: #555555">.</span>exp(Wb)
-    eXB <span style="color: #555555">=</span> eXB <span style="color: #555555">/</span>eXB<span style="color: #555555">.</span>sum(<span style="color: #FF6600">1</span>)[:, <span style="color: #006699; font-weight: bold">None</span>]
+    eXB <span style="color: #555555">=</span> eXB <span style="color: #555555">/</span>eXB<span style="color: #555555">.</span>sum(<span style="color: #FF6600">1</span>)[:, <span style="color: #336666">None</span>]
     <span style="color: #006699; font-weight: bold">return</span> eXB
 
 <span style="color: #006699; font-weight: bold">def</span> <span style="color: #CC00FF">take_log</span>(probs):
@@ -359,7 +359,7 @@ n_params <span style="color: #555555">=</span> <span style="color: #FF6600">3</s
 n_classes <span style="color: #555555">=</span> <span style="color: #FF6600">3</span>
 z <span style="color: #555555">=</span> np<span style="color: #555555">.</span>random<span style="color: #555555">.</span>rand(<span style="color: #FF6600">3</span>,<span style="color: #FF6600">3</span>)<span style="color: #555555">.</span>flatten()
 res <span style="color: #555555">=</span> minimize(ll_mn_logistic, x0 <span style="color: #555555">=</span>z, args <span style="color: #555555">=</span>(y_full, W_full, n_params, n_classes), 
-             options<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;disp&#39;</span>: <span style="color: #006699; font-weight: bold">True</span>, <span style="color: #CC3300">&#39;maxiter&#39;</span>:<span style="color: #FF6600">1000</span>})
+             options<span style="color: #555555">=</span>{<span style="color: #CC3300">&#39;disp&#39;</span>: <span style="color: #336666">True</span>, <span style="color: #CC3300">&#39;maxiter&#39;</span>:<span style="color: #FF6600">1000</span>})
 </pre></div>
 
 <p>The expressive power of these kinds of discrete choice model are to be admired. They map onto an innumerable range of practical problems in business, science and politics. So it is all the more important to be aware of their limitations when deploying them at scale. The independence assumption and the linear structure of the latent utility model is not innocent, they&rsquo;re tantamount to very strong claims about the consistency and preference structure of the population. So long as we&rsquo;re aware of this, the algorithms can be deployed profitably as sometimes consumers do have rational preferences - <em>the challenge is modelling the considerations that go into their reasoning.</em> It&rsquo;s utterly useless to articulate preference over goods poorly described.</p>
@@ -439,7 +439,7 @@ res <span style="color: #555555">=</span> minimize(ll_mn_logistic, x0 <span styl
 </table>
 
 <p>It&rsquo;s hard to estimate demand for a new product directly, so instead he tried to develop a two step model which estimated the relative impact of the each of the demographic factors on rail use where there already existed some rail infrastructure and then project the demand as if the same conditions held throughout the city. The multinomial model fitted on parts of the city with existing infrastructure gives the following coefficient estimates for the demographic factors relative to a base choice of bus-transport.</p>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>no_rail <span style="color: #555555">=</span> y_focus_nr[[<span style="color: #CC3300">&#39;home&#39;</span>, <span style="color: #CC3300">&#39;HHSIZE&#39;</span>, <span style="color: #CC3300">&#39;income&#39;</span>, <span style="color: #CC3300">&#39;urban1&#39;</span>, <span style="color: #CC3300">&#39;density&#39;</span>, <span style="color: #CC3300">&#39;rail&#39;</span>, <span style="color: #CC3300">&#39;CHOICE&#39;</span>]]<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>no_rail <span style="color: #555555">=</span> y_focus_nr[[<span style="color: #CC3300">&#39;home&#39;</span>, <span style="color: #CC3300">&#39;HHSIZE&#39;</span>, <span style="color: #CC3300">&#39;income&#39;</span>, <span style="color: #CC3300">&#39;urban1&#39;</span>, <span style="color: #CC3300">&#39;density&#39;</span>, <span style="color: #CC3300">&#39;rail&#39;</span>, <span style="color: #CC3300">&#39;CHOICE&#39;</span>]]<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
 rail <span style="color: #555555">=</span> y_focus_r[[<span style="color: #CC3300">&#39;home&#39;</span>, <span style="color: #CC3300">&#39;HHSIZE&#39;</span>, <span style="color: #CC3300">&#39;income&#39;</span>, <span style="color: #CC3300">&#39;urban1&#39;</span>, <span style="color: #CC3300">&#39;density&#39;</span>, <span style="color: #CC3300">&#39;rail&#39;</span>, <span style="color: #CC3300">&#39;CHOICE&#39;</span>]]<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
 full <span style="color: #555555">=</span> y_focus[[<span style="color: #CC3300">&#39;home&#39;</span>, <span style="color: #CC3300">&#39;HHSIZE&#39;</span>, <span style="color: #CC3300">&#39;income&#39;</span>, <span style="color: #CC3300">&#39;urban1&#39;</span>, <span style="color: #CC3300">&#39;density&#39;</span>, <span style="color: #CC3300">&#39;rail&#39;</span>, <span style="color: #CC3300">&#39;CHOICE&#39;</span>]]<span style="color: #555555">.</span>astype(<span style="color: #336666">float</span>)
 
@@ -512,7 +512,7 @@ MN_logit_res_r<span style="color: #555555">.</span>summary()
   <th>density</th> <td>    0.0202</td> <td>    0.007</td> <td>    3.107</td> <td> 0.002</td> <td>    0.007</td> <td>    0.033</td>
 </tr>
 </tbody></table>
-<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%;"><span></span>nr_nd <span style="color: #555555">=</span> no_rail
+<div class="highlight" style="background: #f0f3f3"><pre style="line-height: 125%"><span></span>nr_nd <span style="color: #555555">=</span> no_rail
 nr_nd[<span style="color: #CC3300">&#39;density&#39;</span>] <span style="color: #555555">=</span> <span style="color: #FF6600">0</span>
 nr_d <span style="color: #555555">=</span> no_rail
 nr_d[<span style="color: #CC3300">&#39;density&#39;</span>] <span style="color: #555555">=</span> r[<span style="color: #CC3300">&#39;density&#39;</span>]<span style="color: #555555">.</span>mean()
